@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>1230fed4-13d0-49ca-b7da-31df9da14847</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="libwkhtmltox.dll" />
+    <None Remove="libwkhtmltox.dylib" />
+    <None Remove="libwkhtmltox.so" />
+    <None Remove="Reportes\ListaProductoresPorNotaSalidaAlmacen.rdlc" />
+    <None Remove="Reportes\NotaCompra.rdlc" />
+    <None Remove="Reportes\rptAdelanto.rdlc" />
+    <None Remove="Reportes\rptGuiaRemision.rdlc" />
+    <None Remove="Reportes\rptOrdenProceso.rdlc" />
+    <None Remove="Reportes\rptRegistroSeguridadLimpieza.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="libwkhtmltox.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libwkhtmltox.dylib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libwkhtmltox.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\ListaProductoresPorNotaSalidaAlmacen.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\NotaCompra.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\rptAdelanto.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\rptGuiaRemision.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\rptOrdenProceso.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\rptRegistroSeguridadLimpieza.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="BoldReports.WPF" Version="2.4.27" />
+    <PackageReference Include="Haukcode.WkHtmlToPdfDotNet" Version="1.5.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="System.CodeDom" Version="5.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KaphiyQuipu.Service\KaphiyQuipu.Service.csproj" />
+    <ProjectReference Include="..\KaphiyQuipu.Interface\KaphiyQuipu.Interface.csproj" />
+    <ProjectReference Include="..\KaphiyQuipu.Models\KaphiyQuipu.Models.csproj" />
+    <ProjectReference Include="..\KaphiyQuipu.Repository\KaphiyQuipu.Repository.csproj" />
+    <ProjectReference Include="..\KaphiyQuipu.ViewModels\KaphiyQuipu.DTO.csproj" />
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
+    <ProjectReference Include="..\Core.Utils\Core.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="plantillas_correo\bienvenidaES.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="plantillas_correo\bienvenidaEN.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+
+</Project>
