@@ -6,6 +6,8 @@ using CoffeeConnect.Models;
 using CoffeeConnect.Models.User;
 using Core.Common.Domain.Model;
 using Core.Common.Encryption;
+using KaphiyQuipu.Blockchain.Entities;
+using KaphiyQuipu.Blockchain.ERC20;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,13 +22,16 @@ namespace CoffeeConnect.Service
 
         private IEmpresaRepository _EmpresaRepository;
         private IProductoPrecioDiaRepository _ProductoPrecioDiaRepository;
+        private IUserContract _userContract;
 
-        public UsersService(IUsersRepository usersRepository, IClienteRepository clienteRepository, IEmpresaRepository empresaRepository, IProductoPrecioDiaRepository productoPrecioDiaRepository)
+        public UsersService(IUsersRepository usersRepository, IClienteRepository clienteRepository, IEmpresaRepository empresaRepository, IProductoPrecioDiaRepository productoPrecioDiaRepository,
+                            IUserContract userContract)
         {
             _UsersRepository = usersRepository;
             _ClienteRepository = clienteRepository;
             _EmpresaRepository = empresaRepository;
             _ProductoPrecioDiaRepository = productoPrecioDiaRepository;
+            _userContract = userContract;
         }
 
         string dataMenu = @"[
@@ -436,6 +441,11 @@ namespace CoffeeConnect.Service
 
         public LoginBE AuthenticateUsers(string username, string password)
         {
+            UserDTO userDTO =  _userContract.ValidateUser(username, password).Result;
+
+            if (userDTO is null)
+                throw new ResultException(new Result { ErrCode = "02", Message = "Login.UsuarioPasswordIncorrecto" });
+
             LoginBE loginDTO = new LoginBE();
 
             var usuariosList = _UsersRepository.AuthenticateUsers(username, password);

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KaphiyQuipu.Blockchain\KaphiyQuipu.Blockchain.csproj" />
     <ProjectReference Include="..\KaphiyQuipu.Interface\KaphiyQuipu.Interface.csproj" />
     <ProjectReference Include="..\KaphiyQuipu.Models\KaphiyQuipu.Models.csproj" />
     <ProjectReference Include="..\KaphiyQuipu.ViewModels\KaphiyQuipu.DTO.csproj" />
