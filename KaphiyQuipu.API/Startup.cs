@@ -16,6 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using KaphiyQuipu.Blockchain.Facade;
+using KaphiyQuipu.Blockchain.ERC20;
+using KaphiyQuipu.Blockchain.Services;
 
 namespace CoffeeConnect.API
 {
@@ -218,6 +221,13 @@ namespace CoffeeConnect.API
             services.AddTransient<IAdelantoService, AdelantoService>();
             services.AddTransient<IAdelantoRepository, AdelantoRepository>();
             services.AddTransient<IKardexService, KardexService>();
+
+            services.AddTransient<IUserContract, UserContract>();
+
+            services.AddSingleton<IContractFacade, ContractFacade>();
+            services.AddSingleton<IContractOperation, ContractOperation>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddSingleton<ContractService>();
 
             services.AddMvc(setupAction => { setupAction.EnableEndpointRouting = false; })
                     .AddJsonOptions(jsonOptions => { jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null; })

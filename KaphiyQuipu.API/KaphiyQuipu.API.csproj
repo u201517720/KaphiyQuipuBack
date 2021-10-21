@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -60,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KaphiyQuipu.Blockchain\KaphiyQuipu.Blockchain.csproj" />
     <ProjectReference Include="..\KaphiyQuipu.Service\KaphiyQuipu.Service.csproj" />
     <ProjectReference Include="..\KaphiyQuipu.Interface\KaphiyQuipu.Interface.csproj" />
     <ProjectReference Include="..\KaphiyQuipu.Models\KaphiyQuipu.Models.csproj" />
