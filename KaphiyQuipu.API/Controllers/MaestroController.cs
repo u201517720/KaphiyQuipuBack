@@ -33,7 +33,7 @@ namespace Integracion.Deuda.Controller
         public IActionResult ConsultarTablaDeTablas([FromBody] ConsultaTablaDeTablasRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid.ToString()}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
 
             ConsultaTablaDeTablasResponseDTO response = new ConsultaTablaDeTablasResponseDTO();
             try
@@ -46,7 +46,7 @@ namespace Integracion.Deuda.Controller
                 {
                     response.Result.Data = lista;
                 }
-                else if(request.CodigoTabla.Equals("IndicadorTostado"))
+                else if (request.CodigoTabla.Equals("IndicadorTostado"))
                 {
                     response.Result.Data = lista;
                 }
@@ -85,7 +85,7 @@ namespace Integracion.Deuda.Controller
             {
                 List<ConsultaUbigeoBE> lista = _maestroService.ConsultaUbibeo();
 
-                if(request.CodigoPais=="PE")
+                if (request.CodigoPais == "PE")
                 {
                     lista = lista.Where(a => a.CodigoPais == request.CodigoPais && a.Codigo.EndsWith("0000")).ToList();
                     response.Result.Data = lista.OrderBy(x => x.DescripcionPais).ToList();
@@ -93,11 +93,11 @@ namespace Integracion.Deuda.Controller
                 }
                 else
                 {
-                    lista  = lista.Where(a => a.CodigoPais == request.CodigoPais && a.Codigo.StartsWith("C"))
+                    lista = lista.Where(a => a.CodigoPais == request.CodigoPais && a.Codigo.StartsWith("C"))
                                         .ToList();
                     response.Result.Data = lista.OrderBy(x => x.DescripcionPais).ToList();
                 }
-                
+
 
                 response.Result.Success = true;
 
@@ -136,7 +136,7 @@ namespace Integracion.Deuda.Controller
                                                 && !a.Codigo.EndsWith("0000"))
                                         .ToList();
 
-                response.Result.Data =  lista.OrderBy(x => x.DescripcionPais).ToList();
+                response.Result.Data = lista.OrderBy(x => x.DescripcionPais).ToList();
 
                 response.Result.Success = true;
 
@@ -273,7 +273,7 @@ namespace Integracion.Deuda.Controller
 
             ConsultaProductoPrecioDiaResponseDTO response = new ConsultaProductoPrecioDiaResponseDTO();
             try
-            {              
+            {
                 response.Result.Data = _maestroService.ConsultarProductoPrecioDiaPorSubProductoIdPorEmpresaId(request.SubProductoId, request.EmpresaId);
 
                 response.Result.Success = true;

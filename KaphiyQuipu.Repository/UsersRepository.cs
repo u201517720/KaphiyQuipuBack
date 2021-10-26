@@ -295,42 +295,6 @@ namespace CoffeeConnect.Repository
     ]
   }
 ]";
-        //public LoginResponseViewModel GetUserDetailsbyCredentials(string username)
-        //{
-        //    try
-        //    {
-        //        var result = (from user in _context.Users
-        //                      join userinrole in _context.UsersInRoles on user.UserId equals userinrole.UserId
-        //                      where user.UserName == username
-
-        //                      select new LoginResponseViewModel
-        //                      {
-        //                          UserId = user.UserId,
-        //                          RoleId = userinrole.RoleId,
-        //                          Status = user.Status,
-        //                          UserName = user.UserName,
-        //                          FullName = user.FullName
-        //                      }).SingleOrDefault();
-
-        //        if (result != null)
-        //        {
-        //            List<MenuViewModel> opciones = JsonConvert.DeserializeObject<List<MenuViewModel>>(dataMenu);
-
-        //            result.Opciones = opciones;
-
-        //            return result;
-        //        }
-
-        //        return result;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-
-
         public IEnumerable<Usuario> AuthenticateUsers(string username, string password)
         {
             var parameters = new DynamicParameters();
@@ -346,7 +310,7 @@ namespace CoffeeConnect.Repository
         {
             var parameters = new DynamicParameters();
             parameters.Add("UserId", usuarioId);
-          
+
 
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
@@ -399,7 +363,7 @@ namespace CoffeeConnect.Repository
             return id;
         }
 
-        public int InsertarRoles(int userId ,int userRolId)
+        public int InsertarRoles(int userId, int userRolId)
         {
             int result = 0;
 
@@ -407,7 +371,7 @@ namespace CoffeeConnect.Repository
 
             parameters.Add("@UserId", userId);
             parameters.Add("@RoleIdint", userRolId);
-            
+
             parameters.Add("@UserRolesId", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
@@ -426,7 +390,7 @@ namespace CoffeeConnect.Repository
             var parameters = new DynamicParameters();
 
             parameters.Add("@Email", correo);
-            
+
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -434,10 +398,10 @@ namespace CoffeeConnect.Repository
 
                 if (list.Count() > 0)
                     result = 1;
-               // result = db.Execute("uspValidarUsuario", parameters, commandType: CommandType.StoredProcedure);
+                // result = db.Execute("uspValidarUsuario", parameters, commandType: CommandType.StoredProcedure);
             }
 
-            
+
 
             return result;
         }

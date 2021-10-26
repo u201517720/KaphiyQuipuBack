@@ -17,12 +17,14 @@ namespace CoffeeConnect.Service
             _IMaestroRepository = maestroRepository;
             _IProductoPrecioDiaRepository = productoPrecioDiaRepository;
         }
-        public List<ConsultaDetalleTablaBE> ConsultarDetalleTablaDeTablas(int empresaId,string idioma)
+
+        public List<ConsultaDetalleTablaBE> ConsultarDetalleTablaDeTablas(int empresaId, string idioma)
         {
             var lista = _IMaestroRepository.ConsultarDetalleTablaDeTablas(empresaId, idioma);
 
             return lista.ToList();
         }
+
         public List<ConsultaUbigeoBE> ConsultaUbibeo()
         {
             var lista = _IMaestroRepository.ConsultaUbibeo();
@@ -46,7 +48,7 @@ namespace CoffeeConnect.Service
 
         public List<ConsultaProductoPrecioDiaBE> ConsultarProductoPrecioDiaPorSubProductoIdPorEmpresaId(string subProductoId, int empresaId)
         {
-            List<ConsultaProductoPrecioDiaBE> precios = _IProductoPrecioDiaRepository.ConsultarProductoPrecioDiaPorSubProductoIdPorEmpresaId(empresaId,subProductoId ).ToList();
+            List<ConsultaProductoPrecioDiaBE> precios = _IProductoPrecioDiaRepository.ConsultarProductoPrecioDiaPorSubProductoIdPorEmpresaId(empresaId, subProductoId).ToList();
 
             return precios;
         }

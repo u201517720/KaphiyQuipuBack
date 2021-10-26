@@ -18,11 +18,6 @@ namespace CoffeeConnect.Repository
             _connectionString = connectionString;
         }
 
-
-
-
-
-
         public Empresa ObtenerEmpresaPorId(int empresaId)
         {
             Empresa itemBE = null;

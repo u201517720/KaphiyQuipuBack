@@ -23,9 +23,6 @@ namespace CoffeeConnect.Repository
             parameters.Add("EmpresaId", empresaId);
             parameters.Add("Idioma", idioma);
 
-
-
-
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 return db.Query<ConsultaDetalleTablaBE>("uspDetalleCatalogoObtenerPorEmpresaId", parameters, commandType: CommandType.StoredProcedure);
@@ -34,7 +31,6 @@ namespace CoffeeConnect.Repository
 
         public IEnumerable<ConsultaUbigeoBE> ConsultaUbibeo()
         {
-
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 return db.Query<ConsultaUbigeoBE>("uspUbigeoConsulta", null, commandType: CommandType.StoredProcedure);
@@ -54,7 +50,6 @@ namespace CoffeeConnect.Repository
 
         public IEnumerable<ConsultaPaisBE> ConsultarPais()
         {
-
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 return db.Query<ConsultaPaisBE>("uspPaisConsulta", commandType: CommandType.StoredProcedure);

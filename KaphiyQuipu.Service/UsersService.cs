@@ -441,7 +441,7 @@ namespace CoffeeConnect.Service
 
         public LoginBE AuthenticateUsers(string username, string password)
         {
-            UserDTO userDTO =  _userContract.ValidateUser(username, password).Result;
+            UserDTO userDTO = _userContract.ValidateUser(username, password).Result;
 
             if (userDTO is null)
                 throw new ResultException(new Result { ErrCode = "02", Message = "Login.UsuarioPasswordIncorrecto" });
@@ -453,12 +453,12 @@ namespace CoffeeConnect.Service
             if (!usuariosList.Any())
                 throw new ResultException(new Result { ErrCode = "02", Message = "Login.UsuarioPasswordIncorrecto" });
 
-
             var usuario = usuariosList.First();
 
             loginDTO.IdUsuario = usuario.UserId;
             loginDTO.NombreUsuario = usuario.UserName;
             loginDTO.NombreCompletoUsuario = usuario.FullName;
+            loginDTO.RolId = usuario.RoleId;
 
             var empresa = _EmpresaRepository.ObtenerEmpresaPorId(usuario.EmpresaId);
 
@@ -472,47 +472,16 @@ namespace CoffeeConnect.Service
                 loginDTO.LogoEmpresa = empresa.Logo;
                 loginDTO.MonedaId = "01";
                 loginDTO.Moneda = "Soles";
-                
-
-
-                
-
-                //List<ConsultaProductoPrecioDiaBE> precios = _ProductoPrecioDiaRepository.ConsultarProductoPrecioDiaPorEmpresaId(usuario.EmpresaId).ToList();
-
-                //ProductoPrecioDiaBE precioCafePergaminoMote = new ProductoPrecioDiaBE();
-                //precioCafePergaminoMote.ProductoId = "01";
-                //precioCafePergaminoMote.SubProductoId = "01";
-                //precioCafePergaminoMote.PrecioDia = 5.00M;
-                //precios.Add(precioCafePergaminoMote);
-
-                //ProductoPrecioDiaBE precioCafePergaminoSeco = new ProductoPrecioDiaBE();
-                //precioCafePergaminoSeco.ProductoId = "01";
-                //precioCafePergaminoSeco.SubProductoId = "02";
-                //precioCafePergaminoSeco.PrecioDia = 6.80M;
-                //precios.Add(precioCafePergaminoSeco);
-
-                //ProductoPrecioDiaBE precioCafePergaminoEstandar = new ProductoPrecioDiaBE();
-                //precioCafePergaminoEstandar.ProductoId = "01";
-                //precioCafePergaminoEstandar.SubProductoId = "03";
-                //precioCafePergaminoEstandar.PrecioDia = 6.80M;
-                //precios.Add(precioCafePergaminoEstandar);
-
-                //loginDTO.ProductoPreciosDia = precios;
-
             }
-
-            
-            
 
             if (usuario.ClienteId.HasValue)
             {
                 ConsultaClientePorIdBE consultaClientePorIdBE = _ClienteRepository.ConsultarClientePorId(usuario.ClienteId.Value);
 
-                if(consultaClientePorIdBE!=null)
+                if (consultaClientePorIdBE != null)
                 {
                     loginDTO.Cliente = consultaClientePorIdBE.RazonSocial;
                     loginDTO.CodigoCliente = consultaClientePorIdBE.Numero;
-
                 }
             }
 
@@ -520,12 +489,12 @@ namespace CoffeeConnect.Service
 
             //TODO: Armar dataMenu en base a opcionesUsuario
             List<Root> rootList = new List<Root>();
-           
+
             var listaModulos = opcionesUsuario.Where(c => c.Type == "Modulo").ToList();
             foreach (ConsultaOpcionesPorUsuario objOpcion in listaModulos)
             {
                 Root root = new Root();
-                root.Badge =""  ;
+                root.Badge = "";
                 root.BadgeClass = "";
                 root.Class = "has-sub";
                 root.Icon = objOpcion.Icon;
@@ -551,16 +520,13 @@ namespace CoffeeConnect.Service
                 root.Title = objOpcion.Tittle;
                 rootList.Add(root);
             }
-            
-            List<MenuBE> opciones = JsonConvert.DeserializeObject<List<MenuBE>>(dataMenu);
 
+            List<MenuBE> opciones = JsonConvert.DeserializeObject<List<MenuBE>>(dataMenu);
 
             loginDTO.Opciones = rootList;
 
             return loginDTO;
-
         }
-
 
         public int RegistrarUsuario(User request)
         {
@@ -568,14 +534,16 @@ namespace CoffeeConnect.Service
             int id = _UsersRepository.Insertar(request);
             return id;
         }
+
         public int ValidarUsuario(string correo)
         {
             int result = _UsersRepository.ValidarUsuario(correo);
             return result;
         }
+
         public int RegistrarRolUsuario(int userId, int userRolId)
         {
-            int id = _UsersRepository.InsertarRoles(userId,userRolId);
+            int id = _UsersRepository.InsertarRoles(userId, userRolId);
             return id;
         }
     }
