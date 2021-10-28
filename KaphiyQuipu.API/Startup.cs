@@ -178,8 +178,8 @@ namespace KaphiyQuipu.API
             services.AddTransient<IAdelantoService, AdelantoService>();
             services.AddTransient<IAdelantoRepository, AdelantoRepository>();
             services.AddTransient<IKardexService, KardexService>();
-            //services.AddTransient<ISolicitudCompraService, SolicitudCompraService>();
-            //services.AddTransient<ISolicitudCompraRepository, SolicitudCompraRepository>();
+            services.AddTransient<ISolicitudCompraService, SolicitudCompraService>();
+            services.AddTransient<ISolicitudCompraRepository, SolicitudCompraRepository>();
 
             services.AddTransient<IUserContract, UserContract>();
             services.AddSingleton<IContractFacade, ContractFacade>();

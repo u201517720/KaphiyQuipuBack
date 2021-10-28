@@ -25,9 +25,7 @@ namespace KaphiyQuipu.Service.MappingConfigurations
             CreateMap<RegistrarActualizarFincaFotoGeoreferenciadaRequestDTO, FincaFotoGeoreferenciada>();
             CreateMap<RegistrarActualizarContratoRequestDTO, Contrato>();
             CreateMap<RegistrarActualizarZonaRequestDTO, Zona>();
-
             CreateMap<RegistrarActualizarAduanaDocumentoAdjuntoRequestDTO, AduanaDocumentoAdjunto>();
-
             CreateMap<RegistrarActualizarAduanaRequestDTO, Aduana>();
             CreateMap<RegistrarActualizarDetalleCatalogoRequestDTO, DetalleCatalogo>();
             CreateMap<RegistrarSocioDocumentoRequestDTO, SocioDocumento>();
@@ -45,6 +43,7 @@ namespace KaphiyQuipu.Service.MappingConfigurations
             CreateMap<RegistrarActualizarDiagnosticoRequestDTO, Diagnostico>();
             CreateMap<RegistrarActualizarNotaIngresoPlantaDocumentoAdjuntoRequestDTO, NotaIngresoPlantaDocumentoAdjunto>();
             CreateMap<RegistrarActualizarAdelantoRequestDTO, Adelanto>();
+            CreateMap<RegistrarActualizarSolicitudCompraRequestDTO, SolicitudCompra>();
         }
     }
 
