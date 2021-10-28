@@ -1,11 +1,11 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.Models;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeeConnect.Interface.Repository
+namespace KaphiyQuipu.Interface.Repository
 {
     public interface IEmpresaProveedoraAcreedoraRepository
     {   

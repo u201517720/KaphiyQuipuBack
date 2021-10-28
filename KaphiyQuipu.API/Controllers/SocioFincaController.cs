@@ -1,5 +1,5 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Service;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Service;
 using Core.Common.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;

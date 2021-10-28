@@ -1,4 +1,4 @@
-﻿using CoffeeConnect.Repository;
+﻿using KaphiyQuipu.Repository;
 using Dapper;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Models;

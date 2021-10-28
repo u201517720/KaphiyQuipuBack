@@ -1,7 +1,7 @@
-﻿using CoffeeConnect.DTO;
+﻿using KaphiyQuipu.DTO;
 using System.Collections.Generic;
 
-namespace CoffeeConnect.Interface.Service
+namespace KaphiyQuipu.Interface.Service
 {
     public interface IProductorService
     {

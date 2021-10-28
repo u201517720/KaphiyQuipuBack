@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoffeeConnect.API
+namespace KaphiyQuipu.API
 {
     public class Program
     {

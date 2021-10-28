@@ -1,13 +1,13 @@
-﻿using CoffeeConnect.DTO.Seguridad;
+﻿using KaphiyQuipu.DTO.Seguridad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CoffeeConnect.DTO;
-using CoffeeConnect.Models;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Models;
 
-namespace CoffeeConnect.DTO
+namespace KaphiyQuipu.DTO
 {
     public class LoginBE
     {

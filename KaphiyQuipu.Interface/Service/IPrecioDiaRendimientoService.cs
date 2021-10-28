@@ -1,9 +1,9 @@
-﻿using CoffeeConnect.DTO;
+﻿using KaphiyQuipu.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeConnect.Interface.Service
+namespace KaphiyQuipu.Interface.Service
 {
     public interface IPrecioDiaRendimientoService
     {

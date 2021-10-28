@@ -4,7 +4,7 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace CoffeeConnect.DTO.Adjunto
+namespace KaphiyQuipu.DTO.Adjunto
 {
     /// <summary>
     /// Clase para Response Descargar Archivo DTO:Base

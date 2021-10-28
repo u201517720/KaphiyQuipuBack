@@ -1,7 +1,7 @@
 ﻿using AspNetCore.Reporting;
-using CoffeeConnect.DTO;
-using CoffeeConnect.DTO.Adelanto;
-using CoffeeConnect.Interface.Service;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.DTO.Adelanto;
+using KaphiyQuipu.Interface.Service;
 using Core.Common;
 using Core.Common.Domain.Model;
 using Microsoft.AspNetCore.Hosting;

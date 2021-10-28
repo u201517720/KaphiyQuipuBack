@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeConnect.Models.User
+namespace KaphiyQuipu.Models.User
 {
     public class User
     {

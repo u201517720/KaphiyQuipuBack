@@ -1,7 +1,7 @@
 ﻿using Core.Common.Domain.Model;
 using System;
 
-namespace CoffeeConnect.DTO
+namespace KaphiyQuipu.DTO
 {
     public class ConsultaLoteDetallePorLoteIdResponseDTO
     {

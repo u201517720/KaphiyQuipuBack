@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeeConnect.Models
+namespace KaphiyQuipu.Models
 {
     public class QueryParameters
     {

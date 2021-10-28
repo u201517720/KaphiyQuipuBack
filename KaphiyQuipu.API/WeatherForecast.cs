@@ -1,6 +1,6 @@
 using System;
 
-namespace CoffeeConnect.API
+namespace KaphiyQuipu.API
 {
     public class WeatherForecast
     {

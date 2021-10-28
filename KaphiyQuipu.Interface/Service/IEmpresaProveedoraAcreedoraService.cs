@@ -1,8 +1,8 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.Models;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.Models;
 using System.Collections.Generic;
 
-namespace CoffeeConnect.Interface.Service
+namespace KaphiyQuipu.Interface.Service
 {
     public interface IEmpresaProveedoraAcreedoraService
     {

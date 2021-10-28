@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Service;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Service;
 using Core.Common.Domain.Model;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;

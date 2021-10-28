@@ -1,8 +1,8 @@
-using CoffeeConnect.DTO;
+using KaphiyQuipu.DTO;
 using System;
 using System.Collections.Generic;
 
-namespace CoffeeConnect.Models
+namespace KaphiyQuipu.Models
 {
 	public class ConsultaEmpresaProveedoraAcreedoraPorIdBE
 	{

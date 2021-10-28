@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace CoffeeConnect.DTO
+namespace KaphiyQuipu.DTO
 {
     public class ExportarKardexResponseDTO
     {

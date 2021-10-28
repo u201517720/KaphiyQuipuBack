@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeConnect.DTO.PrecioDiaRendimiento
+namespace KaphiyQuipu.DTO.PrecioDiaRendimiento
 {
     public class ConsultarPrecioDiaRendimientoDTO
     {

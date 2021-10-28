@@ -1,8 +1,8 @@
-﻿using CoffeeConnect.DTO;
+﻿using KaphiyQuipu.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace CoffeeConnect.Interface.Service
+namespace KaphiyQuipu.Interface.Service
 {
     public interface IGuiaRemisionAlmacenService
     {           

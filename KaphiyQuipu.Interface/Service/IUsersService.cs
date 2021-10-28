@@ -1,10 +1,10 @@
 ﻿
 
-using CoffeeConnect.DTO;
-using CoffeeConnect.Models.User;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Models.User;
 using System.Threading.Tasks;
 
-namespace CoffeeConnect.Interface.Service
+namespace KaphiyQuipu.Interface.Service
 {
     public interface IUsersService
     {

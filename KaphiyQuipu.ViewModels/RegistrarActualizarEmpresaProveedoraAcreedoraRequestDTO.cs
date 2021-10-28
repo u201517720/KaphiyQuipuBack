@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CoffeeConnect.DTO
+namespace KaphiyQuipu.DTO
 {
     public class RegistrarActualizarEmpresaProveedoraAcreedoraRequestDTO
 	{

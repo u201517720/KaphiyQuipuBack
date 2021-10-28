@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CoffeeConnect.DTO.Adjunto
+namespace KaphiyQuipu.DTO.Adjunto
 {
     /// <summary>
     /// Clase para Request Adjuntar Archivos

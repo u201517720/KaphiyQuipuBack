@@ -1,12 +1,12 @@
 ﻿using ClosedXML.Excel;
-using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Service;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace CoffeeConnect.Service
+namespace KaphiyQuipu.Service
 {
     public class KardexService : IKardexService
     {

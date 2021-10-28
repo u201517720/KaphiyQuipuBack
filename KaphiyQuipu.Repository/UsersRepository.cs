@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Linq;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Models;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Models;
 using System.Threading.Tasks;
 using Dapper;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Options;
-using CoffeeConnect.DTO;
-using CoffeeConnect.Models.User;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Models.User;
 
-namespace CoffeeConnect.Repository
+namespace KaphiyQuipu.Repository
 {
     public class UsersRepository : IUsersRepository
     {

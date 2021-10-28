@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CoffeeConnect.DTO;
-using CoffeeConnect.Models;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Models;
 
-namespace CoffeeConnect.Service.MappingConfigurations
+namespace KaphiyQuipu.Service.MappingConfigurations
 {
     public class MappingProfile : Profile
     {

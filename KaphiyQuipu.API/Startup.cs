@@ -1,9 +1,9 @@
 using AutoMapper;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Interface.Service;
-using CoffeeConnect.Repository;
-using CoffeeConnect.Service;
-using CoffeeConnect.Service.MappingConfigurations;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Repository;
+using KaphiyQuipu.Service;
+using KaphiyQuipu.Service.MappingConfigurations;
 using Core.Common.Auth;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
@@ -20,7 +20,7 @@ using KaphiyQuipu.Blockchain.Facade;
 using KaphiyQuipu.Blockchain.ERC20;
 using KaphiyQuipu.Blockchain.Services;
 
-namespace CoffeeConnect.API
+namespace KaphiyQuipu.API
 {
     public class Startup
     {

@@ -1,9 +1,9 @@
 
-using CoffeeConnect.Models;
+using KaphiyQuipu.Models;
 using System;
 using System.Collections.Generic;
 
-namespace CoffeeConnect.DTO
+namespace KaphiyQuipu.DTO
 {
 	public class ConsultaGuiaRemisionAlmacenPlanta
 	{

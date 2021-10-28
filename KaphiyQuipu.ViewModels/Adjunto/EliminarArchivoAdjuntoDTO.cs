@@ -1,4 +1,4 @@
-﻿namespace CoffeeConnect.DTO.Adjunto
+﻿namespace KaphiyQuipu.DTO.Adjunto
 {
     using System;
     using System.Collections.Generic;

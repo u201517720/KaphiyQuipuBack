@@ -1,6 +1,6 @@
 using System;
 
-namespace CoffeeConnect.Models
+namespace KaphiyQuipu.Models
 {
 	public class NotaCompra
 	{
