@@ -19,6 +19,8 @@ using System.Text;
 using KaphiyQuipu.Blockchain.Facade;
 using KaphiyQuipu.Blockchain.ERC20;
 using KaphiyQuipu.Blockchain.Services;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Service;
 
 namespace CoffeeConnect.API
 {
@@ -222,7 +224,10 @@ namespace CoffeeConnect.API
             services.AddTransient<IAdelantoRepository, AdelantoRepository>();
             services.AddTransient<IKardexService, KardexService>();
 
+            services.AddTransient<ISolicitudCompraService, SolicitudCompraService>();
+
             services.AddTransient<IUserContract, UserContract>();
+            services.AddTransient<ISolicitudCompraContract, SolicitudCompraContract>();
 
             services.AddSingleton<IContractFacade, ContractFacade>();
             services.AddSingleton<IContractOperation, ContractOperation>();

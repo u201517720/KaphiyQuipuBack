@@ -1,0 +1,138 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "correlativo",
+        "type": "string"
+      },
+      {
+        "name": "tipoProduccion",
+        "type": "string"
+      },
+      {
+        "name": "producto",
+        "type": "string"
+      },
+      {
+        "name": "subProducto",
+        "type": "string"
+      },
+      {
+        "name": "gradoPreparacion",
+        "type": "string"
+      },
+      {
+        "name": "calidad",
+        "type": "string"
+      },
+      {
+        "name": "distribuidor",
+        "type": "string"
+      },
+      {
+        "name": "usuario",
+        "type": "string"
+      },
+      {
+        "name": "fecRegistro",
+        "type": "uint256"
+      }
+    ],
+    "name": "agregarSolicitud",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "obtenerTotalSolicitudes",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "correlativo",
+        "type": "string"
+      }
+    ],
+    "name": "obtenerSolicitud",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "correlativo",
+            "type": "string"
+          },
+          {
+            "name": "tipoProduccion",
+            "type": "string"
+          },
+          {
+            "name": "producto",
+            "type": "string"
+          },
+          {
+            "name": "subProducto",
+            "type": "string"
+          },
+          {
+            "name": "gradoPreparacion",
+            "type": "string"
+          },
+          {
+            "name": "calidad",
+            "type": "string"
+          },
+          {
+            "name": "distribuidor",
+            "type": "string"
+          },
+          {
+            "name": "usuario",
+            "type": "string"
+          },
+          {
+            "name": "fecRegistro",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
