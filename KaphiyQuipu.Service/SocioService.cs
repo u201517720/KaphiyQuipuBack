@@ -22,13 +22,8 @@ namespace CoffeeConnect.Service
         public SocioService(ISocioRepository socioRepository, ICorrelativoRepository correlativoRepository, IMapper mapper)
         {
             _ISocioRepository = socioRepository;
-
             _ICorrelativoRepository = correlativoRepository;
-
             _Mapper = mapper;
-
-
-
         }
 
         public List<ConsultaSocioBE> ConsultarSocio(ConsultaSocioRequestDTO request)
@@ -54,7 +49,6 @@ namespace CoffeeConnect.Service
             {
                 throw new ResultException(new Result { ErrCode = "01", Message = "El Socio ya se encuentra registrado." });
             }
-
 
             Socio socio = _Mapper.Map<Socio>(request);
             socio.FechaRegistro = DateTime.Now;

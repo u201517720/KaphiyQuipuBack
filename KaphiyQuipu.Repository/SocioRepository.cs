@@ -33,8 +33,7 @@ namespace CoffeeConnect.Repository
             {
                 result = db.Execute("uspSocioActualizar", parameters, commandType: CommandType.StoredProcedure);
             }
-
-
+            
             return result;
         }
 
@@ -48,7 +47,6 @@ namespace CoffeeConnect.Repository
             parameters.Add("EstadoId", request.EstadoId);
             parameters.Add("FechaInicio", request.FechaInicio);
             parameters.Add("FechaFin", request.FechaFin);
-
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -67,12 +65,10 @@ namespace CoffeeConnect.Repository
             parameters.Add("@EstadoId", socio.EstadoId);
             parameters.Add("@FechaRegistro", socio.FechaRegistro);
 
-
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 result = db.Execute("uspSocioInsertar", parameters, commandType: CommandType.StoredProcedure);
             }
-
 
             return result;
         }
