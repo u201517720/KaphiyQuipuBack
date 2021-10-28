@@ -50,5 +50,61 @@ namespace KaphiyQuipu.API.Controllers
 
             return Ok(response);
         }
+
+        [Route("Consultar")]
+        [HttpPost]
+        public IActionResult Consultar([FromBody] ConsultaSolicitudCompraRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
+
+            ConsultaSolicitudCompraResponseDTO response = new ConsultaSolicitudCompraResponseDTO();
+            try
+            {
+                response.Result.Data = _solicitudCompraService.Consultar(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("ConsultarPorId")]
+        [HttpPost]
+        public IActionResult ConsultarPorId([FromBody] ConsultaSolicitudCompraPorIdRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
+
+            ConsultaSolicitudCompraPorIdResponseDTO response = new ConsultaSolicitudCompraPorIdResponseDTO();
+            try
+            {
+                response.Result.Data = _solicitudCompraService.ConsultarPorId(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
     }
 }

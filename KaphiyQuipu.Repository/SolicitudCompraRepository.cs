@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using KaphiyQuipu.DTO;
+using System.Linq;
 
 namespace KaphiyQuipu.Repository
 {
@@ -18,6 +20,36 @@ namespace KaphiyQuipu.Repository
         public SolicitudCompraRepository(IOptions<ConnectionString> connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        public IEnumerable<ConsultaSolicitudCompraDTO> Consultar(ConsultaSolicitudCompraRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("FechaInicio", request.FechaInicio);
+            parameters.Add("FechaFin", request.FechaFin);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultaSolicitudCompraDTO>("uspSocioConsulta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public ConsultaSolicitudCompraPorIdDTO ConsultarPorId(int solicitudCompraId)
+        {
+            ConsultaSolicitudCompraPorIdDTO itemBE = null;
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@SolicitudCompraId", solicitudCompraId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                var list = db.Query<ConsultaSolicitudCompraPorIdDTO>("uspSocioObtenerPorId", parameters, commandType: CommandType.StoredProcedure);
+
+                if (list.Any())
+                    itemBE = list.First();
+            }
+
+            return itemBE;
         }
 
         public int Insertar(SolicitudCompra solicitudCompra)

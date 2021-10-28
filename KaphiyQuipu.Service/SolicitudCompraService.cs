@@ -9,6 +9,7 @@ using KaphiyQuipu.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace KaphiyQuipu.Service
 {
@@ -23,6 +24,30 @@ namespace KaphiyQuipu.Service
             _ICorrelativoRepository = correlativoRepository;
             _Mapper = mapper;
             _ISolicitudCompraRepository = solicitudCompraRepository;
+        }
+
+        public List<ConsultaSolicitudCompraDTO> Consultar(ConsultaSolicitudCompraRequestDTO request)
+        {
+            if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue)
+            {
+                throw new ResultException(new Result { ErrCode = "01", Message = "Acopio.NotaCompra.ValidacionSeleccioneMinimoUnFiltro.Label" });
+            }
+
+            var timeSpan = request.FechaFin - request.FechaInicio;
+
+            if (timeSpan.Days > 365)
+            {
+                throw new ResultException(new Result { ErrCode = "02", Message = "Acopio.NotaCompra.ValidacionRangoFechaMayor2anios.Label" });
+            }
+
+            var list = _ISolicitudCompraRepository.Consultar(request);
+            return list.ToList();
+        }
+
+        public ConsultaSolicitudCompraPorIdDTO ConsultarPorId(ConsultaSolicitudCompraPorIdRequestDTO request)
+        {
+            ConsultaSolicitudCompraPorIdDTO solicitudCompra = _ISolicitudCompraRepository.ConsultarPorId(request.SolicitudCompraId);
+            return solicitudCompra;
         }
 
         public int Registrar(RegistrarActualizarSolicitudCompraRequestDTO request)
