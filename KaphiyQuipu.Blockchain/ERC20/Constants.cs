@@ -36,7 +36,7 @@ namespace KaphiyQuipu.Blockchain.ERC20
         #endregion
 
         #region Defautl values for contracts
-        public static string DEFAULT_TEST_ACCOUNT_ADDRESS = "0x12890d2cce102216644c59dae5baed380d84830c";
+        public static string DEFAULT_TEST_ACCOUNT_ADDRESS = "0x2fA19369276C6683Ff7426A27Cd7e97294a086eb";
         public static string DEFAULT_TEST_ACCOUNT_PASSWORD = "password";
         public static string GAMER_TOKEN_CONTRACT_NAME = "GamerToken";
         public static BigInteger DEFAULT_GAS = 3000000;

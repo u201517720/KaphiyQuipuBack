@@ -78,6 +78,8 @@ namespace KaphiyQuipu.Blockchain.Facade
 
         private string GetContractDir(string contractName)
         {
+            return $"{Directory.GetCurrentDirectory()}/{Constants.CONTRACTS_DIR_NAME}/{contractName}";
+
             var rootcontractDir = Constants.CONTRACTS_DIR_NAME;
             var sln = Directory.GetParent(Directory.GetCurrentDirectory());
             var dir = sln + $"/{rootcontractDir}/{contractName}";
@@ -94,7 +96,8 @@ namespace KaphiyQuipu.Blockchain.Facade
             // }
 
             var dir = GetContractDir(contractName);
-            var abiFile = $"{dir}/bin/{contractName}.abi";
+            //var abiFile = $"{dir}/bin/{contractName}.abi";
+            var abiFile = $"{dir}/{contractName}.abi";
             if (!File.Exists(abiFile))
                 return null;
             return await Task.Run(() => File.ReadAllText(abiFile));

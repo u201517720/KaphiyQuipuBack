@@ -19,6 +19,8 @@ using System.Text;
 using KaphiyQuipu.Blockchain.Facade;
 using KaphiyQuipu.Blockchain.ERC20;
 using KaphiyQuipu.Blockchain.Services;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Service;
 
 namespace KaphiyQuipu.API
 {
@@ -181,7 +183,11 @@ namespace KaphiyQuipu.API
             services.AddTransient<ISolicitudCompraService, SolicitudCompraService>();
             services.AddTransient<ISolicitudCompraRepository, SolicitudCompraRepository>();
 
+            services.AddTransient<ISolicitudCompraService, SolicitudCompraService>();
+
             services.AddTransient<IUserContract, UserContract>();
+            services.AddTransient<ISolicitudCompraContract, SolicitudCompraContract>();
+
             services.AddSingleton<IContractFacade, ContractFacade>();
             services.AddSingleton<IContractOperation, ContractOperation>();
             services.AddScoped<IAccountService, AccountService>();

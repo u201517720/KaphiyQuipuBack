@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KaphiyQuipu.Blockchain\KaphiyQuipu.Blockchain.csproj" />
     <ProjectReference Include="..\KaphiyQuipu.Models\KaphiyQuipu.Models.csproj" />
     <ProjectReference Include="..\KaphiyQuipu.ViewModels\KaphiyQuipu.DTO.csproj" />
   </ItemGroup>

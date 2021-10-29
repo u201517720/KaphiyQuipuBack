@@ -1,6 +1,7 @@
 ﻿using Core.Common.Domain.Model;
 using Core.Common.Logger;
 using KaphiyQuipu.DTO;
+using KaphiyQuipu.DTO.SolicitudCompra;
 using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -105,6 +106,20 @@ namespace KaphiyQuipu.API.Controllers
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
 
             return Ok(response);
+        }
+
+        [Route("")]
+        [HttpPost]
+        public async Task<IActionResult> Registrar([FromBody] SolicitudCompraDTO request)
+        {
+            return Ok(await _solicitudCompraService.Registrar(request));
+        }
+
+        [Route("{correlativo}")]
+        [HttpGet]
+        public async Task<IActionResult> Obtener(string correlativo)
+        {
+            return Ok(await _solicitudCompraService.ObtenerSolicitud(correlativo));
         }
     }
 }

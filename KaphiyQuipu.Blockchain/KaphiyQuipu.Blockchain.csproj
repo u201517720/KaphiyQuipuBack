@@ -11,4 +11,8 @@
     <PackageReference Include="Nethereum.Web3" Version="4.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KaphiyQuipu.ViewModels\KaphiyQuipu.DTO.csproj" />
+  </ItemGroup>
+
 </Project>

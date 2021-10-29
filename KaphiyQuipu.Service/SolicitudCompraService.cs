@@ -10,6 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using KaphiyQuipu.Blockchain.ERC20;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
+using KaphiyQuipu.DTO.SolicitudCompra;
+using System.Threading.Tasks;
+using KaphiyQuipu.Blockchain.Entities;
 
 namespace KaphiyQuipu.Service
 {
@@ -18,12 +23,15 @@ namespace KaphiyQuipu.Service
         private readonly IMapper _Mapper;
         private ICorrelativoRepository _ICorrelativoRepository;
         private ISolicitudCompraRepository _ISolicitudCompraRepository;
+        private readonly ISolicitudCompraContract _solicitudCompraContract;
 
-        public SolicitudCompraService(ICorrelativoRepository correlativoRepository, IMapper mapper, ISolicitudCompraRepository solicitudCompraRepository)
+        public SolicitudCompraService(ICorrelativoRepository correlativoRepository, IMapper mapper, ISolicitudCompraRepository solicitudCompraRepository,
+                                      ISolicitudCompraContract solicitudCompraContract)
         {
             _ICorrelativoRepository = correlativoRepository;
             _Mapper = mapper;
             _ISolicitudCompraRepository = solicitudCompraRepository;
+            _solicitudCompraContract = solicitudCompraContract;
         }
 
         public List<ConsultaSolicitudCompraDTO> Consultar(ConsultaSolicitudCompraRequestDTO request)
@@ -136,6 +144,16 @@ namespace KaphiyQuipu.Service
                 result = new Result { ErrCode = "16", Message = "El usuario de registro es obligatorio." };
             }
             return result;
+        }
+
+        public async Task<TransactionResult> Registrar(SolicitudCompraDTO solicitudCompra)
+        {
+            return await _solicitudCompraContract.RegistrarSolicitud(solicitudCompra);
+        }
+
+        public async Task<SolicitudCompraOutputDTO> ObtenerSolicitud(string correlativo)
+        {
+            return await _solicitudCompraContract.ObtenerSolicitud(correlativo);
         }
     }
 }
