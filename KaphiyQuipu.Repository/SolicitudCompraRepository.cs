@@ -30,7 +30,7 @@ namespace KaphiyQuipu.Repository
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                return db.Query<ConsultaSolicitudCompraDTO>("uspSocioConsulta", parameters, commandType: CommandType.StoredProcedure);
+                return db.Query<ConsultaSolicitudCompraDTO>("uspSolicitudCompraConsulta", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -39,11 +39,11 @@ namespace KaphiyQuipu.Repository
             ConsultaSolicitudCompraPorIdDTO itemBE = null;
 
             var parameters = new DynamicParameters();
-            parameters.Add("@SolicitudCompraId", solicitudCompraId);
+            parameters.Add("@pSolicitudCompraId", solicitudCompraId);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                var list = db.Query<ConsultaSolicitudCompraPorIdDTO>("uspSocioObtenerPorId", parameters, commandType: CommandType.StoredProcedure);
+                var list = db.Query<ConsultaSolicitudCompraPorIdDTO>("uspSolicitudCompraConsultaPorId", parameters, commandType: CommandType.StoredProcedure);
 
                 if (list.Any())
                     itemBE = list.First();

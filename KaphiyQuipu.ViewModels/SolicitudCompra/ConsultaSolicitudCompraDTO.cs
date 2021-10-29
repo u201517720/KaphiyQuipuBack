@@ -8,7 +8,22 @@ namespace KaphiyQuipu.DTO
     {
         public ConsultaSolicitudCompraDTO()
         {
-
         }
+
+        public int SolicitudCompraId { get; set; }
+        public string Correlativo { get; set; }
+        public string RazonSocial { get; set; }
+        public string ProductoId { get; set; }
+        public string Producto { get; set; }
+        public string SubProductoId { get; set; }
+        public string SubProducto { get; set; }
+        public string CalidadId { get; set; }
+        public string Calidad { get; set; }
+        public string EstadoId { get; set; }
+        public bool Estado { get; set; }
+        public string UsuarioRegistro { get; set; }
+        public DateTime FechaRegistro { get; set; }
+        public string UsuarioActualizacion { get; set; }
+        public DateTime? FechaActualizacion { get; set; }
     }
 }
