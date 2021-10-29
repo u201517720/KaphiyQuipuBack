@@ -1,40 +1,87 @@
-﻿using CoffeeConnect.Repository;
+﻿using KaphiyQuipu.Repository;
 using Dapper;
 using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Models;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
+using KaphiyQuipu.DTO;
+using System.Linq;
 
 namespace KaphiyQuipu.Repository
 {
-    public class SolicitudCompraRepository: ISolicitudCompraRepository
+    public class SolicitudCompraRepository : ISolicitudCompraRepository
     {
         public IOptions<ConnectionString> _connectionString;
+
         public SolicitudCompraRepository(IOptions<ConnectionString> connectionString)
         {
             _connectionString = connectionString;
         }
 
-        //public int Registrar()
-        //{
-        //    var parameters = new DynamicParameters();
-        //    parameters.Add("@Correlativo", contrato.Numero);
-        //    parameters.Add("@DistribuidorId", contrato.Numero);
-        //    parameters.Add("@DepartamentoId", contrato.Numero);
-        //    parameters.Add("@MonedaId", contrato.Numero);
-        //    parameters.Add("@UnidadMedidaId", contrato.Numero);
-        //    parameters.Add("@TipoProduccionId", contrato.Numero);
-        //    parameters.Add("@EmpaqueId", contrato.Numero);
-        //    parameters.Add("@TipoEmpaqueId", contrato.Numero);
-        //    parameters.Add("@PesoSaco", contrato.Numero);
-        //    parameters.Add("@PesoKilos", contrato.Numero);
-        //    parameters.Add("@Observaciones", contrato.Numero);
-        //    parameters.Add("@HashBC", contrato.Numero);
-        //    parameters.Add("@Estado", contrato.Numero);
-        //    parameters.Add("@EstadoId", contrato.Numero);
-        //    parameters.Add("@UsuarioRegistro", contrato.Numero);
+        public IEnumerable<ConsultaSolicitudCompraDTO> Consultar(ConsultaSolicitudCompraRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("FechaInicio", request.FechaInicio);
+            parameters.Add("FechaFin", request.FechaFin);
 
-        //}
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultaSolicitudCompraDTO>("uspSocioConsulta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public ConsultaSolicitudCompraPorIdDTO ConsultarPorId(int solicitudCompraId)
+        {
+            ConsultaSolicitudCompraPorIdDTO itemBE = null;
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@SolicitudCompraId", solicitudCompraId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                var list = db.Query<ConsultaSolicitudCompraPorIdDTO>("uspSocioObtenerPorId", parameters, commandType: CommandType.StoredProcedure);
+
+                if (list.Any())
+                    itemBE = list.First();
+            }
+
+            return itemBE;
+        }
+
+        public int Insertar(SolicitudCompra solicitudCompra)
+        {
+            int result = 0;
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@pDistribuidorId", solicitudCompra.DistribuidorId);
+            parameters.Add("@pPaisId", solicitudCompra.PaisId);
+            parameters.Add("@pDepartamentoId", solicitudCompra.DepartamentoId);
+            parameters.Add("@pMonedaId", solicitudCompra.MonedaId);
+            parameters.Add("@pUnidadMedidaId", solicitudCompra.UnidadMedidaId);
+            parameters.Add("@pTipoProduccionId", solicitudCompra.TipoProduccionId);
+            parameters.Add("@pEmpaqueId", solicitudCompra.EmpaqueId);
+            parameters.Add("@pTipoEmpaqueId", solicitudCompra.TipoEmpaqueId);
+            parameters.Add("@pTotalSacos", solicitudCompra.TotalSacos);
+            parameters.Add("@pPesoSaco", solicitudCompra.PesoSaco);
+            parameters.Add("@pPesoKilos", solicitudCompra.PesoKilos);
+            parameters.Add("@pProductoId", solicitudCompra.ProductoId);
+            parameters.Add("@pSubProductoId", solicitudCompra.SubProductoId);
+            parameters.Add("@pGradoPreparacionId", solicitudCompra.GradoPreparacionId);
+            parameters.Add("@pCalidadId", solicitudCompra.CalidadId);
+            parameters.Add("@pObservaciones", solicitudCompra.Observaciones);
+            parameters.Add("@pUsuarioRegistro", solicitudCompra.UsuarioRegistro);
+            parameters.Add("@pFechaRegistro", DateTime.Now);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                result = db.Execute("uspRegistrarSolicitudCompra", parameters, commandType: CommandType.StoredProcedure);
+            }
+
+            return result;
+        }
     }
 }

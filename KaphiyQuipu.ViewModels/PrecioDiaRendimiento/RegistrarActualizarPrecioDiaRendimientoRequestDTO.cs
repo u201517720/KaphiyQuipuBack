@@ -1,9 +1,9 @@
-﻿using CoffeeConnect.DTO.PrecioDiaRendimiento;
+﻿using KaphiyQuipu.DTO.PrecioDiaRendimiento;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeConnect.DTO
+namespace KaphiyQuipu.DTO
 {
     public class RegistrarActualizarPrecioDiaRendimientoRequestDTO
     {

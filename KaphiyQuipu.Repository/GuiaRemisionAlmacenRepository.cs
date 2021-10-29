@@ -1,6 +1,6 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Models;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Models;
 using Core.Common;
 using Core.Utils;
 using Dapper;
@@ -10,7 +10,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace CoffeeConnect.Repository
+namespace KaphiyQuipu.Repository
 {
     public class GuiaRemisionAlmacenRepository : IGuiaRemisionAlmacenRepository
     {

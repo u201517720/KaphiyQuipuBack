@@ -1,6 +1,6 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Models;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Models;
 using Dapper;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace CoffeeConnect.Repository
+namespace KaphiyQuipu.Repository
 {
     public class SocioRepository : ISocioRepository
     {
@@ -33,8 +33,7 @@ namespace CoffeeConnect.Repository
             {
                 result = db.Execute("uspSocioActualizar", parameters, commandType: CommandType.StoredProcedure);
             }
-
-
+            
             return result;
         }
 
@@ -48,7 +47,6 @@ namespace CoffeeConnect.Repository
             parameters.Add("EstadoId", request.EstadoId);
             parameters.Add("FechaInicio", request.FechaInicio);
             parameters.Add("FechaFin", request.FechaFin);
-
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -67,12 +65,10 @@ namespace CoffeeConnect.Repository
             parameters.Add("@EstadoId", socio.EstadoId);
             parameters.Add("@FechaRegistro", socio.FechaRegistro);
 
-
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 result = db.Execute("uspSocioInsertar", parameters, commandType: CommandType.StoredProcedure);
             }
-
 
             return result;
         }

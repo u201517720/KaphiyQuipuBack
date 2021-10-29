@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "CoffeeConnect.API": {
+    "KaphiyQuipu.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",

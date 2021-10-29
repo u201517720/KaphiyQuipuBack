@@ -1,10 +1,10 @@
-﻿using CoffeeConnect.DTO.Adjunto;
+﻿using KaphiyQuipu.DTO.Adjunto;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace CoffeeConnect.Service.Adjunto
+namespace KaphiyQuipu.Service.Adjunto
 {
     public class AdjuntarArchivosBL
     {

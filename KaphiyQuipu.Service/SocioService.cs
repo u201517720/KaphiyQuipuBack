@@ -1,15 +1,15 @@
 ﻿
 using AutoMapper;
-using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Interface.Service;
-using CoffeeConnect.Models;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Models;
 using Core.Common.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CoffeeConnect.Service
+namespace KaphiyQuipu.Service
 {
     public partial class SocioService : ISocioService
     {
@@ -22,13 +22,8 @@ namespace CoffeeConnect.Service
         public SocioService(ISocioRepository socioRepository, ICorrelativoRepository correlativoRepository, IMapper mapper)
         {
             _ISocioRepository = socioRepository;
-
             _ICorrelativoRepository = correlativoRepository;
-
             _Mapper = mapper;
-
-
-
         }
 
         public List<ConsultaSocioBE> ConsultarSocio(ConsultaSocioRequestDTO request)
@@ -54,7 +49,6 @@ namespace CoffeeConnect.Service
             {
                 throw new ResultException(new Result { ErrCode = "01", Message = "El Socio ya se encuentra registrado." });
             }
-
 
             Socio socio = _Mapper.Map<Socio>(request);
             socio.FechaRegistro = DateTime.Now;

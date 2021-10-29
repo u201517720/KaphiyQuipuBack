@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CoffeeConnect.Models
+namespace KaphiyQuipu.Models
 {
     public class OrdenProcesoPlantaDetalle
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeConnect.DTO.Adelanto
+namespace KaphiyQuipu.DTO.Adelanto
 {
     public class ConsultaAdelantoPorIdResponseDTO
     {

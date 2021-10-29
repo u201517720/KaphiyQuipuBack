@@ -1,6 +1,6 @@
 ﻿using Core.Common.Domain.Model;
 
-namespace CoffeeConnect.DTO
+namespace KaphiyQuipu.DTO
 {
 
     public class ConsultaTrackingContratoPorContratoIdResponseDTO

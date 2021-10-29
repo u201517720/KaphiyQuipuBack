@@ -1,16 +1,16 @@
 ﻿
 using AutoMapper;
-using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Interface.Service;
-using CoffeeConnect.Models;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Models;
 using Core.Common.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CoffeeConnect.Service
+namespace KaphiyQuipu.Service
 {
     public partial class LoteService : ILoteService
     {

@@ -1,6 +1,6 @@
 ﻿
-using CoffeeConnect.DTO;
-using CoffeeConnect.Models;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Models;
 using Core.Common;
 using Dapper;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace CoffeeConnect.Interface.Repository
+namespace KaphiyQuipu.Interface.Repository
 {
     public interface INotaSalidaAlmacenPlantaRepository
     {

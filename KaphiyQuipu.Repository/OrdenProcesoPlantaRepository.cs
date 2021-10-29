@@ -1,6 +1,6 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Models;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Models;
 using Dapper;
 using Microsoft.Extensions.Options;
 using System;
@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace CoffeeConnect.Repository
+namespace KaphiyQuipu.Repository
 {
     public class OrdenProcesoPlantaRepository : IOrdenProcesoPlantaRepository
     {

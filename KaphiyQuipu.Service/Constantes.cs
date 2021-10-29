@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeConnect.Service
+namespace KaphiyQuipu.Service
 {
     public static class GuiaRecepcionMateriaPrimaEstados
     {
@@ -15,7 +15,7 @@ namespace CoffeeConnect.Service
 
     public static class GuiaRemisionAlmacenPlantaEstados
     {
-        public static string Ingresado { get { return "01"; } }    
+        public static string Ingresado { get { return "01"; } }
         public static string Anulado { get { return "00"; } }
     }
 
@@ -49,36 +49,23 @@ namespace CoffeeConnect.Service
         public static string Productor { get { return "Productor"; } }
         public static string Socio { get { return "Socio"; } }
         public static string NotaSalidaAlmacen { get { return "NotaSalidaAlmacen"; } }
-
         public static string Aduana { get { return "Aduana"; } }
         public static string Adelanto { get { return "Adelanto"; } }
-
-
         public static string NotaSalidaAlmacenPlanta { get { return "NotaSalidaAlmacenPlanta"; } }
-
         public static string LiquidacionProcesoPlanta { get { return "LiquidacionProcesoPlanta"; } }
-
         public static string UbigeoCiudad { get { return "UbigeoCiudad"; } }
-
-        
-
         public static string GuiaRemisionAlmacen { get { return "GuiaRemisionAlmacen"; } }
-
         public static string GuiaRemisionAlmacenPlanta { get { return "GuiaRemisionAlmacenPlanta"; } }
         public static string OrdenServicioControlCalidad { get { return "OrdenServicioControlCalidad"; } }
         public static string OrdenProceso { get { return "OrdenProceso"; } }
-
         public static string OrdenProcesoPlanta { get { return "OrdenProcesoPlanta"; } }
         public static string Cliente { get { return "Cliente"; } }
-
         public static string InspeccionInterna { get { return "InspeccionInterna"; } }
-
         public static string Diagnostico { get { return "Diagnostico"; } }
-
         public static string Contrato { get { return "Contrato"; } }
         public static string NotaIngresoAlmacenPlanta { get { return "NotaIngresoAlmacenPlanta  "; } }
-
         public static string NotaIngresoPlanta { get { return "NotaIngresoPlanta  "; } }
+        public static string SolicitudCompra { get { return "SolicitudCompra  "; } }
     }
 
     public static class NotaCompraEstados
@@ -162,7 +149,7 @@ namespace CoffeeConnect.Service
 
     }
 
-    
+
 
     public static class ContratoEstados
     {

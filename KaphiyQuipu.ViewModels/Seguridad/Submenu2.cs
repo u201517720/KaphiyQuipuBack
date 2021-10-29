@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeConnect.DTO.Seguridad
+namespace KaphiyQuipu.DTO.Seguridad
 {
     public class Submenu2
     {

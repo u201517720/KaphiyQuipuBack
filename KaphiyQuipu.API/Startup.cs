@@ -1,9 +1,9 @@
 using AutoMapper;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Interface.Service;
-using CoffeeConnect.Repository;
-using CoffeeConnect.Service;
-using CoffeeConnect.Service.MappingConfigurations;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Repository;
+using KaphiyQuipu.Service;
+using KaphiyQuipu.Service.MappingConfigurations;
 using Core.Common.Auth;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
@@ -22,7 +22,7 @@ using KaphiyQuipu.Blockchain.Services;
 using KaphiyQuipu.Interface.Service;
 using KaphiyQuipu.Service;
 
-namespace CoffeeConnect.API
+namespace KaphiyQuipu.API
 {
     public class Startup
     {
@@ -82,95 +82,65 @@ namespace CoffeeConnect.API
 
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IUsersRepository, UsersRepository>();
-
             services.AddTransient<IZonaService, ZonaService>();
             services.AddTransient<IZonaRepository, ZonaRepository>();
-
             services.AddTransient<IMaestroService, MaestroService>();
             services.AddTransient<IMaestroRepository, MaestroRepository>();
-
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<IClienteRepository, ClienteRepository>();
-
             services.AddTransient<IContratoService, ContratoService>();
             services.AddTransient<IContratoRepository, ContratoRepository>();
             services.AddTransient<IFincaDocumentoAdjuntoService, FincaDocumentoAdjuntoService>();
             services.AddTransient<IFincaDocumentoAdjuntoRepository, FincaDocumentoAdjuntoRepository>();
-
             services.AddTransient<INotaIngresoPlantaDocumentoAdjuntoService, NotaIngresoPlantaDocumentoAdjuntoService>();
             services.AddTransient<INotaIngresoPlantaDocumentoAdjuntoRepository, NotaIngresoPlantaDocumentoAdjuntoRepository>();
-
             services.AddTransient<IAduanaDocumentoAdjuntoService, AduanaDocumentoAdjuntoService>();
             services.AddTransient<IAduanaDocumentoAdjuntoRepository, AduanaDocumentoAdjuntoRepository>();
-
             services.AddTransient<IFincaFotoGeoreferenciadaService, FincaFotoGeoreferenciadaService>();
             services.AddTransient<IFincaFotoGeoreferenciadaRepository, FincaFotoGeoreferenciadaRepository>();
-
             services.AddTransient<IFincaMapaService, FincaMapaService>();
             services.AddTransient<IFincaMapaRepository, FincaMapaRepository>();
-
             services.AddTransient<IGuiaRemisionAlmacenService, GuiaRemisionAlmacenService>();
             services.AddTransient<IGuiaRemisionAlmacenRepository, GuiaRemisionAlmacenRepository>();
-
             services.AddTransient<IGuiaRemisionAlmacenPlantaService, GuiaRemisionAlmacenPlantaService>();
-
-
             services.AddTransient<IGuiaRecepcionMateriaPrimaService, GuiaRecepcionMateriaPrimaService>();
             services.AddTransient<IGuiaRecepcionMateriaPrimaRepository, GuiaRecepcionMateriaPrimaRepository>();
-
             services.AddTransient<IProveedorService, ProveedorService>();
             services.AddTransient<IProveedorRepository, ProveedorRepository>();
-
             services.AddTransient<ILoteService, LoteService>();
             services.AddTransient<ILoteRepository, LoteRepository>();
-
             services.AddTransient<IEmpresaService, EmpresaService>();
             services.AddTransient<IEmpresaRepository, EmpresaRepository>();
-
             services.AddTransient<IProductorService, ProductorService>();
             services.AddTransient<IProductorRepository, ProductorRepository>();
-
             services.AddTransient<IProductoPrecioDiaService, ProductoPrecioDiaService>();
             services.AddTransient<IProductoPrecioDiaRepository, ProductoPrecioDiaRepository>();
-
-
             services.AddTransient<ITipoCambioDiaService, TipoCambioDiaService>();
             services.AddTransient<ITipoCambioDiaRepository, TipoCambioDiaRepository>();
-
             services.AddTransient<ISocioService, SocioService>();
             services.AddTransient<ISocioRepository, SocioRepository>();
-
             services.AddTransient<IDetalleCatalogoService, DetalleCatalogoService>();
             services.AddTransient<IDetalleCatalogoRepository, DetalleCatalogoRepository>();
-
             services.AddTransient<ISocioFincaCertificacionService, SocioFincaCertificacionService>();
             services.AddTransient<ISocioFincaCertificacionRepository, SocioFincaCertificacionRepository>();
-
             services.AddTransient<ITransporteService, TransporteService>();
             services.AddTransient<ITransporteRepository, TransporteRepository>();
-
             services.AddTransient<IAduanaService, AduanaService>();
             services.AddTransient<IAduanaRepository, AduanaRepository>();
-
             services.AddTransient<IEmpresaTransporteService, EmpresaTransporteService>();
             services.AddTransient<IEmpresaTransporteRepository, EmpresaTransporteRepository>();
             services.AddTransient<IEmpresaProveedoraAcreedoraService, EmpresaProveedoraAcreedoraService>();
             services.AddTransient<IEmpresaProveedoraAcreedoraRepository, EmpresaProveedoraAcreedoraRepository>();
             services.AddTransient<INotaSalidaAlmacenRepository, NotaSalidaAlmacenRepository>();
             services.AddTransient<ICorrelativoRepository, CorrelativoRepository>();
-
             services.AddTransient<INotaCompraService, NotaCompraService>();
             services.AddTransient<INotaCompraRepository, NotaCompraRepository>();
-
             services.AddTransient<INotaIngresoAlmacenService, NotaIngresoAlmacenService>();
             services.AddTransient<INotaIngresoAlmacenRepository, NotaIngresoAlmacenRepository>();
-
             services.AddTransient<INotaIngresoAlmacenPlantaService, NotaIngresoAlmacenPlantaService>();
             services.AddTransient<INotaIngresoAlmacenPlantaRepository, NotaIngresoAlmacenPlantaRepository>();
-
             services.AddTransient<INotaIngresoPlantaService, NotaIngresoPlantaService>();
             services.AddTransient<INotaIngresoPlantaRepository, NotaIngresoPlantaRepository>();
-
             services.AddTransient<IOrdenServicioControlCalidadService, OrdenServicioControlCalidadService>();
             services.AddTransient<IOrdenServicioControlCalidadRepository, OrdenServicioControlCalidadRepository>();
             services.AddTransient<INotaSalidaAlmacenService, NotaSalidaAlmacenService>();
@@ -183,46 +153,35 @@ namespace CoffeeConnect.API
             services.AddTransient<IGuiaRemisionAlmacenPlantaRepository, GuiaRemisionAlmacenPlantaRepository>();
             services.AddTransient<ISocioDocumentoService, SocioDocumentoService>();
             services.AddTransient<ISocioDocumentoRepository, SocioDocumentoRepository>();
-
             services.AddTransient<IProductorDocumentoService, ProductorDocumentoService>();
             services.AddTransient<IProductorDocumentoRepository, ProductorDocumentoRepository>();
-
             services.AddTransient<IInspeccionInternaService, InspeccionInternaService>();
             services.AddTransient<IInspeccionInternaRepository, InspeccionInternaRepository>();
-
             services.AddTransient<IDiagnosticoService, DiagnosticoService>();
             services.AddTransient<IDiagnosticoRepository, DiagnosticoRepository>();
-
             services.AddTransient<IUbigeoService, UbigeoService>();
             services.AddTransient<IUbigeoRepository, UbigeoRepository>();
-
             services.AddTransient<IInspeccionInternaService, InspeccionInternaService>();
             services.AddTransient<IInspeccionInternaRepository, InspeccionInternaRepository>();
-
             services.AddTransient<INotaSalidaAlmacenPlantaService, NotaSalidaAlmacenPlantaService>();
             services.AddTransient<INotaSalidaAlmacenPlantaRepository, NotaSalidaAlmacenPlantaRepository>();
-
             services.AddTransient<ISocioProyectoService, SocioProyectoService>();
             services.AddTransient<ISocioProyectoRepository, SocioProyectoRepository>();
             services.AddTransient<IOrdenProcesoService, OrdenProcesoService>();
             services.AddTransient<IOrdenProcesoRepository, OrdenProcesoRepository>();
-
-
             services.AddTransient<ILiquidacionProcesoPlantaService, LiquidacionProcesoPlantaService>();
             services.AddTransient<ILiquidacionProcesoPlantaRepository, LiquidacionProcesoPlantaRepository>();
-
             services.AddTransient<IOrdenProcesoPlantaService, OrdenProcesoPlantaService>();
             services.AddTransient<IOrdenProcesoPlantaRepository, OrdenProcesoPlantaRepository>();
-
             services.AddTransient<IOrganizacionService, OrganizacionService>();
             services.AddTransient<IOrganizacionRepository, OrganizacionRepository>();
-
             services.AddTransient<IPrecioDiaRendimientoService, PrecioDiaRendimientoService>();
             services.AddTransient<IPrecioDiaRendimientoRepository, PrecioDiaRendimientoRepository>();
-
             services.AddTransient<IAdelantoService, AdelantoService>();
             services.AddTransient<IAdelantoRepository, AdelantoRepository>();
             services.AddTransient<IKardexService, KardexService>();
+            services.AddTransient<ISolicitudCompraService, SolicitudCompraService>();
+            services.AddTransient<ISolicitudCompraRepository, SolicitudCompraRepository>();
 
             services.AddTransient<ISolicitudCompraService, SolicitudCompraService>();
 

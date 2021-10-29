@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CoffeeConnect.DTO;
-using CoffeeConnect.Models;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Models;
 
-namespace CoffeeConnect.Service.MappingConfigurations
+namespace KaphiyQuipu.Service.MappingConfigurations
 {
     public class MappingProfile : Profile
     {
@@ -25,9 +25,7 @@ namespace CoffeeConnect.Service.MappingConfigurations
             CreateMap<RegistrarActualizarFincaFotoGeoreferenciadaRequestDTO, FincaFotoGeoreferenciada>();
             CreateMap<RegistrarActualizarContratoRequestDTO, Contrato>();
             CreateMap<RegistrarActualizarZonaRequestDTO, Zona>();
-
             CreateMap<RegistrarActualizarAduanaDocumentoAdjuntoRequestDTO, AduanaDocumentoAdjunto>();
-
             CreateMap<RegistrarActualizarAduanaRequestDTO, Aduana>();
             CreateMap<RegistrarActualizarDetalleCatalogoRequestDTO, DetalleCatalogo>();
             CreateMap<RegistrarSocioDocumentoRequestDTO, SocioDocumento>();
@@ -45,6 +43,7 @@ namespace CoffeeConnect.Service.MappingConfigurations
             CreateMap<RegistrarActualizarDiagnosticoRequestDTO, Diagnostico>();
             CreateMap<RegistrarActualizarNotaIngresoPlantaDocumentoAdjuntoRequestDTO, NotaIngresoPlantaDocumentoAdjunto>();
             CreateMap<RegistrarActualizarAdelantoRequestDTO, Adelanto>();
+            CreateMap<RegistrarActualizarSolicitudCompraRequestDTO, SolicitudCompra>();
         }
     }
 

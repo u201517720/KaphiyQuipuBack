@@ -1,9 +1,9 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.DTO.Adjunto;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.DTO.Adjunto;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 
-namespace CoffeeConnect.Interface.Service
+namespace KaphiyQuipu.Interface.Service
 {
     public interface IAduanaDocumentoAdjuntoService
     {

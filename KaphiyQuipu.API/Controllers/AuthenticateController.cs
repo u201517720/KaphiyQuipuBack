@@ -1,11 +1,11 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Service;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Service;
 using Core.Common.Domain.Model;
 using Core.Common.Encryption;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace CoffeeConnect.API.Controller
+namespace KaphiyQuipu.API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]

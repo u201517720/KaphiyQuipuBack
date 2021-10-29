@@ -1,13 +1,13 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Models;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Models;
 using Dapper;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace CoffeeConnect.Repository
+namespace KaphiyQuipu.Repository
 {
     public class MaestroRepository : IMaestroRepository
     {

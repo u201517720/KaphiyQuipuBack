@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoffeeConnect.DTO.Adjunto
+namespace KaphiyQuipu.DTO.Adjunto
 {
     /// <summary>
     /// Clase para Request Descargar Archivo

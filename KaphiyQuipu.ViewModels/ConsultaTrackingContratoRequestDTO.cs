@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoffeeConnect.DTO
+namespace KaphiyQuipu.DTO
 {
     public class ConsultaTrackingContratoRequestDTO
     {

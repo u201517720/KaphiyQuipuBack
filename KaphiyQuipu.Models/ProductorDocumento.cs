@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeConnect.Models
+namespace KaphiyQuipu.Models
 {
     [Serializable]
     public class ProductorDocumento

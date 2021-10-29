@@ -1,9 +1,9 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.DTO.Seguridad;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Interface.Service;
-using CoffeeConnect.Models;
-using CoffeeConnect.Models.User;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.DTO.Seguridad;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Models;
+using KaphiyQuipu.Models.User;
 using Core.Common.Domain.Model;
 using Core.Common.Encryption;
 using KaphiyQuipu.Blockchain.Entities;
@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CoffeeConnect.Service
+namespace KaphiyQuipu.Service
 {
     public class UsersService : IUsersService
     {

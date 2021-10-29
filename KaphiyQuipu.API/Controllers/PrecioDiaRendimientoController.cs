@@ -1,5 +1,5 @@
-﻿using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Service;
+﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Service;
 using Core.Common.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoffeeConnect.API.Controllers
+namespace KaphiyQuipu.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

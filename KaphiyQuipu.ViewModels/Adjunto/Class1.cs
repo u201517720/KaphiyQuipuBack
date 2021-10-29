@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeConnect.DTO.Adjunto
+namespace KaphiyQuipu.DTO.Adjunto
 {
     class Class1
     {

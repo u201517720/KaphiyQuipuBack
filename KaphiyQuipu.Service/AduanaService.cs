@@ -1,10 +1,10 @@
 ﻿
 using AutoMapper;
-using CoffeeConnect.DTO;
-using CoffeeConnect.DTO.Adjunto;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Interface.Service;
-using CoffeeConnect.Models;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.DTO.Adjunto;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Models;
 using Core.Common.Domain.Model;
 using Microsoft.Extensions.Options;
 using System;
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace CoffeeConnect.Service
+namespace KaphiyQuipu.Service
 {
     public partial class AduanaService : IAduanaService
     {

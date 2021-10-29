@@ -1,10 +1,10 @@
 ﻿
 using AutoMapper;
-using CoffeeConnect.DTO;
-using CoffeeConnect.Interface.Repository;
-using CoffeeConnect.Interface.Service;
-using CoffeeConnect.Models;
-using CoffeeConnect.Models.User;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Models;
+using KaphiyQuipu.Models.User;
 using Core.Common.Domain.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
@@ -14,7 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebGYM.Common;
 
-namespace CoffeeConnect.Service
+namespace KaphiyQuipu.Service
 {
     public partial class ClienteService : IClienteService
     {
