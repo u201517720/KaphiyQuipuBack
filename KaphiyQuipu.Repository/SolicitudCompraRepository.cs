@@ -25,8 +25,9 @@ namespace KaphiyQuipu.Repository
         public IEnumerable<ConsultaSolicitudCompraDTO> Consultar(ConsultaSolicitudCompraRequestDTO request)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("FechaInicio", request.FechaInicio);
-            parameters.Add("FechaFin", request.FechaFin);
+            parameters.Add("@pFechaInicio", request.FechaInicio);
+            parameters.Add("@pFechaFin", request.FechaFin);
+            parameters.Add("@pUsuarioId", request.UsuarioId);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
