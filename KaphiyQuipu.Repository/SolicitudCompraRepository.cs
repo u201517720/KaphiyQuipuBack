@@ -53,9 +53,9 @@ namespace KaphiyQuipu.Repository
             return itemBE;
         }
 
-        public int Insertar(SolicitudCompra solicitudCompra)
+        public string Insertar(SolicitudCompra solicitudCompra)
         {
-            int result = 0;
+            string result = string.Empty;
 
             var parameters = new DynamicParameters();
             parameters.Add("@pDistribuidorId", solicitudCompra.DistribuidorId);
@@ -81,7 +81,7 @@ namespace KaphiyQuipu.Repository
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                result = db.Execute("uspRegistrarSolicitudCompra", parameters, commandType: CommandType.StoredProcedure);
+                result = db.ExecuteScalar<string>("uspRegistrarSolicitudCompra", parameters, commandType: CommandType.StoredProcedure);
             }
 
             return result;

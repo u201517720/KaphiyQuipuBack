@@ -58,7 +58,7 @@ namespace KaphiyQuipu.Service
             return solicitudCompra;
         }
 
-        public int Registrar(RegistrarActualizarSolicitudCompraRequestDTO request)
+        public string Registrar(RegistrarActualizarSolicitudCompraRequestDTO request)
         {
             Result resultValidacion = ValidarRegistrar(request);
 
@@ -70,7 +70,7 @@ namespace KaphiyQuipu.Service
             SolicitudCompra solicitudCompra = _Mapper.Map<SolicitudCompra>(request);
             solicitudCompra.UsuarioRegistro = request.UsuarioRegistro;
             solicitudCompra.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.SolicitudCompra);
-            int affected = _ISolicitudCompraRepository.Insertar(solicitudCompra);
+            string affected = _ISolicitudCompraRepository.Insertar(solicitudCompra);
 
             return affected;
         }

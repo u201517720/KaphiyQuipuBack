@@ -8,7 +8,7 @@ namespace KaphiyQuipu.Interface.Repository
 {
     public interface ISolicitudCompraRepository
     {
-        int Insertar(SolicitudCompra solicitudCompra);
+        string Insertar(SolicitudCompra solicitudCompra);
         IEnumerable<ConsultaSolicitudCompraDTO> Consultar(ConsultaSolicitudCompraRequestDTO request);
         ConsultaSolicitudCompraPorIdDTO ConsultarPorId(int solicitudCompraId);
     }

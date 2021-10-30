@@ -35,6 +35,7 @@ namespace KaphiyQuipu.DTO
         public string DescripcionEstado { get; set; }
         public string UsuarioRegistro { get; set; }
         public DateTime FechaRegistro { get; set; }
+        public string FechaRegistroString { get; set; }
         public string UsuarioActualizacion { get; set; }
         public DateTime? FechaActualizacion { get; set; }
     }
