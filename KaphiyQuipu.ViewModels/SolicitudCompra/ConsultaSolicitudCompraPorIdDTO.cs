@@ -14,7 +14,7 @@ namespace KaphiyQuipu.DTO
         public string Correlativo { get; set; }
         public int DistribuidorId { get; set; }
         public string Distribuidor { get; set; }
-        public int PaisId { get; set; }
+        public string PaisId { get; set; }
         public string DepartamentoId { get; set; }
         public string MonedaId { get; set; }
         public string UnidadMedidaId { get; set; }
