@@ -75,15 +75,15 @@ namespace KaphiyQuipu.Service
             return affected;
         }
 
-        Result ValidarRegistrar(RegistrarActualizarSolicitudCompraRequestDTO request)
+        Result ValidarRegistrar(RegistrarActualizarSolicitudCompraRequestDTO request, bool register = true)
         {
             Result result = null;
             string message = string.Empty;
-            if (request.DistribuidorId <= 0)
+            if (!register && request.DistribuidorId <= 0)
             {
                 result = new Result { ErrCode = "01", Message = "El distribuidor es obligatorio." };
             }
-            else if (request.PaisId <= 0)
+            else if (string.IsNullOrEmpty(request.PaisId))
             {
                 result = new Result { ErrCode = "02", Message = "El país es obligatorio." };
             }

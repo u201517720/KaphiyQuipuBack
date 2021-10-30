@@ -59,6 +59,7 @@ namespace KaphiyQuipu.Repository
 
             var parameters = new DynamicParameters();
             parameters.Add("@pDistribuidorId", solicitudCompra.DistribuidorId);
+            parameters.Add("@pCorrelativo", solicitudCompra.Correlativo);
             parameters.Add("@pPaisId", solicitudCompra.PaisId);
             parameters.Add("@pDepartamentoId", solicitudCompra.DepartamentoId);
             parameters.Add("@pMonedaId", solicitudCompra.MonedaId);
@@ -73,6 +74,7 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@pSubProductoId", solicitudCompra.SubProductoId);
             parameters.Add("@pGradoPreparacionId", solicitudCompra.GradoPreparacionId);
             parameters.Add("@pCalidadId", solicitudCompra.CalidadId);
+            parameters.Add("@pCertificacionId", solicitudCompra.CertificacionId);
             parameters.Add("@pObservaciones", solicitudCompra.Observaciones);
             parameters.Add("@pUsuarioRegistro", solicitudCompra.UsuarioRegistro);
             parameters.Add("@pFechaRegistro", DateTime.Now);
