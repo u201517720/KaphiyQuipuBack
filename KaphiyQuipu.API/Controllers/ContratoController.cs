@@ -59,6 +59,33 @@ namespace Integracion.Deuda.Controller
             return Ok(response);
         }
 
+        [Route("ConsultarPorId")]
+        [HttpPost]
+        public IActionResult ConsultarPorId([FromBody] ConsultaContratoPorIdRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            ConsultaContratoPorIdResponseDTO response = new ConsultaContratoPorIdResponseDTO();
+            try
+            {
+                response.Result.Data = _contratoService.ConsultarPorId(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+            return Ok(response);
+        }
+
         [Route("Registrar")]
         [HttpPost]
         //public IActionResult Registrar([FromBody] RegistrarActualizarContratoRequestDTO request)
@@ -118,33 +145,6 @@ namespace Integracion.Deuda.Controller
             return Ok(response);
         }
 
-        [Route("ConsultarPorId")]
-        [HttpPost]
-        public IActionResult ConsultarPorId([FromBody] ConsultaContratoPorIdRequestDTO request)
-        {
-            Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
-
-            ConsultaContratoPorIdResponseDTO response = new ConsultaContratoPorIdResponseDTO();
-            try
-            {
-                response.Result.Data = _contratoService.ConsultarContratoPorId(request);
-                response.Result.Success = true;
-            }
-            catch (ResultException ex)
-            {
-                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
-            }
-            catch (Exception ex)
-            {
-                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
-                _log.RegistrarEvento(ex, guid.ToString());
-            }
-
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
-            return Ok(response);
-        }
-
         [Route("ConsultarContratoAsignado")]
         [HttpPost]
         public IActionResult ConsultarContratoAsignado([FromBody] ConsultaContratoAsignadoRequestDTO request)
@@ -171,8 +171,6 @@ namespace Integracion.Deuda.Controller
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
             return Ok(response);
         }
-
-
 
         [Route("DescargarArchivo")]
         //[HttpPost]
@@ -308,9 +306,6 @@ namespace Integracion.Deuda.Controller
             return Ok(response);
         }
 
-
-
-
         [Route("ConsultarTrackingContratoPorContratoId")]
         [HttpPost]
         public IActionResult ConsultarTrackingContratoPorContratoId([FromBody] ConsultaTrackingContratoPorContratoIdRequestDTO request)
@@ -364,9 +359,5 @@ namespace Integracion.Deuda.Controller
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
             return Ok(response);
         }
-
-
-
-
     }
 }

@@ -10,7 +10,7 @@ namespace KaphiyQuipu.Interface.Service
         List<ConsultaContratoDTO> Consultar(ConsultaContratoRequestDTO request);
         int RegistrarContrato(RegistrarActualizarContratoRequestDTO request, IFormFile file);
         int ActualizarContrato(RegistrarActualizarContratoRequestDTO request, IFormFile file);
-        ConsultaContratoPorIdBE ConsultarContratoPorId(ConsultaContratoPorIdRequestDTO request);
+        ConsultaContratoPorIdDTO ConsultarPorId(ConsultaContratoPorIdRequestDTO request);
         ResponseDescargarArchivoDTO DescargarArchivo(RequestDescargarArchivoDTO request);
         int AnularContrato(AnularContratoRequestDTO request);
         ConsultarTrackingContratoPorContratoIdBE ConsultarTrackingContratoPorContratoId(ConsultaTrackingContratoPorContratoIdRequestDTO request);

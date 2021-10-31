@@ -33,6 +33,23 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public ConsultaContratoPorIdDTO ConsultarPorId(int contratoId)
+        {
+            ConsultaContratoPorIdDTO itemBE = null;
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@pContratoId", contratoId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                var list = db.Query<ConsultaContratoPorIdDTO>("uspContratoCompraVentaConsultaPorId", parameters, commandType: CommandType.StoredProcedure);
+
+                if (list.Any())
+                    itemBE = list.First();
+            }
+            return itemBE;
+        }
+
         public int Insertar(Contrato contrato)
         {
             int result = 0;
@@ -103,7 +120,7 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@FechaPagoFactura", contrato.FechaPagoFactura);
             parameters.Add("@CantidadContenedores", contrato.CantidadContenedores);
 
-           
+
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -222,7 +239,7 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@KGPergaminoAsignacion", kgPergaminoAsignacion);
             parameters.Add("@PorcentajeRendimientoAsignacion", porcentajeRendimientoAsignacion);
             parameters.Add("@TotalKGPergaminoAsignacion", totalKGPergaminoAsignacion);
-            
+
 
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
@@ -233,7 +250,6 @@ namespace KaphiyQuipu.Repository
             return affected;
         }
 
-
         public int ActualizarSaldoPendienteAsignacionAcopio(int contratoId, decimal totalKGPergaminoIngreso)
         {
             int affected = 0;
@@ -241,7 +257,7 @@ namespace KaphiyQuipu.Repository
             var parameters = new DynamicParameters();
             parameters.Add("@ContratoId", contratoId);
             parameters.Add("@TotalKGPergaminoIngreso", totalKGPergaminoIngreso);
-            
+
 
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
@@ -250,27 +266,6 @@ namespace KaphiyQuipu.Repository
             }
 
             return affected;
-        }
-
-
-
-
-
-        public ConsultaContratoPorIdBE ConsultarContratoPorId(int contratoId)
-        {
-            ConsultaContratoPorIdBE itemBE = null;
-
-            var parameters = new DynamicParameters();
-            parameters.Add("@ContratoId", contratoId);
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                var list = db.Query<ConsultaContratoPorIdBE>("uspContratoConsultaPorId", parameters, commandType: CommandType.StoredProcedure);
-
-                if (list.Any())
-                    itemBE = list.First();
-            }
-            return itemBE;
         }
 
         public ConsultaContratoAsignado ConsultarContratoAsignado(int empresaId, string estadoId)
@@ -290,8 +285,6 @@ namespace KaphiyQuipu.Repository
             }
             return itemBE;
         }
-
-
 
         public ConsultarTrackingContratoPorContratoIdBE ConsultarTrackingContratoPorContratoId(int contratoId, string idioma)
         {
@@ -339,7 +332,7 @@ namespace KaphiyQuipu.Repository
             decimal precioPromedio = 0;
 
             var parameters = new DynamicParameters();
-            parameters.Add("@EmpresaId", empresaId);            
+            parameters.Add("@EmpresaId", empresaId);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -349,7 +342,7 @@ namespace KaphiyQuipu.Repository
             return precioPromedio;
         }
 
-        public int ValidadContratoAsignado(int empresaId,string estadoId)
+        public int ValidadContratoAsignado(int empresaId, string estadoId)
         {
             int cantidadContratos = 0;
 

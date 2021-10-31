@@ -58,6 +58,11 @@ namespace KaphiyQuipu.Service
             return list.ToList();
         }
 
+        public ConsultaContratoPorIdDTO ConsultarPorId(ConsultaContratoPorIdRequestDTO request)
+        {
+            return _IContratoRepository.ConsultarPorId(request.ContratoId);
+        }
+
         public int RegistrarContrato(RegistrarActualizarContratoRequestDTO request, IFormFile file)
         {
             Contrato contrato = _Mapper.Map<Contrato>(request);
@@ -229,11 +234,6 @@ namespace KaphiyQuipu.Service
             int affected = _IContratoRepository.Actualizar(contrato);
 
             return affected;
-        }
-
-        public ConsultaContratoPorIdBE ConsultarContratoPorId(ConsultaContratoPorIdRequestDTO request)
-        {
-            return _IContratoRepository.ConsultarContratoPorId(request.ContratoId);
         }
 
         public int AnularContrato(AnularContratoRequestDTO request)

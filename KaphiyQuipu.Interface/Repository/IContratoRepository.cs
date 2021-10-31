@@ -11,7 +11,7 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultaContratoDTO> Consultar(ConsultaContratoRequestDTO request);
         int Insertar(Contrato contrato);
         int Actualizar(Contrato contrato);
-        ConsultaContratoPorIdBE ConsultarContratoPorId(int contratoId);
+        ConsultaContratoPorIdDTO ConsultarPorId(int contratoId);
         int ActualizarEstado(int contratoId, DateTime fecha, string usuario, string estadoId);
         ConsultarTrackingContratoPorContratoIdBE ConsultarTrackingContratoPorContratoId(int contratoId, string idioma);
         IEnumerable<ConsultarTrackingContratoPorContratoIdBE> ConsultarTrackingContrato(ConsultaTrackingContratoRequestDTO request);
