@@ -30,7 +30,6 @@ namespace Integracion.Deuda.Controller
             return Ok("Contrato Service. version: 1.20.01.03");
         }
 
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("Consultar")]
         [HttpPost]
         public IActionResult Consultar([FromBody] ConsultaContratoRequestDTO request)
@@ -88,7 +87,6 @@ namespace Integracion.Deuda.Controller
 
         [Route("Registrar")]
         [HttpPost]
-        //public IActionResult Registrar([FromBody] RegistrarActualizarContratoRequestDTO request)
         public IActionResult Registrar(IFormFile file, [FromForm] string request)
         {
             Guid guid = Guid.NewGuid();
@@ -173,9 +171,7 @@ namespace Integracion.Deuda.Controller
         }
 
         [Route("DescargarArchivo")]
-        //[HttpPost]
         [HttpGet()]
-        //public IActionResult DescargarArchivo([FromBody] RequestDescargarArchivoDTO request)
         public IActionResult DescargarArchivo([FromQuery(Name = "path")] string path, [FromQuery(Name = "name")] string name)
         {
 
