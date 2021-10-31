@@ -11,7 +11,7 @@ namespace KaphiyQuipu.DTO
 
         }
 
-        public int DistribuidorId { get; set; }
+        public string CodigoCliente { get; set; }
         public string PaisId { get; set; }
         public string DepartamentoId { get; set; }
         public string MonedaId { get; set; }

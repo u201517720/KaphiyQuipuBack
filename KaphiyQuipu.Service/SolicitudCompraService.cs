@@ -79,7 +79,7 @@ namespace KaphiyQuipu.Service
         {
             Result result = null;
             string message = string.Empty;
-            if (!register && request.DistribuidorId <= 0)
+            if (!register && string.IsNullOrEmpty(request.CodigoCliente))
             {
                 result = new Result { ErrCode = "01", Message = "El distribuidor es obligatorio." };
             }

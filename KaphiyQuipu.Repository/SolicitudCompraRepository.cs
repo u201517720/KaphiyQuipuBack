@@ -27,7 +27,8 @@ namespace KaphiyQuipu.Repository
             var parameters = new DynamicParameters();
             parameters.Add("@pFechaInicio", request.FechaInicio);
             parameters.Add("@pFechaFin", request.FechaFin);
-            parameters.Add("@pUsuarioId", request.UsuarioId);
+            parameters.Add("@pRolId", request.RolId);
+            parameters.Add("@pCodigoCliente", request.CodigoCliente);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -58,7 +59,7 @@ namespace KaphiyQuipu.Repository
             string result = string.Empty;
 
             var parameters = new DynamicParameters();
-            parameters.Add("@pDistribuidorId", solicitudCompra.DistribuidorId);
+            parameters.Add("@pCodigoCliente", solicitudCompra.CodigoCliente);
             parameters.Add("@pCorrelativo", solicitudCompra.Correlativo);
             parameters.Add("@pPaisId", solicitudCompra.PaisId);
             parameters.Add("@pDepartamentoId", solicitudCompra.DepartamentoId);
