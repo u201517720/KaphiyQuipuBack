@@ -36,15 +36,13 @@ namespace Integracion.Deuda.Controller
         public IActionResult Consultar([FromBody] ConsultaContratoRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid.ToString()}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
 
             ConsultaContratoResponseDTO response = new ConsultaContratoResponseDTO();
             try
             {
-                response.Result.Data = _contratoService.ConsultarContrato(request);
-
+                response.Result.Data = _contratoService.Consultar(request);
                 response.Result.Success = true;
-
             }
             catch (ResultException ex)
             {
@@ -56,7 +54,7 @@ namespace Integracion.Deuda.Controller
                 _log.RegistrarEvento(ex, guid.ToString());
             }
 
-            _log.RegistrarEvento($"{guid.ToString()}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
 
             return Ok(response);
         }

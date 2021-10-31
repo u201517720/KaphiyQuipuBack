@@ -19,25 +19,17 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
-        public IEnumerable<ConsultaContratoBE> ConsultarContrato(ConsultaContratoRequestDTO request)
+        public IEnumerable<ConsultaContratoDTO> Consultar(ConsultaContratoRequestDTO request)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("Numero", request.Numero);
-            parameters.Add("RazonSocial", request.RazonSocial);
-            parameters.Add("TipoProduccionId", request.TipoProduccionId);
-            parameters.Add("ProductoId", request.ProductoId);
-            parameters.Add("CalidadId", request.CalidadId);
-            parameters.Add("NumeroCliente", request.NumeroCliente);
-            parameters.Add("EstadoId", request.EstadoId);
-            parameters.Add("EmpresaId", request.EmpresaId);
-            parameters.Add("TipoContratoId", request.TipoContratoId);
-            parameters.Add("FechaInicio", request.FechaInicio);
-            parameters.Add("FechaFin", request.FechaFin);
-
+            parameters.Add("@pFechaInicio", request.FechaInicio);
+            parameters.Add("@pFechaFin", request.FechaFin);
+            parameters.Add("@pRolId", request.RolId);
+            parameters.Add("@pCodigoCliente", request.CodigoDistribuidor);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                return db.Query<ConsultaContratoBE>("uspContratoConsulta", parameters, commandType: CommandType.StoredProcedure);
+                return db.Query<ConsultaContratoDTO>("uspContratoCompraVentaConsulta", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
