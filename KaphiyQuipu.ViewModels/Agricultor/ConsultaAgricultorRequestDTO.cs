@@ -11,6 +11,6 @@ namespace KaphiyQuipu.DTO
 
         }
 
-        public int TipoCertificacionId { get; set; }
+        public string TipoCertificacionId { get; set; }
     }
 }

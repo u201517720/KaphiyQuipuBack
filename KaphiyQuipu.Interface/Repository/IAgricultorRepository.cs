@@ -8,5 +8,7 @@ namespace KaphiyQuipu.Interface.Repository
     public interface IAgricultorRepository
     {
         IEnumerable<ConsultaAgricultorDTO> Consultar(ConsultaAgricultorRequestDTO request);
+        IEnumerable<ConsultaMateriaPrimaSolicitadaDTO> ConsultarMateriaPrimaSolicitada(ConsultaMateriaPrimaSolicitadaRequestDTO request);
+        ConsultaMateriaPrimaSolicitadaDTO ConsultarDetalleMateriaPrimaSolicitada(int contratoSocioFincaId);
     }
 }

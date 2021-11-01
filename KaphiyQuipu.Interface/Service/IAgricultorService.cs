@@ -8,5 +8,7 @@ namespace KaphiyQuipu.Interface.Service
     public interface IAgricultorService
     {
         List<ConsultaAgricultorDTO> Consultar(ConsultaAgricultorRequestDTO request);
+        List<ConsultaMateriaPrimaSolicitadaDTO> ConsultarMateriaPrimaSolicitada(ConsultaMateriaPrimaSolicitadaRequestDTO request);
+        ConsultaMateriaPrimaSolicitadaDTO ConsultarDetalleMateriaPrimaSolicitada(ConsultarDetalleMateriaPrimaSolicitadaRequestDTO request);
     }
 }

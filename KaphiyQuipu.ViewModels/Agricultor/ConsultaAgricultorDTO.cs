@@ -20,7 +20,7 @@ namespace KaphiyQuipu.DTO
         public string NumeroTelefonoCelular { get; set; }
         public string Finca { get; set; }
         public decimal TotalCosecha { get; set; }
-        public DateTime? FechaActualizacion { get; set; }
+        public DateTime FechaRegistro { get; set; }
         public string FechaActualizacionString { get; set; }
     }
 }
