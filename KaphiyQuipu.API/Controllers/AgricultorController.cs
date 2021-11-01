@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace Integracion.Deuda.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AgricultorController : ControllerBase
     {
         private Core.Common.Logger.ILog _log;

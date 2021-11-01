@@ -16,11 +16,13 @@ namespace KaphiyQuipu.DTO
         public string ApellidoSocio { get; set; }
         public string NombreCompleto { get; set; }
         public string TipoDocumentoId { get; set; }
+        public string TipoDocumento { get; set; }
         public string NumeroDocumento { get; set; }
         public string NumeroTelefonoCelular { get; set; }
         public string Finca { get; set; }
         public decimal TotalCosecha { get; set; }
         public DateTime FechaRegistro { get; set; }
         public string FechaActualizacionString { get; set; }
+        public string TipoCertificacion { get; set; }
     }
 }

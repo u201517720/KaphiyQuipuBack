@@ -30,7 +30,7 @@ namespace KaphiyQuipu.Service
             agricultores = list.ToList();
             agricultores.ForEach(x =>
             {
-                x.NombreSocio = string.Format("{0} {1}", x.ApellidoSocio.Trim(), x.NombreSocio.Trim());
+                x.NombreCompleto = string.Format("{0}, {1}", x.ApellidoSocio.Trim(), x.NombreSocio.Trim());
                 x.FechaActualizacionString = x.FechaRegistro != null ? ((DateTime)x.FechaRegistro).ToString("yyyy-MM-dd HH:mm:ss") : string.Empty;
             });
             return agricultores;

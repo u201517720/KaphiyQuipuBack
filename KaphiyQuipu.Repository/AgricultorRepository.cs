@@ -23,7 +23,7 @@ namespace KaphiyQuipu.Repository
         public IEnumerable<ConsultaAgricultorDTO> Consultar(ConsultaAgricultorRequestDTO request)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@pFechaInicio", request.TipoCertificacionId);
+            parameters.Add("@pTipoCertificacionId", request.TipoCertificacionId);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
