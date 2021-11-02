@@ -1,16 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace KaphiyQuipu.DTO
 {
-    public class ConsultaSolicitudCompraPorIdDTO
+    public class ConsultaContratoPorIdDTO
     {
-        public ConsultaSolicitudCompraPorIdDTO()
-        {
-
-        }
-
+        public int ContratoId { get; set; }
         public string Correlativo { get; set; }
         public int DistribuidorId { get; set; }
         public string Distribuidor { get; set; }
@@ -29,7 +26,8 @@ namespace KaphiyQuipu.DTO
         public string GradoPreparacionId { get; set; }
         public string CalidadId { get; set; }
         public string CertificacionId { get; set; }
-        public string Observaciones { get; set; }
+        public string ObservacionesSolicitud { get; set; }
+        public string ObservacionesContrato { get; set; }
         public bool Estado { get; set; }
         public string EstadoId { get; set; }
         public string DescripcionEstado { get; set; }
@@ -37,6 +35,7 @@ namespace KaphiyQuipu.DTO
         public DateTime FechaRegistro { get; set; }
         public string FechaRegistroString { get; set; }
         public string UsuarioActualizacion { get; set; }
-        public DateTime? FechaActualizacion { get; set; }
+        public DateTime FechaActualizacion { get; set; }
+        public string FechaActualizacionString { get; set; }
     }
 }

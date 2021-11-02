@@ -11,7 +11,7 @@ namespace KaphiyQuipu.Interface.Service
 {
     public interface ISolicitudCompraService
     {
-        int Registrar(RegistrarActualizarSolicitudCompraRequestDTO request);
+        string Registrar(RegistrarActualizarSolicitudCompraRequestDTO request);
         List<ConsultaSolicitudCompraDTO> Consultar(ConsultaSolicitudCompraRequestDTO request);
         ConsultaSolicitudCompraPorIdDTO ConsultarPorId(ConsultaSolicitudCompraPorIdRequestDTO request);
         Task<TransactionResult> Registrar(SolicitudCompraDTO solicitudCompra);

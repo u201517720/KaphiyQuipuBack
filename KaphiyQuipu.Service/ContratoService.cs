@@ -25,7 +25,6 @@ namespace KaphiyQuipu.Service
         private IMaestroRepository _IMaestroRepository;
         private IEmpresaRepository _IEmpresaRepository;
 
-        
         public ContratoService(IContratoRepository contratoRepository, ICorrelativoRepository correlativoRepository, IMapper mapper, IOptions<FileServerSettings> fileServerSettings, IMaestroRepository maestroRepository, IEmpresaRepository empresaRepository)
         {
             _IContratoRepository = contratoRepository;
@@ -41,61 +40,27 @@ namespace KaphiyQuipu.Service
             return _fileServerSettings.Value.RutaPrincipal + pathFile;
         }
 
-        public List<ConsultaContratoBE> ConsultarContrato(ConsultaContratoRequestDTO request)
+        public List<ConsultaContratoDTO> Consultar(ConsultaContratoRequestDTO request)
         {
-            if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue || string.IsNullOrEmpty(request.EstadoId))
+            if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue)
+            {
                 throw new ResultException(new Result { ErrCode = "01", Message = "Comercial.Cliente.ValidacionSeleccioneMinimoUnFiltro.Label" });
+            }
 
             var timeSpan = request.FechaFin - request.FechaInicio;
 
             if (timeSpan.Days > 730)
-                throw new ResultException(new Result { ErrCode = "02", Message = "Comercial.Contrato.ValidacionRangoFechaMayor2anios.Label" });
-
-            var list = _IContratoRepository.ConsultarContrato(request);
-
-            List<ConsultaDetalleTablaBE> lista = _IMaestroRepository.ConsultarDetalleTablaDeTablas(request.EmpresaId,String.Empty).ToList();
-
-
-            foreach (ConsultaContratoBE contrato in list)
             {
-                string[] certificacionesIds = contrato.TipoCertificacionId.Split('|');
-
-                string certificacionLabel = string.Empty;
-                string tipoContratoLabel = string.Empty;
-
-
-                if (certificacionesIds.Length > 0)
-                {
-
-                    List<ConsultaDetalleTablaBE> certificaciones = lista.Where(a => a.CodigoTabla.Trim().Equals("TipoCertificacion")).ToList();
-                    
-                    foreach (string certificacionId in certificacionesIds)
-                    {
-
-                        ConsultaDetalleTablaBE certificacion = certificaciones.Where(a => a.Codigo == certificacionId).FirstOrDefault();
-
-                        if (certificacion != null)
-                        {
-                            certificacionLabel = certificacionLabel + certificacion.Label + " ";
-                        }
-                    }
-
-                }
-                List<ConsultaDetalleTablaBE> tipoContratos = lista.Where(a => a.CodigoTabla.Trim().Equals("TipoContrato")).ToList();
-                ConsultaDetalleTablaBE tipoContrato = tipoContratos.Where(a => a.Codigo == contrato.TipoContratoId).FirstOrDefault();
-                if (tipoContrato != null)
-                {
-                    tipoContratoLabel = tipoContratoLabel + tipoContrato.Label + " ";
-                }
-
-                contrato.TipoContrato = tipoContratoLabel;
-                contrato.TipoCertificacion = certificacionLabel;
+                throw new ResultException(new Result { ErrCode = "02", Message = "Comercial.Contrato.ValidacionRangoFechaMayor2anios.Label" });
             }
 
-            
-
-
+            var list = _IContratoRepository.Consultar(request);
             return list.ToList();
+        }
+
+        public ConsultaContratoPorIdDTO ConsultarPorId(ConsultaContratoPorIdRequestDTO request)
+        {
+            return _IContratoRepository.ConsultarPorId(request.ContratoId);
         }
 
         public int RegistrarContrato(RegistrarActualizarContratoRequestDTO request, IFormFile file)
@@ -158,14 +123,14 @@ namespace KaphiyQuipu.Service
 
             Empresa empresa = _IEmpresaRepository.ObtenerEmpresaPorId(request.EmpresaId);
 
-            if(empresa.TipoEmpresaid != "01")
+            if (empresa.TipoEmpresaid != "01")
             {
                 contrato.EstadoId = ContratoEstados.Completado;
             }
 
             int cantidadContratosExistentes = _IContratoRepository.ValidadContratoExistente(request.EmpresaId, request.Numero);
-            
-            if (cantidadContratosExistentes > 0) 
+
+            if (cantidadContratosExistentes > 0)
             {
                 throw new ResultException(new Result { ErrCode = "02", Message = "Comercial.Contrato.ValidacionContratoExistente.Label" });
 
@@ -271,11 +236,6 @@ namespace KaphiyQuipu.Service
             return affected;
         }
 
-        public ConsultaContratoPorIdBE ConsultarContratoPorId(ConsultaContratoPorIdRequestDTO request)
-        {
-            return _IContratoRepository.ConsultarContratoPorId(request.ContratoId);
-        }
-
         public int AnularContrato(AnularContratoRequestDTO request)
         {
             int result = 0;
@@ -290,9 +250,9 @@ namespace KaphiyQuipu.Service
         {
             int cantidadContratosAsignados = _IContratoRepository.ValidadContratoAsignado(request.EmpresaId, ContratoEstados.Asignado);
 
-            if(cantidadContratosAsignados>0)
+            if (cantidadContratosAsignados > 0)
             {
-               throw new ResultException(new Result { ErrCode = "01", Message = "Comercial.Contrato.ValidacionContratoAsignado.Label" });
+                throw new ResultException(new Result { ErrCode = "01", Message = "Comercial.Contrato.ValidacionContratoAsignado.Label" });
 
             }
 
@@ -304,31 +264,26 @@ namespace KaphiyQuipu.Service
             return result;
         }
 
-
         public ConsultarTrackingContratoPorContratoIdBE ConsultarTrackingContratoPorContratoId(ConsultaTrackingContratoPorContratoIdRequestDTO request)
         {
-            return _IContratoRepository.ConsultarTrackingContratoPorContratoId(request.ContratoId,request.Idioma);
+            return _IContratoRepository.ConsultarTrackingContratoPorContratoId(request.ContratoId, request.Idioma);
         }
 
         public List<ConsultarTrackingContratoPorContratoIdBE> ConsultarTrackingContrato(ConsultaTrackingContratoRequestDTO request)
         {
-           
+
             var list = _IContratoRepository.ConsultarTrackingContrato(request);
 
-            
+
 
 
 
             return list.ToList();
         }
 
-
         public ConsultaContratoAsignado ConsultarContratoAsignado(ConsultaContratoAsignadoRequestDTO request)
         {
-            return _IContratoRepository.ConsultarContratoAsignado(request.EmpresaId,ContratoEstados.Asignado);
+            return _IContratoRepository.ConsultarContratoAsignado(request.EmpresaId, ContratoEstados.Asignado);
         }
-
-
-
     }
 }

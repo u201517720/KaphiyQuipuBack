@@ -25,12 +25,14 @@ namespace KaphiyQuipu.Repository
         public IEnumerable<ConsultaSolicitudCompraDTO> Consultar(ConsultaSolicitudCompraRequestDTO request)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("FechaInicio", request.FechaInicio);
-            parameters.Add("FechaFin", request.FechaFin);
+            parameters.Add("@pFechaInicio", request.FechaInicio);
+            parameters.Add("@pFechaFin", request.FechaFin);
+            parameters.Add("@pRolId", request.RolId);
+            parameters.Add("@pCodigoCliente", request.CodigoCliente);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                return db.Query<ConsultaSolicitudCompraDTO>("uspSocioConsulta", parameters, commandType: CommandType.StoredProcedure);
+                return db.Query<ConsultaSolicitudCompraDTO>("uspSolicitudCompraConsulta", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -39,11 +41,11 @@ namespace KaphiyQuipu.Repository
             ConsultaSolicitudCompraPorIdDTO itemBE = null;
 
             var parameters = new DynamicParameters();
-            parameters.Add("@SolicitudCompraId", solicitudCompraId);
+            parameters.Add("@pSolicitudCompraId", solicitudCompraId);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                var list = db.Query<ConsultaSolicitudCompraPorIdDTO>("uspSocioObtenerPorId", parameters, commandType: CommandType.StoredProcedure);
+                var list = db.Query<ConsultaSolicitudCompraPorIdDTO>("uspSolicitudCompraConsultaPorId", parameters, commandType: CommandType.StoredProcedure);
 
                 if (list.Any())
                     itemBE = list.First();
@@ -52,12 +54,13 @@ namespace KaphiyQuipu.Repository
             return itemBE;
         }
 
-        public int Insertar(SolicitudCompra solicitudCompra)
+        public string Insertar(SolicitudCompra solicitudCompra)
         {
-            int result = 0;
+            string result = string.Empty;
 
             var parameters = new DynamicParameters();
-            parameters.Add("@pDistribuidorId", solicitudCompra.DistribuidorId);
+            parameters.Add("@pCodigoCliente", solicitudCompra.CodigoCliente);
+            parameters.Add("@pCorrelativo", solicitudCompra.Correlativo);
             parameters.Add("@pPaisId", solicitudCompra.PaisId);
             parameters.Add("@pDepartamentoId", solicitudCompra.DepartamentoId);
             parameters.Add("@pMonedaId", solicitudCompra.MonedaId);
@@ -72,13 +75,14 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@pSubProductoId", solicitudCompra.SubProductoId);
             parameters.Add("@pGradoPreparacionId", solicitudCompra.GradoPreparacionId);
             parameters.Add("@pCalidadId", solicitudCompra.CalidadId);
+            parameters.Add("@pCertificacionId", solicitudCompra.CertificacionId);
             parameters.Add("@pObservaciones", solicitudCompra.Observaciones);
             parameters.Add("@pUsuarioRegistro", solicitudCompra.UsuarioRegistro);
             parameters.Add("@pFechaRegistro", DateTime.Now);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                result = db.Execute("uspRegistrarSolicitudCompra", parameters, commandType: CommandType.StoredProcedure);
+                result = db.ExecuteScalar<string>("uspRegistrarSolicitudCompra", parameters, commandType: CommandType.StoredProcedure);
             }
 
             return result;

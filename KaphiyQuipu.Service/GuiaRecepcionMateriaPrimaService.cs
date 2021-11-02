@@ -53,7 +53,7 @@ namespace KaphiyQuipu.Service
             ConsultaGuiaRecepcionMateriaPrimaPorIdBE consultaGuiaRecepcionMateriaPrimaPorIdBE = _IGuiaRecepcionMateriaPrimaRepository.ConsultarGuiaRecepcionMateriaPrimaPorId(request.GuiaRecepcionMateriaPrimaId);
             int contratoId = consultaGuiaRecepcionMateriaPrimaPorIdBE.ContratoAsignadoId;
 
-            ConsultaContratoPorIdBE consultaContratoPorIdBE = _IContratoRepository.ConsultarContratoPorId(contratoId);
+            ConsultaContratoPorIdDTO consultaContratoPorIdBE = _IContratoRepository.ConsultarPorId(contratoId);
 
             if(consultaContratoPorIdBE.EstadoId == ContratoEstados.Completado)
             {

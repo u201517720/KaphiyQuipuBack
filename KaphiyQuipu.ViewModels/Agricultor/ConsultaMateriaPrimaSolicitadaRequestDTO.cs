@@ -4,16 +4,15 @@ using System.Text;
 
 namespace KaphiyQuipu.DTO
 {
-    public class ConsultaSolicitudCompraRequestDTO
+    public class ConsultaMateriaPrimaSolicitadaRequestDTO
     {
-        public ConsultaSolicitudCompraRequestDTO()
+        public ConsultaMateriaPrimaSolicitadaRequestDTO()
         {
 
         }
 
+        public int UserId { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
-        public int RolId { get; set; }
-        public string CodigoCliente { get; set; }
     }
 }
