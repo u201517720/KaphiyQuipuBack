@@ -7,11 +7,11 @@ using KaphiyQuipu.Models.User;
 using Core.Common.Domain.Model;
 using Core.Common.Encryption;
 using KaphiyQuipu.Blockchain.Entities;
-using KaphiyQuipu.Blockchain.ERC20;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using KaphiyQuipu.Blockchain.Contracts;
 
 namespace KaphiyQuipu.Service
 {

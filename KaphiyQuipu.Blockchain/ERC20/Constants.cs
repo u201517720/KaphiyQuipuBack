@@ -28,10 +28,7 @@ namespace KaphiyQuipu.Blockchain.ERC20
         public static string FUNCTION_CHECK_OWNER_PERMISSION = "checkOwnerPermission";
         public static string FUNCTION_GET_OWNER = "getOwner";
 
-        public static string FUNCTION_VALIDATE_USER = "validateUser";
-        public static string FUNCTION_GET_USER = "getUser";
-        public static string FUNCTION_TOTAL_USERS = "totalUsers";
-        public static string FUNCTION_USERS = "users";
+        
 
         #endregion
 

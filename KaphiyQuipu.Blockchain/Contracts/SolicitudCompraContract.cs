@@ -1,4 +1,5 @@
 ﻿using KaphiyQuipu.Blockchain.Entities;
+using KaphiyQuipu.Blockchain.ERC20;
 using KaphiyQuipu.Blockchain.Facade;
 using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.Blockchain.Services;
@@ -12,7 +13,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KaphiyQuipu.Blockchain.ERC20
+namespace KaphiyQuipu.Blockchain.Contracts
 {
     public interface ISolicitudCompraContract
     {

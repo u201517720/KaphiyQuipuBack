@@ -1,5 +1,6 @@
 ﻿using Core.Common.Domain.Model;
 using Core.Common.Logger;
+using KaphiyQuipu.Blockchain.Contracts;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.DTO.SolicitudCompra;
 using KaphiyQuipu.Interface.Service;
@@ -17,11 +18,13 @@ namespace Integracion.Deuda.Controllers
     {
         private ILog _log;
         private ISolicitudCompraService _solicitudCompraService;
+        private IContratoCompraContract _contratoCompraContract;
 
-        public SolicitudCompraController(ILog log, ISolicitudCompraService solicitudCompraService)
+        public SolicitudCompraController(ILog log, ISolicitudCompraService solicitudCompraService, IContratoCompraContract contratoCompraContract)
         {
             _log = log;
             _solicitudCompraService = solicitudCompraService;
+            _contratoCompraContract = contratoCompraContract;
         }
 
         [Route("Registrar")]
@@ -120,6 +123,35 @@ namespace Integracion.Deuda.Controllers
         public async Task<IActionResult> Obtener(string correlativo)
         {
             return Ok(await _solicitudCompraService.ObtenerSolicitud(correlativo));
+        }
+
+        [Route("Contrato")]
+        [HttpPost]
+        public async Task<IActionResult> RegistrarContrato([FromBody] ContratoCompraDTO request)
+        {
+            return Ok(await _contratoCompraContract.RegistrarContrato(request));
+        }
+
+        [Route("Contrato/{nroContrato}")]
+        [HttpGet]
+        public async Task<IActionResult> ObtenerContrato(string nroContrato)
+        {
+            return Ok(await _contratoCompraContract.ObtenerContrato(nroContrato));
+        }
+
+        [Route("Agricultores")]
+        [HttpPost]
+        public async Task<IActionResult> AgregarAgricultor([FromBody] AgricultorContratoDTO request)
+        {
+            return Ok(await _contratoCompraContract.AgregarAgricultor(request));
+        }
+
+
+        [Route("Contrato/{nroContrato}/agricultores")]
+        [HttpGet]
+        public async Task<IActionResult> ObtenerAgricultores(string nroContrato)
+        {
+            return Ok(await _contratoCompraContract.ObtenerAgricultoresPorContrato(nroContrato));
         }
     }
 }

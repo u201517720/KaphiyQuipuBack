@@ -15,6 +15,7 @@ using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO.SolicitudCompra;
 using System.Threading.Tasks;
 using KaphiyQuipu.Blockchain.Entities;
+using KaphiyQuipu.Blockchain.Contracts;
 
 namespace KaphiyQuipu.Service
 {
