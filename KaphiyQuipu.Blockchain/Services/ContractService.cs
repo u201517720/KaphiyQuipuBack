@@ -16,6 +16,7 @@ using Nethereum.RPC.Eth.DTOs;
 
 using KaphiyQuipu.Blockchain.Facade;
 using KaphiyQuipu.Blockchain.Helpers.OperationResults;
+using Nethereum.RPC.Accounts;
 
 namespace KaphiyQuipu.Blockchain.Services
 {
@@ -41,9 +42,9 @@ namespace KaphiyQuipu.Blockchain.Services
                                 new HexBigInteger(Constants.DEFAULT_GAS));
         }
 
-        public Web3 GetDefaultWeb3(ManagedAccount account)
+        public Web3 GetDefaultWeb3(IAccount account)
         {
-            return new Web3(account, _config.GetSection(Constants.GETH_RPC).Value);
+            return new Web3(account, _config["Ethereum:ProviderUrl"]);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace KaphiyQuipu.Blockchain.ERC20
 
         public async Task<UserDTO> ValidateUser(string username, string passsword)
         {
-            var contract = await _ContractFacade.GetContract(_configuration["Contracts:UserContract:Name"], true, _configuration["Contracts:UserContract:Address"]);
+            var contract = await _ContractFacade.GetContract(_configuration["Ethereum:Contracts:UserContract:Name"], true, _configuration["Ethereum:Contracts:UserContract:Address"]);
             bool isAuthenticated= await contract.Contract.GetFunction(Constants.FUNCTION_VALIDATE_USER).CallAsync<bool>(username, passsword);
 
             if (isAuthenticated)

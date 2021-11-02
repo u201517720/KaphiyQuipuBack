@@ -53,7 +53,9 @@ namespace KaphiyQuipu.Blockchain.Facade
             }
 
             var url = Config.GetSection(Constants.GETH_RPC).Value;
-            var web3 = new Web3(url);
+
+            var web3 = GetWeb3(url);
+            web3.TransactionManager.UseLegacyAsDefault = true;
             var contract = await Task.Run(() => web3.Eth.GetContract(abi, contractAddress));
             var contDAO = new ContractDAO()
             {
@@ -73,6 +75,12 @@ namespace KaphiyQuipu.Blockchain.Facade
         public Web3 GetWeb3(string address, string password, string rpcUrl)
         {
             var account = new ManagedAccount(address, password);
+            return new Web3(account, rpcUrl);
+        }
+
+        public Web3 GetWeb3(string rpcUrl)
+        {
+            var account = new Account(Config["Ethereum:Account:Key"], BigInteger.Parse(Config["Ethereum:NetworkID"]));
             return new Web3(account, rpcUrl);
         }
 

@@ -4,6 +4,7 @@ using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.Blockchain.Services;
 using KaphiyQuipu.DTO.SolicitudCompra;
 using Microsoft.Extensions.Configuration;
+using Nethereum.RPC.Accounts;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts.Managed;
 using System;
@@ -26,7 +27,7 @@ namespace KaphiyQuipu.Blockchain.ERC20
         private readonly IContractOperation _contractOperation;
         private readonly IAccountService _accountService;
         private readonly Web3 _web3;
-        private ManagedAccount _account;
+        private IAccount _account;
         private ContractDAO contract;
 
         public SolicitudCompraContract( IContractFacade contractFacade,
@@ -41,7 +42,7 @@ namespace KaphiyQuipu.Blockchain.ERC20
             _web3 = _accountService.GetWeb3();
             _account = _accountService.GetAccount();
 
-            contract =  _ContractFacade.GetContract(_configuration["Contracts:SolicitudCompra:Name"], true, _configuration["Contracts:SolicitudCompra:Address"]).Result;
+            contract =  _ContractFacade.GetContract(_configuration["Ethereum:Contracts:SolicitudCompra:Name"], true, _configuration["Ethereum:Contracts:SolicitudCompra:Address"]).Result;
         }
 
         public async Task<TransactionResult> RegistrarSolicitud(SolicitudCompraDTO solicitud)
