@@ -53,7 +53,6 @@ namespace KaphiyQuipu.Repository
         public string Registrar(Contrato contrato)
         {
             string result = string.Empty;
-            int responseDB = 0;
 
             var parameters = new DynamicParameters();
             parameters.Add("@pCorrelativo", contrato.Correlativo);
@@ -65,10 +64,8 @@ namespace KaphiyQuipu.Repository
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                responseDB = db.Execute("uspRegistrarContratoCompraVenta", parameters, commandType: CommandType.StoredProcedure);
+                result = db.ExecuteScalar<string>("uspRegistrarContratoCompraVenta", parameters, commandType: CommandType.StoredProcedure);
             }
-
-            result = parameters.Get<string>("Correlativo");
 
             return result;
         }
