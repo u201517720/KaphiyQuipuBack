@@ -55,7 +55,7 @@ namespace KaphiyQuipu.Service
 
             ConsultaContratoPorIdDTO consultaContratoPorIdBE = _IContratoRepository.ConsultarPorId(contratoId);
 
-            if(consultaContratoPorIdBE.EstadoId == ContratoEstados.Completado)
+            if (consultaContratoPorIdBE.EstadoId == ContratoEstados.Completado)
             {
                 //throw new ResultException(new Result { ErrCode = "04", Message = "Acopio.GuiaRecepcionMateriaPrima.ContratoCompletado.Label" });
                 throw new ResultException(new Result { ErrCode = "04", Message = "No se puede anular una guía con contrato asignado completado." });
@@ -64,7 +64,7 @@ namespace KaphiyQuipu.Service
             {
                 decimal kilosNetosPesado = consultaGuiaRecepcionMateriaPrimaPorIdBE.KilosNetosPesado;
 
-                _IContratoRepository.ActualizarSaldoPendienteAsignacionAcopio(contratoId, kilosNetosPesado * (-1));
+                //_IContratoRepository.ActualizarSaldoPendienteAsignacionAcopio(contratoId, kilosNetosPesado * (-1));
             }
 
 
@@ -73,8 +73,8 @@ namespace KaphiyQuipu.Service
             string productoIdCafePergamino = _ParametrosSettings.Value.ProductoIdCafePergamino;
             string subProductoIdCafeSeco = _ParametrosSettings.Value.SubProductoIdCafeSeco;
 
-            
-           
+
+
 
             if (consultaGuiaRecepcionMateriaPrimaPorIdBE.ProductoId == productoIdCafePergamino && consultaGuiaRecepcionMateriaPrimaPorIdBE.SubProductoId == subProductoIdCafeSeco && consultaGuiaRecepcionMateriaPrimaPorIdBE.SocioFincaCertificacion != String.Empty)
             {
@@ -104,7 +104,7 @@ namespace KaphiyQuipu.Service
 
         //    return affected;
         //}
-        
+
         public ConsultaGuiaRecepcionMateriaPrimaPorIdBE ConsultarGuiaRecepcionMateriaPrimaPorId(ConsultaGuiaRecepcionMateriaPrimaPorIdRequestDTO request)
         {
             int guiaRecepcionMateriaPrimaId = request.GuiaRecepcionMateriaPrimaId;
@@ -146,115 +146,98 @@ namespace KaphiyQuipu.Service
 
         public int RegistrarPesadoGuiaRecepcionMateriaPrima(RegistrarActualizarPesadoGuiaRecepcionMateriaPrimaRequestDTO request)
         {
-            string productoIdCafePergamino = _ParametrosSettings.Value.ProductoIdCafePergamino;
-            string subProductoIdCafeSeco = _ParametrosSettings.Value.SubProductoIdCafeSeco;
+            //string productoIdCafePergamino = _ParametrosSettings.Value.ProductoIdCafePergamino;
+            //string subProductoIdCafeSeco = _ParametrosSettings.Value.SubProductoIdCafeSeco;
 
-            ConsultaContratoAsignado consultaContratoAsignado = null;
+            //ConsultaContratoAsignado consultaContratoAsignado = null;
 
+            //decimal kilosNetosPesado = request.KilosBrutosPesado - request.TaraPesado;
 
-            decimal kilosNetosPesado = request.KilosBrutosPesado - request.TaraPesado;
+            //int? contratoAsignadoId = null;
 
-            int? contratoAsignadoId=null;
+            //if (request.ProductoId == productoIdCafePergamino && request.SubProductoId == subProductoIdCafeSeco)
+            //{
+            //    consultaContratoAsignado = _IContratoRepository.ConsultarContratoAsignado(request.EmpresaId, ContratoEstados.Asignado);
 
-            if (request.ProductoId == productoIdCafePergamino && request.SubProductoId == subProductoIdCafeSeco)
-            {
+            //    if (consultaContratoAsignado == null || consultaContratoAsignado.SaldoPendienteKGPergaminoAsignacion == 0)
+            //    {
+            //        throw new ResultException(new Result { ErrCode = "03", Message = "Acopio.GuiaRecepcionMateriaPrima.ValidacionContratoNoAsignado.Label" });
+            //    }
 
-                consultaContratoAsignado = _IContratoRepository.ConsultarContratoAsignado(request.EmpresaId, ContratoEstados.Asignado);
+            //    if (kilosNetosPesado > consultaContratoAsignado.SaldoPendienteKGPergaminoAsignacion)
+            //    {
+            //        throw new ResultException(new Result { ErrCode = "04", Message = "Acopio.GuiaRecepcionMateriaPrima.ValidacionKilosNetosPesadoMayorContratoNoAsignado.Label" });
+            //    }
 
-                if (consultaContratoAsignado == null || consultaContratoAsignado.SaldoPendienteKGPergaminoAsignacion == 0)
-                {
-                    throw new ResultException(new Result { ErrCode = "03", Message = "Acopio.GuiaRecepcionMateriaPrima.ValidacionContratoNoAsignado.Label" });
-                }
+            //    contratoAsignadoId = consultaContratoAsignado.ContratoId;
+            //}
 
-               
+            //GuiaRecepcionMateriaPrima guiaRecepcionMateriaPrima = new GuiaRecepcionMateriaPrima();
 
-                if (kilosNetosPesado > consultaContratoAsignado.SaldoPendienteKGPergaminoAsignacion)
-                {
-                    throw new ResultException(new Result { ErrCode = "04", Message = "Acopio.GuiaRecepcionMateriaPrima.ValidacionKilosNetosPesadoMayorContratoNoAsignado.Label" });
-                }
+            //guiaRecepcionMateriaPrima.EmpresaId = request.EmpresaId;
+            //guiaRecepcionMateriaPrima.NumeroReferencia = request.NumeroReferencia;
+            //guiaRecepcionMateriaPrima.Numero = _ICorrelativoRepository.Obtener(request.EmpresaId, Documentos.GuiaRecepcion);
+            //guiaRecepcionMateriaPrima.TipoProvedorId = request.TipoProvedorId;
+            //guiaRecepcionMateriaPrima.SocioId = request.SocioId;
+            //guiaRecepcionMateriaPrima.TerceroId = request.TerceroId;
+            //guiaRecepcionMateriaPrima.IntermediarioId = request.IntermediarioId;
+            //guiaRecepcionMateriaPrima.ProductoId = request.ProductoId;
+            //guiaRecepcionMateriaPrima.SubProductoId = request.SubProductoId;
+            //guiaRecepcionMateriaPrima.FechaCosecha = request.FechaCosecha;
+            //guiaRecepcionMateriaPrima.FechaPesado = DateTime.Now;
+            //guiaRecepcionMateriaPrima.UsuarioPesado = request.UsuarioPesado;
+            //guiaRecepcionMateriaPrima.UnidadMedidaIdPesado = request.UnidadMedidaIdPesado;
+            //guiaRecepcionMateriaPrima.CantidadPesado = request.CantidadPesado;
+            //guiaRecepcionMateriaPrima.KilosBrutosPesado = request.KilosBrutosPesado;
+            //guiaRecepcionMateriaPrima.TaraPesado = request.TaraPesado;
+            //guiaRecepcionMateriaPrima.ObservacionPesado = request.ObservacionPesado;
+            //guiaRecepcionMateriaPrima.SocioFincaId = request.SocioFincaId;
+            //guiaRecepcionMateriaPrima.SocioFincaCertificacion = request.SocioFincaCertificacion;
+            //guiaRecepcionMateriaPrima.IntermediarioFinca = request.IntermediarioFinca;
+            //guiaRecepcionMateriaPrima.TerceroFincaId = request.TerceroFincaId;
+            //guiaRecepcionMateriaPrima.TipoProduccionId = request.TipoProduccionId;
+            //guiaRecepcionMateriaPrima.EstadoId = GuiaRecepcionMateriaPrimaEstados.Pesado;
+            //guiaRecepcionMateriaPrima.FechaRegistro = DateTime.Now;
+            //guiaRecepcionMateriaPrima.UsuarioRegistro = request.UsuarioPesado;
+            //guiaRecepcionMateriaPrima.KilosNetosPesado = kilosNetosPesado;
+            //guiaRecepcionMateriaPrima.ContratoAsignadoId = contratoAsignadoId;
 
-                contratoAsignadoId = consultaContratoAsignado.ContratoId;
-            }
+            int affected = 0; // _IGuiaRecepcionMateriaPrimaRepository.InsertarPesado(guiaRecepcionMateriaPrima);
 
-            
+            //if (request.ProductoId == productoIdCafePergamino && request.SubProductoId == subProductoIdCafeSeco && request.SocioFincaCertificacion != String.Empty)
+            //{
+            //    List<ConsultaSocioFincaEstimadoPorSocioFincaIdBE> fincaEstimados = _ISocioFincaRepository.ConsultarSocioFincaEstimadoPorSocioFincaId(request.SocioFincaId.Value).ToList();
 
+            //    if (fincaEstimados.Count > 0)
+            //    {
+            //        int anioActual = DateTime.Now.Year;
 
+            //        ConsultaSocioFincaEstimadoPorSocioFincaIdBE fincaEstima = null;
 
+            //        fincaEstima = fincaEstimados.Where(x => x.Anio == anioActual).FirstOrDefault();
 
-            GuiaRecepcionMateriaPrima guiaRecepcionMateriaPrima = new GuiaRecepcionMateriaPrima();
+            //        if (fincaEstima != null)
+            //        {
+            //            fincaEstima.SaldoPendiente = fincaEstima.Estimado - fincaEstima.Consumido;
 
-            guiaRecepcionMateriaPrima.EmpresaId = request.EmpresaId;
-            guiaRecepcionMateriaPrima.NumeroReferencia = request.NumeroReferencia;
-            guiaRecepcionMateriaPrima.Numero = _ICorrelativoRepository.Obtener(request.EmpresaId, Documentos.GuiaRecepcion);
-            guiaRecepcionMateriaPrima.TipoProvedorId = request.TipoProvedorId;
-            guiaRecepcionMateriaPrima.SocioId = request.SocioId;
-            guiaRecepcionMateriaPrima.TerceroId = request.TerceroId;
-            guiaRecepcionMateriaPrima.IntermediarioId = request.IntermediarioId;
-            guiaRecepcionMateriaPrima.ProductoId = request.ProductoId;
-            guiaRecepcionMateriaPrima.SubProductoId = request.SubProductoId;
-            guiaRecepcionMateriaPrima.FechaCosecha = request.FechaCosecha;
-            guiaRecepcionMateriaPrima.FechaPesado = DateTime.Now;
-            guiaRecepcionMateriaPrima.UsuarioPesado = request.UsuarioPesado;
-            guiaRecepcionMateriaPrima.UnidadMedidaIdPesado = request.UnidadMedidaIdPesado;
-            guiaRecepcionMateriaPrima.CantidadPesado = request.CantidadPesado;
-            guiaRecepcionMateriaPrima.KilosBrutosPesado = request.KilosBrutosPesado;
-            guiaRecepcionMateriaPrima.TaraPesado = request.TaraPesado;
-            guiaRecepcionMateriaPrima.ObservacionPesado = request.ObservacionPesado;
-            guiaRecepcionMateriaPrima.SocioFincaId = request.SocioFincaId;
-            guiaRecepcionMateriaPrima.SocioFincaCertificacion = request.SocioFincaCertificacion;
-            guiaRecepcionMateriaPrima.IntermediarioFinca = request.IntermediarioFinca;
-            guiaRecepcionMateriaPrima.TerceroFincaId = request.TerceroFincaId;
-            guiaRecepcionMateriaPrima.TipoProduccionId = request.TipoProduccionId;
-            guiaRecepcionMateriaPrima.EstadoId = GuiaRecepcionMateriaPrimaEstados.Pesado;
-            guiaRecepcionMateriaPrima.FechaRegistro = DateTime.Now;
-            guiaRecepcionMateriaPrima.UsuarioRegistro = request.UsuarioPesado;
-            guiaRecepcionMateriaPrima.KilosNetosPesado = kilosNetosPesado;
+            //            if (fincaEstima.SaldoPendiente > 0)
+            //            {
+            //                _ISocioFincaRepository.ActualizarSocioFincaEstimadoConsumido(fincaEstima.SocioFincaEstimadoId, request.KilosBrutosPesado);
+            //            }
+            //        }
+            //    }
+            //}
 
-            guiaRecepcionMateriaPrima.ContratoAsignadoId = contratoAsignadoId;
-            
-           
+            //if (contratoAsignadoId.HasValue)
+            //{
+            //    _IContratoRepository.ActualizarSaldoPendienteAsignacionAcopio(contratoAsignadoId.Value, kilosNetosPesado);
 
+            //    if ((consultaContratoAsignado.SaldoPendienteKGPergaminoAsignacion - kilosNetosPesado) == 0)
+            //    {
+            //        _IContratoRepository.ActualizarEstado(contratoAsignadoId.Value, DateTime.Now, request.UsuarioPesado, ContratoEstados.Completado);
 
-
-            int affected = _IGuiaRecepcionMateriaPrimaRepository.InsertarPesado(guiaRecepcionMateriaPrima);
-
-            if (request.ProductoId == productoIdCafePergamino && request.SubProductoId == subProductoIdCafeSeco && request.SocioFincaCertificacion != String.Empty)
-            {
-                List<ConsultaSocioFincaEstimadoPorSocioFincaIdBE> fincaEstimados = _ISocioFincaRepository.ConsultarSocioFincaEstimadoPorSocioFincaId(request.SocioFincaId.Value).ToList();
-
-                if (fincaEstimados.Count > 0)
-                {
-                    int anioActual = DateTime.Now.Year;
-
-                    ConsultaSocioFincaEstimadoPorSocioFincaIdBE fincaEstima = null;
-
-                    fincaEstima = fincaEstimados.Where(x => x.Anio == anioActual).FirstOrDefault();
-
-                    if (fincaEstima != null)
-                    {
-                        fincaEstima.SaldoPendiente = fincaEstima.Estimado - fincaEstima.Consumido;
-
-                        if (fincaEstima.SaldoPendiente > 0)
-                        {
-                            _ISocioFincaRepository.ActualizarSocioFincaEstimadoConsumido(fincaEstima.SocioFincaEstimadoId, request.KilosBrutosPesado);
-                        }
-                    }
-                }
-            }
-
-            if (contratoAsignadoId.HasValue)
-            {
-                _IContratoRepository.ActualizarSaldoPendienteAsignacionAcopio(contratoAsignadoId.Value, kilosNetosPesado);
-
-                if ((consultaContratoAsignado.SaldoPendienteKGPergaminoAsignacion - kilosNetosPesado) == 0)
-                {
-                    _IContratoRepository.ActualizarEstado(contratoAsignadoId.Value, DateTime.Now, request.UsuarioPesado, ContratoEstados.Completado);
-
-                }
-            }
-
-
-
+            //    }
+            //}
 
             return affected;
         }
@@ -366,7 +349,7 @@ namespace KaphiyQuipu.Service
             guiaRecepcionMateriaPrima.UsuarioCalidad = request.UsuarioCalidad;
             guiaRecepcionMateriaPrima.ObservacionRegistroTostado = request.ObservacionRegistroTostado;
             guiaRecepcionMateriaPrima.ObservacionAnalisisSensorial = request.ObservacionAnalisisSensorial;
-            guiaRecepcionMateriaPrima.DefectosTasaAnalisisSensorial = request.DefectosTasaAnalisisSensorial ;
+            guiaRecepcionMateriaPrima.DefectosTasaAnalisisSensorial = request.DefectosTasaAnalisisSensorial;
             guiaRecepcionMateriaPrima.DefectosIntensidadAnalisisSensorial = request.DefectosIntensidadAnalisisSensorial;
             guiaRecepcionMateriaPrima.UsuarioCalidad = request.UsuarioCalidad;
             guiaRecepcionMateriaPrima.EstadoId = GuiaRecepcionMateriaPrimaEstados.Analizado;

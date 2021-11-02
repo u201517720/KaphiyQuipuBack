@@ -74,8 +74,8 @@ namespace KaphiyQuipu.Service
         public CalculoPrecioDiaRendimientoDTO CalcularPrecioDiaRendimiento(CalcularPrecioDiaRendimientoRequestDTO request)
         {
             CalculoPrecioDiaRendimientoDTO calculoPrecioDiaRendimientoDTO = new CalculoPrecioDiaRendimientoDTO();
-                        
-            decimal precioPromedio = _IContratoRepository.CalcularPrecioDiaContrato(request.EmpresaId);
+
+            decimal precioPromedio = 0;// _IContratoRepository.CalcularPrecioDiaContrato(request.EmpresaId);
 
             calculoPrecioDiaRendimientoDTO.PrecioPromedioContrato = Math.Round(precioPromedio,2);
 
