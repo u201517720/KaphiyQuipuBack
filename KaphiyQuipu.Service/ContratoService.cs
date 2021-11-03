@@ -13,6 +13,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
+using KaphiyQuipu.DTO.SolicitudCompra;
+using System.Threading.Tasks;
 
 namespace KaphiyQuipu.Service
 {
@@ -24,8 +28,10 @@ namespace KaphiyQuipu.Service
         public IOptions<FileServerSettings> _fileServerSettings;
         private IMaestroRepository _IMaestroRepository;
         private IEmpresaRepository _IEmpresaRepository;
+        private IContratoCompraContract _contratoCompraContract;
 
-        public ContratoService(IContratoRepository contratoRepository, ICorrelativoRepository correlativoRepository, IMapper mapper, IOptions<FileServerSettings> fileServerSettings, IMaestroRepository maestroRepository, IEmpresaRepository empresaRepository)
+        public ContratoService(IContratoRepository contratoRepository, ICorrelativoRepository correlativoRepository, IMapper mapper, IOptions<FileServerSettings> fileServerSettings, IMaestroRepository maestroRepository, IEmpresaRepository empresaRepository,
+                               IContratoCompraContract contratoCompraContract)
         {
             _IContratoRepository = contratoRepository;
             _fileServerSettings = fileServerSettings;
@@ -33,6 +39,7 @@ namespace KaphiyQuipu.Service
             _Mapper = mapper;
             _IMaestroRepository = maestroRepository;
             _IEmpresaRepository = empresaRepository;
+            _contratoCompraContract = contratoCompraContract;
         }
 
         private String getRutaFisica(string pathFile)
@@ -73,6 +80,24 @@ namespace KaphiyQuipu.Service
             string affected = _IContratoRepository.Registrar(contrato);
 
             return affected;
+        }
+
+        public async Task<TransactionResponse<string>> Confirmar(ContratoCompraDTO request)
+        {
+            TransactionResponse<string> response = new TransactionResponse<string>();
+            ConsultaContratoPorIdDTO contrato = _IContratoRepository.ConsultarPorId(request.Id);
+            request.FechaSolicitud = contrato.FechaRegistro;
+
+            TransactionResult result = await _contratoCompraContract.RegistrarContrato(request);
+
+            if (result != null)
+            {
+                _IContratoRepository.Confirmar(request.Id, result.TransactionHash);
+                response.Data = result.TransactionHash;
+                response.Result.Success = true;
+            }
+
+            return response;
         }
     }
 }

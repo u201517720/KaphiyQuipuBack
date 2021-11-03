@@ -6,6 +6,7 @@ namespace KaphiyQuipu.DTO.SolicitudCompra
 {
     public class ContratoCompraDTO
     {
+        public int Id { get; set; }
         public string NroContrato { get; set; }
         public string Distribuidor { get; set; }
         public string Producto { get; set; }
