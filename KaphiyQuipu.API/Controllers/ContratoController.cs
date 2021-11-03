@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net.Mime;
+using KaphiyQuipu.DTO.SolicitudCompra;
+using System.Threading.Tasks;
 
 namespace Integracion.Deuda.Controller
 {
@@ -113,6 +115,33 @@ namespace Integracion.Deuda.Controller
             return Ok(response);
         }
 
-        
+
+
+        [Route("Confirmar")]
+        [HttpPost]
+        public async Task<IActionResult> Confirmar(ContratoCompraDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            TransactionResponse<string> response = new TransactionResponse<string>();
+            try
+            {
+                response = await _contratoService.Confirmar(request);
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
     }
 }

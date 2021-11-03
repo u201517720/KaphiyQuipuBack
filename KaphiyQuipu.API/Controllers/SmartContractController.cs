@@ -4,6 +4,7 @@ using KaphiyQuipu.Blockchain.Facade;
 using KaphiyQuipu.Blockchain.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.RPC.Accounts;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts.Managed;
 using System;
@@ -22,7 +23,7 @@ namespace KaphiyQuipu.API.Controllers
         private IContractOperation _operation;
 
         private Web3 _web3;
-        private ManagedAccount _account;
+        private IAccount _account;
         private ContractService _contractService;
         private IAccountService _accountService;
 

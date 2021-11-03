@@ -10,8 +10,8 @@ namespace KaphiyQuipu.Blockchain.Facade
         public static string GETH_RPC = "GethRPC";
 
         #region Defautl values for contracts
-        public static string DEFAULT_TEST_ACCOUNT_ADDRESS = "0x12890d2cce102216644c59dae5baed380d84830c";
-        public static string DEFAULT_TEST_ACCOUNT_PASSWORD = "password";
+        public static string DEFAULT_TEST_ACCOUNT_ADDRESS = "0x18595224cc2A9221ebDA8dbd69d60A60d4698D63";
+        public static string DEFAULT_TEST_ACCOUNT_PASSWORD = "Pass@word1";
         public static string GAMER_TOKEN_CONTRACT_NAME = "GamerToken";
         public static BigInteger DEFAULT_GAS = 3000000;
         public static BigInteger DEFAULT_VALUE = 0;

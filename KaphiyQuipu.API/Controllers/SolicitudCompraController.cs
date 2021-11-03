@@ -1,4 +1,5 @@
 ﻿using Core.Common.Domain.Model;
+using KaphiyQuipu.Blockchain.Contracts;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,13 @@ namespace KaphiyQuipu.API.Controller
     {
         private Core.Common.Logger.ILog _log;
         private ISolicitudCompraService _solicitudCompraService;
+        private IContratoCompraContract _contratoCompraContract;
 
-        public SolicitudCompraController(ISolicitudCompraService solicitudCompraService, Core.Common.Logger.ILog log)
+        public SolicitudCompraController(ILog log, ISolicitudCompraService solicitudCompraService, IContratoCompraContract contratoCompraContract)
         {
             _log = log;
             _solicitudCompraService = solicitudCompraService;
+            _contratoCompraContract = contratoCompraContract;
         }
 
         [HttpGet("version")]
@@ -122,5 +125,33 @@ namespace KaphiyQuipu.API.Controller
         //{
         //    return Ok(await _solicitudCompraService.ObtenerSolicitud(correlativo));
         //}
+
+        [Route("Contrato")]
+        [HttpPost]
+        public async Task<IActionResult> RegistrarContrato([FromBody] ContratoCompraDTO request)
+        {
+            return Ok(await _contratoCompraContract.RegistrarContrato(request));
+        }
+
+        [Route("Contrato/{nroContrato}")]
+        [HttpGet]
+        public async Task<IActionResult> ObtenerContrato(string nroContrato)
+        {
+            return Ok(await _contratoCompraContract.ObtenerContrato(nroContrato));
+        }
+
+        [Route("Agricultores")]
+        [HttpPost]
+        public async Task<IActionResult> AgregarAgricultor([FromBody] AgricultorContratoDTO request)
+        {
+            return Ok(await _contratoCompraContract.AgregarAgricultor(request));
+        }
+
+
+        [Route("Contrato/{nroContrato}/agricultores")]
+        [HttpGet]
+        public async Task<IActionResult> ObtenerAgricultores(string nroContrato)
+        {
+            return Ok(await _contratoCompraContract.ObtenerAgricultoresPorContrato(nroContrato));
     }
 }

@@ -52,8 +52,8 @@ namespace KaphiyQuipu.Blockchain.Facade
                 return null;
             }
 
-            var url = Config.GetSection(Constants.GETH_RPC).Value;
-            var web3 = new Web3(url);
+            var web3 = GetWeb3();
+            web3.TransactionManager.UseLegacyAsDefault = true;
             var contract = await Task.Run(() => web3.Eth.GetContract(abi, contractAddress));
             var contDAO = new ContractDAO()
             {
@@ -76,16 +76,15 @@ namespace KaphiyQuipu.Blockchain.Facade
             return new Web3(account, rpcUrl);
         }
 
+        public Web3 GetWeb3()
+        {
+            var account = new Account(Config["Ethereum:Account:Key"], BigInteger.Parse(Config["Ethereum:NetworkID"]));
+            return new Web3(account, Config["Ethereum:ProviderUrl"]);
+        }
+
         private string GetContractDir(string contractName)
         {
             return $"{Directory.GetCurrentDirectory()}/{Constants.CONTRACTS_DIR_NAME}/{contractName}";
-
-            var rootcontractDir = Constants.CONTRACTS_DIR_NAME;
-            var sln = Directory.GetParent(Directory.GetCurrentDirectory());
-            var dir = sln + $"/{rootcontractDir}/{contractName}";
-            if (!Directory.Exists(dir))
-                return null;
-            return dir;
         }
 
         public async Task<string> GetAbi(string contractName, bool isDeployed, string contractAddress = null)
@@ -96,7 +95,6 @@ namespace KaphiyQuipu.Blockchain.Facade
             // }
 
             var dir = GetContractDir(contractName);
-            //var abiFile = $"{dir}/bin/{contractName}.abi";
             var abiFile = $"{dir}/{contractName}.abi";
             if (!File.Exists(abiFile))
                 return null;

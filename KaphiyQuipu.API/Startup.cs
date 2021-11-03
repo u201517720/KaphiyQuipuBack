@@ -19,6 +19,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
+using KaphiyQuipu.Blockchain.Contracts;
 
 namespace KaphiyQuipu.API
 {
@@ -185,6 +186,7 @@ namespace KaphiyQuipu.API
 
             services.AddTransient<IUserContract, UserContract>();
             services.AddTransient<ISolicitudCompraContract, SolicitudCompraContract>();
+            services.AddTransient<IContratoCompraContract, ContratoCompraContract>();
 
             services.AddSingleton<IContractFacade, ContractFacade>();
             services.AddSingleton<IContractOperation, ContractOperation>();

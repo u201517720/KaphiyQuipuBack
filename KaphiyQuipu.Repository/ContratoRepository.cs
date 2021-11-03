@@ -69,5 +69,20 @@ namespace KaphiyQuipu.Repository
 
             return result;
         }
+
+
+        public void Confirmar(int ContratoId, string hash)
+        {
+            string result = string.Empty;
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@pContratoId", ContratoId);
+            parameters.Add("@pHashBC", hash);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspContratoConfirmar", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

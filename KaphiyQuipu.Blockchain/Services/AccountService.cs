@@ -4,22 +4,19 @@ using Microsoft.Extensions.Configuration;
 using Nethereum.Web3.Accounts.Managed;
 using Nethereum.Web3;
 using KaphiyQuipu.Blockchain.ERC20;
+using Nethereum.RPC.Accounts;
+using Nethereum.Web3.Accounts;
 
 namespace KaphiyQuipu.Blockchain.Services
 {
     public class AccountService : IAccountService
     {
-        private ManagedAccount _account;
+        private IAccount _account;
         private ContractService _contractService;
         private Web3 _web3;
         private bool _isAuthenticated = false;
         public AccountService(IConfiguration config, ContractService contractService, IServiceProvider service)
         {
-            //var auth = context.HttpContext.AuthenticateAsync();
-            // var res = auth?.AuthenticateAsync();
-            //if (auth.Result.Succeeded)
-            //    _isAuthenticated = true;
-
             _isAuthenticated = true;
 
             _config = config;
@@ -30,44 +27,14 @@ namespace KaphiyQuipu.Blockchain.Services
 
         }
         private readonly IConfiguration _config;
-        //List<AccountDAO> _accounts = new List<AccountDAO>(){
-        //    new AccountDAO(){Address = "0x12890d2cce102216644c59dae5baed380d84830c", Password = "password"},
-        //    new AccountDAO(){Address = "0x13f022d72158410433cbd66f5dd8bf6d2d129924", Password = "password"}
-        //};
-
-
-        //public AccountDAO Authenticate(string address, string password)
-        //{
-        //    var account = _accounts.SingleOrDefault(x => x.Address.Equals(address) && x.Password.Equals(password));
-        //    if (account == null)
-        //        return null;
-
-        //    var tokenHandler = new JwtSecurityTokenHandler();
-        //    var key = Encoding.UTF8.GetBytes(_config.GetSection("Auth").GetSection("Secret").Value);
-        //    var tokenDescriptor = new SecurityTokenDescriptor()
-        //    {
-        //        Subject = new ClaimsIdentity(new Claim[]
-        //        {
-        //            new Claim(ClaimTypes.Name, account.Address)
-        //        }),
-        //        Expires = DateTime.UtcNow.AddHours(1),
-        //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-        //    };
-        //    var token = tokenHandler.CreateToken(tokenDescriptor);
-        //    account.Token = tokenHandler.WriteToken(token);
-        //    account.Password = null;
-        //    SetAccount();
-        //    SetWeb3();
-        //    return account;
-        //}
-
+ 
         private void SetAccount()
         {
             if (_isAuthenticated)
                 _account = GetDefaultAccount();
         }
 
-        public ManagedAccount GetAccount()
+        public IAccount GetAccount()
         {
             return _account;
         }
@@ -81,9 +48,10 @@ namespace KaphiyQuipu.Blockchain.Services
         {
             return _web3;
         }
-        private ManagedAccount GetDefaultAccount()
+
+        private IAccount GetDefaultAccount()
         {
-            return new ManagedAccount(Constants.DEFAULT_TEST_ACCOUNT_ADDRESS, Constants.DEFAULT_TEST_ACCOUNT_PASSWORD);
+            return new Account(_config["Ethereum:Account:Key"]);
         }
     }
 }

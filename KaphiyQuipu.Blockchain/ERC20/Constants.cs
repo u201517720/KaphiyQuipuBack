@@ -28,16 +28,13 @@ namespace KaphiyQuipu.Blockchain.ERC20
         public static string FUNCTION_CHECK_OWNER_PERMISSION = "checkOwnerPermission";
         public static string FUNCTION_GET_OWNER = "getOwner";
 
-        public static string FUNCTION_VALIDATE_USER = "validateUser";
-        public static string FUNCTION_GET_USER = "getUser";
-        public static string FUNCTION_TOTAL_USERS = "totalUsers";
-        public static string FUNCTION_USERS = "users";
+        
 
         #endregion
 
         #region Defautl values for contracts
-        public static string DEFAULT_TEST_ACCOUNT_ADDRESS = "0x2fA19369276C6683Ff7426A27Cd7e97294a086eb";
-        public static string DEFAULT_TEST_ACCOUNT_PASSWORD = "password";
+        public static string DEFAULT_TEST_ACCOUNT_ADDRESS = "0x18595224cc2A9221ebDA8dbd69d60A60d4698D63";
+        public static string DEFAULT_TEST_ACCOUNT_PASSWORD = "98e53a79b69b5967351c7aefcb417ac29fdbaef2d9fd76fe3249379ee8ecaa31";
         public static string GAMER_TOKEN_CONTRACT_NAME = "GamerToken";
         public static BigInteger DEFAULT_GAS = 3000000;
         public static BigInteger DEFAULT_VALUE = 0;
