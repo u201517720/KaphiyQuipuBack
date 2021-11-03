@@ -1,12 +1,13 @@
 using AutoMapper;
+using Core.Common.Auth;
+using KaphiyQuipu.Blockchain.ERC20;
+using KaphiyQuipu.Blockchain.Facade;
+using KaphiyQuipu.Blockchain.Services;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
 using KaphiyQuipu.Repository;
 using KaphiyQuipu.Service;
 using KaphiyQuipu.Service.MappingConfigurations;
-using Core.Common.Auth;
-using WkHtmlToPdfDotNet;
-using WkHtmlToPdfDotNet.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,11 +17,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using KaphiyQuipu.Blockchain.Facade;
-using KaphiyQuipu.Blockchain.ERC20;
-using KaphiyQuipu.Blockchain.Services;
-using KaphiyQuipu.Interface.Service;
-using KaphiyQuipu.Service;
+using WkHtmlToPdfDotNet;
+using WkHtmlToPdfDotNet.Contracts;
 
 namespace KaphiyQuipu.API
 {

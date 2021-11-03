@@ -1,27 +1,28 @@
 ﻿using Core.Common.Domain.Model;
-using Core.Common.Logger;
 using KaphiyQuipu.DTO;
-using KaphiyQuipu.DTO.SolicitudCompra;
 using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Integracion.Deuda.Controllers
+namespace KaphiyQuipu.API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
     public class SolicitudCompraController : ControllerBase
     {
-        private ILog _log;
+        private Core.Common.Logger.ILog _log;
         private ISolicitudCompraService _solicitudCompraService;
 
-        public SolicitudCompraController(ILog log, ISolicitudCompraService solicitudCompraService)
+        public SolicitudCompraController(ISolicitudCompraService solicitudCompraService, Core.Common.Logger.ILog log)
         {
             _log = log;
             _solicitudCompraService = solicitudCompraService;
+        }
+
+        [HttpGet("version")]
+        public IActionResult Version()
+        {
+            return Ok("Authenticate Service. version: 1.0.0.0");
         }
 
         [Route("Registrar")]
@@ -108,18 +109,18 @@ namespace Integracion.Deuda.Controllers
             return Ok(response);
         }
 
-        [Route("")]
-        [HttpPost]
-        public async Task<IActionResult> Registrar([FromBody] SolicitudCompraDTO request)
-        {
-            return Ok(await _solicitudCompraService.Registrar(request));
-        }
+        //[Route("")]
+        //[HttpPost]
+        //public async Task<IActionResult> Registrar([FromBody] SolicitudCompraDTO request)
+        //{
+        //    return Ok(await _solicitudCompraService.Registrar(request));
+        //}
 
-        [Route("{correlativo}")]
-        [HttpGet]
-        public async Task<IActionResult> Obtener(string correlativo)
-        {
-            return Ok(await _solicitudCompraService.ObtenerSolicitud(correlativo));
-        }
+        //[Route("{correlativo}")]
+        //[HttpGet]
+        //public async Task<IActionResult> Obtener(string correlativo)
+        //{
+        //    return Ok(await _solicitudCompraService.ObtenerSolicitud(correlativo));
+        //}
     }
 }

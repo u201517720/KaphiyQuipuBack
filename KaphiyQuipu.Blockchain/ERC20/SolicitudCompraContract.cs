@@ -2,13 +2,11 @@
 using KaphiyQuipu.Blockchain.Facade;
 using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.Blockchain.Services;
-using KaphiyQuipu.DTO.SolicitudCompra;
+using KaphiyQuipu.DTO;
 using Microsoft.Extensions.Configuration;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts.Managed;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace KaphiyQuipu.Blockchain.ERC20
