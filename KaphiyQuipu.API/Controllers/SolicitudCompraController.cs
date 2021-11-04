@@ -5,6 +5,7 @@ using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace KaphiyQuipu.API.Controller
 {

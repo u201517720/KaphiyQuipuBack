@@ -1,7 +1,4 @@
 ﻿using KaphiyQuipu.DTO;
-using KaphiyQuipu.DTO.Adjunto;
-using KaphiyQuipu.DTO.SolicitudCompra;
-using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
