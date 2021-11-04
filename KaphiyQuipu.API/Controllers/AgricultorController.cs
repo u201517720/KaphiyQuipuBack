@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Integracion.Deuda.Controllers
+namespace KaphiyQuipu.API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,6 +21,12 @@ namespace Integracion.Deuda.Controllers
         {
             _log = log;
             _agricultorService = agricultorService;
+        }
+
+        [HttpGet("version")]
+        public IActionResult Version()
+        {
+            return Ok("Authenticate Service. version: 1.0.0.0");
         }
 
         [Route("Consultar")]

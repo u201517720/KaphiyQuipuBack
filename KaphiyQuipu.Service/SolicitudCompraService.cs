@@ -1,20 +1,16 @@
 ﻿using AutoMapper;
-using KaphiyQuipu.Interface.Repository;
-using KaphiyQuipu.Service;
 using Core.Common.Domain.Model;
+using KaphiyQuipu.Blockchain.Entities;
+using KaphiyQuipu.Blockchain.ERC20;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
 using KaphiyQuipu.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using KaphiyQuipu.Blockchain.ERC20;
-using KaphiyQuipu.Blockchain.Helpers.OperationResults;
-using KaphiyQuipu.DTO.SolicitudCompra;
 using System.Threading.Tasks;
-using KaphiyQuipu.Blockchain.Entities;
 using KaphiyQuipu.Blockchain.Contracts;
 
 namespace KaphiyQuipu.Service

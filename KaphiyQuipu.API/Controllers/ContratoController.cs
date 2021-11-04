@@ -1,17 +1,12 @@
-﻿using KaphiyQuipu.DTO;
-using KaphiyQuipu.DTO.Adjunto;
+﻿using Core.Common.Domain.Model;
+using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Service;
-using Core.Common.Domain.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
-using System.IO;
-using System.Net.Mime;
-using KaphiyQuipu.DTO.SolicitudCompra;
 using System.Threading.Tasks;
 
-namespace Integracion.Deuda.Controller
+namespace KaphiyQuipu.API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]

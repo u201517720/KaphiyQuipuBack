@@ -2,15 +2,12 @@
 using Core.Common.Logger;
 using KaphiyQuipu.Blockchain.Contracts;
 using KaphiyQuipu.DTO;
-using KaphiyQuipu.DTO.SolicitudCompra;
 using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Integracion.Deuda.Controllers
+namespace KaphiyQuipu.API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,6 +22,12 @@ namespace Integracion.Deuda.Controllers
             _log = log;
             _solicitudCompraService = solicitudCompraService;
             _contratoCompraContract = contratoCompraContract;
+        }
+
+        [HttpGet("version")]
+        public IActionResult Version()
+        {
+            return Ok("Authenticate Service. version: 1.0.0.0");
         }
 
         [Route("Registrar")]
@@ -111,19 +114,19 @@ namespace Integracion.Deuda.Controllers
             return Ok(response);
         }
 
-        [Route("")]
-        [HttpPost]
-        public async Task<IActionResult> Registrar([FromBody] SolicitudCompraDTO request)
-        {
-            return Ok(await _solicitudCompraService.Registrar(request));
-        }
+        //[Route("")]
+        //[HttpPost]
+        //public async Task<IActionResult> Registrar([FromBody] SolicitudCompraDTO request)
+        //{
+        //    return Ok(await _solicitudCompraService.Registrar(request));
+        //}
 
-        [Route("{correlativo}")]
-        [HttpGet]
-        public async Task<IActionResult> Obtener(string correlativo)
-        {
-            return Ok(await _solicitudCompraService.ObtenerSolicitud(correlativo));
-        }
+        //[Route("{correlativo}")]
+        //[HttpGet]
+        //public async Task<IActionResult> Obtener(string correlativo)
+        //{
+        //    return Ok(await _solicitudCompraService.ObtenerSolicitud(correlativo));
+        //}
 
         [Route("Contrato")]
         [HttpPost]
