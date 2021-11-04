@@ -1,4 +1,5 @@
 ﻿using Core.Common.Domain.Model;
+using Core.Common.Logger;
 using KaphiyQuipu.Blockchain.Contracts;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Service;
@@ -11,7 +12,7 @@ namespace KaphiyQuipu.API.Controller
     [ApiController]
     public class SolicitudCompraController : ControllerBase
     {
-        private Core.Common.Logger.ILog _log;
+        private ILog _log;
         private ISolicitudCompraService _solicitudCompraService;
         private IContratoCompraContract _contratoCompraContract;
 
