@@ -155,5 +155,6 @@ namespace KaphiyQuipu.API.Controller
         public async Task<IActionResult> ObtenerAgricultores(string nroContrato)
         {
             return Ok(await _contratoCompraContract.ObtenerAgricultoresPorContrato(nroContrato));
+        }
     }
 }
