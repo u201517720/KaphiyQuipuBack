@@ -15,5 +15,6 @@ namespace KaphiyQuipu.DTO
         public string Calidad { get; set; }
         public string GradoPreparacion { get; set; }
         public DateTime FechaSolicitud { get; set; }
+        public string Usuario { get; set; }
     }
 }

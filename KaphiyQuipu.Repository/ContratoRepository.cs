@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Core.Common;
 
 namespace KaphiyQuipu.Repository
 {
@@ -70,18 +71,30 @@ namespace KaphiyQuipu.Repository
             return result;
         }
 
-
-        public void Confirmar(int ContratoId, string hash)
+        public void Confirmar(int ContratoId, string hash, string usuario)
         {
             string result = string.Empty;
 
             var parameters = new DynamicParameters();
             parameters.Add("@pContratoId", ContratoId);
             parameters.Add("@pHashBC", hash);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", DateTime.Now);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 db.Execute("uspContratoConfirmar", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void AsociarAgricultoresContrato(List<AsociarAgricultoresContratoDTO> request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pttAgricultores", request.ToDataTable().AsTableValuedParameter());
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspRegistrarContratoCompraVenta", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }
