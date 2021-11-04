@@ -8,9 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="libwkhtmltox.dll" />
-    <None Remove="libwkhtmltox.dylib" />
-    <None Remove="libwkhtmltox.so" />
     <None Remove="Reportes\ListaProductoresPorNotaSalidaAlmacen.rdlc" />
     <None Remove="Reportes\NotaCompra.rdlc" />
     <None Remove="Reportes\rptAdelanto.rdlc" />
@@ -20,15 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="libwkhtmltox.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libwkhtmltox.dylib">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libwkhtmltox.so">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Reportes\ListaProductoresPorNotaSalidaAlmacen.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
