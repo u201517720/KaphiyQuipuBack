@@ -63,7 +63,9 @@ namespace KaphiyQuipu.Blockchain.Contracts
             }
             catch (Exception ex)
             {
-                return null;
+                TransactionResult result = new TransactionResult();
+                result.TransactionHash = ex.ToString();
+                return result;
             }
         }
 

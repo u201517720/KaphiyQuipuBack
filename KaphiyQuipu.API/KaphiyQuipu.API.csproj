@@ -65,6 +65,15 @@
     <None Update="plantillas_correo\bienvenidaEN.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SmartContracts\ContratoCompra\ContratoCompra.abi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SmartContracts\SolicitudCompra\SolicitudCompra.abi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SmartContracts\UserContract\UserContract.abi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
