@@ -11,7 +11,7 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultaContratoDTO> Consultar(ConsultaContratoRequestDTO request);
         ConsultaContratoPorIdDTO ConsultarPorId(int contratoId);
         string Registrar(Contrato contrato);
-        void Confirmar(int ContratoId, string hash);
-
+        void Confirmar(int ContratoId, string hash, string usuario);
+        void AsociarAgricultoresContrato(List<AsociarAgricultoresContratoDTO> request);
     }
 }

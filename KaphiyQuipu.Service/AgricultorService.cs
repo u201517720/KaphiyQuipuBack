@@ -18,6 +18,16 @@ namespace KaphiyQuipu.Service
             _IAgricultorRepository = agricultorRepository;
         }
 
+        public void ConfirmarDisponibilidad(ConfirmarDisponibilidadRequestDTO request)
+        {
+            _IAgricultorRepository.ConfirmarDisponibilidad(request.ContratoSocioFincaId, request.Usuario, request.Fecha);
+        }
+
+        public void ConfirmarEnvio(ConfirmarEnvioRequestDTO request)
+        {
+            _IAgricultorRepository.ConfirmarEnvio(request.ContratoSocioFincaId, request.Usuario, request.Fecha);
+        }
+
         public List<ConsultaAgricultorDTO> Consultar(ConsultaAgricultorRequestDTO request)
         {
             List<ConsultaAgricultorDTO> agricultores = new List<ConsultaAgricultorDTO>();

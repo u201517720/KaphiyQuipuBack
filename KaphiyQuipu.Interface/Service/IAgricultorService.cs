@@ -10,5 +10,8 @@ namespace KaphiyQuipu.Interface.Service
         List<ConsultaAgricultorDTO> Consultar(ConsultaAgricultorRequestDTO request);
         List<ConsultaMateriaPrimaSolicitadaDTO> ConsultarMateriaPrimaSolicitada(ConsultaMateriaPrimaSolicitadaRequestDTO request);
         ConsultaMateriaPrimaSolicitadaDTO ConsultarDetalleMateriaPrimaSolicitada(ConsultarDetalleMateriaPrimaSolicitadaRequestDTO request);
+
+        void ConfirmarDisponibilidad(ConfirmarDisponibilidadRequestDTO request);
+        void ConfirmarEnvio(ConfirmarEnvioRequestDTO request);
     }
 }

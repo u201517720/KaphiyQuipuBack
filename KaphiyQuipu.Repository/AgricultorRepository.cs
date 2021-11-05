@@ -20,6 +20,32 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
+        public void ConfirmarDisponibilidad(int ContratoSocioFincaId, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pContratoSocioFincaId", ContratoSocioFincaId);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspConfirmarCantidadMateriaPrima", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void ConfirmarEnvio(int ContratoSocioFincaId, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pContratoSocioFincaId", ContratoSocioFincaId);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspConfirmarEnvioMateriaPrima", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public IEnumerable<ConsultaAgricultorDTO> Consultar(ConsultaAgricultorRequestDTO request)
         {
             var parameters = new DynamicParameters();

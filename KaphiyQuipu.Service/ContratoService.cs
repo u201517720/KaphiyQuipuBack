@@ -21,8 +21,6 @@ namespace KaphiyQuipu.Service
         private IContratoRepository _IContratoRepository;
         private ICorrelativoRepository _ICorrelativoRepository;
         public IOptions<FileServerSettings> _fileServerSettings;
-        private IMaestroRepository _IMaestroRepository;
-        private IEmpresaRepository _IEmpresaRepository;
         private IContratoCompraContract _contratoCompraContract;
 
         public ContratoService(IContratoRepository contratoRepository, ICorrelativoRepository correlativoRepository, IMapper mapper, IOptions<FileServerSettings> fileServerSettings, IMaestroRepository maestroRepository, IEmpresaRepository empresaRepository,
@@ -32,8 +30,6 @@ namespace KaphiyQuipu.Service
             _fileServerSettings = fileServerSettings;
             _ICorrelativoRepository = correlativoRepository;
             _Mapper = mapper;
-            _IMaestroRepository = maestroRepository;
-            _IEmpresaRepository = empresaRepository;
             _contratoCompraContract = contratoCompraContract;
         }
 
@@ -87,12 +83,23 @@ namespace KaphiyQuipu.Service
 
             if (result != null)
             {
-                _IContratoRepository.Confirmar(request.Id, result.TransactionHash);
+                _IContratoRepository.Confirmar(request.Id, result.TransactionHash, request.Usuario);
                 response.Data = result.TransactionHash;
                 response.Result.Success = true;
             }
 
             return response;
+        }
+
+        public void AsociarAgricultoresContrato(AsociarAgricultoresContratoRequestDTO request)
+        {
+            if (request.agricultores.Count > 0)
+            {
+                request.Fecha = DateTime.Now;
+                request.agricultores.ForEach(x => x.Fecha = request.Fecha);
+
+                _IContratoRepository.AsociarAgricultoresContrato(request.agricultores);
+            }
         }
     }
 }
