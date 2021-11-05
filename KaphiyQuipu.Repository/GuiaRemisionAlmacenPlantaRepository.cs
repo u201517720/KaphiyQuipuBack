@@ -105,55 +105,6 @@ namespace KaphiyQuipu.Repository
             return result;
         }
 
-        public int ActualizarGuiaRemisionAlmacenPlantaDetalle(List<GuiaRemisionAlmacenPlantaDetalleTipo> GuiaRemisionAlmacenPlantaDetalle)
-        {
-            int result = 0;
-
-            var parameters = new DynamicParameters();
-
-            parameters.Add("@GuiaRemisionAlmacenPlantaDetalle", GuiaRemisionAlmacenPlantaDetalle.ToDataTable().AsTableValuedParameter());
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                result = db.Execute("uspGuiaRemisionAlmacenPlantaDetalleActualizar", parameters, commandType: CommandType.StoredProcedure);
-            }
-
-            return result;
-        }
-
-        public ConsultaGuiaRemisionAlmacenPlanta ConsultaGuiaRemisionAlmacenPlantaPorNotaSalidaAlmacenPlantaId(int NotaSalidaAlmacenPlantaId)
-        {
-            ConsultaGuiaRemisionAlmacenPlanta itemBE = null;
-
-            var parameters = new DynamicParameters();
-            parameters.Add("@NotaSalidaAlmacenPlantaId", NotaSalidaAlmacenPlantaId);
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                var list = db.Query<ConsultaGuiaRemisionAlmacenPlanta>("uspGuiaRemisionAlmacenPlantaConsultaIdNotaSalidaAlmacenPlanta", parameters, commandType: CommandType.StoredProcedure);
-
-                if (list.Any())
-                    itemBE = list.First();
-            }
-
-            return itemBE;
-        }
-
-        public IEnumerable<ConsultaGuiaRemisionAlmacenPlantaDetalle> ConsultaGuiaRemisionAlmacenPlantaDetallePorGuiaRemisionAlmacenPlantaId(int GuiaRemisionAlmacenPlantaId)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@GuiaRemisionAlmacenPlantaId", GuiaRemisionAlmacenPlantaId);
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaGuiaRemisionAlmacenPlantaDetalle>("uspGuiaAlmacenPlantaDetalleConsultaPorIdGuia", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
-        public ConsultaGuiaRemisionAlmacenPlanta ConsultaGuiaRemisionAlmacenPlantaPorId(int guiaRemisionAlmacenPlantaId)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 
 

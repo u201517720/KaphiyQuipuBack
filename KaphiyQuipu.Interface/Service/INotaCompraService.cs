@@ -10,17 +10,7 @@ namespace KaphiyQuipu.Interface.Service
 
         int ActualizarNotaCompra(RegistrarActualizarNotaCompraRequestDTO request);
 
-        int AnularNotaCompra(AnularNotaCompraRequestDTO request);
-
         int LiquidarNotaCompra(LiquidarNotaCompraRequestDTO request);
-
-        List<ConsultaNotaCompraBE> ConsultarNotaCompra(ConsultaNotaCompraRequestDTO request);
-
-        ConsultaNotaCompraPorGuiaRecepcionMateriaPrimaIdBE ConsultarNotaCompraPorGuiaRecepcionMateriaPrimaId(ConsultaNotaCompraPorGuiaRecepcionMateriaPrimaIdRequestDTO request);
-
-        ConsultaImpresionNotaCompraPorGuiaRecepcionMateriaPrimaIdBE ConsultarImpresionNotaCompraPorGuiaRecepcionMateriaPrimaId(ConsultaNotaCompraPorGuiaRecepcionMateriaPrimaIdRequestDTO request);
-
-        ConsultaNotaCompraPorIdBE ConsultarNotaCompraPorId(ConsultaNotaCompraPorIdRequestDTO request);
 
     }
 }

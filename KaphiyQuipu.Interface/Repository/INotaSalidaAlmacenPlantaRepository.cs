@@ -19,16 +19,7 @@ namespace KaphiyQuipu.Interface.Repository
         int ActualizarEstado(int NotaSalidaAlmacenPlantaId, DateTime fecha, string usuario, string estadoId);
 
 
-        IEnumerable<ConsultaNotaSalidaAlmacenPlantaBE> ConsultarNotaSalidaAlmacenPlanta(ConsultaNotaSalidaAlmacenPlantaRequestDTO request);
-       
-        ConsultaNotaSalidaAlmacenPlantaPorIdBE ConsultarNotaSalidaAlmacenPlantaPorId(int NotaSalidaAlmacenPlantaId);
-
-
-        IEnumerable<ConsultaNotaSalidaAlmacenPlantaDetallePorIdBE> ConsultarNotaSalidaAlmacenPlantaDetallePorIdBE(int notaSalidaAlmacenPlantaId);
-
         int ActualizarNotaSalidaAlmacenPlantaDetalle(List<NotaSalidaAlmacenPlantaDetalle> request, int? NotaSalidaAlmacenPlantaId);
-
-        //int ActualizarEstadoPorIds(List<TablaIdsTipo> ids, DateTime fecha, string usuario, string estadoId);
 
     }
 }

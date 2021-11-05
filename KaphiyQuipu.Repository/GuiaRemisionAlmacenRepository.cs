@@ -135,57 +135,6 @@ namespace KaphiyQuipu.Repository
             return result;
         }
 
-        public int ActualizarGuiaRemisionAlmacenDetalle(List<GuiaRemisionAlmacenDetalleTipo> guiaRemisionAlmacenDetalle)
-        {
-            int result = 0;
-
-            var parameters = new DynamicParameters();
-
-            parameters.Add("@GuiaRemisionAlmacenDetalle", guiaRemisionAlmacenDetalle.ToDataTable().AsTableValuedParameter());
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                result = db.Execute("uspGuiaRemisionAlmacenDetalleActualizar", parameters, commandType: CommandType.StoredProcedure);
-            }
-
-            return result;
-        }
-
-        public ConsultaGuiaRemisionAlmacen ConsultaGuiaRemisionAlmacenPorNotaSalidaAlmacenId(int notaSalidaAlmacenId)
-        {
-            ConsultaGuiaRemisionAlmacen itemBE = null;
-
-            var parameters = new DynamicParameters();
-            parameters.Add("@NotaSalidaAlmacenId", notaSalidaAlmacenId);
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                var list = db.Query<ConsultaGuiaRemisionAlmacen>("uspGuiaRemisionAlmacenConsultaIdNotaSalida", parameters, commandType: CommandType.StoredProcedure);
-
-                if (list.Any())
-                    itemBE = list.First();
-            }
-
-            return itemBE;
-        }
-
-
-
-        public IEnumerable<ConsultaGuiaRemisionAlmacenDetalle> ConsultaGuiaRemisionAlmacenDetallePorGuiaRemisionAlmacenId(int guiaRemisionAlmacenId)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@GuiaRemisionAlmacenId", guiaRemisionAlmacenId);
-
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaGuiaRemisionAlmacenDetalle>("uspGuiaAlmacenDetalleConsultaPorIdGuia", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
-
 
     }
 

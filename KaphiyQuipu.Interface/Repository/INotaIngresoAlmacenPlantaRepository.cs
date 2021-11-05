@@ -1,8 +1,6 @@
-﻿using KaphiyQuipu.DTO;
-using KaphiyQuipu.Models;
+﻿using KaphiyQuipu.Models;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace KaphiyQuipu.Interface.Repository
 {
@@ -10,16 +8,7 @@ namespace KaphiyQuipu.Interface.Repository
     {       
         int Insertar(NotaIngresoAlmacenPlanta NotaIngresoAlmacenPlanta);
 
-        IEnumerable<ConsultaNotaIngresoAlmacenPlantaBE> ConsultarNotaIngresoAlmacenPlanta(ConsultaNotaIngresoAlmacenPlantaRequestDTO request);
-
-        //IEnumerable<NotaIngresoAlmacenPlanta> ConsultarNotaIngresoPorIds(List<TablaIdsTipo> request);
-
-      
-     
-
         int ActualizarEstado(int NotaIngresoAlmacenPlantaId, DateTime fecha, string usuario, string estadoId);
-
-        ConsultaNotaIngresoAlmacenPlantaPorIdBE ConsultarNotaIngresoAlmacenPlantaPorId(int NotaIngresoAlmacenPlantaId);
 
         int Actualizar(int NotaIngresoAlmacenPlantaId, DateTime fecha, string usuario, string almacenId);
 

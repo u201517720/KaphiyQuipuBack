@@ -20,27 +20,6 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
-        public IEnumerable<ConsultaAduanaBE> ConsultarAduana(ConsultaAduanaRequestDTO request)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("Numero", request.Numero);
-            parameters.Add("NumeroContrato", request.NumeroContrato);
-            parameters.Add("RazonSocialCliente", request.RazonSocialCliente);            
-            parameters.Add("RazonSocialEmpresaAgenciaAduanera", request.RazonSocialEmpresaAgenciaAduanera);
-            parameters.Add("RazonSocialEmpresaExportadora", request.RazonSocialEmpresaExportadora);
-            parameters.Add("RazonSocialEmpresaProductora", request.RazonSocialEmpresaProductora);
-            parameters.Add("EstadoId", request.EstadoId);
-            parameters.Add("EmpresaId", request.EmpresaId);
-            parameters.Add("FechaInicio", request.FechaInicio);
-            parameters.Add("FechaFin", request.FechaFin);
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaAduanaBE>("uspAduanaConsulta", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
         public int Insertar(Aduana aduana)
         {
             int result = 0;
@@ -146,23 +125,6 @@ namespace KaphiyQuipu.Repository
             return affected;
         }
 
-        public ConsultaAduanaPorIdBE ConsultarAduanaPorId(int aduanaId)
-        {
-            ConsultaAduanaPorIdBE itemBE = null;
-
-            var parameters = new DynamicParameters();
-            parameters.Add("@AduanaId", aduanaId);
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                var list = db.Query<ConsultaAduanaPorIdBE>("uspAduanaConsultarPorId", parameters, commandType: CommandType.StoredProcedure);
-
-                if (list.Any())
-                    itemBE = list.First();
-            }
-            return itemBE;
-        }
-
         public int ActualizarAduanaCertificacion(List<AduanaCertificacionTipo> request, int aduanaId)
         {
             //uspGuiaRecepcionMateriaPrimaAnalisisFisicoColorDetalleActualizar
@@ -182,17 +144,6 @@ namespace KaphiyQuipu.Repository
 
             return result;
 
-        }
-
-        public IEnumerable<ConsultaAduanaCertificacionPorIdBE> ConsultarAduanaCertificacionPorId(int aduanaId)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@AduanaId", aduanaId);
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaAduanaCertificacionPorIdBE>("uspAduanaCertificacionConsultaPorId", parameters, commandType: CommandType.StoredProcedure);
-            }
         }
 
         public int InsertarAduanaDetalle(AduanaDetalle aduanaDetalle)

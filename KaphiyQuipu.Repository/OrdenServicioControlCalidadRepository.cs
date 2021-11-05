@@ -21,26 +21,6 @@ namespace KaphiyQuipu.Repository
         }
 
 
-        public IEnumerable<ConsultaOrdenServicioControlCalidadBE> ConsultarOrdenServicioControlCalidad(ConsultaOrdenServicioControlCalidadRequestDTO request)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("Numero", request.Numero);
-            parameters.Add("Ruc", request.Ruc);
-            parameters.Add("RazonSocial", request.RazonSocial);
-            parameters.Add("EstadoId", request.EstadoId);
-            parameters.Add("ProductoId", request.ProductoId);
-            parameters.Add("SubProductoId", request.SubProductoId);
-            parameters.Add("EmpresaId", request.EmpresaId);
-            parameters.Add("FechaInicio", request.FechaInicio);
-            parameters.Add("FechaFin", request.FechaFin);
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaOrdenServicioControlCalidadBE>("uspOrdenServicioControlCalidadConsulta", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
         public int ActualizarEstado(int ordenServicioControlCalidadId, DateTime fecha, string usuario, string estadoId)
         {
             int affected = 0;
@@ -158,41 +138,6 @@ namespace KaphiyQuipu.Repository
 
             return result;
         }
-
-
-
-        public ConsultaOrdenServicioControlCalidadPorIdBE ConsultarOrdenServicioControlCalidadPorId(int OrdenServicioControlCalidadId)
-        {
-            ConsultaOrdenServicioControlCalidadPorIdBE itemBE = null;
-
-            var parameters = new DynamicParameters();
-            parameters.Add("OrdenServicioControlCalidadId", OrdenServicioControlCalidadId);
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                var list = db.Query<ConsultaOrdenServicioControlCalidadPorIdBE>("uspOrdenServicioControlCalidadObtenerPorId", parameters, commandType: CommandType.StoredProcedure);
-
-                if (list.Any())
-                    itemBE = list.First();
-            }
-
-            return itemBE;
-        }
-
-        //public IEnumerable<OrdenServicioControlCalidadDetalle> ConsultarOrdenServicioControlCalidadDetallePorId(int OrdenServicioControlCalidadId)
-        //{
-        //    var parameters = new DynamicParameters();
-        //    parameters.Add("OrdenServicioControlCalidadId", OrdenServicioControlCalidadId);
-
-
-
-        //    using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-        //    {
-        //        return db.Query<OrdenServicioControlCalidadDetalle>("uspOrdenServicioControlCalidadDetallePorId", parameters, commandType: CommandType.StoredProcedure);
-        //    }
-        //}
-
 
 
         public IEnumerable<OrdenServicioControlCalidadAnalisisFisicoColorDetalle> ConsultarOrdenServicioControlCalidadAnalisisFisicoColorDetallePorId(int OrdenServicioControlCalidadId)

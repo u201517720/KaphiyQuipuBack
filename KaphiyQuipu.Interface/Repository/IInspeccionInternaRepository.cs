@@ -6,13 +6,7 @@ namespace KaphiyQuipu.Interface.Service
 {
     public interface IInspeccionInternaRepository
     {
-        IEnumerable<ConsultaInspeccionInternaBE> ConsultarInspeccionInterna(ConsultaInspeccionInternaRequestDTO request);
 
-        int Insertar(InspeccionInterna inspeccionInterna);
-
-        int Actualizar(InspeccionInterna inspeccionInterna);
-
-        ConsultaInspeccionInternaPorIdBE ConsultarInspeccionInternaPorId(int InspeccionInternaId);
 
         IEnumerable<InspeccionInternaParcela> ConsultarInspeccionInternaParcelaPorId(int inspeccionInternaId);
 

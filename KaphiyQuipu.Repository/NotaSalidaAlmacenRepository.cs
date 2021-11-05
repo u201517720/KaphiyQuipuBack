@@ -122,56 +122,7 @@ namespace KaphiyQuipu.Repository
             return affected;
         }
 
-        public IEnumerable<ConsultaNotaSalidaAlmacenBE> ConsultarNotaSalidaAlmacen(ConsultaNotaSalidaAlmacenRequestDTO request)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@Numero", request.Numero);
-            parameters.Add("@EmpresaIdDestino", request.EmpresaIdDestino);
-            parameters.Add("@EmpresaTransporteId", request.EmpresaTransporteId);
-            parameters.Add("@AlmacenId", request.AlmacenId);
-            parameters.Add("@MotivoTrasladoId", request.MotivoTrasladoId);
-            parameters.Add("@EmpresaId", request.EmpresaId);
-            parameters.Add("@FechaInicio", request.FechaInicio);
-            parameters.Add("@FechaFin", request.FechaFin);
-            parameters.Add("@EstadoId", request.EstadoId);
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaNotaSalidaAlmacenBE>("uspNotaSalidaAlmacenConsulta", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
-        public IEnumerable<ConsultaImpresionListaProductoresPorNotaSalidaAlmacenIdBE> ConsultarImpresionListaProductoresPorNotaSalida(int notaSalidaAlmacenId)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("NotaSalidaAlmacenId", notaSalidaAlmacenId);
-
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaImpresionListaProductoresPorNotaSalidaAlmacenIdBE>("uspListaProductoresConsultaImpresionPorNotaSalidaAlmacenId", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
-        public ConsultaNotaSalidaAlmacenPorIdBE ConsultarNotaSalidaAlmacenPorId(int notaSalidaAlmacenId)
-        {
-            ConsultaNotaSalidaAlmacenPorIdBE itemBE = null;
-
-            var parameters = new DynamicParameters();
-            parameters.Add("NotaSalidaAlmacenId", notaSalidaAlmacenId);
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                var list = db.Query<ConsultaNotaSalidaAlmacenPorIdBE>("uspNotaSalidaAlmacenObtenerPorId", parameters, commandType: CommandType.StoredProcedure);
-
-                if (list.Any())
-                    itemBE = list.First();
-            }
-
-            return itemBE;
-        }
+    
 
         public IEnumerable<NotaSalidaAlmacenDetalle> ConsultarNotaSalidaAlmacenDetallePorId(int notaSalidaAlmacenId)
         {
@@ -506,17 +457,6 @@ namespace KaphiyQuipu.Repository
 
         }
 
-        public IEnumerable<ConsultaNotaSalidaAlmacenLotesDetallePorIdBE> ConsultarNotaSalidaAlmacenLotesDetallePorIdBE(int notaSalidaAlmacenId)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("NotaSalidaAlmacenId", notaSalidaAlmacenId);
-
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaNotaSalidaAlmacenLotesDetallePorIdBE>("uspConsultaNotaSalidaAlmacenLotesDetallePorId", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
+       
     }
 }

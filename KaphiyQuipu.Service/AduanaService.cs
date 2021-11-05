@@ -36,53 +36,6 @@ namespace KaphiyQuipu.Service
             return _fileServerSettings.Value.RutaPrincipal + pathFile;
         }
 
-        public List<ConsultaAduanaBE> ConsultarAduana(ConsultaAduanaRequestDTO request)
-        {
-            if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue || string.IsNullOrEmpty(request.EstadoId))
-                throw new ResultException(new Result { ErrCode = "01", Message = "Comercial.Cliente.ValidacionSeleccioneMinimoUnFiltro.Label" });
-
-            var timeSpan = request.FechaFin - request.FechaInicio;
-
-            if (timeSpan.Days > 730)
-                throw new ResultException(new Result { ErrCode = "02", Message = "Comercial.Aduana.ValidacionRangoFechaMayor2anios.Label" });
-
-            var list = _IAduanaRepository.ConsultarAduana(request);
-
-            List<ConsultaDetalleTablaBE> lista = _IMaestroRepository.ConsultarDetalleTablaDeTablas(request.EmpresaId, String.Empty).ToList();
-
-            foreach (ConsultaAduanaBE aduana in list)
-            {
-                string[] certificacionesIds = aduana.TipoCertificacionId.Split('|');
-
-                string certificacionLabel = string.Empty;
-                string tipoContratoLabel = string.Empty;
-
-
-                if (certificacionesIds.Length > 0)
-                {
-
-                    List<ConsultaDetalleTablaBE> certificaciones = lista.Where(a => a.CodigoTabla.Trim().Equals("TipoCertificacion")).ToList();
-
-                    foreach (string certificacionId in certificacionesIds)
-                    {
-
-                        ConsultaDetalleTablaBE certificacion = certificaciones.Where(a => a.Codigo == certificacionId).FirstOrDefault();
-
-                        if (certificacion != null)
-                        {
-                            certificacionLabel = certificacionLabel + certificacion.Label + " ";
-                        }
-                    }
-
-                }
-
-                aduana.TipoCertificacion = certificacionLabel;
-            }
-
-
-
-            return list.ToList();
-        }
 
         public int RegistrarAduana(RegistrarActualizarAduanaRequestDTO request)
         {
@@ -212,51 +165,6 @@ namespace KaphiyQuipu.Service
             return affected;
         }
 
-        public ConsultaAduanaPorIdBE ConsultarAduanaPorId(ConsultaAduanaPorIdRequestDTO request)
-        {
-            ConsultaAduanaPorIdBE consultaAduanaPorIdBE = _IAduanaRepository.ConsultarAduanaPorId(request.AduanaId);
-
-
-            List<ConsultaDetalleTablaBE> lista = _IMaestroRepository.ConsultarDetalleTablaDeTablas(consultaAduanaPorIdBE.EmpresaId, String.Empty).ToList();
-
-
-           
-                string[] certificacionesIds = consultaAduanaPorIdBE.TipoCertificacionId.Split('|');
-
-                string certificacionLabel = string.Empty;
-               
-
-
-                if (certificacionesIds.Length > 0)
-                {
-
-                    List<ConsultaDetalleTablaBE> certificaciones = lista.Where(a => a.CodigoTabla.Trim().Equals("TipoCertificacion")).ToList();
-
-                    foreach (string certificacionId in certificacionesIds)
-                    {
-
-                        ConsultaDetalleTablaBE certificacion = certificaciones.Where(a => a.Codigo == certificacionId).FirstOrDefault();
-
-                        if (certificacion != null)
-                        {
-                            certificacionLabel = certificacionLabel + certificacion.Label + " ";
-                        }
-                    }
-
-                }
-
-
-
-            consultaAduanaPorIdBE.TipoCertificacion = certificacionLabel;
-            
-
-
-            consultaAduanaPorIdBE.Certificaciones = _IAduanaRepository.ConsultarAduanaCertificacionPorId(request.AduanaId).ToList();
-
-            consultaAduanaPorIdBE.Detalle = _IAduanaRepository.ConsultarAduanaDetallePorId(request.AduanaId).ToList();
-
-            return consultaAduanaPorIdBE;
-        }
 
         public int AnularAduana(AnularAduanaRequestDTO request)
         {

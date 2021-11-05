@@ -96,35 +96,6 @@ namespace Integracion.Deuda.Controller
             return Ok(response);
         }
 
-        [Route("ActualizarAnalisisCalidad")]
-        [HttpPost]
-        public IActionResult ActualizarAnalisisCalidad([FromBody] ActualizarLoteAnalisisCalidadRequestDTO request)
-        {
-            Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid.ToString()}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
-
-            ActualizarGuiaRecepcionMateriaPrimaAnalisisCalidadResponseDTO response = new ActualizarGuiaRecepcionMateriaPrimaAnalisisCalidadResponseDTO();
-            try
-            {
-                response.Result.Data = _loteService.ActualizarLoteAnalisisCalidad(request);
-
-                response.Result.Success = true;
-
-            }
-            catch (ResultException ex)
-            {
-                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
-            }
-            catch (Exception ex)
-            {
-                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
-                _log.RegistrarEvento(ex, guid.ToString());
-            }
-
-            _log.RegistrarEvento($"{guid.ToString()}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
-
-            return Ok(response);
-        }
 
         [Route("Anular")]
         [HttpPost]
@@ -291,99 +262,6 @@ namespace Integracion.Deuda.Controller
             return Ok(response);
         }
 
-        [Route("ConsultarEtiquetasLote")]
-        [HttpPost]
-        public IActionResult ConsultarEtiquetasLote([FromBody] ConsultarEtiquetasLoteRequestDTO request)
-        {
-            Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
 
-            ConsultarEtiquetasLoteResponseDTO response = new ConsultarEtiquetasLoteResponseDTO();
-            try
-            {
-                response.Result.Data = _loteService.ConsultarImpresionLotePorId(request.LoteId);
-
-                response.Result.Success = true;
-            }
-            catch (ResultException ex)
-            {
-                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
-            }
-            catch (Exception ex)
-            {
-                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
-                _log.RegistrarEvento(ex, guid.ToString());
-            }
-
-            _log.RegistrarEvento($"{guid.ToString()}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
-
-            return Ok(response);
-        }
-
-        [Route("GenerarPDFEtiquetasLote")]
-        [HttpGet]
-        public IActionResult GenerarPDFEtiquetasLote(int id)
-        {
-            return GenerarPDF(id);
-        }
-
-        IActionResult GenerarPDF(int id)
-        {
-            Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(id)}");
-
-            GenerarPDFEtiquetasLoteResponseDTO response = new GenerarPDFEtiquetasLoteResponseDTO();
-            try
-            {
-                GenerarPDFEtiquetasLoteRequestDTO request = new GenerarPDFEtiquetasLoteRequestDTO { LoteId = id };
-                response.Result.Data = _loteService.ConsultarImpresionLotePorId(request.LoteId);
-                string html = _loteService.ObtenerHTMLReporteEtiquetasLotes(response.Result.Data);
-                string fileName = $"EtiquetasLotes_{DateTime.Now.ToString("yyyyMMddhhmmss")}.pdf";
-
-                if (string.IsNullOrEmpty(html))
-                {
-                    html = "<h3>No existe información para mostrar.</h3>";
-                    fileName = "EtiquetasLotes_SinDatos.pdf";
-                }
-
-                var globalSettings = new GlobalSettings
-                {
-                    ColorMode = ColorMode.Color,
-                    Orientation = Orientation.Portrait,
-                    PaperSize = PaperKind.A4,
-                    Margins = new MarginSettings { Top = 10 },
-                    DocumentTitle = "Etiquetas Lotes"
-                };
-                var objectSettings = new ObjectSettings
-                {
-                    PagesCount = true,
-                    HtmlContent = html,
-                    WebSettings = { DefaultEncoding = "utf-8" },
-                    HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Página [page] de [toPage]" }
-                };
-                var pdf = new HtmlToPdfDocument()
-                {
-                    GlobalSettings = globalSettings,
-                    Objects = { objectSettings }
-                };
-                var file = _converter.Convert(pdf);
-
-                return File(file, "application/pdf", fileName);
-            }
-            catch (ResultException ex)
-            {
-                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
-                _log.RegistrarEvento(ex, guid.ToString());
-            }
-            catch (Exception ex)
-            {
-                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
-                _log.RegistrarEvento(ex, guid.ToString());
-            }
-
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
-
-            return Ok(response);
-        }
     }
 }

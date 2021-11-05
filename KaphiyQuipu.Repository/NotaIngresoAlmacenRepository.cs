@@ -68,34 +68,6 @@ namespace KaphiyQuipu.Repository
             return result;
         }
 
-        public IEnumerable<ConsultaNotaIngresoAlmacenBE> ConsultarNotaIngresoAlmacen(ConsultaNotaIngresoAlmacenRequestDTO request)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("Numero", request.Numero);
-            parameters.Add("NombreRazonSocial", request.NombreRazonSocial);
-            parameters.Add("TipoDocumentoId", request.TipoDocumentoId);
-            parameters.Add("NumeroDocumento", request.NumeroDocumento);
-            parameters.Add("CodigoSocio", request.CodigoSocio);
-            parameters.Add("EstadoId", request.EstadoId);
-            parameters.Add("ProductoId", request.ProductoId);
-            parameters.Add("SubProductoId", request.SubProductoId);
-            parameters.Add("TipoCertificacionId", request.TipoCertificacionId);
-            parameters.Add("AlmacenId", request.AlmacenId);
-            parameters.Add("EmpresaId", request.EmpresaId);
-            parameters.Add("RendimientoPorcentajeInicio", request.RendimientoPorcentajeInicio);
-            parameters.Add("RendimientoPorcentajeFin", request.RendimientoPorcentajeFin);
-            parameters.Add("PuntajeAnalisisSensorialInicio", request.PuntajeAnalisisSensorialInicio);
-            parameters.Add("PuntajeAnalisisSensorialFin", request.PuntajeAnalisisSensorialFin);
-            parameters.Add("FechaInicio", request.FechaInicio);
-            parameters.Add("FechaFin", request.FechaFin);
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaNotaIngresoAlmacenBE>("uspNotaIngresoAlmacenConsulta", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
         public IEnumerable<NotaIngresoAlmacen> ConsultarNotaIngresoPorIds(List<TablaIdsTipo> request)
         {
             var parameters = new DynamicParameters();
@@ -163,28 +135,6 @@ namespace KaphiyQuipu.Repository
 
             return affected;
         }
-
-
-        public ConsultaNotaIngresoAlmacenPorIdBE ConsultarNotaIngresoAlmacenPorId(int notaIngresoAlmacenId)
-        {
-            ConsultaNotaIngresoAlmacenPorIdBE itemBE = null;
-
-            var parameters = new DynamicParameters();
-            parameters.Add("@NotaIngresoAlmacenId", notaIngresoAlmacenId);
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                var list = db.Query<ConsultaNotaIngresoAlmacenPorIdBE>("uspNotaIngresoAlmacenObtenerPorId", parameters, commandType: CommandType.StoredProcedure);
-
-                if (list.Any())
-                    itemBE = list.First();
-            }
-
-            return itemBE;
-        }
-
-
 
     }
 }

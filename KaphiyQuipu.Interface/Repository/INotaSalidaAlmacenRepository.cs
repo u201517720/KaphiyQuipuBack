@@ -14,12 +14,6 @@ namespace KaphiyQuipu.Interface.Repository
 
         int ActualizarEstado(int notaSalidaAlmacenId, DateTime fecha, string usuario, string estadoId);
 
-
-        IEnumerable<ConsultaNotaSalidaAlmacenBE> ConsultarNotaSalidaAlmacen(ConsultaNotaSalidaAlmacenRequestDTO request);
-        IEnumerable<ConsultaImpresionListaProductoresPorNotaSalidaAlmacenIdBE> ConsultarImpresionListaProductoresPorNotaSalida(int notaSalidaAlmacenId);
-
-        ConsultaNotaSalidaAlmacenPorIdBE ConsultarNotaSalidaAlmacenPorId(int notaSalidaAlmacenId);
-
        
         IEnumerable<NotaSalidaAlmacenAnalisisFisicoColorDetalle> ConsultarNotaSalidaAlmacenAnalisisFisicoColorDetallePorId(int NotaSalidaAlmacenId);
         IEnumerable<NotaSalidaAlmacenAnalisisFisicoOlorDetalle> ConsultarNotaSalidaAlmacenAnalisisFisicoOlorDetallePorId(int NotaSalidaAlmacenId);
@@ -44,11 +38,5 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<NotaSalidaAlmacenDetalleLotes> ConsultarNotaSalidaAlmacenDetalleLotesPorId(int NotaSalidaAlmacenId);
 
         int ActualizarNotaSalidaAlmacenDetalle(List<NotaSalidaAlmacenDetalle> request, int? NotaSalidaAlmacenId);
-
-        
-
-        IEnumerable<ConsultaNotaSalidaAlmacenLotesDetallePorIdBE> ConsultarNotaSalidaAlmacenLotesDetallePorIdBE(int notaSalidaAlmacenId);
-
-
     }
 }

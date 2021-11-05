@@ -99,10 +99,7 @@ namespace KaphiyQuipu.API
             services.AddTransient<IFincaFotoGeoreferenciadaRepository, FincaFotoGeoreferenciadaRepository>();
             services.AddTransient<IFincaMapaService, FincaMapaService>();
             services.AddTransient<IFincaMapaRepository, FincaMapaRepository>();
-            services.AddTransient<IGuiaRemisionAlmacenService, GuiaRemisionAlmacenService>();
             services.AddTransient<IGuiaRemisionAlmacenRepository, GuiaRemisionAlmacenRepository>();
-            services.AddTransient<IGuiaRemisionAlmacenPlantaService, GuiaRemisionAlmacenPlantaService>();
-            services.AddTransient<IGuiaRecepcionMateriaPrimaService, GuiaRecepcionMateriaPrimaService>();
             services.AddTransient<IGuiaRecepcionMateriaPrimaRepository, GuiaRecepcionMateriaPrimaRepository>();
             services.AddTransient<IProveedorService, ProveedorService>();
             services.AddTransient<IProveedorRepository, ProveedorRepository>();
@@ -134,15 +131,10 @@ namespace KaphiyQuipu.API
             services.AddTransient<ICorrelativoRepository, CorrelativoRepository>();
             services.AddTransient<INotaCompraService, NotaCompraService>();
             services.AddTransient<INotaCompraRepository, NotaCompraRepository>();
-            services.AddTransient<INotaIngresoAlmacenService, NotaIngresoAlmacenService>();
             services.AddTransient<INotaIngresoAlmacenRepository, NotaIngresoAlmacenRepository>();
-            services.AddTransient<INotaIngresoAlmacenPlantaService, NotaIngresoAlmacenPlantaService>();
             services.AddTransient<INotaIngresoAlmacenPlantaRepository, NotaIngresoAlmacenPlantaRepository>();
-            services.AddTransient<INotaIngresoPlantaService, NotaIngresoPlantaService>();
             services.AddTransient<INotaIngresoPlantaRepository, NotaIngresoPlantaRepository>();
-            services.AddTransient<IOrdenServicioControlCalidadService, OrdenServicioControlCalidadService>();
             services.AddTransient<IOrdenServicioControlCalidadRepository, OrdenServicioControlCalidadRepository>();
-            services.AddTransient<INotaSalidaAlmacenService, NotaSalidaAlmacenService>();
             services.AddTransient<INotaSalidaAlmacenRepository, NotaSalidaAlmacenRepository>();
             services.AddTransient<IProductorFincaService, ProductorFincaService>();
             services.AddTransient<IProductorFincaRepository, ProductorFincaRepository>();
@@ -162,7 +154,6 @@ namespace KaphiyQuipu.API
             services.AddTransient<IUbigeoRepository, UbigeoRepository>();
             services.AddTransient<IInspeccionInternaService, InspeccionInternaService>();
             services.AddTransient<IInspeccionInternaRepository, InspeccionInternaRepository>();
-            services.AddTransient<INotaSalidaAlmacenPlantaService, NotaSalidaAlmacenPlantaService>();
             services.AddTransient<INotaSalidaAlmacenPlantaRepository, NotaSalidaAlmacenPlantaRepository>();
             services.AddTransient<ISocioProyectoService, SocioProyectoService>();
             services.AddTransient<ISocioProyectoRepository, SocioProyectoRepository>();

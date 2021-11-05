@@ -7,14 +7,8 @@ namespace KaphiyQuipu.Interface.Repository
 {
     public interface INotaIngresoPlantaRepository
     {
-        IEnumerable<ConsultaNotaIngresoPlantaBE> ConsultarNotaIngresoPlanta(ConsultaNotaIngresoPlantaRequestDTO request);
         int AnularNotaIngresoPlanta(int NotaIngresoPlantaId, DateTime fecha, string usuario, string estadoId);
-        ConsultaNotaIngresoPlantaPorIdBE ConsultarNotaIngresoPlantaPorId(int notaIngresoPlantaId);
-        int InsertarPesado(NotaIngresoPlanta NotaIngresoPlanta);
 
-        int ActualizarPesado(NotaIngresoPlanta NotaIngresoPlanta);
-
-        int ActualizarAnalisisCalidad(NotaIngresoPlanta NotaIngresoPlanta);
        
         IEnumerable<NotaIngresoPlantaAnalisisFisicoColorDetalle> ConsultarNotaIngresoPlantaAnalisisFisicoColorDetallePorId(int NotaIngresoPlantaId);
         

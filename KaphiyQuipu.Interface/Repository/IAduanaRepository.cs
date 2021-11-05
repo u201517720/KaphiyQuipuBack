@@ -12,14 +12,9 @@ namespace KaphiyQuipu.Interface.Repository
 
         int Actualizar(Aduana Aduana);
 
-        IEnumerable<ConsultaAduanaBE> ConsultarAduana(ConsultaAduanaRequestDTO request);
-
-        ConsultaAduanaPorIdBE ConsultarAduanaPorId(int AduanaId);
-
         int Anular(int AduanaId, DateTime fecha, string usuario, string estadoId);
 
 
-        IEnumerable<ConsultaAduanaCertificacionPorIdBE> ConsultarAduanaCertificacionPorId(int aduanaId);
         int ActualizarAduanaCertificacion(List<AduanaCertificacionTipo> request, int aduanaId);
 
         int InsertarAduanaDetalle(AduanaDetalle aduanaDetalle);

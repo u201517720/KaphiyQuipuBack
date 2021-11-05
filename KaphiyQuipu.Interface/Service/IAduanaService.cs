@@ -9,8 +9,6 @@ namespace KaphiyQuipu.Interface.Service
     {
         int RegistrarAduana(RegistrarActualizarAduanaRequestDTO request);
         int ActualizarAduana(RegistrarActualizarAduanaRequestDTO request);
-        List<ConsultaAduanaBE> ConsultarAduana(ConsultaAduanaRequestDTO request);
-        ConsultaAduanaPorIdBE ConsultarAduanaPorId(ConsultaAduanaPorIdRequestDTO request);
         ResponseDescargarArchivoDTO DescargarArchivo(RequestDescargarArchivoDTO request);
 
         int AnularAduana(AnularAduanaRequestDTO request);

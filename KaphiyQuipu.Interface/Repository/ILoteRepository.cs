@@ -29,9 +29,6 @@ namespace KaphiyQuipu.Interface.Repository
         ConsultaLoteBandejaBE ConsultarLotePorId(int loteId);
 
 
-        IEnumerable<ConsultaImpresionLotePorIdBE> ConsultarImpresionLotePorId(int loteId);
-
-       
         IEnumerable<LoteAnalisisFisicoColorDetalle> ConsultarLoteAnalisisFisicoColorDetallePorId(int LoteId);
         IEnumerable<LoteAnalisisFisicoOlorDetalle> ConsultarLoteAnalisisFisicoOlorDetallePorId(int LoteId);
 

@@ -15,8 +15,7 @@ namespace KaphiyQuipu.Service.MappingConfigurations
             CreateMap<RegistrarActualizarSocioFincaCertificacionRequestDTO, SocioFincaCertificacion>();
             CreateMap<NotaSalidaAlmacen, GuiaRemisionAlmacen>();
             CreateMap<NotaSalidaAlmacenPlanta, GuiaRemisionAlmacenPlanta>();
-            CreateMap<ConsultaNotaSalidaAlmacenLotesDetallePorIdBE, GuiaRemisionAlmacenDetalleTipo>();
-            CreateMap<ConsultaNotaSalidaAlmacenPlantaDetallePorIdBE, GuiaRemisionAlmacenPlantaDetalleTipo>();
+            
             CreateMap<RegistrarActualizarClienteRequestDTO, Cliente>();
             CreateMap<RegistrarActualizarEmpresaTransporteRequestDTO, EmpresaTransporte>();
             CreateMap<RegistrarActualizarTransporteRequestDTO, Transporte>();
@@ -25,7 +24,6 @@ namespace KaphiyQuipu.Service.MappingConfigurations
             CreateMap<RegistrarActualizarFincaFotoGeoreferenciadaRequestDTO, FincaFotoGeoreferenciada>();
             CreateMap<RegistrarActualizarContratoRequestDTO, Contrato>();
             CreateMap<RegistrarActualizarZonaRequestDTO, Zona>();
-            CreateMap<RegistrarActualizarAduanaDocumentoAdjuntoRequestDTO, AduanaDocumentoAdjunto>();
             CreateMap<RegistrarActualizarAduanaRequestDTO, Aduana>();
             CreateMap<RegistrarActualizarDetalleCatalogoRequestDTO, DetalleCatalogo>();
             CreateMap<RegistrarSocioDocumentoRequestDTO, SocioDocumento>();
@@ -34,14 +32,11 @@ namespace KaphiyQuipu.Service.MappingConfigurations
             CreateMap<RegistrarActualizarLiquidacionProcesoPlantaRequestDTO, LiquidacionProcesoPlanta>();
             CreateMap<RegistrarActualizarOrdenProcesoPlantaRequestDTO, OrdenProcesoPlanta>();
             CreateMap<RegistrarActualizarOrdenProcesoRequestDTO, OrdenProceso>();
-            CreateMap<RegistrarActualizarPesadoNotaIngresoPlantaRequestDTO, NotaIngresoPlanta>();
             CreateMap<RegistrarActualizarUbigeoRequestDTO, Ubigeo>();
             CreateMap<RegistrarActualizarProductoPrecioDiaRequestDTO, ProductoPrecioDia>();
             CreateMap<RegistrarActualizarTipoCambioDiaRequestDTO, TipoCambioDia>();
             CreateMap<RegistrarActualizarEmpresaProveedoraAcreedoraRequestDTO, EmpresaProveedoraAcreedora>();
-            CreateMap<RegistrarActualizarInspeccionInternaRequestDTO, InspeccionInterna>();
             CreateMap<RegistrarActualizarDiagnosticoRequestDTO, Diagnostico>();
-            CreateMap<RegistrarActualizarNotaIngresoPlantaDocumentoAdjuntoRequestDTO, NotaIngresoPlantaDocumentoAdjunto>();
             CreateMap<RegistrarActualizarAdelantoRequestDTO, Adelanto>();
             CreateMap<RegistrarActualizarSolicitudCompraRequestDTO, SolicitudCompra>();
         }

@@ -90,12 +90,6 @@ namespace KaphiyQuipu.Service
             return affected;
         }
 
-        public int AnularNotaCompra(AnularNotaCompraRequestDTO request)
-        {
-            int affected = _INotaCompraRepository.Anular(request.NotaCompraId, DateTime.Now, request.Usuario, NotaCompraEstados.PorLiquidar);
-
-            return affected;
-        }
 
         public int LiquidarNotaCompra(LiquidarNotaCompraRequestDTO request)
         {
@@ -127,68 +121,7 @@ namespace KaphiyQuipu.Service
             return affected;
         }
 
-        public List<ConsultaNotaCompraBE> ConsultarNotaCompra(ConsultaNotaCompraRequestDTO request)
-        {
-            if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue || string.IsNullOrEmpty(request.EstadoId))
-            {
-                throw new ResultException(new Result { ErrCode = "01", Message = "Acopio.NotaCompra.ValidacionSeleccioneMinimoUnFiltro.Label" });
-            }
-
-            var timeSpan = request.FechaFin - request.FechaInicio;
-
-            if (timeSpan.Days > 730)
-            {
-                throw new ResultException(new Result { ErrCode = "02", Message = "Acopio.NotaCompra.ValidacionRangoFechaMayor2anios.Label" });
-            }
-
-            var list = _INotaCompraRepository.ConsultarNotaCompra(request);
-            return list.ToList();
-        }
-
-        public ConsultaNotaCompraPorGuiaRecepcionMateriaPrimaIdBE ConsultarNotaCompraPorGuiaRecepcionMateriaPrimaId(ConsultaNotaCompraPorGuiaRecepcionMateriaPrimaIdRequestDTO request)
-        {
-            return _INotaCompraRepository.ConsultarNotaCompraPorGuiaRecepcionMateriaPrimaId(request.GuiaRecepcionMateriaPrimaId);
-        }
-
-        public ConsultaImpresionNotaCompraPorGuiaRecepcionMateriaPrimaIdBE ConsultarImpresionNotaCompraPorGuiaRecepcionMateriaPrimaId(ConsultaNotaCompraPorGuiaRecepcionMateriaPrimaIdRequestDTO request)
-        {
-            return _INotaCompraRepository.ConsultarImpresionNotaCompraPorGuiaRecepcionMateriaPrimaId(request.GuiaRecepcionMateriaPrimaId);
-        }
-
-        public ConsultaNotaCompraPorIdBE ConsultarNotaCompraPorId(ConsultaNotaCompraPorIdRequestDTO request)
-        {
-            ConsultaNotaCompraPorIdBE consultaNotaCompraPorIdBE = _INotaCompraRepository.ConsultarNotaCompraPorId(request.NotaCompraId);
-            if (consultaNotaCompraPorIdBE != null)
-            {
-                if (consultaNotaCompraPorIdBE.EstadoId == NotaCompraEstados.PorLiquidar)
-                {
-                    List<ConsultaAdelantoBE> _adelantos = _IAdelantoRepository.ConsultarAdelantosPorNotaCompra(request.NotaCompraId, AdelantoEstados.PorLiquidar).ToList();
-
-                    if (_adelantos.Count > 0)
-                    {
-
-                        decimal montoAdelanto = _adelantos.Sum(x => x.Monto);
-                        consultaNotaCompraPorIdBE.TotalAdelanto = montoAdelanto;
-
-                    }
-                }
-
-                if (!consultaNotaCompraPorIdBE.TotalAdelanto.HasValue)
-                {
-                    consultaNotaCompraPorIdBE.TotalAdelanto = 0;
-
-                }
-
-                if (!consultaNotaCompraPorIdBE.Importe.HasValue)
-                {
-                    consultaNotaCompraPorIdBE.Importe = 0;
-
-                }
-
-                consultaNotaCompraPorIdBE.TotalPagar = consultaNotaCompraPorIdBE.Importe.Value - consultaNotaCompraPorIdBE.TotalAdelanto.Value;
-            }
-            return consultaNotaCompraPorIdBE;
-        }
+      
 
     }
 }

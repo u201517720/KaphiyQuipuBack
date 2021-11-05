@@ -1,21 +1,18 @@
-﻿using KaphiyQuipu.DTO;
-using KaphiyQuipu.Models;
+﻿using KaphiyQuipu.Models;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace KaphiyQuipu.Interface.Repository
 {
     public interface IOrdenServicioControlCalidadRepository
     {
-        IEnumerable<ConsultaOrdenServicioControlCalidadBE> ConsultarOrdenServicioControlCalidad(ConsultaOrdenServicioControlCalidadRequestDTO request);
+        
         int ActualizarEstado(int ordenServicioControlCalidadId, DateTime fecha, string usuario, string estadoId);
         int Insertar(OrdenServicioControlCalidad OrdenServicioControlCalidad);
         int Actualizar(OrdenServicioControlCalidad OrdenServicioControlCalidad);
 
         int ActualizarAnalisisCalidad(OrdenServicioControlCalidad OrdenServicioControlCalidad);
 
-        ConsultaOrdenServicioControlCalidadPorIdBE ConsultarOrdenServicioControlCalidadPorId(int OrdenServicioControlCalidadId);
         IEnumerable<OrdenServicioControlCalidadAnalisisFisicoColorDetalle> ConsultarOrdenServicioControlCalidadAnalisisFisicoColorDetallePorId(int OrdenServicioControlCalidadId);
         IEnumerable<OrdenServicioControlCalidadAnalisisFisicoOlorDetalle> ConsultarOrdenServicioControlCalidadAnalisisFisicoOlorDetallePorId(int OrdenServicioControlCalidadId);
         IEnumerable<OrdenServicioControlCalidadAnalisisFisicoDefectoPrimarioDetalle> ConsultarOrdenServicioControlCalidadAnalisisFisicoDefectoPrimarioDetallePorId(int OrdenServicioControlCalidadId);
@@ -30,11 +27,6 @@ namespace KaphiyQuipu.Interface.Repository
         int ActualizarOrdenServicioControlCalidadAnalisisSensorialAtributoDetalle(List<OrdenServicioControlCalidadAnalisisSensorialAtributoDetalleTipo> request, int OrdenServicioControlCalidadId);
         int ActualizarOrdenServicioControlCalidadAnalisisSensorialDefectoDetalle(List<OrdenServicioControlCalidadAnalisisSensorialDefectoDetalleTipo> request, int OrdenServicioControlCalidadId);
         int ActualizarOrdenServicioControlCalidadRegistroTostadoIndicadorDetalle(List<OrdenServicioControlCalidadRegistroTostadoIndicadorDetalleTipo> request, int OrdenServicioControlCalidadId);
-
-
-
-
-
 
     }
 }

@@ -19,10 +19,5 @@ namespace KaphiyQuipu.Interface.Service
 
         List<LoteDetalleConsulta> ConsultaLoteDetalleBusquedaPorLoteId(ConsultaLoteDetalleBusquedaPorLoteIdRequestDTO request);
 
-        List<ConsultaImpresionLotePorIdBE> ConsultarImpresionLotePorId(int loteId);
-
-        int ActualizarLoteAnalisisCalidad(ActualizarLoteAnalisisCalidadRequestDTO request);
-
-        string ObtenerHTMLReporteEtiquetasLotes(List<ConsultaImpresionLotePorIdBE> listaEtiquetasLotes);
     }
 }
