@@ -48,9 +48,7 @@ namespace KaphiyQuipu.Blockchain.Contracts
 
         public async Task<TransactionResult> RegistrarContrato(ContratoCompraDTO contrato)
         {
-            try
-            {
-                TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_CONTRATO,
+            TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_CONTRATO,
                                            contrato.NroContrato,
                                            contrato.Distribuidor,
                                            contrato.Producto,
@@ -60,12 +58,7 @@ namespace KaphiyQuipu.Blockchain.Contracts
                                            contrato.GradoPreparacion,
                                            contrato.FechaSolicitud.Ticks);
 
-                return result;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return result;
         }
 
         public async Task<ContratoCompraOutputDTO> ObtenerContrato(string nroContrato)
@@ -77,20 +70,13 @@ namespace KaphiyQuipu.Blockchain.Contracts
 
         public async Task<TransactionResult> AgregarAgricultor(AgricultorContratoDTO agricultor)
         {
-            try
-            {
-                TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_AGRICULTOR,
+            TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_AGRICULTOR,
                                            agricultor.NroContrato,
                                            agricultor.NroDocumento,
                                            agricultor.Finca,
                                            agricultor.Certificacion);
 
-                return result;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return result;
         }
 
         public async Task<List<AgricultorContratoOutputDTO>> ObtenerAgricultoresPorContrato(string nroContrato)
