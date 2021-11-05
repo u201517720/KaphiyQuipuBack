@@ -13,5 +13,6 @@ namespace KaphiyQuipu.Interface.Repository
         string Registrar(Contrato contrato);
         void Confirmar(int ContratoId, string hash, string usuario);
         void AsociarAgricultoresContrato(List<AsociarAgricultoresContratoDTO> request);
+        IEnumerable<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(int contratoId);
     }
 }

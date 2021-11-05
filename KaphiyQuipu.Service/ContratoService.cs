@@ -51,7 +51,7 @@ namespace KaphiyQuipu.Service
             {
                 throw new ResultException(new Result { ErrCode = "02", Message = "Comercial.Contrato.ValidacionRangoFechaMayor2anios.Label" });
             }
-
+            request.FechaFin = request.FechaFin.AddHours(23).AddMinutes(59).AddSeconds(59);
             var list = _IContratoRepository.Consultar(request);
             return list.ToList();
         }
@@ -100,6 +100,19 @@ namespace KaphiyQuipu.Service
 
                 _IContratoRepository.AsociarAgricultoresContrato(request.agricultores);
             }
+        }
+
+        public List<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(ObtenerAgricultoresPorContratoRequestDTO request)
+        {
+            List<ObtenerAgricultoresPorContratoDTO> agricultores = new List<ObtenerAgricultoresPorContratoDTO>();
+            var lista = _IContratoRepository.ObtenerAgricultoresPorContrato(request.ContratoId);
+            agricultores = lista.ToList();
+            agricultores.ForEach(x =>
+            {
+                x.NombreCompleto = string.Format("{0}, {1}", x.ApellidoSocio, x.NombreSocio);
+                x.FechaRegistroString = x.FechaRegistro.ToString("yyyy-MM-dd HH:mm:ss");
+            });
+            return agricultores;
         }
     }
 }

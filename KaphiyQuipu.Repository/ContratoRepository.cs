@@ -94,7 +94,18 @@ namespace KaphiyQuipu.Repository
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                db.Execute("uspRegistrarContratoCompraVenta", parameters, commandType: CommandType.StoredProcedure);
+                db.Execute("uspRegistrarContratoSocioFinca", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(int contratoId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pContratoId", contratoId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ObtenerAgricultoresPorContratoDTO>("uspObtenerAgricultoresPorContradoId", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

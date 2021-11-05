@@ -24,6 +24,7 @@ namespace KaphiyQuipu.DTO
         public string SubProducto { get; set; }
         public decimal PesoSaco { get; set; }
         public string UnidadMedidaId { get; set; }
+        public string UnidadMedida { get; set; }
         public int CantidadSolicitada { get; set; }
         public string EstadoId { get; set; }
         public string Estado { get; set; }

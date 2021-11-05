@@ -32,7 +32,7 @@ namespace KaphiyQuipu.API.Controller
         public IActionResult Consultar([FromBody] ConsultaContratoRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
             ConsultaContratoResponseDTO response = new ConsultaContratoResponseDTO();
             try
@@ -50,7 +50,7 @@ namespace KaphiyQuipu.API.Controller
                 _log.RegistrarEvento(ex, guid.ToString());
             }
 
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
 
             return Ok(response);
         }
@@ -165,6 +165,34 @@ namespace KaphiyQuipu.API.Controller
             }
 
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+            return Ok(response);
+        }
+
+        [Route("Agricultores")]
+        [HttpPost]
+        public IActionResult ObtenerAgricultoresPorContrato([FromBody] ObtenerAgricultoresPorContratoRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            ObtenerAgricultoresPorContratoResponseDTO response = new ObtenerAgricultoresPorContratoResponseDTO();
+            try
+            {
+                response.Result.Data = _contratoService.ObtenerAgricultoresPorContrato(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
             return Ok(response);
         }
     }

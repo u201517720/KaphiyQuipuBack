@@ -8,36 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Reportes\ListaProductoresPorNotaSalidaAlmacen.rdlc" />
-    <None Remove="Reportes\NotaCompra.rdlc" />
-    <None Remove="Reportes\rptAdelanto.rdlc" />
-    <None Remove="Reportes\rptGuiaRemision.rdlc" />
-    <None Remove="Reportes\rptOrdenProceso.rdlc" />
-    <None Remove="Reportes\rptRegistroSeguridadLimpieza.rdlc" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Reportes\ListaProductoresPorNotaSalidaAlmacen.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reportes\NotaCompra.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reportes\rptAdelanto.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reportes\rptGuiaRemision.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reportes\rptOrdenProceso.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reportes\rptRegistroSeguridadLimpieza.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BoldReports.WPF" Version="2.4.27" />

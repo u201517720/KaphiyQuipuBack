@@ -20,12 +20,12 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
-        public void ConfirmarDisponibilidad(int ContratoSocioFincaId, string usuario, DateTime fecha)
+        public void ConfirmarDisponibilidad(int ContratoSocioFincaId, string usuario)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pContratoSocioFincaId", ContratoSocioFincaId);
             parameters.Add("@pUsuario", usuario);
-            parameters.Add("@pFecha", fecha);
+            parameters.Add("@pFecha", DateTime.Now);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -33,12 +33,12 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public void ConfirmarEnvio(int ContratoSocioFincaId, string usuario, DateTime fecha)
+        public void ConfirmarEnvio(int ContratoSocioFincaId, string usuario)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pContratoSocioFincaId", ContratoSocioFincaId);
             parameters.Add("@pUsuario", usuario);
-            parameters.Add("@pFecha", fecha);
+            parameters.Add("@pFecha", DateTime.Now);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {

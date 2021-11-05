@@ -20,12 +20,12 @@ namespace KaphiyQuipu.Service
 
         public void ConfirmarDisponibilidad(ConfirmarDisponibilidadRequestDTO request)
         {
-            _IAgricultorRepository.ConfirmarDisponibilidad(request.ContratoSocioFincaId, request.Usuario, request.Fecha);
+            _IAgricultorRepository.ConfirmarDisponibilidad(request.ContratoSocioFincaId, request.Usuario);
         }
 
         public void ConfirmarEnvio(ConfirmarEnvioRequestDTO request)
         {
-            _IAgricultorRepository.ConfirmarEnvio(request.ContratoSocioFincaId, request.Usuario, request.Fecha);
+            _IAgricultorRepository.ConfirmarEnvio(request.ContratoSocioFincaId, request.Usuario);
         }
 
         public List<ConsultaAgricultorDTO> Consultar(ConsultaAgricultorRequestDTO request)
@@ -53,7 +53,6 @@ namespace KaphiyQuipu.Service
 
         public List<ConsultaMateriaPrimaSolicitadaDTO> ConsultarMateriaPrimaSolicitada(ConsultaMateriaPrimaSolicitadaRequestDTO request)
         {
-            List<ConsultaMateriaPrimaSolicitadaDTO> resultados = new List<ConsultaMateriaPrimaSolicitadaDTO>();
             if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue)
             {
                 throw new ResultException(new Result { ErrCode = "01", Message = "Comercial.Cliente.ValidacionSeleccioneMinimoUnFiltro.Label" });
@@ -65,7 +64,8 @@ namespace KaphiyQuipu.Service
             {
                 throw new ResultException(new Result { ErrCode = "02", Message = "Comercial.Contrato.ValidacionRangoFechaMayor2anios.Label" });
             }
-
+            List<ConsultaMateriaPrimaSolicitadaDTO> resultados = new List<ConsultaMateriaPrimaSolicitadaDTO>();
+            request.FechaFin = request.FechaFin.AddHours(23).AddMinutes(59).AddSeconds(59);
             var list = _IAgricultorRepository.ConsultarMateriaPrimaSolicitada(request);
             resultados = list.ToList();
             return resultados;
