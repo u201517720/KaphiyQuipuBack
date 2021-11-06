@@ -29,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="plantillas_correo\ConfirmacionContrato.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="plantillas_correo\bienvenidaES.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

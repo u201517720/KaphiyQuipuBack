@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebGYM.Common;
 
 namespace KaphiyQuipu.Service
 {
@@ -69,6 +70,8 @@ namespace KaphiyQuipu.Service
             contrato.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.Contrato);
 
             string affected = _IContratoRepository.Registrar(contrato);
+
+            //new EmailManager().enviarCorreo("","PRUEBA", )
 
             return affected;
         }
