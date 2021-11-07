@@ -56,15 +56,5 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public IEnumerable<ConsultaPrecioDiaRendimientoDetalleBE> ConsultarPrecioDiaRendimientoPorEmpresa(int empresaId)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("EmpresaId", empresaId);
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                return db.Query<ConsultaPrecioDiaRendimientoDetalleBE>("uspPrecioDiaRendimientoConsultarPorEmpresa", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
     }
 }

@@ -172,24 +172,6 @@ namespace KaphiyQuipu.DTO
 		public DateTime? FechaCalidad
 		{ get; set; }
 
-		public IEnumerable<LoteAnalisisFisicoColorDetalle> AnalisisFisicoColorDetalle
-        { get; set; }
-
-        public IEnumerable<LoteAnalisisFisicoDefectoPrimarioDetalle> AnalisisFisicoDefectoPrimarioDetalle
-        { get; set; }
-
-        public IEnumerable<LoteAnalisisFisicoDefectoSecundarioDetalle> AnalisisFisicoDefectoSecundarioDetalle
-        { get; set; }
-
-        public IEnumerable<LoteAnalisisFisicoOlorDetalle> AnalisisFisicoOlorDetalle
-        { get; set; }
-
-        public IEnumerable<LoteAnalisisSensorialAtributoDetalle> AnalisisSensorialAtributoDetalle
-        { get; set; }
-
-        public IEnumerable<LoteAnalisisSensorialDefectoDetalle> AnalisisSensorialDefectoDetalle
-        { get; set; }
-
         public IEnumerable<LoteRegistroTostadoIndicadorDetalle> RegistroTostadoIndicadorDetalle
         { get; set; }
 

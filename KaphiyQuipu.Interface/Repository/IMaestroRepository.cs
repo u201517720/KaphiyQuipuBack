@@ -10,6 +10,5 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultaUbigeoBE> ConsultaUbibeo();
         IEnumerable<Zona> ConsultarZona(string codigoDistrito);
         IEnumerable<ConsultaPaisBE> ConsultarPais();
-        IEnumerable<ConsultaPrecioDiaRendimientoDetalleBE> ConsultarPrecioDiaRendimientoPorEmpresa(int empresaId);
     }
 }

@@ -8,5 +8,6 @@ namespace KaphiyQuipu.Interface.Repository
     public interface IGuiaRecepcionMateriaPrimaRepository
     {
         IEnumerable<ConsultaGuiaRecepcionMateriaPrimaDTO> Consultar(ConsultarGuiaRecepcionMateriaPrimaRequestDTO request);
+        string Registrar(GuiaRecepcionMateriaPrima guia);
     }
 }

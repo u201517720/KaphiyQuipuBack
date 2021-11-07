@@ -8,5 +8,6 @@ namespace KaphiyQuipu.Interface.Service
     public interface IGuiaRecepionMateriaPrimaService
     {
         List<ConsultaGuiaRecepcionMateriaPrimaDTO> Consultar(ConsultarGuiaRecepcionMateriaPrimaRequestDTO request);
+        string Registrar(RegistrarActualizarGuiaRecepcionRequestDTO request);
     }
 }

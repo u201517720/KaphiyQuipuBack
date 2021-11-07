@@ -5,12 +5,13 @@ using System.Text;
 
 namespace KaphiyQuipu.DTO
 {
-    public class ConsultaOrdenProcesoResponseDTO
+    public class RegistrarActualizarGuiaRecepcionResponseDTO
     {
-        public ConsultaOrdenProcesoResponseDTO()
+        public RegistrarActualizarGuiaRecepcionResponseDTO()
         {
             Result = new Result();
         }
+
         public Result Result { get; set; }
     }
 }

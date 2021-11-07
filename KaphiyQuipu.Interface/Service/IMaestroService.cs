@@ -14,10 +14,6 @@ namespace KaphiyQuipu.Interface.Service
 
         List<ConsultaProductoPrecioDiaBE> ConsultarProductoPrecioDiaPorSubProductoIdPorEmpresaId(string subProductoId, int empresaId);
 
-        List<ConsultaPrecioDiaRendimientoDetalleBE> ConsultarPrecioDiaRendimiento(ConsultaPrecioDiaRendimientoRequestDTO request);
-
-
-     
 
     }
 }
