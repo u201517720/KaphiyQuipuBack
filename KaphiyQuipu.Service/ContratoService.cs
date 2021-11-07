@@ -48,7 +48,7 @@ namespace KaphiyQuipu.Service
 
             var timeSpan = request.FechaFin - request.FechaInicio;
 
-            if (timeSpan.Days > 730)
+            if (timeSpan.Days > 365)
             {
                 throw new ResultException(new Result { ErrCode = "02", Message = "El rango entre las fechas no puede ser mayor a 1 año." });
             }
