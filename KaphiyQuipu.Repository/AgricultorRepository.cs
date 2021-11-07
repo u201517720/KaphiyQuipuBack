@@ -33,12 +33,13 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public void ConfirmarEnvio(int ContratoSocioFincaId, string usuario)
+        public void ConfirmarEnvio(int ContratoSocioFincaId, string usuario, string hash)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pContratoSocioFincaId", ContratoSocioFincaId);
             parameters.Add("@pUsuario", usuario);
             parameters.Add("@pFecha", DateTime.Now);
+            parameters.Add("@pHashBC", hash);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -85,6 +86,22 @@ namespace KaphiyQuipu.Repository
             {
                 return db.Query<ConsultaMateriaPrimaSolicitadaDTO>("uspConsultaSolicitudesMateriaPrimaPorAgricultor", parameters, commandType: CommandType.StoredProcedure);
             }
+        }
+
+        public ConfirmacionEnvioAgricultorDTO ObtenerDatosConfirmacionEnvio(int contratoSocioFincaId)
+        {
+            ConfirmacionEnvioAgricultorDTO itemBE = null;
+            var parameters = new DynamicParameters();
+            parameters.Add("@ContratoSocioFincaId", contratoSocioFincaId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                var list = db.Query<ConfirmacionEnvioAgricultorDTO>("uspContratoSocioFincaConsulta", parameters, commandType: CommandType.StoredProcedure);
+                if (list.Any())
+                    itemBE = list.First();
+            }
+
+            return itemBE;
         }
     }
 }

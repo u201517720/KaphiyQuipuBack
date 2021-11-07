@@ -11,6 +11,7 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultaMateriaPrimaSolicitadaDTO> ConsultarMateriaPrimaSolicitada(ConsultaMateriaPrimaSolicitadaRequestDTO request);
         ConsultaMateriaPrimaSolicitadaDTO ConsultarDetalleMateriaPrimaSolicitada(int contratoSocioFincaId);
         void ConfirmarDisponibilidad(int ContratoSocioFincaId, string usuario);
-        void ConfirmarEnvio(int ContratoSocioFincaId, string usuario);
+        void ConfirmarEnvio(int ContratoSocioFincaId, string usuario, string hash);
+        ConfirmacionEnvioAgricultorDTO ObtenerDatosConfirmacionEnvio(int contratoSocioFincaId);
     }
 }
