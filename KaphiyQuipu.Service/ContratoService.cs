@@ -43,14 +43,14 @@ namespace KaphiyQuipu.Service
         {
             if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue)
             {
-                throw new ResultException(new Result { ErrCode = "01", Message = "Comercial.Cliente.ValidacionSeleccioneMinimoUnFiltro.Label" });
+                throw new ResultException(new Result { ErrCode = "01", Message = "La fecha inicio y fin son obligatorias. Por favor, ingresarlas." });
             }
 
             var timeSpan = request.FechaFin - request.FechaInicio;
 
             if (timeSpan.Days > 730)
             {
-                throw new ResultException(new Result { ErrCode = "02", Message = "Comercial.Contrato.ValidacionRangoFechaMayor2anios.Label" });
+                throw new ResultException(new Result { ErrCode = "02", Message = "El rango entre las fechas no puede ser mayor a 1 año." });
             }
             request.FechaFin = request.FechaFin.AddHours(23).AddMinutes(59).AddSeconds(59);
             var list = _IContratoRepository.Consultar(request);
