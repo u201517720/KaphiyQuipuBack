@@ -1,4 +1,6 @@
 ﻿using Core.Common.Domain.Model;
+using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
@@ -12,10 +14,12 @@ namespace KaphiyQuipu.Service
     public class AgricultorService : IAgricultorService
     {
         private IAgricultorRepository _IAgricultorRepository;
+        private IContratoCompraContract _IContratoCompraContract;
 
-        public AgricultorService(IAgricultorRepository agricultorRepository)
+        public AgricultorService(IAgricultorRepository agricultorRepository, IContratoCompraContract contratoCompraContract)
         {
             _IAgricultorRepository = agricultorRepository;
+            _IContratoCompraContract = contratoCompraContract;
         }
 
         public void ConfirmarDisponibilidad(ConfirmarDisponibilidadRequestDTO request)
@@ -25,7 +29,16 @@ namespace KaphiyQuipu.Service
 
         public void ConfirmarEnvio(ConfirmarEnvioRequestDTO request)
         {
-            _IAgricultorRepository.ConfirmarEnvio(request.ContratoSocioFincaId, request.Usuario);
+            ConfirmacionEnvioAgricultorDTO confirmacionEnvioAgricultorDTO = _IAgricultorRepository.ObtenerDatosConfirmacionEnvio(request.ContratoSocioFincaId);
+            AgricultorContratoDTO agricultorContratoDTO = new AgricultorContratoDTO();
+            agricultorContratoDTO.NroContrato = confirmacionEnvioAgricultorDTO.Contrato;
+            agricultorContratoDTO.NroDocumento = confirmacionEnvioAgricultorDTO.DNIAgricultor;
+            agricultorContratoDTO.Finca = confirmacionEnvioAgricultorDTO.Finca;
+            agricultorContratoDTO.Certificacion = confirmacionEnvioAgricultorDTO.Certificacion;
+
+            TransactionResult result = _IContratoCompraContract.AgregarAgricultor(agricultorContratoDTO).Result;
+
+            _IAgricultorRepository.ConfirmarEnvio(request.ContratoSocioFincaId, request.Usuario, result.TransactionHash);
         }
 
         public List<ConsultaAgricultorDTO> Consultar(ConsultaAgricultorRequestDTO request)
