@@ -27,6 +27,7 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@pFechaFin", request.FechaFin);
             parameters.Add("@pRolId", request.RolId);
             parameters.Add("@pCodigoCliente", request.CodigoDistribuidor);
+            parameters.Add("@pUserId", request.UserId);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -106,6 +107,28 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 return db.Query<ObtenerAgricultoresPorContratoDTO>("uspObtenerAgricultoresPorContradoId", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void RegistrarControlCalidad(List<RegistrarControlCalidadDTO> listaControles)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pTabla", listaControles.ToDataTable().AsTableValuedParameter());
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.ExecuteScalar<string>("uspRegistrarControlCalidadContratoPorAgricultor", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<RegistrarControlCalidadDTO> ObtenerControlCalidad(int contratoId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pContratoId", contratoId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<RegistrarControlCalidadDTO>("uspObtenerControlCalidadPoRContratoId", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

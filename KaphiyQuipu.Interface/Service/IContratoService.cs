@@ -12,5 +12,6 @@ namespace KaphiyQuipu.Interface.Service
         Task<TransactionResponse<string>> Confirmar(ContratoCompraDTO request);
         void AsociarAgricultoresContrato(AsociarAgricultoresContratoRequestDTO request);
         List<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(ObtenerAgricultoresPorContratoRequestDTO request);
+        void RegistrarControlCalidad(RegistrarControlCalidadRequestDTO request);
     }
 }

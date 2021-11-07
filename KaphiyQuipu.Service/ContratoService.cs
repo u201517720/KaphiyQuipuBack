@@ -59,7 +59,14 @@ namespace KaphiyQuipu.Service
 
         public ConsultaContratoPorIdDTO ConsultarPorId(ConsultaContratoPorIdRequestDTO request)
         {
-            return _IContratoRepository.ConsultarPorId(request.ContratoId);
+            ConsultaContratoPorIdDTO response = new ConsultaContratoPorIdDTO();
+            response = _IContratoRepository.ConsultarPorId(request.ContratoId);
+            var listaControles = _IContratoRepository.ObtenerControlCalidad(request.ContratoId);
+            if (listaControles != null)
+            {
+                response.controles = listaControles.ToList();
+            }
+            return response;
         }
 
         public string Registrar(RegistrarActualizarContratoRequestDTO request)
@@ -116,6 +123,17 @@ namespace KaphiyQuipu.Service
                 x.FechaRegistroString = x.FechaRegistro.ToString("yyyy-MM-dd HH:mm:ss");
             });
             return agricultores;
+        }
+
+        public void RegistrarControlCalidad(RegistrarControlCalidadRequestDTO request)
+        {
+            DateTime dt = DateTime.Now;
+            request.controles.ForEach(x =>
+            {
+                x.FechaCreacion = dt;
+            });
+
+            _IContratoRepository.RegistrarControlCalidad(request.controles);
         }
     }
 }

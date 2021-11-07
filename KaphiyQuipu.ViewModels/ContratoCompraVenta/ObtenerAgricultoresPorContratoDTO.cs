@@ -11,6 +11,7 @@ namespace KaphiyQuipu.DTO
 
         }
 
+        public int ContratoSocioFincaId { get; set; }
         public string NombreSocio { get; set; }
         public string ApellidoSocio { get; set; }
         public string NombreCompleto { get; set; }

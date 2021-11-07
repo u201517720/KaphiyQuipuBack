@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;using System.Threading;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Core.Common.Logger
 {
@@ -12,7 +11,7 @@ namespace Core.Common.Logger
 
         public LogText()
         {
-            //this.Ruta = string.Format("{0}{1}", @"h:\\root\\home\\kaphiyquipu-001\\www\\logs\\", string.Format("{0:yyyyMMdd}{1}", DateTime.Now, @"Log.txt"));
+            //this.Ruta = string.Format("{0}{1}", @"h:\root\home\kaphiyquipu-001\www\logs\", string.Format("{0:yyyyMMdd}{1}", DateTime.Now, @"Log.txt"));
             this.Ruta = string.Format("{0:yyyyMMdd}{1}", DateTime.Now, @"Log.txt");
             //this.Ruta = string.Format("{0}{1}", @"c:\\Log\\", string.Format("{0:yyyyMMdd}{1}", DateTime.Now, @"Log.txt"));
         }
