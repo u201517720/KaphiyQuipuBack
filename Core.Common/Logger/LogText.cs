@@ -11,8 +11,11 @@ namespace Core.Common.Logger
 
         public LogText()
         {
-            //this.Ruta = string.Format("{0}{1}", @"h:\root\home\kaphiyquipu-001\www\logs\", string.Format("{0:yyyyMMdd}{1}", DateTime.Now, @"Log.txt"));
+#if DEBUG
             this.Ruta = string.Format("{0:yyyyMMdd}{1}", DateTime.Now, @"Log.txt");
+#else
+            this.Ruta = string.Format("{0}{1}", @"h:\root\home\kaphiyquipu-001\www\logs\", string.Format("{0:yyyyMMdd}{1}", DateTime.Now, @"Log.txt"));
+#endif
             //this.Ruta = string.Format("{0}{1}", @"c:\\Log\\", string.Format("{0:yyyyMMdd}{1}", DateTime.Now, @"Log.txt"));
         }
 
