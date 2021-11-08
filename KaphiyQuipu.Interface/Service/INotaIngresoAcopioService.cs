@@ -8,5 +8,6 @@ namespace KaphiyQuipu.Interface.Service
     public interface INotaIngresoAcopioService
     {
         string Registrar(RegistrarNotaIngresoAcopioRequestDTO request);
+        List<ConsultaNotaIngresoAcopioDTO> Consultar(ConsultaNotaIngresoAcopioRequestDTO request);
     }
 }

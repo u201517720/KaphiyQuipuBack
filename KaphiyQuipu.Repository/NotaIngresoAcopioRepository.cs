@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Models;
 using Microsoft.Extensions.Options;
@@ -17,6 +18,18 @@ namespace KaphiyQuipu.Repository
         public NotaIngresoAcopioRepository(IOptions<ConnectionString> connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        public IEnumerable<ConsultaNotaIngresoAcopioDTO> Consultar(ConsultaNotaIngresoAcopioRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pFechaInicio", request.FechaInicio);
+            parameters.Add("@pFechaFinal", request.FechaFin);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultaNotaIngresoAcopioDTO>("uspObtenerNotasIngresoAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
 
         public string Registrar(NotaIngresoAlmacenAcopio nota)
