@@ -3,6 +3,7 @@ using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Models;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -21,7 +22,7 @@ namespace KaphiyQuipu.Repository
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pFechaInicio", request.FechaInicio);
-            parameters.Add("@pFechaFin", request.FechaFin);
+            parameters.Add("@pFechaFinal", request.FechaFin);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {

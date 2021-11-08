@@ -136,6 +136,10 @@ namespace KaphiyQuipu.API
             services.AddSingleton<ContractService>();
             services.AddTransient<IAgricultorService, AgricultorService>();
             services.AddTransient<IAgricultorRepository, AgricultorRepository>();
+            services.AddTransient<IGuiaRecepionMateriaPrimaService, GuiaRecepionMateriaPrimaService>();
+            services.AddTransient<IGuiaRecepcionMateriaPrimaRepository, GuiaRecepcionMateriaPrimaRepository>();
+            services.AddTransient<INotaIngresoAcopioService, NotaIngresoAcopioService>();
+            services.AddTransient<INotaIngresoAcopioRepository, NotaIngresoAcopioRepository>();
 
             services.AddMvc(setupAction => { setupAction.EnableEndpointRouting = false; })
                     .AddJsonOptions(jsonOptions => { jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null; })

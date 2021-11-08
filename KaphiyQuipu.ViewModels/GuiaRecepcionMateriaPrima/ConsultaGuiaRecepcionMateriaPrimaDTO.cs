@@ -23,5 +23,7 @@ namespace KaphiyQuipu.DTO
         public string HashBC { get; set; }
         public string UsuarioRegistro { get; set; }
         public string FechaRegistro { get; set; }
+        public string Estado { get; set; }
+        public string EstadoId { get; set; }
     }
 }

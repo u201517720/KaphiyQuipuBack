@@ -25,84 +25,18 @@ namespace KaphiyQuipu.Service
         public static string Internacional { get { return "02"; } }
     }
 
-
-    public static class GuiaRemisionAlmacenEstados
-    {
-        public static string Ingresado { get { return "01"; } }
-        public static string Anulado { get { return "00"; } }
-    }
-
-    public static class NotaIngresoPlantaEstados
-    {
-        public static string Pesado { get { return "01"; } }
-        public static string Analizado { get { return "02"; } }
-        public static string EnviadoAlmacen { get { return "03"; } }
-        public static string Anulado { get { return "00"; } }
-    }
-
     public static class Documentos
     {
         public static string GuiaRecepcion { get { return "GuiaRecepcion"; } }
-        public static string NotaCompra { get { return "NotaCompra"; } }
-        public static string NotaIngresoAlmacen { get { return "NotaIngresoAlmacen"; } }
-        public static string Lote { get { return "Lote"; } }
         public static string Productor { get { return "Productor"; } }
         public static string Socio { get { return "Socio"; } }
-        public static string NotaSalidaAlmacen { get { return "NotaSalidaAlmacen"; } }
-        public static string Aduana { get { return "Aduana"; } }
-        public static string Adelanto { get { return "Adelanto"; } }
-        public static string NotaSalidaAlmacenPlanta { get { return "NotaSalidaAlmacenPlanta"; } }
-        public static string LiquidacionProcesoPlanta { get { return "LiquidacionProcesoPlanta"; } }
         public static string UbigeoCiudad { get { return "UbigeoCiudad"; } }
-        public static string GuiaRemisionAlmacen { get { return "GuiaRemisionAlmacen"; } }
-        public static string GuiaRemisionAlmacenPlanta { get { return "GuiaRemisionAlmacenPlanta"; } }
-        public static string OrdenServicioControlCalidad { get { return "OrdenServicioControlCalidad"; } }
-        public static string OrdenProceso { get { return "OrdenProceso"; } }
-        public static string OrdenProcesoPlanta { get { return "OrdenProcesoPlanta"; } }
-        public static string Cliente { get { return "Cliente"; } }
-        public static string InspeccionInterna { get { return "InspeccionInterna"; } }
-        public static string Diagnostico { get { return "Diagnostico"; } }
         public static string Contrato { get { return "Contrato"; } }
-        public static string NotaIngresoAlmacenPlanta { get { return "NotaIngresoAlmacenPlanta  "; } }
-        public static string NotaIngresoPlanta { get { return "NotaIngresoPlanta  "; } }
-        public static string SolicitudCompra { get { return "SolicitudCompra  "; } }
+        public static string SolicitudCompra { get { return "SolicitudCompra"; } }
+        public static string NotaIngresoAcopio { get { return "NotaIngresoAcopio"; } }
+        public static string Cliente { get { return "NotaIngresoAcopio"; } }
+
     }
-
-    public static class NotaCompraEstados
-    {
-        public static string PorLiquidar { get { return "01"; } }
-        public static string Liquidado { get { return "02"; } }
-        public static string Anulado { get { return "00"; } }
-    }
-
-    public static class NotaCompraTipos
-    {
-        public static string Liquidado { get { return "01"; } }
-        public static string Guardado { get { return "02"; } }
-    }
-
-    public static class NotaIngresoAlmacenEstados
-    {
-        public static string Ingresado { get { return "01"; } }
-        public static string Lotizado { get { return "02"; } }
-        public static string Anulado { get { return "00"; } }
-    }
-
-    public static class NotaIngresoAlmacenPlantaEstados
-    {
-        public static string Ingresado { get { return "01"; } }
-        public static string Anulado { get { return "00"; } }
-
-        public static string GeneradoNotaSalida { get { return "02"; } }
-    }
-
-    public static class NotaSalidaAlmacenEstados
-    {
-        public static string Ingresado { get { return "01"; } }
-        public static string Anulado { get { return "00"; } }
-        public static string Analizado { get { return "02"; } }
-    }
-
     public static class NotaSalidaAlmacenPlantaEstados
     {
         public static string Ingresado { get { return "01"; } }

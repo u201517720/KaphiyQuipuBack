@@ -4,11 +4,6 @@ namespace KaphiyQuipu.Models
 {
     public class GuiaRecepcionMateriaPrima
     {
-        public GuiaRecepcionMateriaPrima()
-        {
-
-        }
-
         public int ID { get; set; }
         public string Correlativo { get; set; }
         public int ContratoId { get; set; }

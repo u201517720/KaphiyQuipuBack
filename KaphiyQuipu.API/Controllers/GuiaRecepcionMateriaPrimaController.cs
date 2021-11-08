@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 
-namespace Integracion.Deuda.Controller
+namespace KaphiyQuipu.API.Controller
 {
     [Route("api/[controller]")]
     [ApiController]

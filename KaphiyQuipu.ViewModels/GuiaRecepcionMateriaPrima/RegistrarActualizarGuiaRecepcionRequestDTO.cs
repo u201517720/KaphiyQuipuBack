@@ -6,11 +6,6 @@ namespace KaphiyQuipu.DTO
 {
     public class RegistrarActualizarGuiaRecepcionRequestDTO
     {
-        public RegistrarActualizarGuiaRecepcionRequestDTO()
-        {
-
-        }
-
         public string Correlativo { get; set; }
         public int ContratoId { get; set; }
         public decimal SacosPC { get; set; }
