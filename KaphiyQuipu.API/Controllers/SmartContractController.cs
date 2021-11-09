@@ -1,7 +1,11 @@
-﻿using KaphiyQuipu.Blockchain.Entities;
+﻿using Core.Common.Email;
+using Core.Common.Razor;
+using Core.Common.SMS;
+using KaphiyQuipu.Blockchain.Entities;
 using KaphiyQuipu.Blockchain.ERC20;
 using KaphiyQuipu.Blockchain.Facade;
 using KaphiyQuipu.Blockchain.Services;
+using KaphiyQuipu.DTO.ContratoCompraVenta;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.RPC.Accounts;
@@ -26,12 +30,18 @@ namespace KaphiyQuipu.API.Controllers
         private IAccount _account;
         private ContractService _contractService;
         private IAccountService _accountService;
+        private IMessageSender _messageSender;
+        private IEmailService _emailService;
+        private IViewRender _viewRender;
 
         public SmartContractController(
             IContractFacade contractFacade,
             IContractOperation operation,
             ContractService contractService,
-            IAccountService accountService)
+            IAccountService accountService,
+            IMessageSender messageSender,
+             IEmailService emailService,
+             IViewRender viewRender)
         {
             _contractFacade = contractFacade;
             _operation = operation;
@@ -39,8 +49,32 @@ namespace KaphiyQuipu.API.Controllers
             _accountService = accountService;
             _web3 = _accountService.GetWeb3();
             _account = _accountService.GetAccount();
+            _messageSender = messageSender;
+            _emailService = emailService;
+            _viewRender = viewRender;
         }
 
+        [HttpGet("sms")]
+        public async Task<IActionResult> SendSMS(string mensaje)
+        {
+            var response = await _messageSender.SendSmsAsync("988863908", mensaje);
+
+            return Ok(new { response.Item1, response.Item2 });
+        }
+
+        [HttpPost("email")]
+        public async Task<IActionResult> SendEmail(SolicitudConfirmacionAgrigultorDTO solicitudConfirmacion)
+        {
+            ParametroEmail oParametroEmail = new ParametroEmail();
+            oParametroEmail.Para = "crisvelasquez02@gmail.com";
+            oParametroEmail.Asunto = "Solicitud Confirmación";
+            oParametroEmail.IsHtml = true;
+            oParametroEmail.Mensaje = await _viewRender.RenderAsync(@"Mailing\mail-solicitud-confirmacion", solicitudConfirmacion);
+
+            var response = await _emailService.SendEmailAsync(oParametroEmail);
+
+            return Ok(new { response });
+        }
 
         [HttpGet("users")]
         public async Task<IActionResult> GetUsers()

@@ -1,9 +1,14 @@
 ﻿
 using AutoMapper;
 using Core.Common.Domain.Model;
+using Core.Common.Email;
+using Core.Common.Razor;
+using Core.Common.SMS;
 using KaphiyQuipu.Blockchain.Contracts;
 using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
+using KaphiyQuipu.DTO.Agricultor;
+using KaphiyQuipu.DTO.ContratoCompraVenta;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
 using KaphiyQuipu.Models;
@@ -24,14 +29,26 @@ namespace KaphiyQuipu.Service
         public IOptions<FileServerSettings> _fileServerSettings;
         private IContratoCompraContract _contratoCompraContract;
 
+        private IMessageSender _messageSender;
+        private IEmailService _emailService;
+        private IViewRender _viewRender;
+
+
         public ContratoService(IContratoRepository contratoRepository, ICorrelativoRepository correlativoRepository, IMapper mapper, IOptions<FileServerSettings> fileServerSettings, IMaestroRepository maestroRepository, IEmpresaRepository empresaRepository,
-                               IContratoCompraContract contratoCompraContract)
+                               IContratoCompraContract contratoCompraContract,
+                               IMessageSender messageSender,
+                               IEmailService emailService,
+                               IViewRender viewRender)
         {
             _IContratoRepository = contratoRepository;
             _fileServerSettings = fileServerSettings;
             _ICorrelativoRepository = correlativoRepository;
             _Mapper = mapper;
             _contratoCompraContract = contratoCompraContract;
+
+            _messageSender = messageSender;
+            _emailService = emailService;
+            _viewRender = viewRender;
         }
 
         private String getRutaFisica(string pathFile)
@@ -109,7 +126,34 @@ namespace KaphiyQuipu.Service
                 request.agricultores.ForEach(x => x.Fecha = request.Fecha);
 
                 _IContratoRepository.AsociarAgricultoresContrato(request.agricultores);
+
+                foreach (var item in request.agricultores)
+                {
+                    SolicitudConfirmacionAgrigultorDTO agrigultorDTO = _IContratoRepository.ObtenerDatosSolicitudConfirmacionAgrigultor(item.SocioFincaId, item.ContratoId);
+                    var resultSMS = EnviarSolicitudConfirmacionSMS(agrigultorDTO).Result;
+                    var resultEmail = EnviarCorreoSolicitudConfirmacion(agrigultorDTO).Result;
+                }
             }
+        }
+
+        private async Task<bool> EnviarSolicitudConfirmacionSMS(SolicitudConfirmacionAgrigultorDTO agrigultorDTO)
+        {
+            string mensaje = $"Hola {agrigultorDTO.Nombre}, la Cooperativa de Servicios Múltiples Aprocassi te ha solicitado {agrigultorDTO.CantidadSolicitada} " +
+                $"sacos de café pergamino y cada saco debe pesar {agrigultorDTO.PesoSaco} kilos, por favor ingresar a la pagina web http://kaphiyquipu.azurewebsites.net/ para brindar la confirmación.";
+            (bool, string) result = await _messageSender.SendSmsAsync(agrigultorDTO.NumeroTelefonoCelular, mensaje);
+
+            return result.Item1;
+        }
+
+        private async Task<bool> EnviarCorreoSolicitudConfirmacion(SolicitudConfirmacionAgrigultorDTO agrigultorDTO)
+        {
+            ParametroEmail oParametroEmail = new ParametroEmail();
+            oParametroEmail.Para = agrigultorDTO.EmailId;
+            oParametroEmail.Asunto = "Solicitud Confirmación";
+            oParametroEmail.IsHtml = true;
+            oParametroEmail.Mensaje = await _viewRender.RenderAsync(@"Mailing\mail-solicitud-confirmacion", agrigultorDTO);
+
+            return await _emailService.SendEmailAsync(oParametroEmail);
         }
 
         public List<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(ObtenerAgricultoresPorContratoRequestDTO request)

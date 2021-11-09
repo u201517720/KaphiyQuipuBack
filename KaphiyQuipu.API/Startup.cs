@@ -1,5 +1,8 @@
 using AutoMapper;
 using Core.Common.Auth;
+using Core.Common.Email;
+using Core.Common.Razor;
+using Core.Common.SMS;
 using KaphiyQuipu.Blockchain.Contracts;
 using KaphiyQuipu.Blockchain.ERC20;
 using KaphiyQuipu.Blockchain.Facade;
@@ -12,6 +15,7 @@ using KaphiyQuipu.Service.MappingConfigurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -79,6 +83,8 @@ namespace KaphiyQuipu.API
 
             services.AddTransient<Core.Common.Logger.ILog, Core.Common.Logger.Log>();
 
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IViewRender, ViewRender>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IUsersRepository, UsersRepository>();
             services.AddTransient<IZonaService, ZonaService>();
@@ -140,6 +146,9 @@ namespace KaphiyQuipu.API
             services.AddTransient<IGuiaRecepcionMateriaPrimaRepository, GuiaRecepcionMateriaPrimaRepository>();
             services.AddTransient<INotaIngresoAcopioService, NotaIngresoAcopioService>();
             services.AddTransient<INotaIngresoAcopioRepository, NotaIngresoAcopioRepository>();
+
+            services.AddTransient<IMessageSender, MessageSender>();
+            services.AddTransient<IEmailService, EmailService>();
 
             services.AddMvc(setupAction => { setupAction.EnableEndpointRouting = false; })
                     .AddJsonOptions(jsonOptions => { jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null; })
