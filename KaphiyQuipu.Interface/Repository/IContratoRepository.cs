@@ -18,6 +18,6 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(int contratoId);
         SolicitudConfirmacionAgrigultorDTO ObtenerDatosSolicitudConfirmacionAgrigultor(int socioFincaId, int contratoId);
         void RegistrarControlCalidad(List<RegistrarControlCalidadDTO> listaControles);
-        IEnumerable<RegistrarControlCalidadDTO> ObtenerControlCalidad(int contratoId);
+        IEnumerable<ObtenerControlCalidadDTO> ObtenerControlCalidad(int contratoId);
     }
 }

@@ -3,7 +3,6 @@ using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Models;
 using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -27,6 +26,39 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 return db.Query<ConsultaGuiaRecepcionMateriaPrimaDTO>("uspObtenerGuiasRecepcion", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<ConsultarPorIdGuiaRecepcionMateriaPrimaDTO> ConsultarPorId(int guiaRecepcionId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pGuiaRecepcionId", guiaRecepcionId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarPorIdGuiaRecepcionMateriaPrimaDTO>("uspObtenerGuiaRecepcionPorId", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<AgricultoresGuiaRecepcionMateriaPrimaDTO> ObtenerAgricultores(int guiaRecepcionId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pGuiaRecepcionId", guiaRecepcionId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<AgricultoresGuiaRecepcionMateriaPrimaDTO>("uspObtenerAgricultoresPorGuiaRecepcionId", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<GuiaRecepcionMateriaPrimaControlCalidadDTO> ObtenerControlesCalidad(int guiaRecepcionId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pGuiaRecepcionId", guiaRecepcionId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<GuiaRecepcionMateriaPrimaControlCalidadDTO>("uspObtenerControlesCalidadPorGuiaRecepcionId", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
