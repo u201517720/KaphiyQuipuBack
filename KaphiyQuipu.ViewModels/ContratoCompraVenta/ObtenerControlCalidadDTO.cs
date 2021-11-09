@@ -4,24 +4,10 @@ using System.Text;
 
 namespace KaphiyQuipu.DTO
 {
-    public class RegistrarControlCalidadRequestDTO
+    public class ObtenerControlCalidadDTO
     {
-        public RegistrarControlCalidadRequestDTO()
-        {
-            controles = new List<RegistrarControlCalidadDTO>();
-        }
-
-        public List<RegistrarControlCalidadDTO> controles { get; set; }
-    }
-
-    public class RegistrarControlCalidadDTO
-    {
-        public RegistrarControlCalidadDTO()
-        {
-
-        }
-
         public int ContratoSocioFincaId { get; set; }
+        public string NombreCompleto { get; set; }
         public decimal Humedad { get; set; }
         public string Observaciones { get; set; }
         public string ListaOlores { get; set; }

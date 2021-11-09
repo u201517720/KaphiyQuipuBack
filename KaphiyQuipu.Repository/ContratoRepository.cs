@@ -121,14 +121,14 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public IEnumerable<RegistrarControlCalidadDTO> ObtenerControlCalidad(int contratoId)
+        public IEnumerable<ObtenerControlCalidadDTO> ObtenerControlCalidad(int contratoId)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pContratoId", contratoId);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                return db.Query<RegistrarControlCalidadDTO>("uspObtenerControlCalidadPoRContratoId", parameters, commandType: CommandType.StoredProcedure);
+                return db.Query<ObtenerControlCalidadDTO>("uspObtenerControlCalidadPoRContratoId", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

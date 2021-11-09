@@ -15,6 +15,6 @@ namespace KaphiyQuipu.Interface.Repository
         void AsociarAgricultoresContrato(List<AsociarAgricultoresContratoDTO> request);
         IEnumerable<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(int contratoId);
         void RegistrarControlCalidad(List<RegistrarControlCalidadDTO> listaControles);
-        IEnumerable<RegistrarControlCalidadDTO> ObtenerControlCalidad(int contratoId);
+        IEnumerable<ObtenerControlCalidadDTO> ObtenerControlCalidad(int contratoId);
     }
 }

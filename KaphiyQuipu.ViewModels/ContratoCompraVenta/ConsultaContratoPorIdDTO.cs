@@ -9,7 +9,7 @@ namespace KaphiyQuipu.DTO
     {
         public ConsultaContratoPorIdDTO()
         {
-            controles = new List<RegistrarControlCalidadDTO>();
+            controles = new List<ObtenerControlCalidadDTO>();
         }
         public int ContratoId { get; set; }
         public string Correlativo { get; set; }
@@ -42,6 +42,6 @@ namespace KaphiyQuipu.DTO
         public DateTime FechaActualizacion { get; set; }
         public string FechaActualizacionString { get; set; }
         public string Responsable { get; set; }
-        public List<RegistrarControlCalidadDTO> controles { get; set; }
+        public List<ObtenerControlCalidadDTO> controles { get; set; }
     }
 }
