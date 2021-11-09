@@ -10,5 +10,9 @@ namespace KaphiyQuipu.Interface.Repository
     {
         string Registrar(NotaIngresoAlmacenAcopio nota);
         IEnumerable<ConsultaNotaIngresoAcopioDTO> Consultar(ConsultaNotaIngresoAcopioRequestDTO request);
+        IEnumerable<ConsultaPorIdNotaIngresoAcopioDTO> ConsultarPorId(int notaIngresoId);
+        IEnumerable<ConsultaPorIdNotaIngresoAcopioAgricultoresDTO> ObtenerAgricultores(int notaIngresoId);
+        IEnumerable<ConsultaPorIdNotaIngresoAcopioControlCalidadDTO> ObtenerControlesCalidad(int notaIngresoId);
+        void UbicarMateriaPrimaAlmacen(UbicarMateriaPrimaAlmacenRequestDTO request);
     }
 }

@@ -81,5 +81,62 @@ namespace Integracion.Deuda.Controller
 
             return Ok(response);
         }
+
+        [Route("ConsultarPorId")]
+        [HttpPost]
+        public IActionResult ConsultarPorId([FromBody] ConsultaPorIdNotaIngresoAcopioRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            ConsultaPorIdNotaIngresoAcopioResponseDTO response = new ConsultaPorIdNotaIngresoAcopioResponseDTO();
+            try
+            {
+                response.Result.Data = _notaIngresoAcopioService.ConsultarPorId(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("UbicarAlmacen")]
+        [HttpPost]
+        public IActionResult UbicarMateriaPrimaAlmacen(UbicarMateriaPrimaAlmacenRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            UbicarMateriaPrimaAlmacenResponseDTO response = new UbicarMateriaPrimaAlmacenResponseDTO();
+
+            try
+            {
+                _notaIngresoAcopioService.UbicarMateriaPrimaAlmacen(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
     }
 }

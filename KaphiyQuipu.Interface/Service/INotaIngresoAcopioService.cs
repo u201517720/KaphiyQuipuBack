@@ -9,5 +9,7 @@ namespace KaphiyQuipu.Interface.Service
     {
         string Registrar(RegistrarNotaIngresoAcopioRequestDTO request);
         List<ConsultaNotaIngresoAcopioDTO> Consultar(ConsultaNotaIngresoAcopioRequestDTO request);
+        ConsultaPorIdNotaIngresoAcopioDTO ConsultarPorId(ConsultaPorIdNotaIngresoAcopioRequestDTO request);
+        void UbicarMateriaPrimaAlmacen(UbicarMateriaPrimaAlmacenRequestDTO request);
     }
 }

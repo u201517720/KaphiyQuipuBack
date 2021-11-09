@@ -42,6 +42,25 @@ namespace KaphiyQuipu.Service
             return list.ToList();
         }
 
+        public ConsultaPorIdNotaIngresoAcopioDTO ConsultarPorId(ConsultaPorIdNotaIngresoAcopioRequestDTO request)
+        {
+            ConsultaPorIdNotaIngresoAcopioDTO response = new ConsultaPorIdNotaIngresoAcopioDTO();
+            var guiaRecepcion = _INotaIngresoAcopioRepository.ConsultarPorId(request.NotaIngresoAcopioId);
+            if (guiaRecepcion.Any())
+            {
+                response = guiaRecepcion.ToList().FirstOrDefault();
+            }
+
+            if (response != null)
+            {
+                var agricultores = _INotaIngresoAcopioRepository.ObtenerAgricultores(request.NotaIngresoAcopioId);
+                response.agricultores = agricultores.ToList();
+                var controles = _INotaIngresoAcopioRepository.ObtenerControlesCalidad(request.NotaIngresoAcopioId);
+                response.controlesCalidad = controles.ToList();
+            }
+            return response;
+        }
+
         public string Registrar(RegistrarNotaIngresoAcopioRequestDTO request)
         {
             NotaIngresoAlmacenAcopio notaIngreso = _Mapper.Map<NotaIngresoAlmacenAcopio>(request);
@@ -51,6 +70,12 @@ namespace KaphiyQuipu.Service
             string affected = _INotaIngresoAcopioRepository.Registrar(notaIngreso);
 
             return affected;
+        }
+
+        public void UbicarMateriaPrimaAlmacen(UbicarMateriaPrimaAlmacenRequestDTO request)
+        {
+            request.Fecha = DateTime.Now;
+            _INotaIngresoAcopioRepository.UbicarMateriaPrimaAlmacen(request);
         }
     }
 }
