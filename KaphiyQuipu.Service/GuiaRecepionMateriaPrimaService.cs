@@ -52,5 +52,24 @@ namespace KaphiyQuipu.Service
 
             return affected;
         }
+
+        public ConsultarPorIdGuiaRecepcionMateriaPrimaDTO ConsultarPorId(ConsultarPorIdGuiaRecepcionMateriaPrimaRequestDTO request)
+        {
+            ConsultarPorIdGuiaRecepcionMateriaPrimaDTO response = new ConsultarPorIdGuiaRecepcionMateriaPrimaDTO();
+            var guiaRecepcion = _IGuiaRecepcionRepository.ConsultarPorId(request.GuiaRecepcionId);
+            if (guiaRecepcion.Any())
+            {
+                response = guiaRecepcion.ToList().FirstOrDefault();
+            }
+
+            if (response != null)
+            {
+                var agricultores = _IGuiaRecepcionRepository.ObtenerAgricultores(request.GuiaRecepcionId);
+                response.agricultores = agricultores.ToList();
+                var controles = _IGuiaRecepcionRepository.ObtenerControlesCalidad(request.GuiaRecepcionId);
+                response.controlesCalidad = controles.ToList();
+            }
+            return response;
+        }
     }
 }

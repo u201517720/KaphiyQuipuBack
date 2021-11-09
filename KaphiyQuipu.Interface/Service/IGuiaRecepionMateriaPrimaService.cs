@@ -9,5 +9,6 @@ namespace KaphiyQuipu.Interface.Service
     {
         List<ConsultaGuiaRecepcionMateriaPrimaDTO> Consultar(ConsultarGuiaRecepcionMateriaPrimaRequestDTO request);
         string Registrar(RegistrarActualizarGuiaRecepcionRequestDTO request);
+        ConsultarPorIdGuiaRecepcionMateriaPrimaDTO ConsultarPorId(ConsultarPorIdGuiaRecepcionMateriaPrimaRequestDTO request);
     }
 }
