@@ -1,4 +1,6 @@
 ﻿using KaphiyQuipu.DTO;
+using KaphiyQuipu.DTO.Agricultor;
+using KaphiyQuipu.DTO.ContratoCompraVenta;
 using KaphiyQuipu.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace KaphiyQuipu.Interface.Repository
         void Confirmar(int ContratoId, string hash, string usuario);
         void AsociarAgricultoresContrato(List<AsociarAgricultoresContratoDTO> request);
         IEnumerable<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(int contratoId);
+        SolicitudConfirmacionAgrigultorDTO ObtenerDatosSolicitudConfirmacionAgrigultor(int socioFincaId, int contratoId);
         void RegistrarControlCalidad(List<RegistrarControlCalidadDTO> listaControles);
         IEnumerable<ObtenerControlCalidadDTO> ObtenerControlCalidad(int contratoId);
     }

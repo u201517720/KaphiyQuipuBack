@@ -9,6 +9,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Core.Common;
+using KaphiyQuipu.DTO.Agricultor;
+using KaphiyQuipu.DTO.ContratoCompraVenta;
 
 namespace KaphiyQuipu.Repository
 {
@@ -108,6 +110,24 @@ namespace KaphiyQuipu.Repository
             {
                 return db.Query<ObtenerAgricultoresPorContratoDTO>("uspObtenerAgricultoresPorContradoId", parameters, commandType: CommandType.StoredProcedure);
             }
+        }
+
+        public SolicitudConfirmacionAgrigultorDTO ObtenerDatosSolicitudConfirmacionAgrigultor(int socioFincaId, int contratoid)
+        {
+            SolicitudConfirmacionAgrigultorDTO itemBE = null;
+            var parameters = new DynamicParameters();
+            parameters.Add("@pSocioFincaId", socioFincaId);
+            parameters.Add("@pContratoid", contratoid);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                var list = db.Query<SolicitudConfirmacionAgrigultorDTO>("uspContratoSocioFincaAgricultorConsulta", parameters, commandType: CommandType.StoredProcedure);
+
+                if(list.Any())
+                    itemBE = list.First();
+            }
+
+            return itemBE;
         }
 
         public void RegistrarControlCalidad(List<RegistrarControlCalidadDTO> listaControles)
