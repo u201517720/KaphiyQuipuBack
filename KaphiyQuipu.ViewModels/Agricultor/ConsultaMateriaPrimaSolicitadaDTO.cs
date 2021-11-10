@@ -30,5 +30,6 @@ namespace KaphiyQuipu.DTO
         public string Estado { get; set; }
         public DateTime? FechaActualizacion { get; set; }
         public string FechaActualizacionString { get; set; }
+        public string HashBC { get; set; }
     }
 }
