@@ -85,6 +85,7 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@pHumedad", guia.Humedad);
             parameters.Add("@pObservaciones", guia.Observaciones);
             parameters.Add("@pUsuarioRegistro", guia.UsuarioRegistro);
+            parameters.Add("@pHashBC", guia.HashBC);
             parameters.Add("@pFechaRegistro", guia.FechaRegistro);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))

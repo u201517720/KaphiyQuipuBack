@@ -27,6 +27,7 @@ namespace KaphiyQuipu.DTO
         public string ListaOlores { get; set; }
         public string ListaColores { get; set; }
         public string UsuarioCreacion { get; set; }
+        public string HashBC { get; set; }
         public DateTime? FechaCreacion { get; set; }
     }
 }
