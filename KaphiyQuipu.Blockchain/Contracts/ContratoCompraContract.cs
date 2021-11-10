@@ -22,6 +22,7 @@ namespace KaphiyQuipu.Blockchain.Contracts
         Task<List<AgricultorContratoOutputDTO>> ObtenerAgricultoresPorContrato(string nroContrato);
         Task<TransactionResult> AgregarControlCalidad(RegistrarControlCalidadDTO controlCalidad);
         Task<TransactionResult> AgregarAnalisisFisicoCafe(GuiaRecepcionMateriaPrima guia);
+        Task<TransactionResult> AgregarNotaIngresoAlmacenAcopio(UbicarMateriaPrimaAlmacenRequestDTO request);
     }
 
     public class ContratoCompraContract : IContratoCompraContract
@@ -114,6 +115,17 @@ namespace KaphiyQuipu.Blockchain.Contracts
                                              guia.CascaraPorcAFC.ToString("0.00"),
                                              guia.TotalGramosAFC.ToString("0.00"),
                                              guia.TotalPorcAFC.ToString("0.00")
+                                           );
+
+            return result;
+        }
+
+        public async Task<TransactionResult> AgregarNotaIngresoAlmacenAcopio(UbicarMateriaPrimaAlmacenRequestDTO request)
+        {
+            TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_NOTA_INGRESO_ALMACEN_ACOPIO,
+                                             request.Correlativo,
+                                             request.Almacen,
+                                             request.Fecha.Ticks
                                            );
 
             return result;

@@ -32,6 +32,7 @@ namespace KaphiyQuipu.Blockchain.ERC20
             public static string OBTENER_CONTROL_CALIDAD = "obtenerControlCalidad";
             public static string AGREGAR_ANALISIS_FISICO_CAFE = "agregarAnalisisFisicoCafe";
             public static string OBTENER_ANALISIS_FISICO_CAFE = "obtenerAnalisisFisicoCafe";
+            public static string AGREGAR_NOTA_INGRESO_ALMACEN_ACOPIO = "agregarNotaIngresoAlmacenAcopio";
         }
     }
 }

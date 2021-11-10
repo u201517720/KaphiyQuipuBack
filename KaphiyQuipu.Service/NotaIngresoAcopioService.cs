@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Core.Common.Domain.Model;
+using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
@@ -16,12 +18,14 @@ namespace KaphiyQuipu.Service
         private readonly IMapper _Mapper;
         private ICorrelativoRepository _ICorrelativoRepository;
         private INotaIngresoAcopioRepository _INotaIngresoAcopioRepository;
+        private IContratoCompraContract _contratoCompraContract;
 
-        public NotaIngresoAcopioService(IMapper mapper, ICorrelativoRepository correlativoRepository, INotaIngresoAcopioRepository notaIngresoAcopioRepository)
+        public NotaIngresoAcopioService(IMapper mapper, ICorrelativoRepository correlativoRepository, INotaIngresoAcopioRepository notaIngresoAcopioRepository, IContratoCompraContract contratoCompraContract)
         {
             _Mapper = mapper;
             _ICorrelativoRepository = correlativoRepository;
             _INotaIngresoAcopioRepository = notaIngresoAcopioRepository;
+            _contratoCompraContract = contratoCompraContract;
         }
 
         public List<ConsultaNotaIngresoAcopioDTO> Consultar(ConsultaNotaIngresoAcopioRequestDTO request)
@@ -75,6 +79,8 @@ namespace KaphiyQuipu.Service
         public void UbicarMateriaPrimaAlmacen(UbicarMateriaPrimaAlmacenRequestDTO request)
         {
             request.Fecha = DateTime.Now;
+            TransactionResult result =  _contratoCompraContract.AgregarNotaIngresoAlmacenAcopio(request).Result;
+            request.HashBC = result.TransactionHash;
             _INotaIngresoAcopioRepository.UbicarMateriaPrimaAlmacen(request);
         }
     }
