@@ -174,8 +174,11 @@ namespace KaphiyQuipu.Service
             DateTime dt = DateTime.Now;
             request.controles.ForEach(x =>
             {
+                TransactionResult result = _contratoCompraContract.AgregarControlCalidad(x).Result;
+                x.HashBC = result.TransactionHash;
                 x.FechaCreacion = dt;
             });
+
 
             _IContratoRepository.RegistrarControlCalidad(request.controles);
         }

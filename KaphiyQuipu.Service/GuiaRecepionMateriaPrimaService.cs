@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Core.Common.Domain.Model;
+using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
@@ -14,13 +16,15 @@ namespace KaphiyQuipu.Service
     {
         private IGuiaRecepcionMateriaPrimaRepository _IGuiaRecepcionRepository;
         private ICorrelativoRepository _ICorrelativoRepository;
+        private IContratoCompraContract _contratoCompraContract;
         private readonly IMapper _Mapper;
 
-        public GuiaRecepionMateriaPrimaService(IGuiaRecepcionMateriaPrimaRepository guiaRecepcionMateriaPrimaRepository, ICorrelativoRepository correlativoRepository, IMapper mapper)
+        public GuiaRecepionMateriaPrimaService(IGuiaRecepcionMateriaPrimaRepository guiaRecepcionMateriaPrimaRepository, ICorrelativoRepository correlativoRepository, IMapper mapper, IContratoCompraContract contratoCompraContract)
         {
             _IGuiaRecepcionRepository = guiaRecepcionMateriaPrimaRepository;
             _ICorrelativoRepository = correlativoRepository;
             _Mapper = mapper;
+            _contratoCompraContract = contratoCompraContract;
         }
 
         public List<ConsultaGuiaRecepcionMateriaPrimaDTO> Consultar(ConsultarGuiaRecepcionMateriaPrimaRequestDTO request)
@@ -48,6 +52,8 @@ namespace KaphiyQuipu.Service
             guia.UsuarioRegistro = request.UsuarioRegistro;
             guia.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.GuiaRecepcion);
 
+            TransactionResult result = _contratoCompraContract.AgregarAnalisisFisicoCafe(guia).Result;
+            guia.HashBC = result.TransactionHash;
             string affected = _IGuiaRecepcionRepository.Registrar(guia);
 
             return affected;

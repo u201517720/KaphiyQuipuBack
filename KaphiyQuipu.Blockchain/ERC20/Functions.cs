@@ -27,6 +27,11 @@ namespace KaphiyQuipu.Blockchain.ERC20
             public static string OBTENER_CONTRATO = "obtenerContrato";
             public static string AGREGAR_AGRICULTOR = "agregarAgricultor";
             public static string OBTENER_AGRICULTORES = "obtenerAgricultores";
+
+            public static string AGREGAR_CONTROL_CALIDAD = "agregarControlCalidad";
+            public static string OBTENER_CONTROL_CALIDAD = "obtenerControlCalidad";
+            public static string AGREGAR_ANALISIS_FISICO_CAFE = "agregarAnalisisFisicoCafe";
+            public static string OBTENER_ANALISIS_FISICO_CAFE = "obtenerAnalisisFisicoCafe";
         }
     }
 }
