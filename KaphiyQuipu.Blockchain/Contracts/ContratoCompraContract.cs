@@ -92,7 +92,7 @@ namespace KaphiyQuipu.Blockchain.Contracts
         {
             TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_CONTROL_CALIDAD,
                                            controlCalidad.ContratoSocioFincaId,
-                                           controlCalidad.Humedad,
+                                           controlCalidad.Humedad.ToString("0.00"),
                                            controlCalidad.ListaOlores,
                                            controlCalidad.ListaColores,
                                            controlCalidad.Observaciones,
