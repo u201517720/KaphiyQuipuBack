@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Common", "Core.Common\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Utils", "Core.Utils\Core.Utils.csproj", "{13621C01-BD08-4A40-94C9-B77A4E1048D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Identity", "Service.Identity\Service.Identity.csproj", "{E3A35C14-F85B-4C8E-80C7-BC6300122693}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KaphiyQuipu.Service", "KaphiyQuipu.Service\KaphiyQuipu.Service.csproj", "{2035A60D-E2D0-43C8-AEB5-8834D630E471}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KaphiyQuipu.Models", "KaphiyQuipu.Models\KaphiyQuipu.Models.csproj", "{D8B6DE2F-BDA0-476C-93FB-3AB02B48CC5B}"
@@ -21,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KaphiyQuipu.API", "KaphiyQu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KaphiyQuipu.Repository", "KaphiyQuipu.Repository\KaphiyQuipu.Repository.csproj", "{BC38E787-8563-494F-8CCC-3CEF58B22D8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaphiyQuipu.Blockchain", "KaphiyQuipu.Blockchain\KaphiyQuipu.Blockchain.csproj", "{B97CD235-6BED-420F-BD26-9F35528AA736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KaphiyQuipu.Blockchain", "KaphiyQuipu.Blockchain\KaphiyQuipu.Blockchain.csproj", "{B97CD235-6BED-420F-BD26-9F35528AA736}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{13621C01-BD08-4A40-94C9-B77A4E1048D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13621C01-BD08-4A40-94C9-B77A4E1048D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13621C01-BD08-4A40-94C9-B77A4E1048D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3A35C14-F85B-4C8E-80C7-BC6300122693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3A35C14-F85B-4C8E-80C7-BC6300122693}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3A35C14-F85B-4C8E-80C7-BC6300122693}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3A35C14-F85B-4C8E-80C7-BC6300122693}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2035A60D-E2D0-43C8-AEB5-8834D630E471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2035A60D-E2D0-43C8-AEB5-8834D630E471}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2035A60D-E2D0-43C8-AEB5-8834D630E471}.Release|Any CPU.ActiveCfg = Release|Any CPU
