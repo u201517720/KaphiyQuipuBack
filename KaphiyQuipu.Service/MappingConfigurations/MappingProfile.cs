@@ -16,6 +16,8 @@ namespace KaphiyQuipu.Service.MappingConfigurations
             CreateMap<RegistrarActualizarGuiaRecepcionRequestDTO, GuiaRecepcionMateriaPrima>();
             CreateMap<RegistrarNotaIngresoAcopioRequestDTO, NotaIngresoAlmacenAcopio>();
             CreateMap<RegistrarOrdenProcesoAcopioRequestDTO, OrdenProcesoAcopio>();
+            CreateMap<RegistrarGuiaRemisionAcopioRequestDTO, MarcadoSacoAcopio>();
+            CreateMap<RegistrarGuiaRemisionAcopioRequestDTO, GuiaRemisionAcopio>();
         }
     }
 

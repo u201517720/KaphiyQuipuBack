@@ -1,0 +1,58 @@
+﻿using AutoMapper;
+using Core.Common.Email;
+using Core.Common.Razor;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Repository;
+using KaphiyQuipu.Interface.Service;
+using KaphiyQuipu.Models;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KaphiyQuipu.Service
+{
+    public class GuiaRemisionAcopioService: IGuiaRemisionAcopioService
+    {
+        private readonly IMapper _Mapper;
+        ICorrelativoRepository _ICorrelativoRepository;
+        IViewRender _viewRender;
+        IEmailService _emailService;
+        IGuiaRemisionAcopioRepository _IGuiaRemisionAcopioRepository;
+        IMarcadoSacoAcopioRepository _IMarcadoSacoAcopioRepository;
+
+        public GuiaRemisionAcopioService(IMapper mapper, ICorrelativoRepository correlativoRepository, IViewRender viewRender, IEmailService emailService, IGuiaRemisionAcopioRepository guiaRemisionAcopioRepository, IMarcadoSacoAcopioRepository marcadoSacoAcopioRepository)
+        {
+            _Mapper = mapper;
+            _ICorrelativoRepository = correlativoRepository;
+            _viewRender = viewRender;
+            _emailService = emailService;
+            _IGuiaRemisionAcopioRepository = guiaRemisionAcopioRepository;
+            _IMarcadoSacoAcopioRepository = marcadoSacoAcopioRepository;
+        }
+
+        public async Task<string> Registrar(RegistrarGuiaRemisionAcopioRequestDTO request)
+        {
+            GuiaRemisionAcopio guiaRemision = _Mapper.Map<GuiaRemisionAcopio>(request);
+            guiaRemision.FechaRegistro = DateTime.Now;
+            guiaRemision.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.GuiaRemisionAcopio);
+
+            string affected = _IGuiaRemisionAcopioRepository.Registrar(guiaRemision);
+
+            MarcadoSacoAcopio marcado = _Mapper.Map<MarcadoSacoAcopio>(request);
+            marcado.FechaRegistro = DateTime.Now;
+            marcado.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.MarcadoSacosAcopio);
+            _IMarcadoSacoAcopioRepository.Registrar(marcado);
+
+            ParametroEmail oParametroEmail = new ParametroEmail();
+            oParametroEmail.Para = "jjordandt@gmail.com";
+            oParametroEmail.Asunto = "Envio de materia prima";
+            oParametroEmail.IsHtml = true;
+            oParametroEmail.Mensaje = await _viewRender.RenderAsync(@"Mailing\mail-envioMateriaPrima-Planta", guiaRemision);
+
+            await _emailService.SendEmailAsync(oParametroEmail);
+
+            return affected;
+        }
+    }
+}
