@@ -10,5 +10,6 @@ namespace KaphiyQuipu.Interface.Repository
     {
         string Registrar(OrdenProcesoAcopio ordenProceso);
         IEnumerable<ConsultarOrdenProcesoAcopioDTO> Consultar(DateTime fechaInicio, DateTime fechaFin);
+        IEnumerable<ConsultarPorIdOrdenProcesoDTO> ConsultarPorId(int ordenProcesoId);
     }
 }

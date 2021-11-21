@@ -31,6 +31,17 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public IEnumerable<ConsultarPorIdOrdenProcesoDTO> ConsultarPorId(int ordenProcesoId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pOrdenProcesoId", ordenProcesoId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarPorIdOrdenProcesoDTO>("uspConsultarOrdenProcesoAcopioPorId", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public string Registrar(OrdenProcesoAcopio ordenProceso)
         {
             string result = string.Empty;

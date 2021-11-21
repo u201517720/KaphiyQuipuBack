@@ -52,5 +52,16 @@ namespace KaphiyQuipu.Service
             var list = _IOrdenProcesoAcopioRepository.Consultar(request.FechaInicio, request.FechaFin);
             return list.ToList();
         }
+
+        public ConsultarPorIdOrdenProcesoDTO ConsultarPorId(ConsultarPorIdOrdenProcesoRequestDTO request)
+        {
+            ConsultarPorIdOrdenProcesoDTO response = new ConsultarPorIdOrdenProcesoDTO();
+            var guiaRecepcion = _IOrdenProcesoAcopioRepository.ConsultarPorId(request.OrdenProcesoId);
+            if (guiaRecepcion.Any())
+            {
+                response = guiaRecepcion.ToList().FirstOrDefault();
+            }
+            return response;
+        }
     }
 }
