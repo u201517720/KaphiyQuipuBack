@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace KaphiyQuipu.Repository
 {
@@ -95,6 +94,30 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 db.Execute("uspUbicarMateriaPrimaEnAlmacen", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<StickerAcopioDTO> ObtenerStickers(int notaIngresoId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pNotaIngresoId", notaIngresoId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<StickerAcopioDTO>("uspObtenerDatosTicketAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void ConfirmarEtiquetado(int notaIngresoId, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pNotaIngresoId", notaIngresoId);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspActualizarEstadoEtiquetadoNotaIngresoAcopio", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

@@ -14,5 +14,7 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultaPorIdNotaIngresoAcopioAgricultoresDTO> ObtenerAgricultores(int notaIngresoId);
         IEnumerable<ConsultaPorIdNotaIngresoAcopioControlCalidadDTO> ObtenerControlesCalidad(int notaIngresoId);
         void UbicarMateriaPrimaAlmacen(UbicarMateriaPrimaAlmacenRequestDTO request);
+        IEnumerable<StickerAcopioDTO> ObtenerStickers(int notaIngresoId);
+        void ConfirmarEtiquetado(int notaIngresoId, string usuario, DateTime fecha);
     }
 }

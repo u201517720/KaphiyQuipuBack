@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Core.Common.Domain.Model;
+using Core.Common.Email;
+using Core.Common.Razor;
 using KaphiyQuipu.Blockchain.Contracts;
 using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
@@ -10,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace KaphiyQuipu.Service
 {
@@ -19,13 +22,18 @@ namespace KaphiyQuipu.Service
         private ICorrelativoRepository _ICorrelativoRepository;
         private INotaIngresoAcopioRepository _INotaIngresoAcopioRepository;
         private IContratoCompraContract _contratoCompraContract;
+        private IViewRender _viewRender;
+        private IEmailService _emailService;
 
-        public NotaIngresoAcopioService(IMapper mapper, ICorrelativoRepository correlativoRepository, INotaIngresoAcopioRepository notaIngresoAcopioRepository, IContratoCompraContract contratoCompraContract)
+        public NotaIngresoAcopioService(IMapper mapper, ICorrelativoRepository correlativoRepository, INotaIngresoAcopioRepository notaIngresoAcopioRepository, IContratoCompraContract contratoCompraContract,
+            IViewRender viewRender, IEmailService emailService)
         {
             _Mapper = mapper;
             _ICorrelativoRepository = correlativoRepository;
             _INotaIngresoAcopioRepository = notaIngresoAcopioRepository;
             _contratoCompraContract = contratoCompraContract;
+            _viewRender = viewRender;
+            _emailService = emailService;
         }
 
         public List<ConsultaNotaIngresoAcopioDTO> Consultar(ConsultaNotaIngresoAcopioRequestDTO request)
@@ -82,6 +90,27 @@ namespace KaphiyQuipu.Service
             TransactionResult result =  _contratoCompraContract.AgregarNotaIngresoAlmacenAcopio(request).Result;
             request.HashBC = result.TransactionHash;
             _INotaIngresoAcopioRepository.UbicarMateriaPrimaAlmacen(request);
+        }
+
+        public List<StickerAcopioDTO> ObtenerStickers(int notaIngresoId)
+        {
+            var stickers = _INotaIngresoAcopioRepository.ObtenerStickers(notaIngresoId);
+            List<StickerAcopioDTO> response = stickers.ToList();
+            return response;
+        }
+
+        public async Task<bool> ConfirmarEtiquetado(ConfirmarEtiquetadoRequestDTO request)
+        {
+            request.Fecha = DateTime.Now;
+            _INotaIngresoAcopioRepository.ConfirmarEtiquetado(request.NotaIngresoId, request.Usuario, request.Fecha);
+
+            ParametroEmail oParametroEmail = new ParametroEmail();
+            oParametroEmail.Para = "jjordandt@gmail.com";
+            oParametroEmail.Asunto = "Finalización de etiquetado de sacos";
+            oParametroEmail.IsHtml = true;
+            oParametroEmail.Mensaje = await _viewRender.RenderAsync(@"Mailing\mail-confirmar-etiquetado", request);
+
+            return await _emailService.SendEmailAsync(oParametroEmail);
         }
     }
 }
