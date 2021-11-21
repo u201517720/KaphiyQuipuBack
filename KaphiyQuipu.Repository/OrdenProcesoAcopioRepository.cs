@@ -19,6 +19,20 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
+        public void ActualizarTipoProceso(int ordenProcesoId, string tipoProceso, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pOrdenProcesoId", ordenProcesoId);
+            parameters.Add("@pTipoProceso", tipoProceso);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspActualizarOrdenProcesoAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public IEnumerable<ConsultarOrdenProcesoAcopioDTO> Consultar(DateTime fechaInicio, DateTime fechaFin)
         {
             var parameters = new DynamicParameters();

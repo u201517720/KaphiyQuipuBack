@@ -10,5 +10,6 @@ namespace KaphiyQuipu.Interface.Service
         string Registrar(RegistrarOrdenProcesoAcopioRequestDTO request);
         List<ConsultarOrdenProcesoAcopioDTO> Consultar(ConsultaOrdenProcesoAcopioRequestDTO request);
         ConsultarPorIdOrdenProcesoDTO ConsultarPorId(ConsultarPorIdOrdenProcesoRequestDTO request);
+        void ActualizarTipoProceso(ActualizarTipoProcesoOrdenProcesoRequestDTO request);
     }
 }
