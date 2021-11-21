@@ -47,62 +47,6 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-
-        public int Insertar(EmpresaTransporte empresaTransporte)
-        {
-            int result = 0;
-
-            var parameters = new DynamicParameters();           
-            parameters.Add("@RazonSocial", empresaTransporte.RazonSocial);
-            parameters.Add("@Ruc", empresaTransporte.Ruc);
-            parameters.Add("@Direccion", empresaTransporte.Direccion);
-            parameters.Add("@DepartamentoId", empresaTransporte.DepartamentoId);
-            parameters.Add("@ProvinciaId", empresaTransporte.ProvinciaId);
-            parameters.Add("@DistritoId", empresaTransporte.DistritoId);
-            parameters.Add("@EstadoId", empresaTransporte.EstadoId);
-            parameters.Add("@EmpresaId", empresaTransporte.EmpresaId);       
-            parameters.Add("@FechaRegistro", empresaTransporte.FechaRegistro);
-            parameters.Add("@UsuarioRegistro", empresaTransporte.UsuarioRegistro);
-            parameters.Add("@Activo", true);
-
-
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                result = db.Execute("uspEmpresaTransporteInsertar", parameters, commandType: CommandType.StoredProcedure);
-            }
-
-
-            return result;
-        }
-
-        public int Actualizar(EmpresaTransporte empresaTransporte)
-        {
-            int result = 0;
-
-         
-            var parameters = new DynamicParameters();
-            parameters.Add("@EmpresaTransporteId", empresaTransporte.EmpresaTransporteId);
-            parameters.Add("@RazonSocial", empresaTransporte.RazonSocial);
-            parameters.Add("@Ruc", empresaTransporte.Ruc);
-            parameters.Add("@Direccion", empresaTransporte.Direccion);
-            parameters.Add("@DepartamentoId", empresaTransporte.DepartamentoId);
-            parameters.Add("@ProvinciaId", empresaTransporte.ProvinciaId);
-            parameters.Add("@DistritoId", empresaTransporte.DistritoId);
-            parameters.Add("@EstadoId", empresaTransporte.EstadoId);
-            parameters.Add("@EmpresaId", empresaTransporte.EmpresaId);      
-            parameters.Add("@FechaUltimaActualizacion", empresaTransporte.FechaUltimaActualizacion);
-            parameters.Add("@UsuarioUltimaActualizacion", empresaTransporte.UsuarioUltimaActualizacion);
-
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                result = db.Execute("uspEmpresaTransporteActualizar", parameters, commandType: CommandType.StoredProcedure);
-            }
-            return result;
-        }
-
         public ConsultaEmpresaTransportePorIdBE ConsultarEmpresaTransportePorId(int empresaTransporteId)
         {
             ConsultaEmpresaTransportePorIdBE itemBE = null;

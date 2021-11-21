@@ -9,14 +9,9 @@ namespace KaphiyQuipu.Interface.Repository
 {
     public interface IEmpresaTransporteRepository
     {
-       
-
         IEnumerable<EmpresaTransporteBE> ConsultarEmpresaTransporte(ConsultaEmpresaTransporteRequestDTO request);
         IEnumerable<ConsultaTransportistaBE> ConsultarTransportista(ConsultaTransportistaRequestDTO request);
         IEnumerable<ConsultaProductoPrecioDiaBE> ConsultarEmpresaTransporte(ConsultaEmpresaTransporteDTO request);
         ConsultaEmpresaTransportePorIdBE ConsultarEmpresaTransportePorId(int empresaTransporteId);
-        int Actualizar(EmpresaTransporte empresaTransporte);
-        int Insertar(EmpresaTransporte empresaTransporte);
-
     }
 }
