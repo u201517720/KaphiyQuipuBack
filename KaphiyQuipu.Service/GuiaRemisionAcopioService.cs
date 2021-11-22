@@ -34,7 +34,7 @@ namespace KaphiyQuipu.Service
 
         public ConsultarPorCorrelativoGuiaRemisionDTO ConsultarPorCorrelativo(ConsultarPorCorrelativoGuiaRemisionRequestDTO request)
         {
-            ConsultarPorCorrelativoGuiaRemisionDTO response = new ConsultarPorCorrelativoGuiaRemisionDTO();
+            ConsultarPorCorrelativoGuiaRemisionDTO response = null;
             var guiaRecepcion = _IGuiaRemisionAcopioRepository.ConsultarPorCorrelativo(request.Correlativo);
             if (guiaRecepcion.Any())
             {

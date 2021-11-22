@@ -10,6 +10,7 @@
         public static string OrdenProcesoAcopio { get { return "OrdenProcesoAcopio"; } }
         public static string GuiaRemisionAcopio { get { return "GuiaRemisionAcopio"; } }
         public static string MarcadoSacosAcopio { get { return "MarcadoSacosAcopio"; } }
+        public static string NotaIngresoPlanta { get { return "NotaIngresoPlanta"; } }
     }
 
 }
