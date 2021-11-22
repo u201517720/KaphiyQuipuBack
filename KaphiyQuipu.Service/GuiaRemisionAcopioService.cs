@@ -7,6 +7,7 @@ using KaphiyQuipu.Interface.Service;
 using KaphiyQuipu.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,18 @@ namespace KaphiyQuipu.Service
             _emailService = emailService;
             _IGuiaRemisionAcopioRepository = guiaRemisionAcopioRepository;
             _IMarcadoSacoAcopioRepository = marcadoSacoAcopioRepository;
+        }
+
+        public ConsultarPorCorrelativoGuiaRemisionDTO ConsultarPorCorrelativo(ConsultarPorCorrelativoGuiaRemisionRequestDTO request)
+        {
+            ConsultarPorCorrelativoGuiaRemisionDTO response = new ConsultarPorCorrelativoGuiaRemisionDTO();
+            var guiaRecepcion = _IGuiaRemisionAcopioRepository.ConsultarPorCorrelativo(request.Correlativo);
+            if (guiaRecepcion.Any())
+            {
+                response = guiaRecepcion.ToList().FirstOrDefault();
+            }
+           
+            return response;
         }
 
         public async Task<string> Registrar(RegistrarGuiaRemisionAcopioRequestDTO request)

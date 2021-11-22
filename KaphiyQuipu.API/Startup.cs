@@ -137,6 +137,8 @@ namespace KaphiyQuipu.API
             services.AddTransient<IMarcadoSacoAcopioRepository, MarcadoSacoAcopioRepository>();
             services.AddTransient<IGuiaRemisionAcopioService, GuiaRemisionAcopioService>();
             services.AddTransient<IGuiaRemisionAcopioRepository, GuiaRemisionAcopioRepository>();
+            services.AddTransient<INotaIngresoPlantaService, NotaIngresoPlantaService>();
+            services.AddTransient<INotaIngresoPlantaRepository, NotaIngresoPlantaRepository>();
 
             services.AddTransient<IMessageSender, MessageSender>();
             services.AddTransient<IEmailService, EmailService>();

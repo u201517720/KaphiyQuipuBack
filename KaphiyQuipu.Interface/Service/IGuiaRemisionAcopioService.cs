@@ -9,5 +9,6 @@ namespace KaphiyQuipu.Interface.Service
     public interface IGuiaRemisionAcopioService
     {
         Task<string> Registrar(RegistrarGuiaRemisionAcopioRequestDTO request);
+        ConsultarPorCorrelativoGuiaRemisionDTO ConsultarPorCorrelativo(ConsultarPorCorrelativoGuiaRemisionRequestDTO request);
     }
 }
