@@ -22,5 +22,18 @@ namespace KaphiyQuipu.DTO
         public decimal KilosNetos { get; set; }
         public string Observaciones { get; set; }
         public string FechaRegistro { get; set; }
+        public string EstadoId { get; set; }
+        public string Responsable { get; set; }
+        public string Olores { get; set; }
+        public string Colores { get; set; }
+        public decimal ExportableGramos { get; set; }
+        public decimal ExportablePorcentaje { get; set; }
+        public decimal DescarteGramos { get; set; }
+        public decimal DescartePorcentaje { get; set; }
+        public decimal CascarillaGramos { get; set; }
+        public decimal CascarillaPorcentaje { get; set; }
+        public decimal TotalGramos { get; set; }
+        public decimal TotalPorcentaje { get; set; }
+        public decimal HumedadPorcentaje { get; set; }
     }
 }
