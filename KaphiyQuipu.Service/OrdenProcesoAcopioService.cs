@@ -69,5 +69,10 @@ namespace KaphiyQuipu.Service
             request.Fecha = DateTime.Now;
             _IOrdenProcesoAcopioRepository.ActualizarTipoProceso(request.OrdenProcesoId, request.TipoProceso, request.Usuario, request.Fecha);
         }
+
+        public void IniciarTransformacion(IniciarTransformacionOrdenProcesoRequestDTO request)
+        {
+            _IOrdenProcesoAcopioRepository.IniciarTransformacion(request.Id, request.Usuario, DateTime.Now);
+        }
     }
 }

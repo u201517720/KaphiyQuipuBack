@@ -56,6 +56,19 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public void IniciarTransformacion(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspIniciarTransformacionOrdenProcesoAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public string Registrar(OrdenProcesoAcopio ordenProceso)
         {
             string result = string.Empty;

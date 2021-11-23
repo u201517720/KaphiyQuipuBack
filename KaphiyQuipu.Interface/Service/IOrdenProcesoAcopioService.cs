@@ -11,5 +11,6 @@ namespace KaphiyQuipu.Interface.Service
         List<ConsultarOrdenProcesoAcopioDTO> Consultar(ConsultaOrdenProcesoAcopioRequestDTO request);
         ConsultarPorIdOrdenProcesoDTO ConsultarPorId(ConsultarPorIdOrdenProcesoRequestDTO request);
         void ActualizarTipoProceso(ActualizarTipoProcesoOrdenProcesoRequestDTO request);
+        void IniciarTransformacion(IniciarTransformacionOrdenProcesoRequestDTO request);
     }
 }
