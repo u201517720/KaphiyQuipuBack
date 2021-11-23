@@ -20,6 +20,32 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
+        public void AutorizarTransformacion(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspAutorizarTransformacionNotaIngresoPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void ConfirmarRecepcionMateriaPrima(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+            
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspConfirmarRecepcionMateriaPrimaNotaIngresoPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public IEnumerable<ConsultaNotaIngresoPlantaDTO> Consultar(DateTime fechaInicio, DateTime fechaFin)
         {
             var parameters = new DynamicParameters();
@@ -43,6 +69,19 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public void FinalizarEtiquetado(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspFinalizarEtiquetadoNotaIngresoPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public string Registrar(NotaIngresoPlanta nota)
         {
             string result = string.Empty;
@@ -60,6 +99,31 @@ namespace KaphiyQuipu.Repository
             }
 
             return result;
+        }
+
+        public void RegistrarControlCalidad(NotaIngresoPlanta notaIngreso)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", notaIngreso.Id);
+            parameters.Add("@pOlores", notaIngreso.Olores);
+            parameters.Add("@pColores", notaIngreso.Colores);
+            parameters.Add("@pExportableGramos", notaIngreso.ExportableGramos);
+            parameters.Add("@pExportablePorcentaje", notaIngreso.ExportablePorcentaje);
+            parameters.Add("@pDescarteGramos", notaIngreso.DescarteGramos);
+            parameters.Add("@pDescartePorcentaje", notaIngreso.DescartePorcentaje);
+            parameters.Add("@pCascarillaGramos", notaIngreso.CascarillaGramos);
+            parameters.Add("@pCascarillaPorcentaje", notaIngreso.CascarillaPorcentaje);
+            parameters.Add("@pTotalGramos", notaIngreso.TotalGramos);
+            parameters.Add("@pTotalPorcentaje", notaIngreso.TotalPorcentaje);
+            parameters.Add("@pHumedadPorcentaje", notaIngreso.HumedadPorcentaje);
+            parameters.Add("@pHashBC", notaIngreso.HashBC);
+            parameters.Add("@pUsuario", notaIngreso.UsuarioActualizacion);
+            parameters.Add("@pFecha", notaIngreso.FechaActualizacion);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspRegistrarControlCalidadNotaIngresoPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
     }
 }

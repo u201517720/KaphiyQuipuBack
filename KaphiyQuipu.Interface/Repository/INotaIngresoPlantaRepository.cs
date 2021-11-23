@@ -11,5 +11,9 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultaNotaIngresoPlantaDTO> Consultar(DateTime fechaInicio, DateTime fechaFin);
         string Registrar(NotaIngresoPlanta nota);
         IEnumerable<ConsultarPorIdNotaIngresoPlantaDTO> ConsultarPorId(int id);
+        void RegistrarControlCalidad(NotaIngresoPlanta notaIngreso);
+        void ConfirmarRecepcionMateriaPrima(int id, string usuario, DateTime fecha);
+        void AutorizarTransformacion(int id, string usuario, DateTime fecha);
+        void FinalizarEtiquetado(int id, string usuario, DateTime fecha);
     }
 }

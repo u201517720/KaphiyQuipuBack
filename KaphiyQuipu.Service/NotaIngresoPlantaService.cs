@@ -23,6 +23,16 @@ namespace KaphiyQuipu.Service
             _ICorrelativoRepository = correlativoRepository;
         }
 
+        public void AutorizarTransformacion(AutorizarTransformacionNotaIngresoPlantaRequestDTO request)
+        {
+            _INotaIngresoPlantaRepository.AutorizarTransformacion(request.Id, request.Usuario, DateTime.Now);
+        }
+
+        public void ConfirmarRecepcionMateriaPrima(ConfirmarRecepcionMateriaPrimaNotaIngresoPlantaRequestDTO request)
+        {
+            _INotaIngresoPlantaRepository.ConfirmarRecepcionMateriaPrima(request.Id, request.Usuario, DateTime.Now);
+        }
+
         public List<ConsultaNotaIngresoPlantaDTO> Consultar(ConsultarNotaIngresoPlantaRequestDTO request)
         {
             if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue)
@@ -53,6 +63,11 @@ namespace KaphiyQuipu.Service
             return response;
         }
 
+        public void FinalizarEtiquetado(FinalizarEtiquetadoNotaIngresoPlantaRequestDTO request)
+        {
+            _INotaIngresoPlantaRepository.FinalizarEtiquetado(request.Id, request.Usuario, DateTime.Now);
+        }
+
         public string Registrar(RegistrarNotaIngresoPlantaRequestDTO request)
         {
             NotaIngresoPlanta notaIngreso = _Mapper.Map<NotaIngresoPlanta>(request);
@@ -62,6 +77,13 @@ namespace KaphiyQuipu.Service
             string affected = _INotaIngresoPlantaRepository.Registrar(notaIngreso);
 
             return affected;
+        }
+
+        public void RegistrarControlCalidad(RegistrarControlCalidadNotaIngresoPlantaRequestDTO request)
+        {
+            NotaIngresoPlanta ingresoPlanta = _Mapper.Map<NotaIngresoPlanta>(request);
+            ingresoPlanta.FechaActualizacion = DateTime.Now;
+            _INotaIngresoPlantaRepository.RegistrarControlCalidad(ingresoPlanta);
         }
     }
 }
