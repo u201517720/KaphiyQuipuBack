@@ -11,7 +11,7 @@ namespace Core.Common.Email
 {
     public interface IEmailService
     {
-        Task<bool> SendEmailAsync(ParametroEmail oParametroEmail);
+        Task<bool> SendEmailAsync(ParametroEmail oParametroEmail, string smtp_alias = "");
     }
 
     public class EmailService : IEmailService
@@ -38,9 +38,9 @@ namespace Core.Common.Email
             this.useDefaulCredentials = bool.Parse(configuration["Email:SMTP_DefaultCredential"]);
         }
 
-        public async Task<bool> SendEmailAsync(ParametroEmail oParametroEmail)
+        public async Task<bool> SendEmailAsync(ParametroEmail oParametroEmail, string smtp_alias = "")
         {
-            ConfigurarEmail(oParametroEmail);
+            ConfigurarEmail(oParametroEmail, smtp_alias);
             ConfiguracionClienteSmtp();
 
             return await Task.Run(() => SendEmailAsync());
@@ -74,11 +74,11 @@ namespace Core.Common.Email
 
         #region Private Methods
 
-        public void ConfigurarEmail(ParametroEmail oParametroEmail)
+        public void ConfigurarEmail(ParametroEmail oParametroEmail, string smtp_alias = "")
         {
             oMailMessage = new MailMessage();
             oParametroEmail.Para.Split('|').ToList().ForEach(x => oMailMessage.To.Add(x));
-            oMailMessage.From = new MailAddress(fromEmailAddress, fromEmailAlias);
+            oMailMessage.From = new MailAddress(fromEmailAddress, string.IsNullOrEmpty(smtp_alias) ? fromEmailAlias : smtp_alias);
             oMailMessage.Subject = oParametroEmail.Asunto;
             oMailMessage.Body = oParametroEmail.Mensaje;
             oMailMessage.IsBodyHtml = oParametroEmail.IsHtml;

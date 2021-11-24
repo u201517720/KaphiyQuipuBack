@@ -15,5 +15,7 @@ namespace KaphiyQuipu.Interface.Repository
         void ConfirmarRecepcionMateriaPrima(int id, string usuario, DateTime fecha);
         void AutorizarTransformacion(int id, string usuario, DateTime fecha);
         void FinalizarEtiquetado(int id, string usuario, DateTime fecha);
+        void RegistrarResultadosTransformacion(NotaIngresoPlantaResultadoTransformacion transformacion);
+        void FinalizarTransformacion(int id, string usuario, DateTime fecha);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using KaphiyQuipu.DTO;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace KaphiyQuipu.Interface.Service
 {
@@ -14,5 +13,7 @@ namespace KaphiyQuipu.Interface.Service
         void ConfirmarRecepcionMateriaPrima(ConfirmarRecepcionMateriaPrimaNotaIngresoPlantaRequestDTO request);
         void AutorizarTransformacion(AutorizarTransformacionNotaIngresoPlantaRequestDTO request);
         void FinalizarEtiquetado(FinalizarEtiquetadoNotaIngresoPlantaRequestDTO request);
+        void RegistrarResultadosTransformacion(RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request);
+        Task<bool> FinalizarTransformacion(FinalizarTransformacionNotaIngresoPlantaRequestDTO request);
     }
 }

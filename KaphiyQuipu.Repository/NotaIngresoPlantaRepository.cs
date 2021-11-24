@@ -82,6 +82,19 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public void FinalizarTransformacion(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspNotaIngresoPlantaFinalizarTransformacion", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public string Registrar(NotaIngresoPlanta nota)
         {
             string result = string.Empty;
@@ -123,6 +136,38 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 db.Execute("uspRegistrarControlCalidadNotaIngresoPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void RegistrarResultadosTransformacion(NotaIngresoPlantaResultadoTransformacion transformacion)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pNotaIngresoPlantaId", transformacion.NotaIngresoPlantaId);
+            parameters.Add("@pCafeExportacionSacos", transformacion.CafeExportacionSacos);
+            parameters.Add("@pCafeExportacionKilos", transformacion.CafeExportacionKilos);
+            parameters.Add("@pCafeExportacionMCSacos", transformacion.CafeExportacionMCSacos);
+            parameters.Add("@pCafeExportacionMCKilos", transformacion.CafeExportacionMCKilos);
+            parameters.Add("@pCafeSegundaSacos", transformacion.CafeSegundaSacos);
+            parameters.Add("@pCafeSegundaKilos", transformacion.CafeSegundaKilos);
+            parameters.Add("@pCafeDescarteMaquinaSacos", transformacion.CafeDescarteMaquinaSacos);
+            parameters.Add("@pCafeDescarteMaquinaKilos", transformacion.CafeDescarteMaquinaKilos);
+            parameters.Add("@pCafeDescarteEscojoSacos", transformacion.CafeDescarteEscojoSacos);
+            parameters.Add("@pCafeDescarteEscojoKilos", transformacion.CafeDescarteEscojoKilos);
+            parameters.Add("@pCafeBolaSacos", transformacion.CafeBolaSacos);
+            parameters.Add("@pCafeBolaKilos", transformacion.CafeBolaKilos);
+            parameters.Add("@pCafeCiscoSacos", transformacion.CafeCiscoSacos);
+            parameters.Add("@pCafeCiscoKilos", transformacion.CafeCiscoKilos);
+            parameters.Add("@pTotalCafeSacos", transformacion.TotalCafeSacos);
+            parameters.Add("@pTotalCafeKgNetos", transformacion.TotalCafeKgNetos);
+            parameters.Add("@pPiedraOtrosKgNetos", transformacion.PiedraOtrosKgNetos);
+            parameters.Add("@pCascaraOtrosKgNetos", transformacion.CascaraOtrosKgNetos);
+            parameters.Add("@pHashBC", transformacion.HashBC);
+            parameters.Add("@pUsuarioRegistro", transformacion.UsuarioRegistro);
+            parameters.Add("@pFechaRegistro", transformacion.FechaRegistro);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspRegistrarResultadosTransformacionNotaIngresoAlmacen", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }
