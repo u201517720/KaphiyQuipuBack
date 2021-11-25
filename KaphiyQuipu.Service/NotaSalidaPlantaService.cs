@@ -24,11 +24,11 @@ namespace KaphiyQuipu.Service
 
         public string Registrar(GenerarNotaSalidaPlantaRequestDTO request)
         {
-            NotaSalidaPlanta notaIngreso = _Mapper.Map<NotaSalidaPlanta>(request);
-            notaIngreso.FechaRegistro = DateTime.Now;
-            notaIngreso.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.NotaSalidaPlanta);
+            NotaSalidaPlanta notaSalida = _Mapper.Map<NotaSalidaPlanta>(request);
+            notaSalida.FechaRegistro = DateTime.Now;
+            notaSalida.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.NotaSalidaPlanta);
 
-            string affected = _INotaSalidaPlantaRepository.Registrar(notaIngreso);
+            string affected = _INotaSalidaPlantaRepository.Registrar(notaSalida);
 
             return affected;
         }

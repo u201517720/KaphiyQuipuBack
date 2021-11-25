@@ -141,6 +141,8 @@ namespace KaphiyQuipu.API
             services.AddTransient<INotaIngresoPlantaRepository, NotaIngresoPlantaRepository>();
             services.AddTransient<INotaSalidaPlantaService, NotaSalidaPlantaService>();
             services.AddTransient<INotaSalidaPlantaRepository, NotaSalidaPlantaRepository>();
+            services.AddTransient<IGuiaRemisionPlantaService, GuiaRemisionPlantaService>();
+            services.AddTransient<IGuiaRemisionPlantaRepository, GuiaRemisionPlantaRepository>();
 
             services.AddTransient<IMessageSender, MessageSender>();
             services.AddTransient<IEmailService, EmailService>();
