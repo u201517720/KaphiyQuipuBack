@@ -4,8 +4,6 @@ using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace KaphiyQuipu.API.Controller
@@ -25,7 +23,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("Registrar")]
         [HttpPost]
-        public IActionResult Registrar(GenerarGuiaRemisionPlantaRequestDTO request)
+        public async Task<IActionResult> Registrar([FromBody] GenerarGuiaRemisionPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -33,7 +31,35 @@ namespace KaphiyQuipu.API.Controller
             GeneralResponse response = new GeneralResponse();
             try
             {
-                response.Result.Data = _IGuiaRemisionPlantaService.Registrar(request);
+                response.Result.Data = await _IGuiaRemisionPlantaService.Registrar(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("ConsultarCorrelativo")]
+        [HttpPost]
+        public IActionResult ConsultarCorrelativo([FromBody] ConsultarCorrelativoGuiaRemisionPlantaRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            GeneralResponse response = new GeneralResponse();
+            try
+            {
+                response.Result.Data = _IGuiaRemisionPlantaService.ConsultarCorrelativo(request);
                 response.Result.Success = true;
             }
             catch (ResultException ex)

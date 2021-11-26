@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Models;
 using Microsoft.Extensions.Options;
@@ -17,6 +18,17 @@ namespace KaphiyQuipu.Repository
         public GuiaRemisionPlantaRepository(IOptions<ConnectionString> connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        public IEnumerable<ConsultarCorrelativoGuiaRemisionPlantaDTO> ConsultarCorrelativo(string correlativo)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pCorrelativo", correlativo);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarCorrelativoGuiaRemisionPlantaDTO>("uspConsultarGuiaRemisionPlantaPorCorrelativo", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
 
         public string Registrar(GuiaRemisionPlanta guia)

@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace KaphiyQuipu.Interface.Service
 {
     public interface IGuiaRemisionPlantaService
     {
-        string Registrar(GenerarGuiaRemisionPlantaRequestDTO request);
+        Task<string> Registrar(GenerarGuiaRemisionPlantaRequestDTO request);
+        ConsultarCorrelativoGuiaRemisionPlantaDTO ConsultarCorrelativo(ConsultarCorrelativoGuiaRemisionPlantaRequestDTO request);
     }
 }

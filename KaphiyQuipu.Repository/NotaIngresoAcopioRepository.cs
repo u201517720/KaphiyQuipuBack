@@ -120,5 +120,62 @@ namespace KaphiyQuipu.Repository
                 db.Execute("uspActualizarEstadoEtiquetadoNotaIngresoAcopio", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<ConsultarDevolucionNotaIngresoAcopioDTO> ConsultarDevolucion(DateTime fechaInicio, DateTime fechaFin)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pFechaInicio", fechaInicio);
+            parameters.Add("@pFechaFin", fechaFin);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarDevolucionNotaIngresoAcopioDTO>("uspConsultarNotaIngresosAcopioDevolucion", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public string RegistrarDevolucion(NotaIngresoDevolucion notaIngreso)
+        {
+            string result = string.Empty;
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@pCorrelativo", notaIngreso.Correlativo);
+            parameters.Add("@pGuiaRemisionPlantaId", notaIngreso.GuiaRemisionPlantaId);
+            parameters.Add("@pAlmacenId", notaIngreso.AlmacenId);
+            parameters.Add("@pObservaciones", notaIngreso.Observaciones);
+            parameters.Add("@pHashBC", notaIngreso.HashBC);
+            parameters.Add("@pUsuarioRegistro", notaIngreso.UsuarioRegistro);
+            parameters.Add("@pFechaRegistro", notaIngreso.FechaRegistro);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                result = db.ExecuteScalar<string>("uspGenerarNotaIngresoDevolucion", parameters, commandType: CommandType.StoredProcedure);
+            }
+
+            return result;
+        }
+
+        public IEnumerable<ConsultarDevolucionPorIdNotaIngresoDTO> ConsultarDevolucionPorId(int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarDevolucionPorIdNotaIngresoDTO>("uspConsultarNotaIngresoDevolucionPorId", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void ConfirmarAtencionCompleta(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspConfirmarAtencionCompletaNotaIngresoDevolucion", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

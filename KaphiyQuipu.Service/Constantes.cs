@@ -13,7 +13,8 @@
         public static string NotaIngresoPlanta { get { return "NotaIngresoPlanta"; } }
         public static string NotaSalidaPlanta { get { return "NotaSalidaPlanta"; } }
         public static string GuiaRemisionPlanta { get { return "GuiaRemisionPlanta"; } }
-
+        public static string NotaIngresoDevolucion { get { return "NotaIngresoDevolucion"; } }
+        public static string GuiaRemisionDevolucion { get { return "GuiaRemisionDevolucion"; } }
     }
 
 }

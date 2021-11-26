@@ -112,5 +112,51 @@ namespace KaphiyQuipu.Service
 
             return await _emailService.SendEmailAsync(oParametroEmail);
         }
+
+        public List<ConsultarDevolucionNotaIngresoAcopioDTO> ConsultarDevolucion(ConsultarDevolucionNotaIngresoAcopioRequestDTO request)
+        {
+            if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue)
+            {
+                throw new ResultException(new Result { ErrCode = "01", Message = "La fecha inicio y fin son obligatorias. Por favor, ingresarlas." });
+            }
+
+            var timeSpan = request.FechaFin - request.FechaInicio;
+
+            if (timeSpan.Days > 365)
+            {
+                throw new ResultException(new Result { ErrCode = "02", Message = "El rango entre las fechas no puede ser mayor a 1 año." });
+            }
+            request.FechaFin = request.FechaFin.AddHours(23).AddMinutes(59).AddSeconds(59);
+            var list = _INotaIngresoAcopioRepository.ConsultarDevolucion(request.FechaInicio, request.FechaFin);
+            return list.ToList();
+        }
+
+        public string RegistrarDevolucion(RegistrarDevolucionNotaIngresoRequestDTO request)
+        {
+            NotaIngresoDevolucion notaIngreso = _Mapper.Map<NotaIngresoDevolucion>(request);
+            notaIngreso.FechaRegistro = DateTime.Now;
+            notaIngreso.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.NotaIngresoDevolucion);
+
+            string affected = _INotaIngresoAcopioRepository.RegistrarDevolucion(notaIngreso);
+
+            return affected;
+        }
+
+        public ConsultarDevolucionPorIdNotaIngresoDTO ConsultarDevolucionPorId(ConsultarDevolucionPorIdNotaIngresoRequestDTO request)
+        {
+            ConsultarDevolucionPorIdNotaIngresoDTO response = new ConsultarDevolucionPorIdNotaIngresoDTO();
+            var notaIngreso = _INotaIngresoAcopioRepository.ConsultarDevolucionPorId(request.Id);
+            if (notaIngreso.Any())
+            {
+                response = notaIngreso.ToList().FirstOrDefault();
+            }
+
+            return response;
+        }
+
+        public void ConfirmarAtencionCompleta(ConfirmarAtencionCompletaNotaIngresoDevoRequestDTO request)
+        {
+            _INotaIngresoAcopioRepository.ConfirmarAtencionCompleta(request.Id, request.Usuario, DateTime.Now);
+        }
     }
 }

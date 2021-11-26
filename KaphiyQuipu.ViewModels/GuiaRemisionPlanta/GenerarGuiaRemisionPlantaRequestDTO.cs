@@ -8,5 +8,7 @@ namespace KaphiyQuipu.DTO
     {
         public int NotaSalidaPlantaId { get; set; }
         public string UsuarioRegistro { get; set; }
+        public string Empresa { get; set; }
+        public string Correlativo { get; set; }
     }
 }

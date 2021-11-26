@@ -28,7 +28,7 @@ namespace Integracion.Deuda.Controller
 
         [Route("Registrar")]
         [HttpPost]
-        public IActionResult Registrar(RegistrarNotaIngresoAcopioRequestDTO request)
+        public IActionResult Registrar([FromBody] RegistrarNotaIngresoAcopioRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -112,7 +112,7 @@ namespace Integracion.Deuda.Controller
 
         [Route("UbicarAlmacen")]
         [HttpPost]
-        public IActionResult UbicarMateriaPrimaAlmacen(UbicarMateriaPrimaAlmacenRequestDTO request)
+        public IActionResult UbicarMateriaPrimaAlmacen([FromBody] UbicarMateriaPrimaAlmacenRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -141,7 +141,7 @@ namespace Integracion.Deuda.Controller
 
         [Route("ConfirmarEtiquetado")]
         [HttpPost]
-        public IActionResult ConfirmarEtiquetado(ConfirmarEtiquetadoRequestDTO request)
+        public IActionResult ConfirmarEtiquetado([FromBody] ConfirmarEtiquetadoRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -151,6 +151,118 @@ namespace Integracion.Deuda.Controller
             try
             {
                 _notaIngresoAcopioService.ConfirmarEtiquetado(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("ConsultarDevolucion")]
+        [HttpPost]
+        public IActionResult ConsultarDevolucion([FromBody] ConsultarDevolucionNotaIngresoAcopioRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            ConsultaNotaIngresoAcopioResponseDTO response = new ConsultaNotaIngresoAcopioResponseDTO();
+            try
+            {
+                response.Result.Data = _notaIngresoAcopioService.ConsultarDevolucion(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("RegistrarDevolucion")]
+        [HttpPost]
+        public IActionResult RegistrarDevolucion([FromBody] RegistrarDevolucionNotaIngresoRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            ConsultaNotaIngresoAcopioResponseDTO response = new ConsultaNotaIngresoAcopioResponseDTO();
+            try
+            {
+                response.Result.Data = _notaIngresoAcopioService.RegistrarDevolucion(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("ConsultarDevolucionPorId")]
+        [HttpPost]
+        public IActionResult ConsultarDevolucionPorId([FromBody] ConsultarDevolucionPorIdNotaIngresoRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            ConsultaNotaIngresoAcopioResponseDTO response = new ConsultaNotaIngresoAcopioResponseDTO();
+            try
+            {
+                response.Result.Data = _notaIngresoAcopioService.ConsultarDevolucionPorId(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("ConfirmarAtencionCompleta")]
+        [HttpPost]
+        public IActionResult ConfirmarAtencionCompleta([FromBody] ConfirmarAtencionCompletaNotaIngresoDevoRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            ConsultaNotaIngresoAcopioResponseDTO response = new ConsultaNotaIngresoAcopioResponseDTO();
+            try
+            {
+                _notaIngresoAcopioService.ConfirmarAtencionCompleta(request);
                 response.Result.Success = true;
             }
             catch (ResultException ex)

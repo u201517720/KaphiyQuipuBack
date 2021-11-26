@@ -16,5 +16,9 @@ namespace KaphiyQuipu.Interface.Repository
         void UbicarMateriaPrimaAlmacen(UbicarMateriaPrimaAlmacenRequestDTO request);
         IEnumerable<StickerAcopioDTO> ObtenerStickers(int notaIngresoId);
         void ConfirmarEtiquetado(int notaIngresoId, string usuario, DateTime fecha);
+        IEnumerable<ConsultarDevolucionNotaIngresoAcopioDTO> ConsultarDevolucion(DateTime fechaInicio, DateTime fechaFin);
+        string RegistrarDevolucion(NotaIngresoDevolucion notaIngreso);
+        IEnumerable<ConsultarDevolucionPorIdNotaIngresoDTO> ConsultarDevolucionPorId(int id);
+        void ConfirmarAtencionCompleta(int id, string usuario, DateTime fecha);
     }
 }

@@ -14,5 +14,9 @@ namespace KaphiyQuipu.Interface.Service
         void UbicarMateriaPrimaAlmacen(UbicarMateriaPrimaAlmacenRequestDTO request);
         List<StickerAcopioDTO> ObtenerStickers(int notaIngresoId);
         Task<bool> ConfirmarEtiquetado(ConfirmarEtiquetadoRequestDTO request);
+        List<ConsultarDevolucionNotaIngresoAcopioDTO> ConsultarDevolucion(ConsultarDevolucionNotaIngresoAcopioRequestDTO request);
+        string RegistrarDevolucion(RegistrarDevolucionNotaIngresoRequestDTO request);
+        ConsultarDevolucionPorIdNotaIngresoDTO ConsultarDevolucionPorId(ConsultarDevolucionPorIdNotaIngresoRequestDTO request);
+        void ConfirmarAtencionCompleta(ConfirmarAtencionCompletaNotaIngresoDevoRequestDTO request);
     }
 }
