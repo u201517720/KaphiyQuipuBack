@@ -24,6 +24,7 @@ namespace KaphiyQuipu.Service.MappingConfigurations
             CreateMap<GenerarNotaSalidaPlantaRequestDTO, NotaSalidaPlanta>();
             CreateMap<GenerarGuiaRemisionPlantaRequestDTO, GuiaRemisionPlanta>();
             CreateMap<RegistrarDevolucionNotaIngresoRequestDTO, NotaIngresoDevolucion>();
+            CreateMap<RegistrarDevolucionGuiaRemisionRequestDTO, GuiaRemisionDevolucion>();
         }
     }
 

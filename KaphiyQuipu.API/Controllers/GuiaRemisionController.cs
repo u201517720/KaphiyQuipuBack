@@ -23,7 +23,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("Registrar")]
         [HttpPost]
-        public async Task<IActionResult> Registrar(RegistrarGuiaRemisionAcopioRequestDTO request)
+        public async Task<IActionResult> Registrar([FromBody] RegistrarGuiaRemisionAcopioRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -51,7 +51,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("ConsultarCorrelativo")]
         [HttpPost]
-        public IActionResult ConsultarPorCorrelativo(ConsultarPorCorrelativoGuiaRemisionRequestDTO request)
+        public IActionResult ConsultarPorCorrelativo([FromBody] ConsultarPorCorrelativoGuiaRemisionRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -60,6 +60,34 @@ namespace KaphiyQuipu.API.Controller
             try
             {
                 response.Result.Data = _IGuiaRemisionAcopioService.ConsultarPorCorrelativo(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("RegistrarDevolucion")]
+        [HttpPost]
+        public async Task<IActionResult> RegistrarDevolucion([FromBody] RegistrarDevolucionGuiaRemisionRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            GeneralResponse response = new GeneralResponse();
+            try
+            {
+                response.Result.Data = await _IGuiaRemisionAcopioService.RegistrarDevolucion(request);
                 response.Result.Success = true;
             }
             catch (ResultException ex)

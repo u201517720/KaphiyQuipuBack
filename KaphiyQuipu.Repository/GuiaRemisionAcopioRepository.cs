@@ -51,5 +51,26 @@ namespace KaphiyQuipu.Repository
 
             return result;
         }
+
+        public string RegistrarDevolucion(GuiaRemisionDevolucion guia)
+        {
+            string result = string.Empty;
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@pCorrelativo", guia.Correlativo);
+            parameters.Add("@pNotaIngresoDevolucionId", guia.NotaIngresoDevolucionId);
+            parameters.Add("@pFechaTraslado", guia.FechaTraslado);
+            parameters.Add("@pFechaEmision", guia.FechaEmision);
+            parameters.Add("@pHashBC", guia.HashBC);
+            parameters.Add("@pUsuarioRegistro", guia.UsuarioRegistro);
+            parameters.Add("@pFechaRegistro", guia.FechaRegistro);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                result = db.ExecuteScalar<string>("uspGenerarGuiaRemisionDevolucion", parameters, commandType: CommandType.StoredProcedure);
+            }
+
+            return result;
+        }
     }
 }

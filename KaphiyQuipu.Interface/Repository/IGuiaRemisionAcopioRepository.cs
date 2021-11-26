@@ -11,5 +11,6 @@ namespace KaphiyQuipu.Interface.Repository
     {
         string Registrar(GuiaRemisionAcopio request);
         IEnumerable<ConsultarPorCorrelativoGuiaRemisionDTO> ConsultarPorCorrelativo(string correlativo);
+        string RegistrarDevolucion(GuiaRemisionDevolucion guia);
     }
 }

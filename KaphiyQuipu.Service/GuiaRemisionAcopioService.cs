@@ -67,5 +67,26 @@ namespace KaphiyQuipu.Service
 
             return affected;
         }
+
+        public async Task<string> RegistrarDevolucion(RegistrarDevolucionGuiaRemisionRequestDTO request)
+        {
+            GuiaRemisionDevolucion guiaRemision = _Mapper.Map<GuiaRemisionDevolucion>(request);
+            guiaRemision.FechaRegistro = DateTime.Now;
+            guiaRemision.FechaTraslado = guiaRemision.FechaRegistro;
+            guiaRemision.FechaEmision = guiaRemision.FechaRegistro;
+            guiaRemision.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.GuiaRemisionDevolucion);
+
+            string affected = _IGuiaRemisionAcopioRepository.RegistrarDevolucion(guiaRemision);
+
+            ParametroEmail oParametroEmail = new ParametroEmail();
+            oParametroEmail.Para = "jjordandt@gmail.com";
+            oParametroEmail.Asunto = "Envio de materia procesado";
+            oParametroEmail.IsHtml = true;
+            oParametroEmail.Mensaje = await _viewRender.RenderAsync(@"Mailing\mail-confirmarEnviCafeProcesado", request);
+
+            await _emailService.SendEmailAsync(oParametroEmail);
+
+            return affected;
+        }
     }
 }
