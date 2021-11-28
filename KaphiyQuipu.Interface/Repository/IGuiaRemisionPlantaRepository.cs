@@ -10,5 +10,6 @@ namespace KaphiyQuipu.Interface.Repository
     {
         string Registrar(GuiaRemisionPlanta guia);
         IEnumerable<ConsultarCorrelativoGuiaRemisionPlantaDTO> ConsultarCorrelativo(string correlativo);
+        IEnumerable<ConsultarGuiaRemisionPlantaDTO> Consultar(DateTime fechaInicio, DateTime fechaFin);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Common.Domain.Model;
 using Core.Common.Email;
 using Core.Common.Razor;
 using KaphiyQuipu.DTO;
@@ -8,7 +9,6 @@ using KaphiyQuipu.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace KaphiyQuipu.Service
@@ -28,6 +28,24 @@ namespace KaphiyQuipu.Service
             _IGuiaRemisionPlantaRepository = guiaRemisionPlantaRepository;
             _viewRender = viewRender;
             _emailService = emailService;
+        }
+
+        public List<ConsultarGuiaRemisionPlantaDTO> Consultar(ConsultarGuiaRemisionPlantaRequestDTO request)
+        {
+            if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue)
+            {
+                throw new ResultException(new Result { ErrCode = "01", Message = "La fecha inicio y fin son obligatorias. Por favor, ingresarlas." });
+            }
+
+            var timeSpan = request.FechaFin - request.FechaInicio;
+
+            if (timeSpan.Days > 365)
+            {
+                throw new ResultException(new Result { ErrCode = "02", Message = "El rango entre las fechas no puede ser mayor a 1 año." });
+            }
+            request.FechaFin = request.FechaFin.AddHours(23).AddMinutes(59).AddSeconds(59);
+            var list = _IGuiaRemisionPlantaRepository.Consultar(request.FechaInicio, request.FechaFin);
+            return list.ToList();
         }
 
         public ConsultarCorrelativoGuiaRemisionPlantaDTO ConsultarCorrelativo(ConsultarCorrelativoGuiaRemisionPlantaRequestDTO request)

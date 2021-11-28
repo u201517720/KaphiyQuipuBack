@@ -20,6 +20,18 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
+        public IEnumerable<ConsultarGuiaRemisionPlantaDTO> Consultar(DateTime fechaInicio, DateTime fechaFin)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pFechaInicio", fechaInicio);
+            parameters.Add("@pFechaFin", fechaFin);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarGuiaRemisionPlantaDTO>("uspConsultarGuiaRemisionPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public IEnumerable<ConsultarCorrelativoGuiaRemisionPlantaDTO> ConsultarCorrelativo(string correlativo)
         {
             var parameters = new DynamicParameters();

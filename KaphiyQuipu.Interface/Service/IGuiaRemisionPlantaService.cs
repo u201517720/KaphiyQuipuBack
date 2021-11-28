@@ -10,5 +10,6 @@ namespace KaphiyQuipu.Interface.Service
     {
         Task<string> Registrar(GenerarGuiaRemisionPlantaRequestDTO request);
         ConsultarCorrelativoGuiaRemisionPlantaDTO ConsultarCorrelativo(ConsultarCorrelativoGuiaRemisionPlantaRequestDTO request);
+        List<ConsultarGuiaRemisionPlantaDTO> Consultar(ConsultarGuiaRemisionPlantaRequestDTO request);
     }
 }

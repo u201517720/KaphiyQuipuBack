@@ -51,11 +51,6 @@ namespace KaphiyQuipu.Service
             _viewRender = viewRender;
         }
 
-        private String getRutaFisica(string pathFile)
-        {
-            return _fileServerSettings.Value.RutaPrincipal + pathFile;
-        }
-
         public List<ConsultaContratoDTO> Consultar(ConsultaContratoRequestDTO request)
         {
             if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue)
