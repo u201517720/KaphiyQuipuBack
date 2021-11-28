@@ -182,5 +182,10 @@ namespace KaphiyQuipu.Service
 
             _IContratoRepository.RegistrarControlCalidad(request.controles);
         }
+
+        public void ConfirmarRecepcionCafeTerminado(ConfirmarRecepcionCafeTerminadoContratoRequestDTO request)
+        {
+            _IContratoRepository.ConfirmarRecepcionCafeTerminado(request.Id, request.Usuario, DateTime.Now);
+        }
     }
 }

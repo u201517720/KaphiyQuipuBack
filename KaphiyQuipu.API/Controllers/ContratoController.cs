@@ -84,7 +84,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("Registrar")]
         [HttpPost]
-        public IActionResult Registrar(RegistrarActualizarContratoRequestDTO request)
+        public IActionResult Registrar([FromBody] RegistrarActualizarContratoRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -112,7 +112,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("Confirmar")]
         [HttpPost]
-        public async Task<IActionResult> Confirmar(ContratoCompraDTO request)
+        public async Task<IActionResult> Confirmar([FromBody] ContratoCompraDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -139,7 +139,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("RegistrarAgricultores")]
         [HttpPost]
-        public IActionResult AsociarAgricultoresContrato(AsociarAgricultoresContratoRequestDTO request)
+        public IActionResult AsociarAgricultoresContrato([FromBody] AsociarAgricultoresContratoRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -198,7 +198,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("ControlCalidad")]
         [HttpPost]
-        public IActionResult RegistrarControlCalidad(RegistrarControlCalidadRequestDTO request)
+        public IActionResult RegistrarControlCalidad([FromBody] RegistrarControlCalidadRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -207,6 +207,34 @@ namespace KaphiyQuipu.API.Controller
             try
             {
                 _contratoService.RegistrarControlCalidad(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("ConfirmarRecepcion")]
+        [HttpPost]
+        public IActionResult ConfirmarRecepcionCafeTerminado([FromBody] ConfirmarRecepcionCafeTerminadoContratoRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            GeneralResponse response = new GeneralResponse();
+            try
+            {
+                _contratoService.ConfirmarRecepcionCafeTerminado(request);
                 response.Result.Success = true;
             }
             catch (ResultException ex)

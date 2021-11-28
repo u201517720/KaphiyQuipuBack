@@ -151,5 +151,18 @@ namespace KaphiyQuipu.Repository
                 return db.Query<ObtenerControlCalidadDTO>("uspObtenerControlCalidadPoRContratoId", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void ConfirmarRecepcionCafeTerminado(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspConfimarRecepcionCafeTerminadoContrato", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

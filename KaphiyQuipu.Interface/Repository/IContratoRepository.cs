@@ -19,5 +19,6 @@ namespace KaphiyQuipu.Interface.Repository
         SolicitudConfirmacionAgrigultorDTO ObtenerDatosSolicitudConfirmacionAgrigultor(int socioFincaId, int contratoId);
         void RegistrarControlCalidad(List<RegistrarControlCalidadDTO> listaControles);
         IEnumerable<ObtenerControlCalidadDTO> ObtenerControlCalidad(int contratoId);
+        void ConfirmarRecepcionCafeTerminado(int id, string usuario, DateTime fecha);
     }
 }

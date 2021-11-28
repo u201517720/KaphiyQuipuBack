@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KaphiyQuipu.Repository
 {
@@ -19,6 +17,18 @@ namespace KaphiyQuipu.Repository
         public GuiaRemisionAcopioRepository(IOptions<ConnectionString> connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        public IEnumerable<ConsultarGuiaRemisionAcopioDTO> Consultar(DateTime fechaInicio, DateTime fechaFin)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pFechaInicio", fechaInicio);
+            parameters.Add("@pFechaFin", fechaFin);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarGuiaRemisionAcopioDTO>("uspConsultarGuiasRemisionAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
 
         public IEnumerable<ConsultarPorCorrelativoGuiaRemisionDTO> ConsultarPorCorrelativo(string correlativo)

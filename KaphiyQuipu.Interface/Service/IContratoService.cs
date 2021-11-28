@@ -13,5 +13,6 @@ namespace KaphiyQuipu.Interface.Service
         void AsociarAgricultoresContrato(AsociarAgricultoresContratoRequestDTO request);
         List<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(ObtenerAgricultoresPorContratoRequestDTO request);
         void RegistrarControlCalidad(RegistrarControlCalidadRequestDTO request);
+        void ConfirmarRecepcionCafeTerminado(ConfirmarRecepcionCafeTerminadoContratoRequestDTO request);
     }
 }

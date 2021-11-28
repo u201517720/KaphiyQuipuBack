@@ -11,5 +11,6 @@ namespace KaphiyQuipu.Interface.Service
         Task<string> Registrar(RegistrarGuiaRemisionAcopioRequestDTO request);
         ConsultarPorCorrelativoGuiaRemisionDTO ConsultarPorCorrelativo(ConsultarPorCorrelativoGuiaRemisionRequestDTO request);
         Task<string> RegistrarDevolucion(RegistrarDevolucionGuiaRemisionRequestDTO request);
+        List<ConsultarGuiaRemisionAcopioDTO> Consultar(ConsultarGuiaRemisionAcopioRequestDTO request);
     }
 }
