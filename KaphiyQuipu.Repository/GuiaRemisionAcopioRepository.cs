@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace KaphiyQuipu.Repository
 {
@@ -39,6 +40,19 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 return db.Query<ConsultarPorCorrelativoGuiaRemisionDTO>("uspConsultarGuiaRemisionPorCorrelativo", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<ConsultarPorIdGuiaRemisionAcopioDTO> ConsultarPorId(int id)
+        {
+            IEnumerable<ConsultarPorIdGuiaRemisionAcopioDTO> itemBE = null;
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarPorIdGuiaRemisionAcopioDTO>("uspObtenerGuiaRemisionAcopioPorId", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 

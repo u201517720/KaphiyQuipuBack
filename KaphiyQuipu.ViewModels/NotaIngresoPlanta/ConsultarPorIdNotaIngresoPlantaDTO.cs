@@ -53,5 +53,6 @@ namespace KaphiyQuipu.DTO
         public decimal TotalCafeKgNetos { get; set; }
         public decimal PiedraOtrosKgNetos { get; set; }
         public decimal CascaraOtrosKgNetos { get; set; }
+        public decimal PesoSaco { get; set; }
     }
 }

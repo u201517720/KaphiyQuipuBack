@@ -63,6 +63,17 @@ namespace KaphiyQuipu.Service
             return response;
         }
 
+        public ConsultarPorIdGuiaRemisionAcopioDTO ConsultarPorId(ConsultarPorIdGuiaRemisionAcopioRequestDTO request)
+        {
+            ConsultarPorIdGuiaRemisionAcopioDTO response = null;
+            var lista = _IGuiaRemisionAcopioRepository.ConsultarPorId(request.Id);
+            if (lista != null)
+            {
+                response = lista.FirstOrDefault();
+            }
+            return response;
+        }
+
         public async Task<string> Registrar(RegistrarGuiaRemisionAcopioRequestDTO request)
         {
             GuiaRemisionAcopio guiaRemision = _Mapper.Map<GuiaRemisionAcopio>(request);

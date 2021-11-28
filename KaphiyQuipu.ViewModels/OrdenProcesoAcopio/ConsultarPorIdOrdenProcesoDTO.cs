@@ -30,5 +30,7 @@ namespace KaphiyQuipu.DTO
         public string Responsable { get; set; }
         public string EstadoId { get; set; }
         public string TipoProcesoId { get; set; }
+        public string CorrelativoContrato { get; set; }
+        public string FechaEntrega { get; set; }
     }
 }
