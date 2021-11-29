@@ -42,6 +42,9 @@ namespace KaphiyQuipu.DTO
         public DateTime FechaActualizacion { get; set; }
         public string FechaActualizacionString { get; set; }
         public string Responsable { get; set; }
+        public decimal Tara { get; set; }
+        public decimal KilosNetos { get; set; }
+        public decimal CostoTotal { get; set; }
         public List<ObtenerControlCalidadDTO> controles { get; set; }
     }
 }

@@ -15,6 +15,8 @@ namespace KaphiyQuipu.Models
         public int EmpresaId { get; set; }
         public decimal PrecioUnitario { get; set; }
         public decimal CostoTotal { get; set; }
+        public decimal Tara { get; set; }
+        public decimal KilosNetos { get; set; }
         public string Observaciones { get; set; }
         public string HashBC { get; set; }
         public int Estado { get; set; }

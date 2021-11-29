@@ -30,8 +30,8 @@ namespace KaphiyQuipu.DTO
         public string Calidad { get; set; }
         public string TipoCertificacion { get; set; }
         public int TotalSacos { get; set; }
-        public int PesoSaco { get; set; }
-        public int PesoKilos { get; set; }
+        public decimal PesoSaco { get; set; }
+        public decimal PesoKilos { get; set; }
         public string ObservacionesSolicitudCompra { get; set; }
         public decimal SacosPC { get; set; }
         public decimal KilosBrutosPC { get; set; }
@@ -51,6 +51,8 @@ namespace KaphiyQuipu.DTO
         public string Responsable { get; set; }
         public decimal PrecioUnitario { get; set; }
         public decimal CostoTotal { get; set; }
+        public decimal Tara { get; set; }
+        public decimal KilosNetosContrato { get; set; }
         public List<AgricultoresGuiaRecepcionMateriaPrimaDTO> agricultores { get; set; }
         public List<GuiaRecepcionMateriaPrimaControlCalidadDTO> controlesCalidad { get; set; }
     }

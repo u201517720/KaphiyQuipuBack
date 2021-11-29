@@ -18,5 +18,7 @@ namespace KaphiyQuipu.DTO
         public string EstadoId { get; set; }
         public decimal PrecioUnitario { get; set; }
         public decimal CostoTotal { get; set; }
+        public decimal Tara { get; set; }
+        public decimal KilosNetos { get; set; }
     }
 }

@@ -67,6 +67,8 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@pFechaRegistro", contrato.FechaRegistro);
             parameters.Add("@pPrecio", contrato.PrecioUnitario);
             parameters.Add("@pCosto", contrato.CostoTotal);
+            parameters.Add("@pTara", contrato.Tara);
+            parameters.Add("@pKGsNetos", contrato.KilosNetos);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {

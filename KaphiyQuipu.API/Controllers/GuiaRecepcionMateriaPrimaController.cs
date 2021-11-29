@@ -90,7 +90,7 @@ namespace KaphiyQuipu.API.Controller
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
-            ConsultarPorIdGuiaRecepcionMateriaPrimaResponseDTO response = new ConsultarPorIdGuiaRecepcionMateriaPrimaResponseDTO();
+            GeneralResponse response = new GeneralResponse();
             try
             {
                 response.Result.Data = _guiaRecepionMateriaPrimaService.ConsultarPorId(request);

@@ -62,7 +62,7 @@ namespace KaphiyQuipu.API.Controller
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
-            ConsultaContratoPorIdResponseDTO response = new ConsultaContratoPorIdResponseDTO();
+            GeneralResponse response = new GeneralResponse();
             try
             {
                 response.Result.Data = _contratoService.ConsultarPorId(request);
