@@ -52,6 +52,8 @@ namespace KaphiyQuipu.DTO
         public string Observaciones { get; set; }
         public string Responsable { get; set; }
         public string AlmacenId { get; set; }
+        public decimal PrecioUnitario { get; set; }
+        public decimal CostoTotal { get; set; }
         public List<ConsultaPorIdNotaIngresoAcopioControlCalidadDTO> controlesCalidad { get; set; }
         public List<ConsultaPorIdNotaIngresoAcopioAgricultoresDTO> agricultores { get; set; }
     }

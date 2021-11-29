@@ -90,8 +90,6 @@ namespace KaphiyQuipu.Service
 
             string affected = _IContratoRepository.Registrar(contrato);
 
-            //new EmailManager().enviarCorreo("","PRUEBA", )
-
             return affected;
         }
 

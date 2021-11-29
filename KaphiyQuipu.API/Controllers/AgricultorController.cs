@@ -115,7 +115,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("ConfirmarDisponibilidad")]
         [HttpPost]
-        public IActionResult ConfirmarDisponibilidad(ConfirmarDisponibilidadRequestDTO request)
+        public IActionResult ConfirmarDisponibilidad([FromBody] ConfirmarDisponibilidadRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -143,7 +143,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("ConfirmarEnvio")]
         [HttpPost]
-        public IActionResult ConfirmarEnvio(ConfirmarEnvioRequestDTO request)
+        public IActionResult ConfirmarEnvio([FromBody] ConfirmarEnvioRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");

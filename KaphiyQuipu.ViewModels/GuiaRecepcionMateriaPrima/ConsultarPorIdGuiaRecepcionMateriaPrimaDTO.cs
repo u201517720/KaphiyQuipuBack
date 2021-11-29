@@ -49,6 +49,8 @@ namespace KaphiyQuipu.DTO
         public decimal Humedad { get; set; }
         public string Observaciones { get; set; }
         public string Responsable { get; set; }
+        public decimal PrecioUnitario { get; set; }
+        public decimal CostoTotal { get; set; }
         public List<AgricultoresGuiaRecepcionMateriaPrimaDTO> agricultores { get; set; }
         public List<GuiaRecepcionMateriaPrimaControlCalidadDTO> controlesCalidad { get; set; }
     }

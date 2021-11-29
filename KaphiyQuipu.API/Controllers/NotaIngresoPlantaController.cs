@@ -22,7 +22,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("Consultar")]
         [HttpPost]
-        public IActionResult Consultar(ConsultarNotaIngresoPlantaRequestDTO request)
+        public IActionResult Consultar([FromBody] ConsultarNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -50,7 +50,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("Registrar")]
         [HttpPost]
-        public IActionResult Registrar(RegistrarNotaIngresoPlantaRequestDTO request)
+        public IActionResult Registrar([FromBody] RegistrarNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -78,7 +78,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("ConsultarPorId")]
         [HttpPost]
-        public IActionResult ConsultarPorId(ConsultarPorIdNotaIngresoPlantaRequestDTO request)
+        public IActionResult ConsultarPorId([FromBody] ConsultarPorIdNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -106,7 +106,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("ControlCalidad")]
         [HttpPost]
-        public IActionResult RegistrarControlCalidad(RegistrarControlCalidadNotaIngresoPlantaRequestDTO request)
+        public IActionResult RegistrarControlCalidad([FromBody] RegistrarControlCalidadNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -134,7 +134,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("ConfirmarRecepcion")]
         [HttpPost]
-        public IActionResult ConfirmarRecepcionMateriaPrima(ConfirmarRecepcionMateriaPrimaNotaIngresoPlantaRequestDTO request)
+        public IActionResult ConfirmarRecepcionMateriaPrima([FromBody] ConfirmarRecepcionMateriaPrimaNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -162,7 +162,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("FinalizarEtiquetado")]
         [HttpPost]
-        public IActionResult FinalizarEtiquetado(FinalizarEtiquetadoNotaIngresoPlantaRequestDTO request)
+        public IActionResult FinalizarEtiquetado([FromBody] FinalizarEtiquetadoNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -190,7 +190,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("AutorizarTransformacion")]
         [HttpPost]
-        public IActionResult AutorizarTransformacion(AutorizarTransformacionNotaIngresoPlantaRequestDTO request)
+        public IActionResult AutorizarTransformacion([FromBody] AutorizarTransformacionNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -218,7 +218,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("ResultadosTransformacion")]
         [HttpPost]
-        public IActionResult RegistrarResultadosTransformacion(RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request)
+        public IActionResult RegistrarResultadosTransformacion([FromBody] RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -246,7 +246,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("FinalizarTransformacion")]
         [HttpPost]
-        public IActionResult FinalizarTransformacion(FinalizarTransformacionNotaIngresoPlantaRequestDTO request)
+        public IActionResult FinalizarTransformacion([FromBody] FinalizarTransformacionNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");

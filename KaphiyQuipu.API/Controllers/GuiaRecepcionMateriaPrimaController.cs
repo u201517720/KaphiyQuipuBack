@@ -56,7 +56,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("Registrar")]
         [HttpPost]
-        public IActionResult Registrar(RegistrarActualizarGuiaRecepcionRequestDTO request)
+        public IActionResult Registrar([FromBody] RegistrarActualizarGuiaRecepcionRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");

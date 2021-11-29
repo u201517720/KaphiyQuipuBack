@@ -16,5 +16,7 @@ namespace KaphiyQuipu.DTO
         public string Observaciones { get; set; }
         public string UsuarioRegistro { get; set; }
         public string EstadoId { get; set; }
+        public decimal PrecioUnitario { get; set; }
+        public decimal CostoTotal { get; set; }
     }
 }

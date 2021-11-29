@@ -25,7 +25,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("Registrar")]
         [HttpPost]
-        public IActionResult Registrar(RegistrarOrdenProcesoAcopioRequestDTO request)
+        public IActionResult Registrar([FromBody] RegistrarOrdenProcesoAcopioRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -137,7 +137,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("IniciarTransformacion")]
         [HttpPost]
-        public IActionResult IniciarTransformacion(IniciarTransformacionOrdenProcesoRequestDTO request)
+        public IActionResult IniciarTransformacion([FromBody] IniciarTransformacionOrdenProcesoRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
