@@ -17,4 +17,10 @@
         public static string GuiaRemisionDevolucion { get { return "GuiaRemisionDevolucion"; } }
     }
 
+    public static class Empresas
+    {
+        public static string Acopiadora { get { return "Cooperativa de Servicios Múltiples Aprocassi"; } }
+        public static string Transformadora { get { return "Cooperativa de Servicios Multiples Cenfrocafe"; } }
+    }
+
 }

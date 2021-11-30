@@ -86,7 +86,7 @@ namespace KaphiyQuipu.API.Controller
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
-            ConsultarPorIdOrdenProcesoResponseDTO response = new ConsultarPorIdOrdenProcesoResponseDTO();
+            GeneralResponse response = new GeneralResponse();
             try
             {
                 response.Result.Data = _IOrdenProcesoAcopioService.ConsultarPorId(request);

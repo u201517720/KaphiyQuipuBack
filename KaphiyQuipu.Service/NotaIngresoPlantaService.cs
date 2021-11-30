@@ -75,19 +75,6 @@ namespace KaphiyQuipu.Service
             _INotaIngresoPlantaRepository.FinalizarEtiquetado(request.Id, request.Usuario, DateTime.Now);
         }
 
-        public async Task<bool> FinalizarTransformacion(FinalizarTransformacionNotaIngresoPlantaRequestDTO request)
-        {
-            _INotaIngresoPlantaRepository.FinalizarTransformacion(request.Id, request.Usuario, DateTime.Now);
-
-            ParametroEmail oParametroEmail = new ParametroEmail();
-            oParametroEmail.Para = "jjordandt@gmail.com";
-            oParametroEmail.Asunto = "Finalización de transformación";
-            oParametroEmail.IsHtml = true;
-            oParametroEmail.Mensaje = await _viewRender.RenderAsync(@"Mailing\mail-finalizar-transformacion", request);
-
-            return await _emailService.SendEmailAsync(oParametroEmail, "Planta Transformadora");
-        }
-
         public string Registrar(RegistrarNotaIngresoPlantaRequestDTO request)
         {
             NotaIngresoPlanta notaIngreso = _Mapper.Map<NotaIngresoPlanta>(request);
@@ -106,12 +93,20 @@ namespace KaphiyQuipu.Service
             _INotaIngresoPlantaRepository.RegistrarControlCalidad(ingresoPlanta);
         }
 
-        public void RegistrarResultadosTransformacion(RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request)
+        public async Task<bool> RegistrarResultadosTransformacion(RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request)
         {
             NotaIngresoPlantaResultadoTransformacion transformacion = _Mapper.Map<NotaIngresoPlantaResultadoTransformacion>(request);
             transformacion.FechaRegistro = DateTime.Now;
 
             _INotaIngresoPlantaRepository.RegistrarResultadosTransformacion(transformacion);
+
+            ParametroEmail oParametroEmail = new ParametroEmail();
+            oParametroEmail.Para = "jjordandt@gmail.com";
+            oParametroEmail.Asunto = "Finalización de transformación";
+            oParametroEmail.IsHtml = true;
+            oParametroEmail.Mensaje = await _viewRender.RenderAsync(@"Mailing\mail-finalizar-transformacion", request);
+
+            return await _emailService.SendEmailAsync(oParametroEmail, Empresas.Transformadora);
         }
     }
 }

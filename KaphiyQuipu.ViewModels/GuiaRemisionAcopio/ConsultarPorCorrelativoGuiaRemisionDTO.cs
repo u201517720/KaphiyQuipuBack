@@ -7,7 +7,7 @@ namespace KaphiyQuipu.DTO
     public class ConsultarPorCorrelativoGuiaRemisionDTO
     {
         public int GuiaRemisionId { get; set; }
-        public string Correlativo { get; set; }
+        public string CorrelativoGRA { get; set; }
         public string Empresa { get; set; }
         public string EmpresaRUC { get; set; }
         public string EmpresaDireccion { get; set; }

@@ -13,7 +13,6 @@ namespace KaphiyQuipu.Interface.Service
         void ConfirmarRecepcionMateriaPrima(ConfirmarRecepcionMateriaPrimaNotaIngresoPlantaRequestDTO request);
         void AutorizarTransformacion(AutorizarTransformacionNotaIngresoPlantaRequestDTO request);
         void FinalizarEtiquetado(FinalizarEtiquetadoNotaIngresoPlantaRequestDTO request);
-        void RegistrarResultadosTransformacion(RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request);
-        Task<bool> FinalizarTransformacion(FinalizarTransformacionNotaIngresoPlantaRequestDTO request);
+        Task<bool> RegistrarResultadosTransformacion(RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request);
     }
 }

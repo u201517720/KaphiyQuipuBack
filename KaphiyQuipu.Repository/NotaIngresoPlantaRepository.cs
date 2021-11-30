@@ -82,19 +82,6 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public void FinalizarTransformacion(int id, string usuario, DateTime fecha)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@pId", id);
-            parameters.Add("@pUsuario", usuario);
-            parameters.Add("@pFecha", fecha);
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                db.Execute("uspNotaIngresoPlantaFinalizarTransformacion", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
         public string Registrar(NotaIngresoPlanta nota)
         {
             string result = string.Empty;

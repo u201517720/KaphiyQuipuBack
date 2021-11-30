@@ -4,6 +4,7 @@ using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 namespace KaphiyQuipu.API.Controller
 {
@@ -218,7 +219,7 @@ namespace KaphiyQuipu.API.Controller
 
         [Route("ResultadosTransformacion")]
         [HttpPost]
-        public IActionResult RegistrarResultadosTransformacion([FromBody] RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request)
+        public async Task<IActionResult> RegistrarResultadosTransformacion([FromBody] RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
@@ -226,35 +227,7 @@ namespace KaphiyQuipu.API.Controller
             GeneralResponse response = new GeneralResponse();
             try
             {
-                _INotaIngresoPlantaService.RegistrarResultadosTransformacion(request);
-                response.Result.Success = true;
-            }
-            catch (ResultException ex)
-            {
-                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
-            }
-            catch (Exception ex)
-            {
-                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
-                _log.RegistrarEvento(ex, guid.ToString());
-            }
-
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
-
-            return Ok(response);
-        }
-
-        [Route("FinalizarTransformacion")]
-        [HttpPost]
-        public IActionResult FinalizarTransformacion([FromBody] FinalizarTransformacionNotaIngresoPlantaRequestDTO request)
-        {
-            Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
-
-            GeneralResponse response = new GeneralResponse();
-            try
-            {
-                _INotaIngresoPlantaService.FinalizarTransformacion(request);
+                await _INotaIngresoPlantaService.RegistrarResultadosTransformacion(request);
                 response.Result.Success = true;
             }
             catch (ResultException ex)
