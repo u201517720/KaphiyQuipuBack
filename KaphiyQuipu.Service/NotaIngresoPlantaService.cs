@@ -75,6 +75,13 @@ namespace KaphiyQuipu.Service
             _INotaIngresoPlantaRepository.FinalizarEtiquetado(request.Id, request.Usuario, DateTime.Now);
         }
 
+        public GenerarEtiquetasPlantaResponseDTO GenerarEtiquetasPlanta(int id)
+        {
+            GenerarEtiquetasPlantaResponseDTO response = new GenerarEtiquetasPlantaResponseDTO();
+            response.listaEtiquetas = _INotaIngresoPlantaRepository.GenerarEtiquetasPlanta(id).ToList();
+            return response;
+        }
+
         public string Registrar(RegistrarNotaIngresoPlantaRequestDTO request)
         {
             NotaIngresoPlanta notaIngreso = _Mapper.Map<NotaIngresoPlanta>(request);

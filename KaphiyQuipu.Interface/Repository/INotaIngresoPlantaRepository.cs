@@ -16,5 +16,6 @@ namespace KaphiyQuipu.Interface.Repository
         void AutorizarTransformacion(int id, string usuario, DateTime fecha);
         void FinalizarEtiquetado(int id, string usuario, DateTime fecha);
         void RegistrarResultadosTransformacion(NotaIngresoPlantaResultadoTransformacion transformacion);
+        IEnumerable<EtiquetaPlanta> GenerarEtiquetasPlanta(int id);
     }
 }

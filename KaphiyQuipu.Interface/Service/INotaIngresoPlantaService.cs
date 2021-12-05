@@ -14,5 +14,6 @@ namespace KaphiyQuipu.Interface.Service
         void AutorizarTransformacion(AutorizarTransformacionNotaIngresoPlantaRequestDTO request);
         void FinalizarEtiquetado(FinalizarEtiquetadoNotaIngresoPlantaRequestDTO request);
         Task<bool> RegistrarResultadosTransformacion(RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request);
+        GenerarEtiquetasPlantaResponseDTO GenerarEtiquetasPlanta(int id);
     }
 }
