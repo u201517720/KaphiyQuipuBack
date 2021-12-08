@@ -1,9 +1,13 @@
-﻿using KaphiyQuipu.DTO;
-using KaphiyQuipu.Interface.Service;
+﻿using AspNetCore.Reporting;
+using Core.Common;
 using Core.Common.Domain.Model;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.Interface.Service;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace Integracion.Deuda.Controller
 {
@@ -13,11 +17,13 @@ namespace Integracion.Deuda.Controller
     {
         private Core.Common.Logger.ILog _log;
         private INotaIngresoAcopioService _notaIngresoAcopioService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public NotaIngresoAcopioController(Core.Common.Logger.ILog log, INotaIngresoAcopioService notaIngresoAcopioService)
+        public NotaIngresoAcopioController(Core.Common.Logger.ILog log, INotaIngresoAcopioService notaIngresoAcopioService, IWebHostEnvironment webHostEnvironment)
         {
             _log = log;
             _notaIngresoAcopioService = notaIngresoAcopioService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet("version")]
@@ -264,6 +270,43 @@ namespace Integracion.Deuda.Controller
             {
                 _notaIngresoAcopioService.ConfirmarAtencionCompleta(request);
                 response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("Etiquetas")]
+        [HttpGet]
+        public IActionResult GenerarEtiquetasAcopio(int id)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(id)}");
+
+            GenerarEtiquetasAcopioResponseDTO response = new GenerarEtiquetasAcopioResponseDTO();
+
+            try
+            {
+                response = _notaIngresoAcopioService.GenerarEtiquetasAcopio(id);
+                var path = $"{_webHostEnvironment.ContentRootPath}\\Reports\\rptEtiquetaAcopio.rdlc";
+
+                LocalReport lr = new LocalReport(path);
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+                lr.AddDataSource("dsEtiquetaAcopio", Util.ToDataTable(response.listaEtiquetas));
+                var result = lr.Execute(RenderType.Pdf, 1, parameters, string.Empty);
+
+                return File(result.MainStream, "application/pdf");
             }
             catch (ResultException ex)
             {

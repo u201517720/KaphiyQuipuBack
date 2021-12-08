@@ -177,5 +177,16 @@ namespace KaphiyQuipu.Repository
                 db.Execute("uspConfirmarAtencionCompletaNotaIngresoDevolucion", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<EtiquetaAcopio> GenerarEtiquetasAcopio(int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<EtiquetaAcopio>("uspObtenerTicketPesadoPorNotaIngresoAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

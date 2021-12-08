@@ -1,9 +1,13 @@
-﻿using Core.Common.Domain.Model;
+﻿using AspNetCore.Reporting;
+using Core.Common;
+using Core.Common.Domain.Model;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Service;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace KaphiyQuipu.API.Controller
@@ -14,11 +18,13 @@ namespace KaphiyQuipu.API.Controller
     {
         private Core.Common.Logger.ILog _log;
         INotaIngresoPlantaService _INotaIngresoPlantaService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public NotaIngresoPlantaController(Core.Common.Logger.ILog log, INotaIngresoPlantaService notaIngresoPlantaService)
+        public NotaIngresoPlantaController(Core.Common.Logger.ILog log, INotaIngresoPlantaService notaIngresoPlantaService, IWebHostEnvironment webHostEnvironment)
         {
             _log = log;
             _INotaIngresoPlantaService = notaIngresoPlantaService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [Route("Consultar")]
@@ -229,6 +235,43 @@ namespace KaphiyQuipu.API.Controller
             {
                 await _INotaIngresoPlantaService.RegistrarResultadosTransformacion(request);
                 response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+        }
+
+        [Route("Etiquetas")]
+        [HttpGet]
+        public IActionResult GenerarEtiquetasPlanta(int id)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(id)}");
+
+            GenerarEtiquetasPlantaResponseDTO response = new GenerarEtiquetasPlantaResponseDTO();
+
+            try
+            {
+                response = _INotaIngresoPlantaService.GenerarEtiquetasPlanta(id);
+                var path = $"{_webHostEnvironment.ContentRootPath}\\Reports\\rptEtiquetaPlanta.rdlc";
+
+                LocalReport lr = new LocalReport(path);
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+                lr.AddDataSource("dsEtiquetaPlanta", Util.ToDataTable(response.listaEtiquetas));
+                var result = lr.Execute(RenderType.Pdf, 1, parameters, string.Empty);
+
+                return File(result.MainStream, "application/pdf");
             }
             catch (ResultException ex)
             {

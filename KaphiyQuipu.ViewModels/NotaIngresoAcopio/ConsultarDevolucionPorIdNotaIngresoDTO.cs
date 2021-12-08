@@ -16,5 +16,6 @@ namespace KaphiyQuipu.DTO
         public string FechaRegistro { get; set; }
         public string Observaciones { get; set; }
         public string EstadoId { get; set; }
+        public string CorrelativoNID { get; set; }
     }
 }

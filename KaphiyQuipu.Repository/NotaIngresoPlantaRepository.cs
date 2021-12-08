@@ -82,6 +82,17 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public IEnumerable<EtiquetaPlanta> GenerarEtiquetasPlanta(int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<EtiquetaPlanta>("uspObtenerTicketPesadoPorNotaIngresoPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public string Registrar(NotaIngresoPlanta nota)
         {
             string result = string.Empty;

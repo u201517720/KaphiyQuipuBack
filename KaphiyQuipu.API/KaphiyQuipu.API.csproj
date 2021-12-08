@@ -8,7 +8,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Reports\rptEtiquetaAcopio.rdlc" />
+    <None Remove="Reports\rptEtiquetaPlanta.rdlc" />
     <None Remove="Reports\SolicitudCompra.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Reports\rptEtiquetaAcopio.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\rptEtiquetaPlanta.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Reports\SolicitudCompra.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\SolicitudCompra.rdlc" />
   </ItemGroup>
 
   <ItemGroup>

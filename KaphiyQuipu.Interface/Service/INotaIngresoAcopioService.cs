@@ -18,5 +18,6 @@ namespace KaphiyQuipu.Interface.Service
         string RegistrarDevolucion(RegistrarDevolucionNotaIngresoRequestDTO request);
         ConsultarDevolucionPorIdNotaIngresoDTO ConsultarDevolucionPorId(ConsultarDevolucionPorIdNotaIngresoRequestDTO request);
         void ConfirmarAtencionCompleta(ConfirmarAtencionCompletaNotaIngresoDevoRequestDTO request);
+        GenerarEtiquetasAcopioResponseDTO GenerarEtiquetasAcopio(int id);
     }
 }

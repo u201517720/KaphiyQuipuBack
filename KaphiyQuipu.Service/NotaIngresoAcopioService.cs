@@ -158,5 +158,12 @@ namespace KaphiyQuipu.Service
         {
             _INotaIngresoAcopioRepository.ConfirmarAtencionCompleta(request.Id, request.Usuario, DateTime.Now);
         }
+
+        public GenerarEtiquetasAcopioResponseDTO GenerarEtiquetasAcopio(int id)
+        {
+            GenerarEtiquetasAcopioResponseDTO response = new GenerarEtiquetasAcopioResponseDTO();
+            response.listaEtiquetas = _INotaIngresoAcopioRepository.GenerarEtiquetasAcopio(id).ToList();
+            return response;
+        }
     }
 }
