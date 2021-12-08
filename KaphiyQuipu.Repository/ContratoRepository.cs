@@ -168,5 +168,16 @@ namespace KaphiyQuipu.Repository
                 db.Execute("uspConfimarRecepcionCafeTerminadoContrato", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<CorrelativoTrazabilidadContratoDTO> ObtenerCorrelativosTrazabilidadPorNroContrato(string nroContrato)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pCorrelativo", nroContrato);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<CorrelativoTrazabilidadContratoDTO>("uspObtenerCorrelativosTrazabilidadPorNroContrato", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

@@ -19,12 +19,15 @@ namespace KaphiyQuipu.Blockchain.Entities
         public string NroContrato { get; set; }
 
         [Parameter("string", 2)]
-        public string NroDocumento { get; set; }
+        public string Nombre { get; set; }
 
         [Parameter("string", 3)]
-        public string Finca { get; set; }
+        public string NroDocumento { get; set; }
 
         [Parameter("string", 4)]
+        public string Finca { get; set; }
+
+        [Parameter("string", 5)]
         public string Certificacion { get; set; }
     }
 }

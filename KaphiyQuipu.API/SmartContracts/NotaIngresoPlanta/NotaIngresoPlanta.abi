@@ -1,0 +1,356 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "components": [
+          {
+            "name": "correlativo",
+            "type": "string"
+          },
+          {
+            "name": "olores",
+            "type": "string"
+          },
+          {
+            "name": "colores",
+            "type": "string"
+          },
+          {
+            "name": "exportableGramos",
+            "type": "string"
+          },
+          {
+            "name": "exportablePorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "descarteGramos",
+            "type": "string"
+          },
+          {
+            "name": "descartePorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "cascarillaGramos",
+            "type": "string"
+          },
+          {
+            "name": "cascarillaPorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "totalGramos",
+            "type": "string"
+          },
+          {
+            "name": "totalPorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "humedadPorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "usuario",
+            "type": "string"
+          },
+          {
+            "name": "fechaRegistro",
+            "type": "uint256"
+          }
+        ],
+        "name": "controlCalidad",
+        "type": "tuple"
+      }
+    ],
+    "name": "agregarControlCalidad",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "correlativo",
+        "type": "string"
+      }
+    ],
+    "name": "obtenerControlCalidad",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "correlativo",
+            "type": "string"
+          },
+          {
+            "name": "olores",
+            "type": "string"
+          },
+          {
+            "name": "colores",
+            "type": "string"
+          },
+          {
+            "name": "exportableGramos",
+            "type": "string"
+          },
+          {
+            "name": "exportablePorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "descarteGramos",
+            "type": "string"
+          },
+          {
+            "name": "descartePorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "cascarillaGramos",
+            "type": "string"
+          },
+          {
+            "name": "cascarillaPorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "totalGramos",
+            "type": "string"
+          },
+          {
+            "name": "totalPorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "humedadPorcentaje",
+            "type": "string"
+          },
+          {
+            "name": "usuario",
+            "type": "string"
+          },
+          {
+            "name": "fechaRegistro",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "correlativo",
+        "type": "string"
+      }
+    ],
+    "name": "obtenerResultadoTransformacion",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "correlativo",
+            "type": "string"
+          },
+          {
+            "name": "cafeExportacionSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeExportacionKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeExportacionMCSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeExportacionMCKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeSegundaSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeSegundaKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeDescarteMaquinaSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeDescarteMaquinaKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeDescarteEscojoSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeDescarteEscojoKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeBolaSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeBolaKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeCiscoSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeCiscoKilos",
+            "type": "string"
+          },
+          {
+            "name": "totalCafeSacos",
+            "type": "string"
+          },
+          {
+            "name": "totalCafeKgNetos",
+            "type": "string"
+          },
+          {
+            "name": "piedraOtrosKgNetos",
+            "type": "string"
+          },
+          {
+            "name": "cascaraOtrosKgNetos",
+            "type": "string"
+          },
+          {
+            "name": "usuario",
+            "type": "string"
+          },
+          {
+            "name": "fechaRegistro",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "components": [
+          {
+            "name": "correlativo",
+            "type": "string"
+          },
+          {
+            "name": "cafeExportacionSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeExportacionKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeExportacionMCSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeExportacionMCKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeSegundaSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeSegundaKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeDescarteMaquinaSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeDescarteMaquinaKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeDescarteEscojoSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeDescarteEscojoKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeBolaSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeBolaKilos",
+            "type": "string"
+          },
+          {
+            "name": "cafeCiscoSacos",
+            "type": "string"
+          },
+          {
+            "name": "cafeCiscoKilos",
+            "type": "string"
+          },
+          {
+            "name": "totalCafeSacos",
+            "type": "string"
+          },
+          {
+            "name": "totalCafeKgNetos",
+            "type": "string"
+          },
+          {
+            "name": "piedraOtrosKgNetos",
+            "type": "string"
+          },
+          {
+            "name": "cascaraOtrosKgNetos",
+            "type": "string"
+          },
+          {
+            "name": "usuario",
+            "type": "string"
+          },
+          {
+            "name": "fechaRegistro",
+            "type": "uint256"
+          }
+        ],
+        "name": "resultado",
+        "type": "tuple"
+      }
+    ],
+    "name": "agregarResultadoTransformacion",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

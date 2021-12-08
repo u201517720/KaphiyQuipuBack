@@ -32,6 +32,7 @@ namespace KaphiyQuipu.Service
             ConfirmacionEnvioAgricultorDTO confirmacionEnvioAgricultorDTO = _IAgricultorRepository.ObtenerDatosConfirmacionEnvio(request.ContratoSocioFincaId);
             AgricultorContratoDTO agricultorContratoDTO = new AgricultorContratoDTO();
             agricultorContratoDTO.NroContrato = confirmacionEnvioAgricultorDTO.Contrato;
+            agricultorContratoDTO.Nombre = confirmacionEnvioAgricultorDTO.NombreAgricultor;
             agricultorContratoDTO.NroDocumento = confirmacionEnvioAgricultorDTO.DNIAgricultor;
             agricultorContratoDTO.Finca = confirmacionEnvioAgricultorDTO.Finca;
             agricultorContratoDTO.Certificacion = confirmacionEnvioAgricultorDTO.Certificacion;

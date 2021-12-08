@@ -14,5 +14,6 @@ namespace KaphiyQuipu.Interface.Service
         List<ObtenerAgricultoresPorContratoDTO> ObtenerAgricultoresPorContrato(ObtenerAgricultoresPorContratoRequestDTO request);
         void RegistrarControlCalidad(RegistrarControlCalidadRequestDTO request);
         void ConfirmarRecepcionCafeTerminado(ConfirmarRecepcionCafeTerminadoContratoRequestDTO request);
+        Task<List<(string, List<object>)>> ObtenerDatosTrazabilidad(string nroContrato);
     }
 }

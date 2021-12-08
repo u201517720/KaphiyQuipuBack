@@ -3,7 +3,9 @@ using Core.Common.Auth;
 using Core.Common.Email;
 using Core.Common.Razor;
 using Core.Common.SMS;
+using KaphiyQuipu.API.Helper;
 using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Contracts.Interface;
 using KaphiyQuipu.Blockchain.ERC20;
 using KaphiyQuipu.Blockchain.Facade;
 using KaphiyQuipu.Blockchain.Services;
@@ -121,6 +123,7 @@ namespace KaphiyQuipu.API
             services.AddTransient<IUserContract, UserContract>();
             services.AddTransient<ISolicitudCompraContract, SolicitudCompraContract>();
             services.AddTransient<IContratoCompraContract, ContratoCompraContract>();
+            services.AddTransient<INotaIngresoPlantaContract, NotaIngresoPlantaContract>();
             services.AddSingleton<IContractFacade, ContractFacade>();
             services.AddSingleton<IContractOperation, ContractOperation>();
             services.AddScoped<IAccountService, AccountService>();
@@ -146,6 +149,7 @@ namespace KaphiyQuipu.API
 
             services.AddTransient<IMessageSender, MessageSender>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<ReportService>();
 
             services.AddMvc(setupAction => { setupAction.EnableEndpointRouting = false; })
                     .AddJsonOptions(jsonOptions => { jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null; })

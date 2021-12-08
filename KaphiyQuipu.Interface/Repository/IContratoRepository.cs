@@ -20,5 +20,6 @@ namespace KaphiyQuipu.Interface.Repository
         void RegistrarControlCalidad(List<RegistrarControlCalidadDTO> listaControles);
         IEnumerable<ObtenerControlCalidadDTO> ObtenerControlCalidad(int contratoId);
         void ConfirmarRecepcionCafeTerminado(int id, string usuario, DateTime fecha);
+        IEnumerable<CorrelativoTrazabilidadContratoDTO> ObtenerCorrelativosTrazabilidadPorNroContrato(string nroContrato);
     }
 }

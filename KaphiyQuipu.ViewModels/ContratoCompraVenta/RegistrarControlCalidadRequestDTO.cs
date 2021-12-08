@@ -8,10 +8,29 @@ namespace KaphiyQuipu.DTO
     {
         public RegistrarControlCalidadRequestDTO()
         {
-            controles = new List<RegistrarControlCalidadDTO>();
+            controles = new List<ControlCalidadRequest>();
         }
 
-        public List<RegistrarControlCalidadDTO> controles { get; set; }
+        public List<ControlCalidadRequest> controles { get; set; }
+    }
+
+    public class ControlCalidadRequest
+    {
+        public ControlCalidadRequest()
+        {
+
+        }
+
+        public int ContratoSocioFincaId { get; set; }
+        public decimal Humedad { get; set; }
+        public string Observaciones { get; set; }
+        public string ListaOlores { get; set; }
+        public string ListaDescripcionOlores { get; set; }
+        public string ListaColores { get; set; }
+        public string ListaDescripcionColores { get; set; }
+        public string HashBC { get; set; }
+        public string UsuarioCreacion { get; set; }
+        public DateTime? FechaCreacion { get; set; }
     }
 
     public class RegistrarControlCalidadDTO
