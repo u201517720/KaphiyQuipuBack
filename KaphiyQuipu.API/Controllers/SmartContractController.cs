@@ -1,11 +1,18 @@
 ﻿using Core.Common.Email;
 using Core.Common.Razor;
 using Core.Common.SMS;
+using KaphiyQuipu.API.Helper;
+using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Contracts.Interface;
 using KaphiyQuipu.Blockchain.Entities;
 using KaphiyQuipu.Blockchain.ERC20;
 using KaphiyQuipu.Blockchain.Facade;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.Blockchain.Services;
+using KaphiyQuipu.DTO;
 using KaphiyQuipu.DTO.ContratoCompraVenta;
+using KaphiyQuipu.DTO.Seguridad;
+using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nethereum.RPC.Accounts;
@@ -32,7 +39,11 @@ namespace KaphiyQuipu.API.Controllers
         private IAccountService _accountService;
         private IMessageSender _messageSender;
         private IEmailService _emailService;
+        private IContratoService _contratoService;
+        private ReportService _reportService;
         private IViewRender _viewRender;
+        private IUserContract _userContract;
+        private INotaIngresoPlantaContract _notaIngresoPlantaContract;
 
         public SmartContractController(
             IContractFacade contractFacade,
@@ -41,7 +52,11 @@ namespace KaphiyQuipu.API.Controllers
             IAccountService accountService,
             IMessageSender messageSender,
              IEmailService emailService,
-             IViewRender viewRender)
+             IContratoService contratoService,
+             ReportService reportService,
+             IViewRender viewRender,
+             IUserContract userContract,
+             INotaIngresoPlantaContract notaIngresoPlantaContract)
         {
             _contractFacade = contractFacade;
             _operation = operation;
@@ -51,7 +66,11 @@ namespace KaphiyQuipu.API.Controllers
             _account = _accountService.GetAccount();
             _messageSender = messageSender;
             _emailService = emailService;
+            _contratoService = contratoService;
+            _reportService = reportService;
             _viewRender = viewRender;
+            _userContract = userContract;
+            _notaIngresoPlantaContract = notaIngresoPlantaContract;
         }
 
         [HttpGet("sms")]
@@ -78,21 +97,67 @@ namespace KaphiyQuipu.API.Controllers
 
         [HttpGet("users")]
         public async Task<IActionResult> GetUsers()
+        {   
+            return Ok(await _userContract.ListarUsuarios());
+        }
+
+        [HttpPost("users")]
+        public async Task<IActionResult> AddUser(UsuarioDTO usuario)
         {
-            var contract = await _contractFacade.GetContract("UserContract", true, "0x89D46B6CAaf575CF878fc18209F357f2B320a5Bb");
-            //var contract = await _contractFacade.GetContract("UserContract", true, "0x7Ed22e76E47dE32cD0CE4E3D6E136e5340192891");
+            return Ok(await _userContract.AgregarUsuario(usuario));
+        }
 
-            var totalUsers = contract.Contract.GetFunction("totalUsers").CallAsync<long>();
+        [HttpGet("v2/users")]
+        public async Task<IActionResult> GetV2Users()
+        {
+            var contract = await _contractFacade.GetContract("UserContract", true, "0xd525DEf1Df2E0C3a29143D9FCEeD821a82C6f516");
 
-            var autenticate = await contract.Contract.GetFunction("validateUser").CallAsync<bool>("admin@gmail.com", "5JKIrQpthKxsTzF4kTDryw==");
- 
-            var user = await contract.Contract.GetFunction("getUser").CallDeserializingToObjectAsync<GenericOutputDTO<UserDTO>>("admin@gmail.com");
-
-
-            //var total = await contract.Contract.GetFunction("totalUsers").CallAsync<long>();
+            var totalUsers = (int)(await contract.Contract.GetFunction("totalUsers").CallAsync<long>());
             var userfunction = contract.Contract.GetFunction("users");
-            var data = await userfunction.CallDeserializingToObjectAsync<UserDTO>(1L).ConfigureAwait(false);
-            return Ok(user.Data);
+
+            List<UserResponseDTO> users = new List<UserResponseDTO>();
+            for (int i = 0; i < totalUsers; i++)
+            {
+                var user = await userfunction.CallDeserializingToObjectAsync<UserResponseDTO>(i);
+                users.Add(user);
+            }
+
+            return Ok(users);
+        }
+
+        [HttpGet("trazabilidad/{nroContrato}")]
+        public async Task<IActionResult> ObtenerTrazabilidad([FromRoute]string nroContrato)
+        {
+            List<(string, List<object>)> datasets = await _contratoService.ObtenerDatosTrazabilidad(nroContrato);
+            byte[] reportData = _reportService.Procesar("SolicitudCompra", null, datasets);
+            return File(reportData, System.Net.Mime.MediaTypeNames.Application.Pdf, $"{nroContrato}.pdf");
+        }
+
+        [HttpPost("nota-ingreso/control-calidad")]
+        public async Task<IActionResult> RegistrarNotaIngresoControlCalidad([FromBody] RegistrarControlCalidadNotaIngresoPlantaRequestDTO request)
+        {
+            TransactionResult result = await _notaIngresoPlantaContract.RegistrarControlCalidad(request, "C000" + request.Id.ToString(), DateTime.Now);
+            return Ok(result);
+        }
+
+        [HttpGet("nota-ingreso/control-calidad")]
+        public async Task<IActionResult> ObtenerNotaIngresoControlCalidad([FromQuery] string correlativo)
+        {
+            return Ok(await _notaIngresoPlantaContract.ObtenerControlCalidadPorCorrelativo(correlativo));
+        }
+
+        [HttpPost("nota-ingreso/resultado-transformacion")]
+        public async Task<IActionResult> RegistrarNotaIngresoResultadoTransformacion([FromBody] RegistrarResultadosTransformacionNotaIngresoPlantaRequestDTO request)
+        {
+            TransactionResult result = await _notaIngresoPlantaContract.RegistrarResultadoTransformacion(request, "NIP0000016", DateTime.Now);
+            return Ok(result);
+        }
+
+
+        [HttpGet("nota-ingreso/resultado-transformacion")]
+        public async Task<IActionResult> ObtenerNotaIngresoResultadoTransformacionPorCorrelativo([FromQuery] string correlativo)
+        {
+            return Ok(await _notaIngresoPlantaContract.ObtenerResultadoTransformacionPorCorrelativo(correlativo));
         }
     }
 }

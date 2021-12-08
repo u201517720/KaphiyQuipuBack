@@ -2,6 +2,8 @@
 using Core.Common.Domain.Model;
 using Core.Common.Email;
 using Core.Common.Razor;
+using KaphiyQuipu.Blockchain.Contracts.Interface;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
@@ -20,14 +22,17 @@ namespace KaphiyQuipu.Service
         ICorrelativoRepository _ICorrelativoRepository;
         private IViewRender _viewRender;
         private IEmailService _emailService;
+        private readonly INotaIngresoPlantaContract _notaIngresoContract;
 
-        public NotaIngresoPlantaService(IMapper mapper, INotaIngresoPlantaRepository notaIngresoPlantaRepository, ICorrelativoRepository correlativoRepository, IViewRender viewRender, IEmailService emailService)
+        public NotaIngresoPlantaService(IMapper mapper, INotaIngresoPlantaRepository notaIngresoPlantaRepository, ICorrelativoRepository correlativoRepository, IViewRender viewRender, IEmailService emailService,
+                                        INotaIngresoPlantaContract notaIngresoContract)
         {
             _Mapper = mapper;
             _INotaIngresoPlantaRepository = notaIngresoPlantaRepository;
             _ICorrelativoRepository = correlativoRepository;
             _viewRender = viewRender;
             _emailService = emailService;
+            _notaIngresoContract = notaIngresoContract;
         }
 
         public void AutorizarTransformacion(AutorizarTransformacionNotaIngresoPlantaRequestDTO request)
@@ -97,6 +102,11 @@ namespace KaphiyQuipu.Service
         {
             NotaIngresoPlanta ingresoPlanta = _Mapper.Map<NotaIngresoPlanta>(request);
             ingresoPlanta.FechaActualizacion = DateTime.Now;
+
+            string correlativo = _INotaIngresoPlantaRepository.ObtenerCorrelativoNotaingresoPorId(request.Id);
+            TransactionResult result = _notaIngresoContract.RegistrarControlCalidad(request, correlativo, ingresoPlanta.FechaActualizacion.Value).Result;
+            ingresoPlanta.HashBC = result.TransactionHash;
+            
             _INotaIngresoPlantaRepository.RegistrarControlCalidad(ingresoPlanta);
         }
 
@@ -105,6 +115,10 @@ namespace KaphiyQuipu.Service
             NotaIngresoPlantaResultadoTransformacion transformacion = _Mapper.Map<NotaIngresoPlantaResultadoTransformacion>(request);
             transformacion.FechaRegistro = DateTime.Now;
 
+            string correlativo = _INotaIngresoPlantaRepository.ObtenerCorrelativoNotaingresoPorId(request.NotaIngresoPlantaId);
+            TransactionResult result = _notaIngresoContract.RegistrarResultadoTransformacion(request, correlativo, transformacion.FechaRegistro).Result;
+            transformacion.HashBC = result.TransactionHash;
+            
             _INotaIngresoPlantaRepository.RegistrarResultadosTransformacion(transformacion);
 
             ParametroEmail oParametroEmail = new ParametroEmail();

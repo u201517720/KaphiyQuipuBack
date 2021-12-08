@@ -5,10 +5,13 @@ using Core.Common.Email;
 using Core.Common.Razor;
 using Core.Common.SMS;
 using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Contracts.Interface;
+using KaphiyQuipu.Blockchain.Entities;
 using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.DTO.Agricultor;
 using KaphiyQuipu.DTO.ContratoCompraVenta;
+using KaphiyQuipu.DTO.Reporte;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
 using KaphiyQuipu.Models;
@@ -28,6 +31,7 @@ namespace KaphiyQuipu.Service
         private ICorrelativoRepository _ICorrelativoRepository;
         public IOptions<FileServerSettings> _fileServerSettings;
         private IContratoCompraContract _contratoCompraContract;
+        private INotaIngresoPlantaContract _notaIngresoPlantaContract;
 
         private IMessageSender _messageSender;
         private IEmailService _emailService;
@@ -36,6 +40,7 @@ namespace KaphiyQuipu.Service
 
         public ContratoService(IContratoRepository contratoRepository, ICorrelativoRepository correlativoRepository, IMapper mapper, IOptions<FileServerSettings> fileServerSettings, IMaestroRepository maestroRepository, IEmpresaRepository empresaRepository,
                                IContratoCompraContract contratoCompraContract,
+                               INotaIngresoPlantaContract notaIngresoPlantaContract,
                                IMessageSender messageSender,
                                IEmailService emailService,
                                IViewRender viewRender)
@@ -45,6 +50,7 @@ namespace KaphiyQuipu.Service
             _ICorrelativoRepository = correlativoRepository;
             _Mapper = mapper;
             _contratoCompraContract = contratoCompraContract;
+            _notaIngresoPlantaContract = notaIngresoPlantaContract;
 
             _messageSender = messageSender;
             _emailService = emailService;
@@ -172,13 +178,142 @@ namespace KaphiyQuipu.Service
                 x.FechaCreacion = dt;
             });
 
+            List<RegistrarControlCalidadDTO> listaControles = _Mapper.Map<List<RegistrarControlCalidadDTO>>(request.controles);
 
-            _IContratoRepository.RegistrarControlCalidad(request.controles);
+            _IContratoRepository.RegistrarControlCalidad(listaControles);
         }
 
         public void ConfirmarRecepcionCafeTerminado(ConfirmarRecepcionCafeTerminadoContratoRequestDTO request)
         {
             _IContratoRepository.ConfirmarRecepcionCafeTerminado(request.Id, request.Usuario, DateTime.Now);
         }
+
+        public async Task<List<(string, List<object>)>> ObtenerDatosTrazabilidad(string nroContrato)
+        {
+            List<(string, List<object>)> datasets = new List<(string, List<object>)>();
+            ReporteContratoDTO reporte = await ObtenerDataReporte(nroContrato);
+
+            datasets.Add(("DS_Contrato", new List<object> { reporte.ContratoCompra }));
+            datasets.Add(("DS_Calidad_Cafe_Agricultor", reporte.ListaCalidadCafeAgricultor.ToList<object>()));
+            datasets.Add(("DS_Analisis_Cafe", reporte.ListaAnalisisCafe.ToList<object>()));
+            datasets.Add(("DS_Resultado_Transformacion", reporte.ListaResultadoTransformacion.ToList<object>()));
+            datasets.Add(("DS_Control_Planta_Transformadora", new List<object> { reporte.ControlPlantaTransformadora }));
+            datasets.Add(("DS_Control_Planta_Transformadora_Detalle", reporte.ListaControlPlantaTransformadora.ToList<object>()));
+            datasets.Add(("DS_Trazabilidad_Contrato", new List<object> { reporte.TrazabilidadContrato }));
+
+            return datasets;
+        }
+
+        #region Private methods
+
+        private async Task<ReporteContratoDTO> ObtenerDataReporte(string nroContrato)
+        {
+            ReporteContratoDTO reporte = new ReporteContratoDTO();
+
+            CorrelativoTrazabilidadContratoDTO trazabilidad = _IContratoRepository.ObtenerCorrelativosTrazabilidadPorNroContrato(nroContrato).FirstOrDefault();
+            
+            #region Contrato
+
+            ContratoCompraOutputDTO contratoDTO = await _contratoCompraContract.ObtenerContrato(nroContrato);
+            reporte.ContratoCompra.FechaSolicitud = (new DateTime(contratoDTO.FechaSolicitud)).ToString("dd/MM/yyyy");
+            reporte.ContratoCompra.Producto = contratoDTO.Producto;
+            reporte.ContratoCompra.TipoProduccion = contratoDTO.TipoProduccion;
+            reporte.ContratoCompra.Calidad = contratoDTO.Calidad;
+            reporte.ContratoCompra.GradoPreparacion = contratoDTO.GradoPrepracion;
+            reporte.ContratoCompra.Distribuidor = contratoDTO.Distribuidor;
+            reporte.ContratoCompra.Cooperativa = "Cooperativa de Servicios Múltiples Aprocassi";
+
+            #endregion
+
+            #region Control Calidad Cafe Agricultor
+
+            List<AgricultorContratoOutputDTO> listaAgricultor = await _contratoCompraContract.ObtenerAgricultoresPorContrato(nroContrato);
+            var listaAgricultoresContrato = _IContratoRepository.ObtenerAgricultoresPorContrato(trazabilidad.IdContrato);
+
+            foreach (var item in listaAgricultor)
+            {
+                CalidadCafeAgricultor calidadCafeAgricultor = new CalidadCafeAgricultor();
+                calidadCafeAgricultor.Agricultor = item.Nombre;
+                calidadCafeAgricultor.Documento = item.NroDocumento;
+                calidadCafeAgricultor.Finca = item.Finca;
+                calidadCafeAgricultor.Certificacion = item.Certificacion;
+
+                var agricultor = listaAgricultoresContrato.FirstOrDefault(x => x.NumeroDocumento == item.NroDocumento && x.Finca == item.Finca);
+
+                if (agricultor != null)
+                {
+                    ControlCalidadAgricultorOutputDTO controlCalidad = await _contratoCompraContract.ObtenerControlCalidadPorSocio(agricultor.ContratoSocioFincaId);
+                    calidadCafeAgricultor.PorcentajeHumedad = controlCalidad.PorcentajeHumedad;
+                    calidadCafeAgricultor.Olores = controlCalidad.Olor;
+                    calidadCafeAgricultor.Colores = controlCalidad.Color;
+                    calidadCafeAgricultor.Responsable = controlCalidad.Responsable;
+                }
+
+                reporte.ListaCalidadCafeAgricultor.Add(calidadCafeAgricultor);
+            }
+
+
+            #endregion
+
+            #region Analisis Cafe en la distribuidora
+            
+            AnalisisFisicoCafeOutputDTO analisisFisico = await _contratoCompraContract.ObtenerAnalisisFisicoCafePorNroGuia(trazabilidad.NroGuiaRecepcion);
+
+            reporte.ListaAnalisisCafe = new List<AnalisisCalidadCafe>
+            {
+                new AnalisisCalidadCafe("Exportación", analisisFisico.CafeGramos, analisisFisico.CafePorcentaje),
+                new AnalisisCalidadCafe("Descarte", analisisFisico.DescarteGramos, analisisFisico.DescartePorcentaje),
+                new AnalisisCalidadCafe("Cáscara", analisisFisico.CascaraGramos, analisisFisico.CascaraPorcentaje),
+                new AnalisisCalidadCafe("Total", analisisFisico.TotalGramos, analisisFisico.TotalPorcentaje)
+            };
+
+            #endregion
+
+            #region Control Calidad Planta Transformadora
+
+            NotaIngresoPlantaCalidadOutputDTO notaIngresoPlanta = await _notaIngresoPlantaContract.ObtenerControlCalidadPorCorrelativo(trazabilidad.NroNotaIngresoPlanta);
+
+            reporte.ControlPlantaTransformadora.Olores = notaIngresoPlanta.Olores;
+            reporte.ControlPlantaTransformadora.Colores = notaIngresoPlanta.Colores;
+            reporte.ControlPlantaTransformadora.Humedad = notaIngresoPlanta.HumedadPorcentaje + " %";
+
+            reporte.ListaControlPlantaTransformadora = new List<AnalisisCalidadCafe>
+            {
+                new AnalisisCalidadCafe("Exportación", notaIngresoPlanta.ExportableGramos, notaIngresoPlanta.ExportablePorcentaje),
+                new AnalisisCalidadCafe("Descarte", notaIngresoPlanta.DescarteGramos, notaIngresoPlanta.DescartePorcentaje),
+                new AnalisisCalidadCafe("Cáscara", notaIngresoPlanta.CascarillaGramos, notaIngresoPlanta.CascarillaPorcentaje),
+                new AnalisisCalidadCafe("Total", notaIngresoPlanta.TotalGramos, notaIngresoPlanta.TotalPorcentaje)
+            };
+
+            reporte.TrazabilidadContrato.FechaControlCalidadPlantaTransformadora = (new DateTime(notaIngresoPlanta.FechaRegistro)).ToString("dd/MM/yyyy");
+
+            #endregion
+
+            #region Resultado Transformación
+
+            NotaIngresoPlantaResultadoTransfOutputDTO notaIngresoPlantaResultado = await _notaIngresoPlantaContract.ObtenerResultadoTransformacionPorCorrelativo(trazabilidad.NroNotaIngresoPlanta);
+            ResultadoTransformacion resultadoTransformacion = new ResultadoTransformacion();
+            
+            reporte.ListaResultadoTransformacion = new List<ResultadoTransformacion> {
+                new ResultadoTransformacion("Café exportación", notaIngresoPlantaResultado.CafeExportacionSacos, notaIngresoPlantaResultado.CafeExportacionKilos),
+                new ResultadoTransformacion("Café exportación MC", notaIngresoPlantaResultado.CafeExportacionMCSacos, notaIngresoPlantaResultado.CafeExportacionMCKilos),
+                new ResultadoTransformacion("Café segunda", notaIngresoPlantaResultado.CafeSegundaSacos, notaIngresoPlantaResultado.CafeSegundaKilos),
+                new ResultadoTransformacion("Café descarte máquina", notaIngresoPlantaResultado.CafeDescarteMaquinaSacos, notaIngresoPlantaResultado.CafeDescarteMaquinaKilos),
+                new ResultadoTransformacion("Café descarte de escojo", notaIngresoPlantaResultado.CafeDescarteEscojoSacos, notaIngresoPlantaResultado.CafeDescarteEscojoKilos),
+                new ResultadoTransformacion("Café bola", notaIngresoPlantaResultado.CafeBolaSacos, notaIngresoPlantaResultado.CafeBolaKilos),
+                new ResultadoTransformacion("Café cisco", notaIngresoPlantaResultado.CafeCiscoSacos, notaIngresoPlantaResultado.CafeCiscoKilos),
+                new ResultadoTransformacion("TOTAL EN CAFÉ", notaIngresoPlantaResultado.TotalCafeSacos, notaIngresoPlantaResultado.TotalCafeKgNetos),
+                new ResultadoTransformacion("Piedras y otros", string.Empty, notaIngresoPlantaResultado.PiedraOtrosKgNetos),
+                new ResultadoTransformacion("Cascara y otros", string.Empty, notaIngresoPlantaResultado.CascaraOtrosKgNetos)
+            };
+
+            reporte.TrazabilidadContrato.FechaResultadoTransformacion = (new DateTime(notaIngresoPlantaResultado.FechaRegistro)).ToString("dd/MM/yyyy");
+
+            #endregion
+
+            return reporte;
+        }
+
+        #endregion
     }
 }

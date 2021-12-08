@@ -8,7 +8,9 @@ namespace KaphiyQuipu.DTO
     {
         public int Id { get; set; }
         public string Olores { get; set; }
+        public string DescripcionOlores { get; set; }
         public string Colores { get; set; }
+        public string DescripcionColores { get; set; }
         public decimal ExportableGramos { get; set; }
         public decimal ExportablePorcentaje { get; set; }
         public decimal DescarteGramos { get; set; }

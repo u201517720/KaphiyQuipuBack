@@ -20,9 +20,13 @@ namespace KaphiyQuipu.Blockchain.Contracts
         Task<ContratoCompraOutputDTO> ObtenerContrato(string nroContrato);
         Task<TransactionResult> AgregarAgricultor(AgricultorContratoDTO agricultor);
         Task<List<AgricultorContratoOutputDTO>> ObtenerAgricultoresPorContrato(string nroContrato);
-        Task<TransactionResult> AgregarControlCalidad(RegistrarControlCalidadDTO controlCalidad);
+        Task<TransactionResult> AgregarControlCalidad(ControlCalidadRequest controlCalidad);
+        Task<ControlCalidadAgricultorOutputDTO> ObtenerControlCalidadPorSocio(int contratoSocioFincaId);
         Task<TransactionResult> AgregarAnalisisFisicoCafe(GuiaRecepcionMateriaPrima guia);
+        Task<AnalisisFisicoCafeOutputDTO> ObtenerAnalisisFisicoCafePorNroGuia(string nroGuia);
         Task<TransactionResult> AgregarNotaIngresoAlmacenAcopio(UbicarMateriaPrimaAlmacenRequestDTO request);
+        Task<TransactionResult> AgregarTrazabilidad(string contrato, string proceso, string correlativo, DateTime fecha);
+        Task<List<TrazabilidadContratoOutput>> ObtenerTrazabilidad(string nroContrato);
     }
 
     public class ContratoCompraContract : IContratoCompraContract
@@ -76,6 +80,7 @@ namespace KaphiyQuipu.Blockchain.Contracts
         {
             TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_AGRICULTOR,
                                            agricultor.NroContrato,
+                                           agricultor.Nombre,
                                            agricultor.NroDocumento,
                                            agricultor.Finca,
                                            agricultor.Certificacion);
@@ -89,18 +94,24 @@ namespace KaphiyQuipu.Blockchain.Contracts
             return solicitudOutput.Lista;
         }
 
-        public async Task<TransactionResult> AgregarControlCalidad(RegistrarControlCalidadDTO controlCalidad)
+        public async Task<TransactionResult> AgregarControlCalidad(ControlCalidadRequest controlCalidad)
         {
             TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_CONTROL_CALIDAD,
                                            controlCalidad.ContratoSocioFincaId,
                                            controlCalidad.Humedad.ToString("0.00"),
-                                           controlCalidad.ListaOlores,
-                                           controlCalidad.ListaColores,
+                                           controlCalidad.ListaDescripcionOlores,
+                                           controlCalidad.ListaDescripcionColores,
                                            controlCalidad.Observaciones,
                                            controlCalidad.UsuarioCreacion
                                            );
 
             return result;
+        }
+
+        public async Task<ControlCalidadAgricultorOutputDTO> ObtenerControlCalidadPorSocio(int contratoSocioFincaId)
+        {
+            var solicitudOutput = await contract.Contract.GetFunction(Functions.ContratoCompra.OBTENER_CONTROL_CALIDAD).CallDeserializingToObjectAsync<GenericOutputDTO<ControlCalidadAgricultorOutputDTO>>(contratoSocioFincaId);
+            return solicitudOutput.Data;
         }
 
         public async Task<TransactionResult> AgregarAnalisisFisicoCafe(GuiaRecepcionMateriaPrima guia)
@@ -120,6 +131,12 @@ namespace KaphiyQuipu.Blockchain.Contracts
             return result;
         }
 
+        public async Task<AnalisisFisicoCafeOutputDTO> ObtenerAnalisisFisicoCafePorNroGuia(string nroGuia)
+        {
+            var solicitudOutput = await contract.Contract.GetFunction(Functions.ContratoCompra.OBTENER_ANALISIS_FISICO_CAFE).CallDeserializingToObjectAsync<GenericOutputDTO<AnalisisFisicoCafeOutputDTO>>(nroGuia);
+            return solicitudOutput.Data;
+        }
+
         public async Task<TransactionResult> AgregarNotaIngresoAlmacenAcopio(UbicarMateriaPrimaAlmacenRequestDTO request)
         {
             TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_NOTA_INGRESO_ALMACEN_ACOPIO,
@@ -129,6 +146,23 @@ namespace KaphiyQuipu.Blockchain.Contracts
                                            );
 
             return result;
+        }
+
+        public async Task<TransactionResult> AgregarTrazabilidad(string contrato, string proceso, string correlativo, DateTime fecha)
+        {
+            TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_TRAZABILIDAD,
+                                           contrato,
+                                           proceso,
+                                           correlativo,
+                                           fecha.Ticks);
+
+            return result;
+        }
+
+        public async Task<List<TrazabilidadContratoOutput>> ObtenerTrazabilidad(string nroContrato)
+        {
+            var solicitudOutput = await contract.Contract.GetFunction(Functions.ContratoCompra.OBTENER_TRAZABILIDAD).CallDeserializingToObjectAsync<GenericTupleOutputDTO<TrazabilidadContratoOutput>>(nroContrato);
+            return solicitudOutput.Lista;
         }
     }
 }

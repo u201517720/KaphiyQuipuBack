@@ -1,9 +1,11 @@
 ﻿using Core.Common.Domain.Model;
+using KaphiyQuipu.API.Helper;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace KaphiyQuipu.API.Controller
@@ -13,11 +15,13 @@ namespace KaphiyQuipu.API.Controller
     public class ContratoController : ControllerBase
     {
         private IContratoService _contratoService;
+        private ReportService _reportService;
 
         private Core.Common.Logger.ILog _log;
-        public ContratoController(IContratoService contratoService, Core.Common.Logger.ILog log)
+        public ContratoController(IContratoService contratoService, ReportService reportService, Core.Common.Logger.ILog log)
         {
             _contratoService = contratoService;
+            _reportService = reportService;
             _log = log;
         }
 
@@ -251,5 +255,32 @@ namespace KaphiyQuipu.API.Controller
 
             return Ok(response);
         }
+
+
+        [HttpGet("GenerarQRTrazabilidad/{nroContrato}")]
+        public async Task<IActionResult> ObtenerTrazabilidad([FromRoute] string nroContrato)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{nroContrato}");
+            try
+            {
+                List<(string, List<object>)> datasets = await _contratoService.ObtenerDatosTrazabilidad(nroContrato);
+                byte[] reportData = _reportService.Procesar("SolicitudCompra", null, datasets);
+                return File(reportData, System.Net.Mime.MediaTypeNames.Application.Pdf, $"{nroContrato}.pdf");
+            }
+            catch (ResultException ex)
+            {
+                GeneralResponse response = new GeneralResponse();
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _log.RegistrarEvento(ex, guid.ToString());
+                GeneralResponse response = new GeneralResponse();
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                return Ok(response);
+            }
+                    }
     }
 }

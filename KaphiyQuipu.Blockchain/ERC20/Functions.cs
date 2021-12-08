@@ -12,6 +12,7 @@ namespace KaphiyQuipu.Blockchain.ERC20
             public static string FUNCTION_GET_USER = "getUser";
             public static string FUNCTION_TOTAL_USERS = "totalUsers";
             public static string FUNCTION_USERS = "users";
+            public static string ADD_USERS = "addUser";
         }
 
         public struct SolicitudCompra
@@ -21,7 +22,7 @@ namespace KaphiyQuipu.Blockchain.ERC20
             public static string OBTENER_TOTAL_SOLICITUD = "obtenerTotalSolicitudes";
         }
 
-        public  struct ContratoCompra
+        public struct ContratoCompra
         {
             public static string AGREGAR_CONTRATO = "agregarContrato";
             public static string OBTENER_CONTRATO = "obtenerContrato";
@@ -33,6 +34,17 @@ namespace KaphiyQuipu.Blockchain.ERC20
             public static string AGREGAR_ANALISIS_FISICO_CAFE = "agregarAnalisisFisicoCafe";
             public static string OBTENER_ANALISIS_FISICO_CAFE = "obtenerAnalisisFisicoCafe";
             public static string AGREGAR_NOTA_INGRESO_ALMACEN_ACOPIO = "agregarNotaIngresoAlmacenAcopio";
+
+            public static string AGREGAR_TRAZABILIDAD = "agregarTrazabilidad";
+            public static string OBTENER_TRAZABILIDAD = "obtenerTrazabilidad";
+        }
+
+        public struct NotaIngresoPlanta
+        {
+            public static string AGREGAR_CONTROL_CALIDAD = "agregarControlCalidad";
+            public static string OBTENER_CONTROL_CALIDAD = "obtenerControlCalidad";
+            public static string AGREGAR_RESULTADO_TRANSFORMACION = "agregarResultadoTransformacion";
+            public static string OBTENER_RESULTADO_TRANSFORMACION = "obtenerResultadoTransformacion";
         }
     }
 }
