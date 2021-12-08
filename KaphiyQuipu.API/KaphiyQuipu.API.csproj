@@ -60,6 +60,9 @@
     <None Update="SmartContracts\ContratoCompra\ContratoCompra.abi">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SmartContracts\NotaIngresoPlanta\NotaIngresoPlanta.abi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SmartContracts\SolicitudCompra\SolicitudCompra.abi">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
