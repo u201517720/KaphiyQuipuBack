@@ -8,5 +8,6 @@ namespace KaphiyQuipu.DTO
     {
         public int OrdenProcesoId { get; set; }
         public string UsuarioRegistro { get; set; }
+        public string Contrato { get; set; }
     }
 }

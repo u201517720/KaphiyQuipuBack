@@ -123,7 +123,7 @@ namespace Integracion.Deuda.Controller
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
-            UbicarMateriaPrimaAlmacenResponseDTO response = new UbicarMateriaPrimaAlmacenResponseDTO();
+            GeneralResponse response = new GeneralResponse();
 
             try
             {

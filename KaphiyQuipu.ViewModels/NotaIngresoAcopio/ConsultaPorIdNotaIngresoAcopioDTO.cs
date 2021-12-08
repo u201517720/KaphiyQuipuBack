@@ -14,6 +14,7 @@ namespace KaphiyQuipu.DTO
 
         public int NotaIngresoAcopioId { get; set; }
         public string Correlativo { get; set; }
+        public string CorrelativoContrato { get; set; }
         public string CorrelativoGuiaRecepcion { get; set; }
         public string FechaRegistro { get; set; }
         public string RazonSocial { get; set; }

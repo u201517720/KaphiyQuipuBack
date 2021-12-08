@@ -10,5 +10,6 @@ namespace KaphiyQuipu.DTO
         public string UsuarioRegistro { get; set; }
         public string Empresa { get; set; }
         public string Correlativo { get; set; }
+        public string Contrato { get; set; }
     }
 }

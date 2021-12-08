@@ -9,5 +9,6 @@ namespace KaphiyQuipu.DTO
         public int GuiaRemisionAcopioId { get; set; }
         public string Observaciones { get; set; }
         public string UsuarioRegistro { get; set; }
+        public string Contrato { get; set; }
     }
 }

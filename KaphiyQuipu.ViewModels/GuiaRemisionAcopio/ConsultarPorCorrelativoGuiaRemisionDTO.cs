@@ -19,5 +19,6 @@ namespace KaphiyQuipu.DTO
         public decimal KilosBrutosPC { get; set; }
         public decimal TaraSacoPC { get; set; }
         public decimal KilosNetos { get; set; }
+        public string CorrelativoContrato { get; set; }
     }
 }

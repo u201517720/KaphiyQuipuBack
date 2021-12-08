@@ -12,5 +12,6 @@ namespace KaphiyQuipu.DTO
         public decimal TotalSacos { get; set; }
         public decimal PesoSaco { get; set; }
         public decimal TotalCafeKgNetos { get; set; }
+        public string CorrelativoContrato { get; set; }
     }
 }
