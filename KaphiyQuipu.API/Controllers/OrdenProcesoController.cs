@@ -30,7 +30,7 @@ namespace KaphiyQuipu.API.Controller
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
-            RegistrarOrdenProcesoAcopioResponseDTO response = new RegistrarOrdenProcesoAcopioResponseDTO();
+            GeneralResponse response = new GeneralResponse();
             try
             {
                 response.Result.Data = _IOrdenProcesoAcopioService.Registrar(request);
@@ -58,7 +58,7 @@ namespace KaphiyQuipu.API.Controller
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
-            ConsultarOrdenProcesoAcopioResponseDTO response = new ConsultarOrdenProcesoAcopioResponseDTO();
+            GeneralResponse response = new GeneralResponse();
             try
             {
                 response.Result.Data = _IOrdenProcesoAcopioService.Consultar(request);
@@ -114,7 +114,7 @@ namespace KaphiyQuipu.API.Controller
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
-            ActualizarTipoProcesoOrdenProcesoResponseDTO response = new ActualizarTipoProcesoOrdenProcesoResponseDTO();
+            GeneralResponse response = new GeneralResponse();
             try
             {
                 _IOrdenProcesoAcopioService.ActualizarTipoProceso(request);
