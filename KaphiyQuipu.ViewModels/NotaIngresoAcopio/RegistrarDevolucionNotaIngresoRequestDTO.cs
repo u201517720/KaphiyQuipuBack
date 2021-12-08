@@ -12,5 +12,6 @@ namespace KaphiyQuipu.DTO
         public string Observaciones { get; set; }
         public string HashBC { get; set; }
         public string UsuarioRegistro { get; set; }
+        public string Contrato { get; set; }
     }
 }

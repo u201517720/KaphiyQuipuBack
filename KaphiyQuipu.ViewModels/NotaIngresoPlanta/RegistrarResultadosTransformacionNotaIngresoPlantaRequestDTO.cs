@@ -28,5 +28,6 @@ namespace KaphiyQuipu.DTO
         public string HashBC { get; set; }
         public string UsuarioRegistro { get; set; }
         public DateTime FechaRegistro { get; set; }
+        public string Correlativo { get; set; }
     }
 }
