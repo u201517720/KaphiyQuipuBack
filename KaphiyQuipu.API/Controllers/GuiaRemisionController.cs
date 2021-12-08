@@ -84,7 +84,7 @@ namespace KaphiyQuipu.API.Controller
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
-            RegistrarGuiaRemisionAcopioResponseDTO response = new RegistrarGuiaRemisionAcopioResponseDTO();
+            GeneralResponse response = new GeneralResponse();
             try
             {
                 response.Result.Data = await _IGuiaRemisionAcopioService.Registrar(request);
