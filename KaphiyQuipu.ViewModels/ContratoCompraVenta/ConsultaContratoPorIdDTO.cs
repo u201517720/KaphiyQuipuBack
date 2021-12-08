@@ -45,6 +45,7 @@ namespace KaphiyQuipu.DTO
         public decimal Tara { get; set; }
         public decimal KilosNetos { get; set; }
         public decimal CostoTotal { get; set; }
+        public string HashBC { get; set; }
         public List<ObtenerControlCalidadDTO> controles { get; set; }
     }
 }
