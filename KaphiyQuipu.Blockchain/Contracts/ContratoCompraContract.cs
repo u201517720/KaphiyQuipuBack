@@ -25,6 +25,7 @@ namespace KaphiyQuipu.Blockchain.Contracts
         Task<TransactionResult> AgregarAnalisisFisicoCafe(GuiaRecepcionMateriaPrima guia, DateTime fecha);
         Task<AnalisisFisicoCafeOutputDTO> ObtenerAnalisisFisicoCafePorNroGuia(string nroGuia);
         Task<TransactionResult> AgregarNotaIngresoAlmacenAcopio(UbicarMateriaPrimaAlmacenRequestDTO request);
+        Task<NotaIngresoAlmacenAcopioOutputDTO> ObtenerNotaIngresoAlmacenAcopio(string correlativo);
         Task<TransactionResult> AgregarTrazabilidad(string contrato, string proceso, string correlativo, DateTime fecha);
         Task<List<TrazabilidadContratoOutput>> ObtenerTrazabilidad(string nroContrato);
     }
@@ -133,9 +134,9 @@ namespace KaphiyQuipu.Blockchain.Contracts
             return result;
         }
 
-        public async Task<AnalisisFisicoCafeOutputDTO> ObtenerAnalisisFisicoCafePorNroGuia(string nroGuia)
+        public async Task<AnalisisFisicoCafeOutputDTO> ObtenerAnalisisFisicoCafePorNroGuia(string correlativo)
         {
-            var solicitudOutput = await contract.Contract.GetFunction(Functions.ContratoCompra.OBTENER_ANALISIS_FISICO_CAFE).CallDeserializingToObjectAsync<GenericOutputDTO<AnalisisFisicoCafeOutputDTO>>(nroGuia);
+            var solicitudOutput = await contract.Contract.GetFunction(Functions.ContratoCompra.OBTENER_ANALISIS_FISICO_CAFE).CallDeserializingToObjectAsync<GenericOutputDTO<AnalisisFisicoCafeOutputDTO>>(correlativo);
             return solicitudOutput.Data;
         }
 
@@ -150,8 +151,20 @@ namespace KaphiyQuipu.Blockchain.Contracts
             return result;
         }
 
+        public async Task<NotaIngresoAlmacenAcopioOutputDTO> ObtenerNotaIngresoAlmacenAcopio(string nroGuia)
+        {
+            var solicitudOutput = await contract.Contract.GetFunction(Functions.ContratoCompra.OBTENER_NOTA_INGRESO_ALMACEN_ACOPIO).CallDeserializingToObjectAsync<GenericOutputDTO<NotaIngresoAlmacenAcopioOutputDTO>>(nroGuia);
+            return solicitudOutput.Data;
+        }
+
         public async Task<TransactionResult> AgregarTrazabilidad(string contrato, string proceso, string correlativo, DateTime fecha)
         {
+            if (string.IsNullOrEmpty(contrato))
+            {
+                throw new ArgumentNullException("El número de contrato no puede ser nulo o vacío");
+            }
+
+
             TransactionResult result = await _contractOperation.GenericTransaction(contract.Contract, _web3, _account.Address, Functions.ContratoCompra.AGREGAR_TRAZABILIDAD,
                                            contrato,
                                            proceso,

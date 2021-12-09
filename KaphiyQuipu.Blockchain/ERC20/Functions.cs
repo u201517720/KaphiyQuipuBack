@@ -34,6 +34,7 @@ namespace KaphiyQuipu.Blockchain.ERC20
             public static string AGREGAR_ANALISIS_FISICO_CAFE = "agregarAnalisisFisicoCafe";
             public static string OBTENER_ANALISIS_FISICO_CAFE = "obtenerAnalisisFisicoCafe";
             public static string AGREGAR_NOTA_INGRESO_ALMACEN_ACOPIO = "agregarNotaIngresoAlmacenAcopio";
+            public static string OBTENER_NOTA_INGRESO_ALMACEN_ACOPIO = "obtenerNotaIngresoAlmacenAcopio";
 
             public static string AGREGAR_TRAZABILIDAD = "agregarTrazabilidad";
             public static string OBTENER_TRAZABILIDAD = "obtenerTrazabilidad";

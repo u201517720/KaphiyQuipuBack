@@ -282,6 +282,8 @@ namespace KaphiyQuipu.Service
 
             #endregion
 
+            NotaIngresoAlmacenAcopioOutputDTO notaIngresoAlmacenAcopio = await _contratoCompraContract.ObtenerNotaIngresoAlmacenAcopio(trazabilidad.NroNotaIngresoAlmacenAcopio);
+
             #region Control Calidad Planta Transformadora
 
             NotaIngresoPlantaCalidadOutputDTO notaIngresoPlanta = await _notaIngresoPlantaContract.ObtenerControlCalidadPorCorrelativo(trazabilidad.NroNotaIngresoPlanta);
@@ -320,17 +322,17 @@ namespace KaphiyQuipu.Service
 
             reporte.TrazabilidadContrato.FechaControlCalidad = fechaCalidad.ToString("dd/MM/yyyy");
             reporte.TrazabilidadContrato.FechaAnalisisCafe = (new DateTime(analisisFisico.Fecha)).ToString("dd/MM/yyyy");
-            reporte.TrazabilidadContrato.FechaIngresoPlantaAcopio = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.INGRESO_PLANTA_ACOPIO)?.fecha ?? default).ToString("dd/MM/yyyy");
-            reporte.TrazabilidadContrato.FechaEnvioPlantaTransformadora = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.ENVIO_PLANTA_TRANSFORMADORA)?.fecha ?? default).ToString("dd/MM/yyyy");
-            reporte.TrazabilidadContrato.FechaRecepcionPlantaTransformadora = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.RECEPCION_MATERIA_PRIMA_PLANTA)?.fecha ?? default).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaIngresoPlantaAcopio = (new DateTime(notaIngresoAlmacenAcopio.Fecha)).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaEnvioPlantaTransformadora = (new DateTime(listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.ENVIO_PLANTA_TRANSFORMADORA).fecha)).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaRecepcionPlantaTransformadora = (new DateTime(listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.RECEPCION_MATERIA_PRIMA_PLANTA).fecha)).ToString("dd/MM/yyyy");
 
             reporte.TrazabilidadContrato.FechaControlCalidadPlantaTransformadora = (new DateTime(notaIngresoPlanta.FechaRegistro)).ToString("dd/MM/yyyy");
-            reporte.TrazabilidadContrato.FechaIngresoTransformacionPlanta = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.INICIAR_TRANSFORMACION)?.fecha ?? default).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaIngresoTransformacionPlanta = (new DateTime(listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.INICIAR_TRANSFORMACION).fecha)).ToString("dd/MM/yyyy");
             reporte.TrazabilidadContrato.FechaResultadoTransformacion = (new DateTime(notaIngresoPlantaResultado.FechaRegistro)).ToString("dd/MM/yyyy");
             reporte.TrazabilidadContrato.FechaTransformacionMateriaPrima = reporte.TrazabilidadContrato.FechaResultadoTransformacion;
-            reporte.TrazabilidadContrato.FechaEnvioACooperativa = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.ENVIO_CAFE_HACIA_COOPERATIVA)?.fecha ?? default).ToString("dd/MM/yyyy");
-            reporte.TrazabilidadContrato.FechaRecepcionCooperativa = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.RECEPCION_CAFE_PROCESADO_POR_COOPERATIVA)?.fecha ?? default).ToString("dd/MM/yyyy");
-            reporte.TrazabilidadContrato.FechaEnvioADistribuidora = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.ENVIO_CAFE_HACIA_DISTRIBUIDORA)?.fecha ?? default).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaEnvioACooperativa = (new DateTime(listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.ENVIO_CAFE_HACIA_COOPERATIVA).fecha)).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaRecepcionCooperativa = (new DateTime(listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.RECEPCION_CAFE_PROCESADO_POR_COOPERATIVA).fecha)).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaEnvioADistribuidora = (new DateTime(listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.ENVIO_CAFE_HACIA_DISTRIBUIDORA).fecha)).ToString("dd/MM/yyyy");
 
             #endregion
 

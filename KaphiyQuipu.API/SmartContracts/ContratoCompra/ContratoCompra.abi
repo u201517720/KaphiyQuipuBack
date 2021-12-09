@@ -1,1 +1,685 @@
-[{"constant":false,"inputs":[{"name":"correlativo","type":"string"},{"name":"almacen","type":"string"},{"name":"fecha","type":"uint256"}],"name":"agregarNotaIngresoAlmacenAcopio","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"obtenerTotalContratos","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"correlativo","type":"string"}],"name":"obtenerContrato","outputs":[{"components":[{"name":"correlativo","type":"string"},{"name":"distribuidor","type":"string"},{"name":"producto","type":"string"},{"name":"subProducto","type":"string"},{"name":"tipoProduccion","type":"string"},{"name":"calidad","type":"string"},{"name":"gradoPrepracion","type":"string"},{"name":"fechaSolicitud","type":"uint256"}],"name":"","type":"tuple"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"correlativo","type":"string"},{"name":"distribuidor","type":"string"},{"name":"producto","type":"string"},{"name":"subProducto","type":"string"},{"name":"tipoProduccion","type":"string"},{"name":"calidad","type":"string"},{"name":"gradoPrepracion","type":"string"},{"name":"fechaSolicitud","type":"uint256"}],"name":"agregarContrato","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"contrato","type":"string"},{"name":"proceso","type":"string"},{"name":"correlativo","type":"string"},{"name":"fecha","type":"uint256"}],"name":"agregarTrazabilidad","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"contrato","type":"string"},{"name":"nombre","type":"string"},{"name":"nroDocumento","type":"string"},{"name":"finca","type":"string"},{"name":"certificacion","type":"string"}],"name":"agregarAgricultor","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"contrato","type":"string"}],"name":"obtenerAgricultores","outputs":[{"components":[{"name":"contrato","type":"string"},{"name":"nombre","type":"string"},{"name":"nroDocumento","type":"string"},{"name":"finca","type":"string"},{"name":"certificacion","type":"string"}],"name":"","type":"tuple[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guia","type":"string"},{"name":"cafe_gramos","type":"string"},{"name":"cafe_porcentaje","type":"string"},{"name":"descarte_gramos","type":"string"},{"name":"descarte_porcentaje","type":"string"},{"name":"cascara_gramos","type":"string"},{"name":"cascara_porcentaje","type":"string"},{"name":"total_gramos","type":"string"},{"name":"total_porcentaje","type":"string"}],"name":"agregarAnalisisFisicoCafe","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"contratoSocioFincaId","type":"uint256"},{"name":"porcentajeHumedad","type":"string"},{"name":"olor","type":"string"},{"name":"color","type":"string"},{"name":"observacion","type":"string"},{"name":"responsable","type":"string"}],"name":"agregarControlCalidad","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"contratoSocioFincaId","type":"uint256"}],"name":"obtenerControlCalidad","outputs":[{"components":[{"name":"porcentajeHumedad","type":"string"},{"name":"olor","type":"string"},{"name":"color","type":"string"},{"name":"observacion","type":"string"},{"name":"responsable","type":"string"}],"name":"","type":"tuple"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"contrato","type":"string"}],"name":"obtenerTrazabilidad","outputs":[{"components":[{"name":"Proceso","type":"string"},{"name":"correlativo","type":"string"},{"name":"fecha","type":"uint256"}],"name":"","type":"tuple[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"correlativo","type":"string"}],"name":"obtenerNotaIngresoAlmacenAcopio","outputs":[{"components":[{"name":"correlativo","type":"string"},{"name":"almacen","type":"string"},{"name":"fecha","type":"uint256"}],"name":"","type":"tuple"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"guia","type":"string"}],"name":"obtenerAnalisisFisicoCafe","outputs":[{"components":[{"name":"cafe_gramos","type":"string"},{"name":"cafe_porcentaje","type":"string"},{"name":"descarte_gramos","type":"string"},{"name":"descarte_porcentaje","type":"string"},{"name":"cascara_gramos","type":"string"},{"name":"cascara_porcentaje","type":"string"},{"name":"total_gramos","type":"string"},{"name":"total_porcentaje","type":"string"}],"name":"","type":"tuple"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"correlativo","type":"string"},{"indexed":false,"name":"distribuidor","type":"string"},{"indexed":false,"name":"producto","type":"string"},{"indexed":false,"name":"subProducto","type":"string"},{"indexed":false,"name":"tipoProduccion","type":"string"},{"indexed":false,"name":"calidad","type":"string"},{"indexed":false,"name":"gradoPrepracion","type":"string"},{"indexed":false,"name":"fechaSolicitud","type":"uint256"}],"name":"nuevo_contrato","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"contrato","type":"string"},{"indexed":false,"name":"nroDocumento","type":"string"},{"indexed":false,"name":"finca","type":"string"},{"indexed":false,"name":"certificacion","type":"string"}],"name":"nuevo_agricultor","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"contratoSocioFincaId","type":"uint256"},{"indexed":false,"name":"porcentajeHumedad","type":"string"},{"indexed":false,"name":"olor","type":"string"},{"indexed":false,"name":"color","type":"string"},{"indexed":false,"name":"observacion","type":"string"},{"indexed":false,"name":"responsable","type":"string"}],"name":"agregar_control_calidad","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"guia","type":"string"},{"indexed":false,"name":"cafe_gramos","type":"string"},{"indexed":false,"name":"cafe_porcentaje","type":"string"},{"indexed":false,"name":"descarte_gramos","type":"string"},{"indexed":false,"name":"descarte_porcentaje","type":"string"},{"indexed":false,"name":"cascara_gramos","type":"string"},{"indexed":false,"name":"cascara_porcentaje","type":"string"},{"indexed":false,"name":"total_gramos","type":"string"},{"indexed":false,"name":"total_porcentaje","type":"string"}],"name":"agregar_analisis_fisico","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"correlativo","type":"string"},{"indexed":false,"name":"almacen","type":"string"},{"indexed":false,"name":"fecha","type":"uint256"}],"name":"agregar_nota_ingreso_almacen_acopio","type":"event"}]
+[
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "correlativo",
+        "type": "string"
+      },
+      {
+        "name": "almacen",
+        "type": "string"
+      },
+      {
+        "name": "fecha",
+        "type": "uint256"
+      }
+    ],
+    "name": "agregarNotaIngresoAlmacenAcopio",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "obtenerTotalContratos",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "correlativo",
+        "type": "string"
+      }
+    ],
+    "name": "obtenerContrato",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "correlativo",
+            "type": "string"
+          },
+          {
+            "name": "distribuidor",
+            "type": "string"
+          },
+          {
+            "name": "producto",
+            "type": "string"
+          },
+          {
+            "name": "subProducto",
+            "type": "string"
+          },
+          {
+            "name": "tipoProduccion",
+            "type": "string"
+          },
+          {
+            "name": "calidad",
+            "type": "string"
+          },
+          {
+            "name": "gradoPrepracion",
+            "type": "string"
+          },
+          {
+            "name": "fechaSolicitud",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "correlativo",
+        "type": "string"
+      },
+      {
+        "name": "distribuidor",
+        "type": "string"
+      },
+      {
+        "name": "producto",
+        "type": "string"
+      },
+      {
+        "name": "subProducto",
+        "type": "string"
+      },
+      {
+        "name": "tipoProduccion",
+        "type": "string"
+      },
+      {
+        "name": "calidad",
+        "type": "string"
+      },
+      {
+        "name": "gradoPrepracion",
+        "type": "string"
+      },
+      {
+        "name": "fechaSolicitud",
+        "type": "uint256"
+      }
+    ],
+    "name": "agregarContrato",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "guia",
+        "type": "string"
+      },
+      {
+        "name": "cafe_gramos",
+        "type": "string"
+      },
+      {
+        "name": "cafe_porcentaje",
+        "type": "string"
+      },
+      {
+        "name": "descarte_gramos",
+        "type": "string"
+      },
+      {
+        "name": "descarte_porcentaje",
+        "type": "string"
+      },
+      {
+        "name": "cascara_gramos",
+        "type": "string"
+      },
+      {
+        "name": "cascara_porcentaje",
+        "type": "string"
+      },
+      {
+        "name": "total_gramos",
+        "type": "string"
+      },
+      {
+        "name": "total_porcentaje",
+        "type": "string"
+      },
+      {
+        "name": "fecha",
+        "type": "uint256"
+      }
+    ],
+    "name": "agregarAnalisisFisicoCafe",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "contrato",
+        "type": "string"
+      },
+      {
+        "name": "proceso",
+        "type": "string"
+      },
+      {
+        "name": "correlativo",
+        "type": "string"
+      },
+      {
+        "name": "fecha",
+        "type": "uint256"
+      }
+    ],
+    "name": "agregarTrazabilidad",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "contrato",
+        "type": "string"
+      },
+      {
+        "name": "nombre",
+        "type": "string"
+      },
+      {
+        "name": "nroDocumento",
+        "type": "string"
+      },
+      {
+        "name": "finca",
+        "type": "string"
+      },
+      {
+        "name": "certificacion",
+        "type": "string"
+      }
+    ],
+    "name": "agregarAgricultor",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "contrato",
+        "type": "string"
+      }
+    ],
+    "name": "obtenerAgricultores",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "contrato",
+            "type": "string"
+          },
+          {
+            "name": "nombre",
+            "type": "string"
+          },
+          {
+            "name": "nroDocumento",
+            "type": "string"
+          },
+          {
+            "name": "finca",
+            "type": "string"
+          },
+          {
+            "name": "certificacion",
+            "type": "string"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "contratoSocioFincaId",
+        "type": "uint256"
+      },
+      {
+        "name": "porcentajeHumedad",
+        "type": "string"
+      },
+      {
+        "name": "olor",
+        "type": "string"
+      },
+      {
+        "name": "color",
+        "type": "string"
+      },
+      {
+        "name": "observacion",
+        "type": "string"
+      },
+      {
+        "name": "responsable",
+        "type": "string"
+      },
+      {
+        "name": "fecha",
+        "type": "uint256"
+      }
+    ],
+    "name": "agregarControlCalidad",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "contratoSocioFincaId",
+        "type": "uint256"
+      }
+    ],
+    "name": "obtenerControlCalidad",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "porcentajeHumedad",
+            "type": "string"
+          },
+          {
+            "name": "olor",
+            "type": "string"
+          },
+          {
+            "name": "color",
+            "type": "string"
+          },
+          {
+            "name": "observacion",
+            "type": "string"
+          },
+          {
+            "name": "responsable",
+            "type": "string"
+          },
+          {
+            "name": "fecha",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "contrato",
+        "type": "string"
+      }
+    ],
+    "name": "obtenerTrazabilidad",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "Proceso",
+            "type": "string"
+          },
+          {
+            "name": "correlativo",
+            "type": "string"
+          },
+          {
+            "name": "fecha",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "correlativo",
+        "type": "string"
+      }
+    ],
+    "name": "obtenerNotaIngresoAlmacenAcopio",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "correlativo",
+            "type": "string"
+          },
+          {
+            "name": "almacen",
+            "type": "string"
+          },
+          {
+            "name": "fecha",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "guia",
+        "type": "string"
+      }
+    ],
+    "name": "obtenerAnalisisFisicoCafe",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "cafe_gramos",
+            "type": "string"
+          },
+          {
+            "name": "cafe_porcentaje",
+            "type": "string"
+          },
+          {
+            "name": "descarte_gramos",
+            "type": "string"
+          },
+          {
+            "name": "descarte_porcentaje",
+            "type": "string"
+          },
+          {
+            "name": "cascara_gramos",
+            "type": "string"
+          },
+          {
+            "name": "cascara_porcentaje",
+            "type": "string"
+          },
+          {
+            "name": "total_gramos",
+            "type": "string"
+          },
+          {
+            "name": "total_porcentaje",
+            "type": "string"
+          },
+          {
+            "name": "fecha",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "correlativo",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "distribuidor",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "producto",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "subProducto",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "tipoProduccion",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "calidad",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "gradoPrepracion",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "fechaSolicitud",
+        "type": "uint256"
+      }
+    ],
+    "name": "nuevo_contrato",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "contrato",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "nroDocumento",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "finca",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "certificacion",
+        "type": "string"
+      }
+    ],
+    "name": "nuevo_agricultor",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "contratoSocioFincaId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "porcentajeHumedad",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "olor",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "color",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "observacion",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "responsable",
+        "type": "string"
+      }
+    ],
+    "name": "agregar_control_calidad",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "guia",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "cafe_gramos",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "cafe_porcentaje",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "descarte_gramos",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "descarte_porcentaje",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "cascara_gramos",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "cascara_porcentaje",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "total_gramos",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "total_porcentaje",
+        "type": "string"
+      }
+    ],
+    "name": "agregar_analisis_fisico",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "correlativo",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "almacen",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "fecha",
+        "type": "uint256"
+      }
+    ],
+    "name": "agregar_nota_ingreso_almacen_acopio",
+    "type": "event"
+  }
+]

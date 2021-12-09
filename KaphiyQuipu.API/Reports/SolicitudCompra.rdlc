@@ -6,7 +6,7 @@
         <Source>Embedded</Source>
         <Value>Cooperativa</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>1.43087cm</Top>
+        <Top>1.11337cm</Top>
         <Left>0.51065cm</Left>
         <Height>3.10583cm</Height>
         <Width>6.19006cm</Width>
@@ -35,7 +35,6 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.31609cm</Top>
         <Left>5.42565cm</Left>
         <Height>0.6cm</Height>
         <Width>8.0526cm</Width>
@@ -67,7 +66,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>5.34642cm</Top>
+        <Top>5.02892cm</Top>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>9.16444cm</Width>
         <ZIndex>2</ZIndex>
@@ -99,7 +99,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.3603cm</Top>
+        <Top>1.0428cm</Top>
         <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>9.08755cm</Width>
@@ -132,7 +132,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>2.03086cm</Top>
+        <Top>1.71336cm</Top>
         <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>2.85749cm</Width>
@@ -165,7 +165,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>2.59558cm</Top>
+        <Top>2.27808cm</Top>
         <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>2.85749cm</Width>
@@ -198,7 +198,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>3.23086cm</Top>
+        <Top>2.91336cm</Top>
         <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>2.85749cm</Width>
@@ -231,7 +231,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>3.86614cm</Top>
+        <Top>3.54864cm</Top>
         <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>2.85749cm</Width>
@@ -263,7 +263,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.99558cm</Top>
+        <Top>1.67808cm</Top>
         <Left>13.51353cm</Left>
         <Height>0.6cm</Height>
         <Width>6.19478cm</Width>
@@ -295,7 +295,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>2.59558cm</Top>
+        <Top>2.27808cm</Top>
         <Left>13.51353cm</Left>
         <Height>0.6cm</Height>
         <Width>6.19478cm</Width>
@@ -327,7 +327,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>3.19558cm</Top>
+        <Top>2.87808cm</Top>
         <Left>13.47825cm</Left>
         <Height>0.6cm</Height>
         <Width>6.23006cm</Width>
@@ -359,7 +359,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>3.86613cm</Top>
+        <Top>3.54863cm</Top>
         <Left>13.47825cm</Left>
         <Height>0.6cm</Height>
         <Width>6.23006cm</Width>
@@ -378,28 +378,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.94224cm</Width>
+              <Width>2.93704cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.96327cm</Width>
+              <Width>1.95807cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.02077cm</Width>
+              <Width>2.01557cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.61526cm</Width>
+              <Width>2.61006cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.89811cm</Width>
+              <Width>1.89291cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.61526cm</Width>
+              <Width>2.61006cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.61526cm</Width>
+              <Width>2.61006cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.02183cm</Width>
+              <Width>3.01663cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1174,10 +1174,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DS_Calidad_Cafe_Agricultor</DataSetName>
-        <Top>5.94642cm</Top>
+        <Top>5.62892cm</Top>
         <Left>0.02894cm</Left>
         <Height>1.2cm</Height>
-        <Width>19.69203cm</Width>
+        <Width>19.65041cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -1202,7 +1202,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>7.35809cm</Top>
+        <Top>7.04059cm</Top>
         <Left>0.04161cm</Left>
         <Height>0.6cm</Height>
         <Width>9.12283cm</Width>
@@ -1537,7 +1537,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DS_Analisis_Cafe</DataSetName>
-        <Top>8.02865cm</Top>
+        <Top>7.71115cm</Top>
         <Left>0cm</Left>
         <Height>1.2cm</Height>
         <Width>7.54161cm</Width>
@@ -1586,7 +1586,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>9.44031cm</Top>
+        <Top>9.12281cm</Top>
         <Left>0.04161cm</Left>
         <Height>0.6cm</Height>
         <Width>10.37166cm</Width>
@@ -1605,13 +1605,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.48613cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.48613cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.48613cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1918,10 +1918,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DS_Control_Planta_Transformadora_Detalle</DataSetName>
-        <Top>10.25198cm</Top>
+        <Top>9.93448cm</Top>
         <Left>12.22096cm</Left>
         <Height>1.2cm</Height>
-        <Width>7.5cm</Width>
+        <Width>7.45839cm</Width>
         <ZIndex>16</ZIndex>
         <Style>
           <Border>
@@ -1946,7 +1946,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>13.15999cm</Top>
+        <Top>12.80722cm</Top>
         <Left>0.02894cm</Left>
         <Height>0.6cm</Height>
         <Width>19.67935cm</Width>
@@ -2795,8 +2795,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DS_Resultado_Transformacion</DataSetName>
-        <Top>13.79527cm</Top>
-        <Left>0.02894cm</Left>
+        <Top>13.40722cm</Top>
+        <Left>0cm</Left>
         <Height>2.4985cm</Height>
         <Width>19.67937cm</Width>
         <ZIndex>18</ZIndex>
@@ -3004,7 +3004,7 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>4.13943in</Top>
+        <Top>4.01443in</Top>
         <Left>0.01638in</Left>
         <Height>0.74989in</Height>
         <Width>3.59167in</Width>
@@ -3032,8 +3032,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>16.32905cm</Top>
-        <Left>0.02894cm</Left>
+        <Top>15.97627cm</Top>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>19.67935cm</Width>
         <ZIndex>20</ZIndex>
@@ -3064,8 +3064,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>16.92905cm</Top>
-        <Left>0.02894cm</Left>
+        <Top>16.54099cm</Top>
+        <Left>0.00002cm</Left>
         <Height>0.6cm</Height>
         <Width>19.67935cm</Width>
         <ZIndex>21</ZIndex>
@@ -3096,8 +3096,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>17.52905cm</Top>
-        <Left>0.02894cm</Left>
+        <Top>17.14099cm</Top>
         <Height>0.6cm</Height>
         <Width>19.67935cm</Width>
         <ZIndex>22</ZIndex>
@@ -3118,7 +3117,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!FechaEnvioADistribuidora.Value, "DS_Trazabilidad_Contrato") + " - Recepción del cafe procesado por la cooperativa """ + First(Fields!Cooperativa.Value, "DS_Contrato") +"""."</Value>
+                <Value>=First(Fields!FechaEnvioADistribuidora.Value, "DS_Trazabilidad_Contrato") + " - Envío del " + First(Fields!Producto.Value, "DS_Contrato") + " hacia la distribuidora """ + First(Fields!Distribuidor.Value, "DS_Contrato") + """."</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -3128,8 +3127,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>18.1996cm</Top>
-        <Left>0.03528cm</Left>
+        <Top>17.78651cm</Top>
         <Height>0.6cm</Height>
         <Width>19.67935cm</Width>
         <ZIndex>23</ZIndex>
@@ -3160,7 +3158,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>12.55999cm</Top>
+        <Top>12.17194cm</Top>
         <Left>0.02894cm</Left>
         <Height>0.6cm</Height>
         <Width>19.67935cm</Width>
@@ -3192,9 +3190,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>4.67781cm</Top>
+        <Top>4.36031cm</Top>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>9.12283cm</Width>
+        <Width>19.67935cm</Width>
         <ZIndex>25</ZIndex>
         <Style>
           <Border>
@@ -3207,10 +3206,10 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>7.40142in</Height>
+    <Height>7.25142in</Height>
     <Style />
   </Body>
-  <Width>7.76416in</Width>
+  <Width>7.75918in</Width>
   <Page>
     <PageFooter>
       <Height>0.28611in</Height>
