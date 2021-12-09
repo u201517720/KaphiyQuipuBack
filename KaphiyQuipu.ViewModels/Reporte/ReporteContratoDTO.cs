@@ -35,7 +35,8 @@ namespace KaphiyQuipu.DTO.Reporte
         public string GradoPreparacion { get; set; }
         public string Logo { get; set; }
         public string Distribuidor { get; set; }
-        public string Cooperativa { get; set; }  
+        public string Cooperativa { get; set; }
+        public string HashBC { get; set; }
     }
 
     public class CalidadCafeAgricultor

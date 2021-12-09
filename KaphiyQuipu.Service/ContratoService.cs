@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using Core.Common;
 using Core.Common.Domain.Model;
 using Core.Common.Email;
 using Core.Common.Razor;
@@ -173,7 +174,7 @@ namespace KaphiyQuipu.Service
             DateTime dt = DateTime.Now;
             request.controles.ForEach(x =>
             {
-                TransactionResult result = _contratoCompraContract.AgregarControlCalidad(x).Result;
+                TransactionResult result = _contratoCompraContract.AgregarControlCalidad(x, dt).Result;
                 x.HashBC = result.TransactionHash;
                 x.FechaCreacion = dt;
             });
@@ -185,7 +186,9 @@ namespace KaphiyQuipu.Service
 
         public void ConfirmarRecepcionCafeTerminado(ConfirmarRecepcionCafeTerminadoContratoRequestDTO request)
         {
-            _IContratoRepository.ConfirmarRecepcionCafeTerminado(request.Id, request.Usuario, DateTime.Now);
+            DateTime fechaActual = DateTime.Now;
+            TransactionResult result = _contratoCompraContract.AgregarTrazabilidad(request.Contrato, Constants.TrazabilidadBC.CONFIRMAR_RECEPCION_MATERIA_PROCESADA, request.Contrato, fechaActual).Result;
+            _IContratoRepository.ConfirmarRecepcionCafeTerminado(request.Id, request.Usuario, fechaActual, result.TransactionHash);
         }
 
         public async Task<List<(string, List<object>)>> ObtenerDatosTrazabilidad(string nroContrato)
@@ -211,7 +214,13 @@ namespace KaphiyQuipu.Service
             ReporteContratoDTO reporte = new ReporteContratoDTO();
 
             CorrelativoTrazabilidadContratoDTO trazabilidad = _IContratoRepository.ObtenerCorrelativosTrazabilidadPorNroContrato(nroContrato).FirstOrDefault();
-            
+
+            #region TRAZABILIDAD BLOCKCHAIN CONTRATO
+
+            List<TrazabilidadContratoOutput>  listaTrazabilidad = await _contratoCompraContract.ObtenerTrazabilidad(nroContrato);
+
+            #endregion
+
             #region Contrato
 
             ContratoCompraOutputDTO contratoDTO = await _contratoCompraContract.ObtenerContrato(nroContrato);
@@ -222,6 +231,7 @@ namespace KaphiyQuipu.Service
             reporte.ContratoCompra.GradoPreparacion = contratoDTO.GradoPrepracion;
             reporte.ContratoCompra.Distribuidor = contratoDTO.Distribuidor;
             reporte.ContratoCompra.Cooperativa = "Cooperativa de Servicios Múltiples Aprocassi";
+            reporte.ContratoCompra.HashBC = trazabilidad.HashBCContrato;
 
             #endregion
 
@@ -229,6 +239,7 @@ namespace KaphiyQuipu.Service
 
             List<AgricultorContratoOutputDTO> listaAgricultor = await _contratoCompraContract.ObtenerAgricultoresPorContrato(nroContrato);
             var listaAgricultoresContrato = _IContratoRepository.ObtenerAgricultoresPorContrato(trazabilidad.IdContrato);
+            DateTime fechaCalidad = DateTime.Now;
 
             foreach (var item in listaAgricultor)
             {
@@ -247,6 +258,8 @@ namespace KaphiyQuipu.Service
                     calidadCafeAgricultor.Olores = controlCalidad.Olor;
                     calidadCafeAgricultor.Colores = controlCalidad.Color;
                     calidadCafeAgricultor.Responsable = controlCalidad.Responsable;
+
+                    fechaCalidad = new DateTime(controlCalidad.Fecha);
                 }
 
                 reporte.ListaCalidadCafeAgricultor.Add(calidadCafeAgricultor);
@@ -285,8 +298,6 @@ namespace KaphiyQuipu.Service
                 new AnalisisCalidadCafe("Total", notaIngresoPlanta.TotalGramos, notaIngresoPlanta.TotalPorcentaje)
             };
 
-            reporte.TrazabilidadContrato.FechaControlCalidadPlantaTransformadora = (new DateTime(notaIngresoPlanta.FechaRegistro)).ToString("dd/MM/yyyy");
-
             #endregion
 
             #region Resultado Transformación
@@ -307,7 +318,19 @@ namespace KaphiyQuipu.Service
                 new ResultadoTransformacion("Cascara y otros", string.Empty, notaIngresoPlantaResultado.CascaraOtrosKgNetos)
             };
 
+            reporte.TrazabilidadContrato.FechaControlCalidad = fechaCalidad.ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaAnalisisCafe = (new DateTime(analisisFisico.Fecha)).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaIngresoPlantaAcopio = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.INGRESO_PLANTA_ACOPIO)?.fecha ?? default).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaEnvioPlantaTransformadora = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.ENVIO_PLANTA_TRANSFORMADORA)?.fecha ?? default).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaRecepcionPlantaTransformadora = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.RECEPCION_MATERIA_PRIMA_PLANTA)?.fecha ?? default).ToString("dd/MM/yyyy");
+
+            reporte.TrazabilidadContrato.FechaControlCalidadPlantaTransformadora = (new DateTime(notaIngresoPlanta.FechaRegistro)).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaIngresoTransformacionPlanta = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.INICIAR_TRANSFORMACION)?.fecha ?? default).ToString("dd/MM/yyyy");
             reporte.TrazabilidadContrato.FechaResultadoTransformacion = (new DateTime(notaIngresoPlantaResultado.FechaRegistro)).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaTransformacionMateriaPrima = reporte.TrazabilidadContrato.FechaResultadoTransformacion;
+            reporte.TrazabilidadContrato.FechaEnvioACooperativa = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.ENVIO_CAFE_HACIA_COOPERATIVA)?.fecha ?? default).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaRecepcionCooperativa = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.RECEPCION_CAFE_PROCESADO_POR_COOPERATIVA)?.fecha ?? default).ToString("dd/MM/yyyy");
+            reporte.TrazabilidadContrato.FechaEnvioADistribuidora = (listaTrazabilidad.FirstOrDefault(x => x.Proceso == Constants.TrazabilidadBC.ENVIO_CAFE_HACIA_DISTRIBUIDORA)?.fecha ?? default).ToString("dd/MM/yyyy");
 
             #endregion
 

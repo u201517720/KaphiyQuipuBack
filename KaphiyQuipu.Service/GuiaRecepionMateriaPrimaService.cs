@@ -52,7 +52,7 @@ namespace KaphiyQuipu.Service
             guia.UsuarioRegistro = request.UsuarioRegistro;
             guia.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.GuiaRecepcion);
 
-            TransactionResult result = _contratoCompraContract.AgregarAnalisisFisicoCafe(guia).Result;
+            TransactionResult result = _contratoCompraContract.AgregarAnalisisFisicoCafe(guia, guia.FechaRegistro).Result;
             guia.HashBC = result.TransactionHash;
             string affected = _IGuiaRecepcionRepository.Registrar(guia);
 

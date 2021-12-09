@@ -67,6 +67,7 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@pFechaEmision", request.FechaRegistro);
             parameters.Add("@pUsuarioRegistro", request.UsuarioRegistro);
             parameters.Add("@pFechaRegistro", request.FechaRegistro);
+            parameters.Add("@pHashBC", request.HashBC);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {

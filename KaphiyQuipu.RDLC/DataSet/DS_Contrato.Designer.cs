@@ -505,6 +505,8 @@ namespace KaphiyQuipu.Rdlc.DataSet {
             
             private global::System.Data.DataColumn columnCooperativa;
             
+            private global::System.Data.DataColumn columnHashBC;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DT_ContratoDataTable() {
@@ -604,6 +606,14 @@ namespace KaphiyQuipu.Rdlc.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn HashBCColumn {
+                get {
+                    return this.columnHashBC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -639,7 +649,7 @@ namespace KaphiyQuipu.Rdlc.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DT_ContratoRow AddDT_ContratoRow(string FechaSolicitud, string Producto, string TipoProduccion, string Calidad, string GradoPreparacion, string Logo, string Distribuidor, string Cooperativa) {
+            public DT_ContratoRow AddDT_ContratoRow(string FechaSolicitud, string Producto, string TipoProduccion, string Calidad, string GradoPreparacion, string Logo, string Distribuidor, string Cooperativa, string HashBC) {
                 DT_ContratoRow rowDT_ContratoRow = ((DT_ContratoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         FechaSolicitud,
@@ -649,7 +659,8 @@ namespace KaphiyQuipu.Rdlc.DataSet {
                         GradoPreparacion,
                         Logo,
                         Distribuidor,
-                        Cooperativa};
+                        Cooperativa,
+                        HashBC};
                 rowDT_ContratoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDT_ContratoRow);
                 return rowDT_ContratoRow;
@@ -680,6 +691,7 @@ namespace KaphiyQuipu.Rdlc.DataSet {
                 this.columnLogo = base.Columns["Logo"];
                 this.columnDistribuidor = base.Columns["Distribuidor"];
                 this.columnCooperativa = base.Columns["Cooperativa"];
+                this.columnHashBC = base.Columns["HashBC"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -701,6 +713,8 @@ namespace KaphiyQuipu.Rdlc.DataSet {
                 base.Columns.Add(this.columnDistribuidor);
                 this.columnCooperativa = new global::System.Data.DataColumn("Cooperativa", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCooperativa);
+                this.columnHashBC = new global::System.Data.DataColumn("HashBC", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHashBC);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2873,6 +2887,22 @@ namespace KaphiyQuipu.Rdlc.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string HashBC {
+                get {
+                    try {
+                        return ((string)(this[this.tableDT_Contrato.HashBCColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'HashBC\' de la tabla \'DT_Contrato\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDT_Contrato.HashBCColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsFechaSolicitudNull() {
                 return this.IsNull(this.tableDT_Contrato.FechaSolicitudColumn);
             }
@@ -2965,6 +2995,18 @@ namespace KaphiyQuipu.Rdlc.DataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetCooperativaNull() {
                 this[this.tableDT_Contrato.CooperativaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsHashBCNull() {
+                return this.IsNull(this.tableDT_Contrato.HashBCColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetHashBCNull() {
+                this[this.tableDT_Contrato.HashBCColumn] = global::System.Convert.DBNull;
             }
         }
         

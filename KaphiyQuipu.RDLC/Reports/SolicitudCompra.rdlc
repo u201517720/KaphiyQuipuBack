@@ -7,7 +7,7 @@
         <Value>Cooperativa</Value>
         <Sizing>FitProportional</Sizing>
         <Top>1.43087cm</Top>
-        <Left>0.48171cm</Left>
+        <Left>0.51065cm</Left>
         <Height>3.10583cm</Height>
         <Width>6.19006cm</Width>
         <Style>
@@ -36,7 +36,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.31609cm</Top>
-        <Left>4.75738cm</Left>
+        <Left>5.42565cm</Left>
         <Height>0.6cm</Height>
         <Width>8.0526cm</Width>
         <ZIndex>1</ZIndex>
@@ -57,7 +57,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>02/10/2021 - Control de Calidad del Café pergamin de los agricultores</Value>
+                <Value>=First(Fields!FechaControlCalidadPlantaTransformadora.Value, "DS_Trazabilidad_Contrato") + " - Control de Calidad del " + First(Fields!Producto.Value, "DS_Contrato") + "de los agricultores."</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -67,10 +67,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>5.02892cm</Top>
-        <Left>0.01267cm</Left>
+        <Top>5.34642cm</Top>
         <Height>0.6cm</Height>
-        <Width>9.12283cm</Width>
+        <Width>9.16444cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -100,8 +99,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.39558cm</Top>
-        <Left>9.95249cm</Left>
+        <Top>1.3603cm</Top>
+        <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>9.08755cm</Width>
         <ZIndex>3</ZIndex>
@@ -133,8 +132,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>2.06614cm</Top>
-        <Left>9.95249cm</Left>
+        <Top>2.03086cm</Top>
+        <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>2.85749cm</Width>
         <ZIndex>4</ZIndex>
@@ -166,8 +165,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>2.63086cm</Top>
-        <Left>9.95249cm</Left>
+        <Top>2.59558cm</Top>
+        <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>2.85749cm</Width>
         <ZIndex>5</ZIndex>
@@ -199,8 +198,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>3.26614cm</Top>
-        <Left>9.95249cm</Left>
+        <Top>3.23086cm</Top>
+        <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>2.85749cm</Width>
         <ZIndex>6</ZIndex>
@@ -232,8 +231,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>3.90142cm</Top>
-        <Left>9.95249cm</Left>
+        <Top>3.86614cm</Top>
+        <Left>10.62076cm</Left>
         <Height>0.6cm</Height>
         <Width>2.85749cm</Width>
         <ZIndex>7</ZIndex>
@@ -264,8 +263,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>2.03086cm</Top>
-        <Left>12.84526cm</Left>
+        <Top>1.99558cm</Top>
+        <Left>13.51353cm</Left>
         <Height>0.6cm</Height>
         <Width>6.19478cm</Width>
         <ZIndex>8</ZIndex>
@@ -296,8 +295,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>2.63086cm</Top>
-        <Left>12.84526cm</Left>
+        <Top>2.59558cm</Top>
+        <Left>13.51353cm</Left>
         <Height>0.6cm</Height>
         <Width>6.19478cm</Width>
         <ZIndex>9</ZIndex>
@@ -328,8 +327,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>3.23086cm</Top>
-        <Left>12.80998cm</Left>
+        <Top>3.19558cm</Top>
+        <Left>13.47825cm</Left>
         <Height>0.6cm</Height>
         <Width>6.23006cm</Width>
         <ZIndex>10</ZIndex>
@@ -360,8 +359,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>3.90141cm</Top>
-        <Left>12.80998cm</Left>
+        <Top>3.86613cm</Top>
+        <Left>13.47825cm</Left>
         <Height>0.6cm</Height>
         <Width>6.23006cm</Width>
         <ZIndex>11</ZIndex>
@@ -379,28 +378,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.94066cm</Width>
+              <Width>2.94224cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.96169cm</Width>
+              <Width>1.96327cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.01919cm</Width>
+              <Width>2.02077cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.61368cm</Width>
+              <Width>2.61526cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.89653cm</Width>
+              <Width>1.89811cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.61368cm</Width>
+              <Width>2.61526cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.61368cm</Width>
+              <Width>2.61526cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.02025cm</Width>
+              <Width>3.02183cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1175,10 +1174,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DS_Calidad_Cafe_Agricultor</DataSetName>
-        <Top>5.62892cm</Top>
-        <Left>0.01267cm</Left>
+        <Top>5.94642cm</Top>
+        <Left>0.02894cm</Left>
         <Height>1.2cm</Height>
-        <Width>19.67935cm</Width>
+        <Width>19.69203cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -1193,7 +1192,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>03/10/2021 - Análisis del café pergamino en la distribuidora</Value>
+                <Value>=First(Fields!FechaAnalisisCafe.Value, "DS_Trazabilidad_Contrato") + " - Análisis del " + First(Fields!Producto.Value, "DS_Contrato") + " en la distribuidora."</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -1203,8 +1202,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>7.04059cm</Top>
-        <Left>0.01267cm</Left>
+        <Top>7.35809cm</Top>
+        <Left>0.04161cm</Left>
         <Height>0.6cm</Height>
         <Width>9.12283cm</Width>
         <ZIndex>13</ZIndex>
@@ -1222,13 +1221,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.51387cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.51387cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.51387cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1538,10 +1537,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DS_Analisis_Cafe</DataSetName>
-        <Top>7.71115cm</Top>
-        <Left>0.01267cm</Left>
+        <Top>8.02865cm</Top>
+        <Left>0cm</Left>
         <Height>1.2cm</Height>
-        <Width>7.5cm</Width>
+        <Width>7.54161cm</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -1587,8 +1586,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>9.12281cm</Top>
-        <Left>0.01267cm</Left>
+        <Top>9.44031cm</Top>
+        <Left>0.04161cm</Left>
         <Height>0.6cm</Height>
         <Width>10.37166cm</Width>
         <ZIndex>15</ZIndex>
@@ -1919,8 +1918,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DS_Control_Planta_Transformadora_Detalle</DataSetName>
-        <Top>9.93448cm</Top>
-        <Left>12.19202cm</Left>
+        <Top>10.25198cm</Top>
+        <Left>12.22096cm</Left>
         <Height>1.2cm</Height>
         <Width>7.5cm</Width>
         <ZIndex>16</ZIndex>
@@ -1947,8 +1946,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>12.27776cm</Top>
-        <Left>0.01267cm</Left>
+        <Top>13.15999cm</Top>
+        <Left>0.02894cm</Left>
         <Height>0.6cm</Height>
         <Width>19.67935cm</Width>
         <ZIndex>17</ZIndex>
@@ -2796,9 +2795,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DS_Resultado_Transformacion</DataSetName>
-        <Top>12.91304cm</Top>
+        <Top>13.79527cm</Top>
+        <Left>0.02894cm</Left>
         <Height>2.4985cm</Height>
-        <Width>19.67935cm</Width>
+        <Width>19.67937cm</Width>
         <ZIndex>18</ZIndex>
         <Style>
           <Border>
@@ -3004,8 +3004,8 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>4.01443in</Top>
-        <Left>0.00499in</Left>
+        <Top>4.13943in</Top>
+        <Left>0.01638in</Left>
         <Height>0.74989in</Height>
         <Width>3.59167in</Width>
         <ZIndex>19</ZIndex>
@@ -3015,12 +3015,246 @@
           </Border>
         </Style>
       </Rectangle>
+      <Textbox Name="Textbox57">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!FechaTransformacionMateriaPrima.Value, "DS_Trazabilidad_Contrato") + " - Transformación de materia prima a " + First(Fields!Producto.Value, "DS_Contrato") + " terminada."</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>16.32905cm</Top>
+        <Left>0.02894cm</Left>
+        <Height>0.6cm</Height>
+        <Width>19.67935cm</Width>
+        <ZIndex>20</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox58">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!FechaEnvioACooperativa.Value, "DS_Trazabilidad_Contrato") + " - Envío del cafe " + First(Fields!Producto.Value, "DS_Contrato") + " hacia la cooperativa """ + First(Fields!Cooperativa.Value, "DS_Contrato") +"""."</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>16.92905cm</Top>
+        <Left>0.02894cm</Left>
+        <Height>0.6cm</Height>
+        <Width>19.67935cm</Width>
+        <ZIndex>21</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox60">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!FechaRecepcionCooperativa.Value, "DS_Trazabilidad_Contrato") + " - Recepción del cafe procesado por la cooperativa """ + First(Fields!Cooperativa.Value, "DS_Contrato") +"""."</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>17.52905cm</Top>
+        <Left>0.02894cm</Left>
+        <Height>0.6cm</Height>
+        <Width>19.67935cm</Width>
+        <ZIndex>22</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox61">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!FechaEnvioADistribuidora.Value, "DS_Trazabilidad_Contrato") + " - Recepción del cafe procesado por la cooperativa """ + First(Fields!Cooperativa.Value, "DS_Contrato") +"""."</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>18.1996cm</Top>
+        <Left>0.03528cm</Left>
+        <Height>0.6cm</Height>
+        <Width>19.67935cm</Width>
+        <ZIndex>23</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox63">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!FechaIngresoTransformacionPlanta.Value, "DS_Trazabilidad_Contrato") + " - Ingreso de la materia prima al área de transformación de la planta."</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>12.55999cm</Top>
+        <Left>0.02894cm</Left>
+        <Height>0.6cm</Height>
+        <Width>19.67935cm</Width>
+        <ZIndex>24</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox13">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>= "Hash Blockchain: " + First(Fields!HashBC.Value, "DS_Contrato")</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>4.67781cm</Top>
+        <Height>0.6cm</Height>
+        <Width>9.12283cm</Width>
+        <ZIndex>25</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>6.08012in</Height>
+    <Height>7.40142in</Height>
     <Style />
   </Body>
-  <Width>7.75276in</Width>
+  <Width>7.76416in</Width>
   <Page>
+    <PageFooter>
+      <Height>0.28611in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox23">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Fecha QR: " + FORMAT(Globals!ExecutionTime, "dd/MM/yyyy")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox23</rd:DefaultName>
+          <Top>0.01792in</Top>
+          <Left>6.05399in</Left>
+          <Height>0.25in</Height>
+          <Width>1.54167in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
     <LeftMargin>0.25in</LeftMargin>
@@ -3077,6 +3311,10 @@
         </Field>
         <Field Name="Cooperativa">
           <DataField>Cooperativa</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HashBC">
+          <DataField>HashBC</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

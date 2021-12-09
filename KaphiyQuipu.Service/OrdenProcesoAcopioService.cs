@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using Core.Common;
 using Core.Common.Domain.Model;
+using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
@@ -15,12 +18,14 @@ namespace KaphiyQuipu.Service
     {
         private ICorrelativoRepository _ICorrelativoRepository;
         IOrdenProcesoAcopioRepository _IOrdenProcesoAcopioRepository;
+        private readonly IContratoCompraContract _contratoCompraContract;
         private readonly IMapper _Mapper;
 
-        public OrdenProcesoAcopioService(ICorrelativoRepository correlativoRepository, IOrdenProcesoAcopioRepository ordenProcesoAcopioRepository, IMapper mapper)
+        public OrdenProcesoAcopioService(ICorrelativoRepository correlativoRepository, IOrdenProcesoAcopioRepository ordenProcesoAcopioRepository, IContratoCompraContract contratoCompraContract, IMapper mapper)
         {
             _ICorrelativoRepository = correlativoRepository;
             _IOrdenProcesoAcopioRepository = ordenProcesoAcopioRepository;
+            _contratoCompraContract = contratoCompraContract;
             _Mapper = mapper;
         }
 
@@ -72,7 +77,9 @@ namespace KaphiyQuipu.Service
 
         public void IniciarTransformacion(IniciarTransformacionOrdenProcesoRequestDTO request)
         {
-            _IOrdenProcesoAcopioRepository.IniciarTransformacion(request.Id, request.Usuario, DateTime.Now);
+            DateTime fechaActual = DateTime.Now;
+            TransactionResult result = _contratoCompraContract.AgregarTrazabilidad(request.Contrato, Constants.TrazabilidadBC.INICIAR_TRANSFORMACION, request.Id.ToString(), fechaActual).Result;
+            _IOrdenProcesoAcopioRepository.IniciarTransformacion(request.Id, request.Usuario, fechaActual, result.TransactionHash);
         }
     }
 }

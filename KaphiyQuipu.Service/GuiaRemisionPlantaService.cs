@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Core.Common;
 using Core.Common.Domain.Model;
 using Core.Common.Email;
 using Core.Common.Razor;
+using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
@@ -18,14 +21,16 @@ namespace KaphiyQuipu.Service
         private readonly IMapper _Mapper;
         ICorrelativoRepository _ICorrelativoRepository;
         IGuiaRemisionPlantaRepository _IGuiaRemisionPlantaRepository;
+        private IContratoCompraContract _contratoCompraContract;
         private IViewRender _viewRender;
         private IEmailService _emailService;
 
-        public GuiaRemisionPlantaService(IMapper mapper, ICorrelativoRepository correlativoRepository, IGuiaRemisionPlantaRepository guiaRemisionPlantaRepository, IViewRender viewRender, IEmailService emailService)
+        public GuiaRemisionPlantaService(IMapper mapper, ICorrelativoRepository correlativoRepository, IGuiaRemisionPlantaRepository guiaRemisionPlantaRepository, IContratoCompraContract contratoCompraContract, IViewRender viewRender, IEmailService emailService)
         {
             _Mapper = mapper;
             _ICorrelativoRepository = correlativoRepository;
             _IGuiaRemisionPlantaRepository = guiaRemisionPlantaRepository;
+            _contratoCompraContract = contratoCompraContract;
             _viewRender = viewRender;
             _emailService = emailService;
         }
@@ -65,6 +70,9 @@ namespace KaphiyQuipu.Service
             GuiaRemisionPlanta guiaSalida = _Mapper.Map<GuiaRemisionPlanta>(request);
             guiaSalida.FechaRegistro = DateTime.Now;
             guiaSalida.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.GuiaRemisionPlanta);
+
+            TransactionResult result = await _contratoCompraContract.AgregarTrazabilidad(request.Contrato, Constants.TrazabilidadBC.ENVIO_CAFE_HACIA_COOPERATIVA, guiaSalida.Correlativo, guiaSalida.FechaRegistro);
+            guiaSalida.HashBC = result.TransactionHash;
 
             string affected = _IGuiaRemisionPlantaRepository.Registrar(guiaSalida);
             request.Correlativo = affected;

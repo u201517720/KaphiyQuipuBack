@@ -20,12 +20,13 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
-        public void AutorizarTransformacion(int id, string usuario, DateTime fecha)
+        public void AutorizarTransformacion(int id, string usuario, DateTime fecha, string hashBC)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pId", id);
             parameters.Add("@pUsuario", usuario);
             parameters.Add("@pFecha", fecha);
+            parameters.Add("@pHashBC", hashBC);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
@@ -103,6 +104,7 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@pObservaciones", nota.Observaciones);
             parameters.Add("@pUsuarioRegistro", nota.UsuarioRegistro);
             parameters.Add("@pFechaRegistro", nota.FechaRegistro);
+            parameters.Add("@pHashBC", nota.HashBC);  
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {

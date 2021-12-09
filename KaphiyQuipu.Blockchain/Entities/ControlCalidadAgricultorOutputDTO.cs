@@ -22,5 +22,8 @@ namespace KaphiyQuipu.Blockchain.Entities
 
         [Parameter("string", 5)]
         public string Responsable { get; set; }
+
+        [Parameter("uint256", 6)]
+        public long Fecha { get; set; }
     }
 }

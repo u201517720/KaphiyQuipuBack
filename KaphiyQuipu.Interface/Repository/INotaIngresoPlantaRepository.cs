@@ -13,7 +13,7 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultarPorIdNotaIngresoPlantaDTO> ConsultarPorId(int id);
         void RegistrarControlCalidad(NotaIngresoPlanta notaIngreso);
         void ConfirmarRecepcionMateriaPrima(int id, string usuario, DateTime fecha);
-        void AutorizarTransformacion(int id, string usuario, DateTime fecha);
+        void AutorizarTransformacion(int id, string usuario, DateTime fecha, string hashBC);
         void FinalizarEtiquetado(int id, string usuario, DateTime fecha);
         void RegistrarResultadosTransformacion(NotaIngresoPlantaResultadoTransformacion transformacion);
         IEnumerable<EtiquetaPlanta> GenerarEtiquetasPlanta(int id);

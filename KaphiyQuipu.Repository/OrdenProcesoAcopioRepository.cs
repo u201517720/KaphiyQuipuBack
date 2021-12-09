@@ -56,12 +56,13 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public void IniciarTransformacion(int id, string usuario, DateTime fecha)
+        public void IniciarTransformacion(int id, string usuario, DateTime fecha, string hash)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pId", id);
             parameters.Add("@pUsuario", usuario);
             parameters.Add("@pFecha", fecha);
+            parameters.Add("@pHashBC", hash);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {

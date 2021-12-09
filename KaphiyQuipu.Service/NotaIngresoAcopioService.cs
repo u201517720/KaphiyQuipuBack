@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Common;
 using Core.Common.Domain.Model;
 using Core.Common.Email;
 using Core.Common.Razor;
@@ -136,6 +137,9 @@ namespace KaphiyQuipu.Service
             NotaIngresoDevolucion notaIngreso = _Mapper.Map<NotaIngresoDevolucion>(request);
             notaIngreso.FechaRegistro = DateTime.Now;
             notaIngreso.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.NotaIngresoDevolucion);
+
+            TransactionResult result = _contratoCompraContract.AgregarTrazabilidad(request.Contrato, Constants.TrazabilidadBC.RECEPCION_CAFE_PROCESADO_POR_COOPERATIVA, notaIngreso.Correlativo, notaIngreso.FechaRegistro).Result;
+            notaIngreso.HashBC = result.TransactionHash;
 
             string affected = _INotaIngresoAcopioRepository.RegistrarDevolucion(notaIngreso);
 

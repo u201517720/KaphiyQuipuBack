@@ -31,5 +31,8 @@ namespace KaphiyQuipu.Blockchain.Entities
 
         [Parameter("string", 8)]
         public string TotalPorcentaje { get; set; }
+
+        [Parameter("uint256", 9)]
+        public long Fecha { get; set; }
     }
 }

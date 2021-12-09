@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Core.Common;
 using Core.Common.Domain.Model;
 using Core.Common.Email;
 using Core.Common.Razor;
+using KaphiyQuipu.Blockchain.Contracts;
+using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Interface.Service;
@@ -22,8 +25,10 @@ namespace KaphiyQuipu.Service
         IEmailService _emailService;
         IGuiaRemisionAcopioRepository _IGuiaRemisionAcopioRepository;
         IMarcadoSacoAcopioRepository _IMarcadoSacoAcopioRepository;
+        private readonly IContratoCompraContract _contratoCompraContract;
 
-        public GuiaRemisionAcopioService(IMapper mapper, ICorrelativoRepository correlativoRepository, IViewRender viewRender, IEmailService emailService, IGuiaRemisionAcopioRepository guiaRemisionAcopioRepository, IMarcadoSacoAcopioRepository marcadoSacoAcopioRepository)
+        public GuiaRemisionAcopioService(IMapper mapper, ICorrelativoRepository correlativoRepository, IViewRender viewRender, IEmailService emailService, IGuiaRemisionAcopioRepository guiaRemisionAcopioRepository, IMarcadoSacoAcopioRepository marcadoSacoAcopioRepository,
+                                        IContratoCompraContract contratoCompraContract)
         {
             _Mapper = mapper;
             _ICorrelativoRepository = correlativoRepository;
@@ -31,6 +36,7 @@ namespace KaphiyQuipu.Service
             _emailService = emailService;
             _IGuiaRemisionAcopioRepository = guiaRemisionAcopioRepository;
             _IMarcadoSacoAcopioRepository = marcadoSacoAcopioRepository;
+            _contratoCompraContract = contratoCompraContract;
         }
 
         public List<ConsultarGuiaRemisionAcopioDTO> Consultar(ConsultarGuiaRemisionAcopioRequestDTO request)
@@ -80,6 +86,8 @@ namespace KaphiyQuipu.Service
             guiaRemision.FechaRegistro = DateTime.Now;
             guiaRemision.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.GuiaRemisionAcopio);
 
+            TransactionResult result = await _contratoCompraContract.AgregarTrazabilidad(request.Contrato, Constants.TrazabilidadBC.ENVIO_PLANTA_TRANSFORMADORA, guiaRemision.Correlativo, guiaRemision.FechaRegistro);
+            guiaRemision.HashBC = result.TransactionHash;
             string affected = _IGuiaRemisionAcopioRepository.Registrar(guiaRemision);
 
             MarcadoSacoAcopio marcado = _Mapper.Map<MarcadoSacoAcopio>(request);
@@ -105,6 +113,9 @@ namespace KaphiyQuipu.Service
             guiaRemision.FechaTraslado = guiaRemision.FechaRegistro;
             guiaRemision.FechaEmision = guiaRemision.FechaRegistro;
             guiaRemision.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.GuiaRemisionDevolucion);
+
+            TransactionResult result = await _contratoCompraContract.AgregarTrazabilidad(request.Contrato, Constants.TrazabilidadBC.ENVIO_CAFE_HACIA_DISTRIBUIDORA, guiaRemision.Correlativo, guiaRemision.FechaRegistro);
+            guiaRemision.HashBC = result.TransactionHash;
 
             string affected = _IGuiaRemisionAcopioRepository.RegistrarDevolucion(guiaRemision);
 

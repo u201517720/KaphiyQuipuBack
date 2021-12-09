@@ -20,5 +20,6 @@ namespace KaphiyQuipu.Models
         public DateTime FechaRegistro { get; set; }
         public string UsuarioActualizacion { get; set; }
         public DateTime? FechaActualizacion { get; set; }
+        public string HashBC { get; set; }
     }
 }

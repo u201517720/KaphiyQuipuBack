@@ -8,6 +8,7 @@ namespace KaphiyQuipu.DTO.ContratoCompraVenta
     {
         public int IdContrato { get; set; }
         public string NroContrato { get; set; }
+        public string HashBCContrato { get; set; }
         public string NroGuiaRecepcion { get; set; }
         public string NroNotaIngresoAlmacenAcopio { get; set; }
         public string NroOrdenProceso { get; set; }

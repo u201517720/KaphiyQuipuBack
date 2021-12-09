@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Core.Common;
 using Core.Common.Domain.Model;
 using Core.Common.Email;
 using Core.Common.Razor;
+using KaphiyQuipu.Blockchain.Contracts;
 using KaphiyQuipu.Blockchain.Contracts.Interface;
 using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
@@ -23,9 +25,10 @@ namespace KaphiyQuipu.Service
         private IViewRender _viewRender;
         private IEmailService _emailService;
         private readonly INotaIngresoPlantaContract _notaIngresoContract;
+        private readonly IContratoCompraContract _contratoCompraContract;
 
         public NotaIngresoPlantaService(IMapper mapper, INotaIngresoPlantaRepository notaIngresoPlantaRepository, ICorrelativoRepository correlativoRepository, IViewRender viewRender, IEmailService emailService,
-                                        INotaIngresoPlantaContract notaIngresoContract)
+                                        INotaIngresoPlantaContract notaIngresoContract, IContratoCompraContract contratoCompraContract)
         {
             _Mapper = mapper;
             _INotaIngresoPlantaRepository = notaIngresoPlantaRepository;
@@ -33,11 +36,14 @@ namespace KaphiyQuipu.Service
             _viewRender = viewRender;
             _emailService = emailService;
             _notaIngresoContract = notaIngresoContract;
+            _contratoCompraContract = contratoCompraContract;
         }
 
         public void AutorizarTransformacion(AutorizarTransformacionNotaIngresoPlantaRequestDTO request)
         {
-            _INotaIngresoPlantaRepository.AutorizarTransformacion(request.Id, request.Usuario, DateTime.Now);
+            DateTime fechaActual = DateTime.Now;
+            TransactionResult result = _contratoCompraContract.AgregarTrazabilidad(request.Contrato, Constants.TrazabilidadBC.AUTORIZAR_TRANSFORMACION, request.Id.ToString(), fechaActual).Result;
+            _INotaIngresoPlantaRepository.AutorizarTransformacion(request.Id, request.Usuario, fechaActual, result.TransactionHash);
         }
 
         public void ConfirmarRecepcionMateriaPrima(ConfirmarRecepcionMateriaPrimaNotaIngresoPlantaRequestDTO request)
@@ -92,6 +98,9 @@ namespace KaphiyQuipu.Service
             NotaIngresoPlanta notaIngreso = _Mapper.Map<NotaIngresoPlanta>(request);
             notaIngreso.FechaRegistro = DateTime.Now;
             notaIngreso.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.NotaIngresoPlanta);
+
+            TransactionResult result = _contratoCompraContract.AgregarTrazabilidad(request.Contrato, Constants.TrazabilidadBC.RECEPCION_MATERIA_PRIMA_PLANTA, notaIngreso.Correlativo, notaIngreso.FechaRegistro).Result;
+            notaIngreso.HashBC = result.TransactionHash;
 
             string affected = _INotaIngresoPlantaRepository.Registrar(notaIngreso);
 
