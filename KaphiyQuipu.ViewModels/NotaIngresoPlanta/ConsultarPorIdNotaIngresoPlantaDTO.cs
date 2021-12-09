@@ -54,5 +54,6 @@ namespace KaphiyQuipu.DTO
         public decimal PiedraOtrosKgNetos { get; set; }
         public decimal CascaraOtrosKgNetos { get; set; }
         public decimal PesoSaco { get; set; }
+        public string CorrelativoContrato { get; set; }
     }
 }
