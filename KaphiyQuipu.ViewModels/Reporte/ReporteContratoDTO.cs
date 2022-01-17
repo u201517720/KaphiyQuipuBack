@@ -85,9 +85,9 @@ namespace KaphiyQuipu.DTO.Reporte
         }
         public ResultadoTransformacion(string producto, string sacos, string kilos)
         {
-            Producto = producto;
-            Sacos = sacos;
-            Kilos = kilos;
+            Producto = producto ?? string.Empty;
+            Sacos = sacos ?? string.Empty;
+            Kilos = kilos ?? string.Empty;
 
             if (!string.IsNullOrEmpty(sacos) && !string.IsNullOrEmpty(kilos))
             {
