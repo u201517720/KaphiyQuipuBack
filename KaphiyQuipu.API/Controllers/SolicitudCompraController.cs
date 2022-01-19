@@ -4,6 +4,7 @@ using KaphiyQuipu.Blockchain.Contracts;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -35,7 +36,7 @@ namespace KaphiyQuipu.API.Controller
         public IActionResult Registrar([FromBody] RegistrarActualizarSolicitudCompraRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
             RegistrarActualizarSolicitudCompraResponseDTO response = new RegistrarActualizarSolicitudCompraResponseDTO();
             try
@@ -53,7 +54,7 @@ namespace KaphiyQuipu.API.Controller
                 _log.RegistrarEvento(ex, guid.ToString());
             }
 
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
 
             return Ok(response);
         }
@@ -63,7 +64,7 @@ namespace KaphiyQuipu.API.Controller
         public IActionResult Consultar([FromBody] ConsultaSolicitudCompraRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
             ConsultaSolicitudCompraResponseDTO response = new ConsultaSolicitudCompraResponseDTO();
             try
@@ -81,7 +82,7 @@ namespace KaphiyQuipu.API.Controller
                 _log.RegistrarEvento(ex, guid.ToString());
             }
 
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
 
             return Ok(response);
         }
@@ -91,7 +92,7 @@ namespace KaphiyQuipu.API.Controller
         public IActionResult ConsultarPorId([FromBody] ConsultaSolicitudCompraPorIdRequestDTO request)
         {
             Guid guid = Guid.NewGuid();
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(request)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
             ConsultaSolicitudCompraPorIdResponseDTO response = new ConsultaSolicitudCompraPorIdResponseDTO();
             try
@@ -109,24 +110,10 @@ namespace KaphiyQuipu.API.Controller
                 _log.RegistrarEvento(ex, guid.ToString());
             }
 
-            _log.RegistrarEvento($"{guid}{Environment.NewLine}{Newtonsoft.Json.JsonConvert.SerializeObject(response)}");
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
 
             return Ok(response);
         }
-
-        //[Route("")]
-        //[HttpPost]
-        //public async Task<IActionResult> Registrar([FromBody] SolicitudCompraDTO request)
-        //{
-        //    return Ok(await _solicitudCompraService.Registrar(request));
-        //}
-
-        //[Route("{correlativo}")]
-        //[HttpGet]
-        //public async Task<IActionResult> Obtener(string correlativo)
-        //{
-        //    return Ok(await _solicitudCompraService.ObtenerSolicitud(correlativo));
-        //}
 
         [Route("Contrato")]
         [HttpPost]
@@ -149,12 +136,40 @@ namespace KaphiyQuipu.API.Controller
             return Ok(await _contratoCompraContract.AgregarAgricultor(request));
         }
 
-
         [Route("Contrato/{nroContrato}/agricultores")]
         [HttpGet]
         public async Task<IActionResult> ObtenerAgricultores(string nroContrato)
         {
             return Ok(await _contratoCompraContract.ObtenerAgricultoresPorContrato(nroContrato));
+        }
+
+        [Route("EvaluateAvailability")]
+        [HttpPost]
+        public IActionResult EvaluarDisponibilidad([FromBody] EvaluarDisponibilidadRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            GeneralResponse response = new GeneralResponse();
+
+            try
+            {
+                response.Result.Data = _solicitudCompraService.EvaluarDisponibilidad(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
         }
     }
 }

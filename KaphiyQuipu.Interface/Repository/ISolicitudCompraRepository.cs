@@ -1,8 +1,6 @@
 ﻿using KaphiyQuipu.DTO;
 using KaphiyQuipu.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KaphiyQuipu.Interface.Repository
 {
@@ -11,5 +9,6 @@ namespace KaphiyQuipu.Interface.Repository
         string Insertar(SolicitudCompra solicitudCompra);
         IEnumerable<ConsultaSolicitudCompraDTO> Consultar(ConsultaSolicitudCompraRequestDTO request);
         ConsultaSolicitudCompraPorIdDTO ConsultarPorId(int solicitudCompraId);
+        EvaluarDisponibilidadDTO EvaluarDisponibilidad(EvaluarDisponibilidadRequestDTO request);
     }
 }

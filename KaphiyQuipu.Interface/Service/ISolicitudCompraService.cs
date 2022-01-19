@@ -13,5 +13,6 @@ namespace KaphiyQuipu.Interface.Service
         ConsultaSolicitudCompraPorIdDTO ConsultarPorId(ConsultaSolicitudCompraPorIdRequestDTO request);
         Task<TransactionResult> Registrar(SolicitudCompraDTO solicitudCompra);
         Task<SolicitudCompraOutputDTO> ObtenerSolicitud(string correlativo);
+        EvaluarDisponibilidadDTO EvaluarDisponibilidad(EvaluarDisponibilidadRequestDTO request);
     }
 }

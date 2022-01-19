@@ -54,6 +54,29 @@ namespace KaphiyQuipu.Repository
             return itemBE;
         }
 
+        public EvaluarDisponibilidadDTO EvaluarDisponibilidad(EvaluarDisponibilidadRequestDTO request)
+        {
+            EvaluarDisponibilidadDTO response = new EvaluarDisponibilidadDTO();
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdSolicitudCompra", request.CodigoSolicitudCompra);
+            parameters.Add("@TipoCertificacionId", request.CodigoTipoCertificacion);
+            parameters.Add("@PesoNeto", request.PesoNeto);
+            parameters.Add("@PesoSaco", request.PesoSaco);
+            parameters.Add("@FecModif", DateTime.Now);
+            parameters.Add("@UsrModif", request.Usuario);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                var list = db.Query<EvaluarDisponibilidadDTO>("uspEvaluarDisponibilidadMateriaPrimaSolicitudCompra", parameters, commandType: CommandType.StoredProcedure);
+
+                if (list.Any())
+                    response = list.FirstOrDefault();
+            }
+
+            return response;
+        }
+
         public string Insertar(SolicitudCompra solicitudCompra)
         {
             string result = string.Empty;

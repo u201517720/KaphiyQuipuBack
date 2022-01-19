@@ -153,5 +153,10 @@ namespace KaphiyQuipu.Service
         {
             return await _solicitudCompraContract.ObtenerSolicitud(correlativo);
         }
+
+        public EvaluarDisponibilidadDTO EvaluarDisponibilidad(EvaluarDisponibilidadRequestDTO request)
+        {
+            return _ISolicitudCompraRepository.EvaluarDisponibilidad(request);
+        }
     }
 }
