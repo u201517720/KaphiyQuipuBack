@@ -84,5 +84,24 @@ namespace KaphiyQuipu.Service
             resultados = list.ToList();
             return resultados;
         }
+
+        public List<ListarCosechasPorAgricultorDTO> ListarCosechasPorAgricultor(ListarCosechasPorAgricultorRequestDTO request)
+        {
+            if (request.FechaInicio == null || request.FechaInicio == DateTime.MinValue || request.FechaFin == null || request.FechaFin == DateTime.MinValue)
+            {
+                throw new ResultException(new Result { ErrCode = "01", Message = "Comercial.Cliente.ValidacionSeleccioneMinimoUnFiltro.Label" });
+            }
+
+            var timeSpan = request.FechaFin - request.FechaInicio;
+
+            if (timeSpan.Days > 365)
+            {
+                throw new ResultException(new Result { ErrCode = "02", Message = "Comercial.Contrato.ValidacionRangoFechaMayor2anios.Label" });
+            }
+            request.FechaFin = request.FechaFin.AddHours(23).AddMinutes(59).AddSeconds(59);
+            var list = _IAgricultorRepository.ListarCosechasPorAgricultor(request);
+            List<ListarCosechasPorAgricultorDTO> resultados = list.ToList();
+            return resultados;
+        }
     }
 }

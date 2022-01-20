@@ -13,5 +13,6 @@ namespace KaphiyQuipu.Interface.Repository
         void ConfirmarDisponibilidad(int ContratoSocioFincaId, string usuario);
         void ConfirmarEnvio(int ContratoSocioFincaId, string usuario, string hash);
         ConfirmacionEnvioAgricultorDTO ObtenerDatosConfirmacionEnvio(int contratoSocioFincaId);
+        IEnumerable<ListarCosechasPorAgricultorDTO> ListarCosechasPorAgricultor(ListarCosechasPorAgricultorRequestDTO request);
     }
 }

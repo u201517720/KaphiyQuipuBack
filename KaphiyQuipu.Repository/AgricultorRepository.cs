@@ -88,6 +88,19 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public IEnumerable<ListarCosechasPorAgricultorDTO> ListarCosechasPorAgricultor(ListarCosechasPorAgricultorRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pIdUsuario", request.CodigoUsuario);
+            parameters.Add("@pFecInicio", request.FechaInicio);
+            parameters.Add("@pFecFin", request.FechaFin);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ListarCosechasPorAgricultorDTO>("uspConsultarCosechasPorAgricultor", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public ConfirmacionEnvioAgricultorDTO ObtenerDatosConfirmacionEnvio(int contratoSocioFincaId)
         {
             ConfirmacionEnvioAgricultorDTO itemBE = null;
