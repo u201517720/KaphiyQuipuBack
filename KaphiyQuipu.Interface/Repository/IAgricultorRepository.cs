@@ -14,5 +14,7 @@ namespace KaphiyQuipu.Interface.Repository
         void ConfirmarEnvio(int ContratoSocioFincaId, string usuario, string hash);
         ConfirmacionEnvioAgricultorDTO ObtenerDatosConfirmacionEnvio(int contratoSocioFincaId);
         IEnumerable<ListarCosechasPorAgricultorDTO> ListarCosechasPorAgricultor(ListarCosechasPorAgricultorRequestDTO request);
+        IEnumerable<ListarFincasPorAgricultorDTO> ListarFincasPorAgricultor(int codigoUsuario);
+        void RegistrarCosechaPorFinca(RegistrarCosechaPorFincaRequestDTO request);
     }
 }

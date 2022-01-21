@@ -103,5 +103,22 @@ namespace KaphiyQuipu.Service
             List<ListarCosechasPorAgricultorDTO> resultados = list.ToList();
             return resultados;
         }
+
+        public List<ListarFincasPorAgricultorDTO> ListarFincasPorAgricultor(ListarFincasPorAgricultorRequestDTO request)
+        {
+            List<ListarFincasPorAgricultorDTO> lista = new List<ListarFincasPorAgricultorDTO>();
+            var result = _IAgricultorRepository.ListarFincasPorAgricultor(request.CodigoUsuario);
+            if (result.Any())
+            {
+                lista = result.ToList();
+            }
+            return lista;
+        }
+
+        public void RegistrarCosechaPorFinca(RegistrarCosechaPorFincaRequestDTO request)
+        {
+            request.Fecha = DateTime.Now;
+            _IAgricultorRepository.RegistrarCosechaPorFinca(request);
+        }
     }
 }

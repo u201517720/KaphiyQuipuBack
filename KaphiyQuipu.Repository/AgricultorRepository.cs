@@ -101,6 +101,17 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public IEnumerable<ListarFincasPorAgricultorDTO> ListarFincasPorAgricultor(int codigoUsuario)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pIdUsuario", codigoUsuario);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ListarFincasPorAgricultorDTO>("uspObtenerFincasPorProductor", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public ConfirmacionEnvioAgricultorDTO ObtenerDatosConfirmacionEnvio(int contratoSocioFincaId)
         {
             ConfirmacionEnvioAgricultorDTO itemBE = null;
@@ -115,6 +126,22 @@ namespace KaphiyQuipu.Repository
             }
 
             return itemBE;
+        }
+
+        public void RegistrarCosechaPorFinca(RegistrarCosechaPorFincaRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pSocioFincaId", request.CodigoSocioFinca);
+            parameters.Add("@pPesoNeto", request.PesoNeto);
+            parameters.Add("@pFecCosecha", request.FechaCosecha);
+            parameters.Add("@pUnidMedicionId", request.UnidadMedida);
+            parameters.Add("@pUsuario", request.Usuario);
+            parameters.Add("@pFecha", request.Fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspRegistrarCosechaPorAgricultor", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
     }
 }

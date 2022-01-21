@@ -13,5 +13,7 @@ namespace KaphiyQuipu.Interface.Service
         void ConfirmarDisponibilidad(ConfirmarDisponibilidadRequestDTO request);
         void ConfirmarEnvio(ConfirmarEnvioRequestDTO request);
         List<ListarCosechasPorAgricultorDTO> ListarCosechasPorAgricultor(ListarCosechasPorAgricultorRequestDTO request);
+        List<ListarFincasPorAgricultorDTO> ListarFincasPorAgricultor(ListarFincasPorAgricultorRequestDTO request);
+        void RegistrarCosechaPorFinca(RegistrarCosechaPorFincaRequestDTO request);
     }
 }
