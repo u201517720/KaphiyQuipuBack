@@ -56,5 +56,16 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public IEnumerable<ConsultarTransportistaDTO> ConsultarTransportista(string nombre, string documento)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pNombre", nombre);
+            parameters.Add("@pNroDoc", documento);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarTransportistaDTO>("uspConsultarTransportistas", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

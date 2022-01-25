@@ -53,7 +53,15 @@ namespace KaphiyQuipu.Service
             return precios;
         }
 
-     
-
+        public List<ConsultarTransportistaDTO> ConsultarTransportista(ConsultarTransportistaRequestDTO request)
+        {
+            List<ConsultarTransportistaDTO> response = new List<ConsultarTransportistaDTO>();
+            var lista = _IMaestroRepository.ConsultarTransportista(request.Nombre, request.NumeroDocumento);
+            if (lista.Any())
+            {
+                response = lista.ToList();
+            }
+            return response;
+        }
     }
 }

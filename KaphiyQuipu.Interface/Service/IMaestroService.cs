@@ -9,11 +9,8 @@ namespace KaphiyQuipu.Interface.Service
         List<ConsultaDetalleTablaBE> ConsultarDetalleTablaDeTablas(int empresaId, string idioma);
         List<ConsultaUbigeoBE> ConsultaUbibeo();
         List<Zona> ConsultarZona(string codigoDistrito);
-
         List<ConsultaPaisBE> ConsultarPais();
-
         List<ConsultaProductoPrecioDiaBE> ConsultarProductoPrecioDiaPorSubProductoIdPorEmpresaId(string subProductoId, int empresaId);
-
-
+        List<ConsultarTransportistaDTO> ConsultarTransportista(ConsultarTransportistaRequestDTO request);
     }
 }
