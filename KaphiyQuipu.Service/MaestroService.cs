@@ -63,5 +63,16 @@ namespace KaphiyQuipu.Service
             }
             return response;
         }
+
+        public List<ConsultarResponsableDTO> ConsultarResponsable(ConsultarResponsableRequestDTO request)
+        {
+            List<ConsultarResponsableDTO> response = new List<ConsultarResponsableDTO>();
+            var lista = _IMaestroRepository.ConsultarResponsable(request);
+            if (lista.Any())
+            {
+                response = lista.ToList();
+            }
+            return response;
+        }
     }
 }

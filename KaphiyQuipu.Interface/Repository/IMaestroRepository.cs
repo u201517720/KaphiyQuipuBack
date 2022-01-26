@@ -11,5 +11,6 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<Zona> ConsultarZona(string codigoDistrito);
         IEnumerable<ConsultaPaisBE> ConsultarPais();
         IEnumerable<ConsultarTransportistaDTO> ConsultarTransportista(string nombre, string documento);
+        IEnumerable<ConsultarResponsableDTO> ConsultarResponsable(ConsultarResponsableRequestDTO request);
     }
 }

@@ -67,5 +67,18 @@ namespace KaphiyQuipu.Repository
                 return db.Query<ConsultarTransportistaDTO>("uspConsultarTransportistas", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<ConsultarResponsableDTO> ConsultarResponsable(ConsultarResponsableRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pTipo", request.Tipo);
+            parameters.Add("@pNombre", request.Nombre);
+            parameters.Add("@pNroDoc", request.Documento);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarResponsableDTO>("uspConsultarResponsables", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

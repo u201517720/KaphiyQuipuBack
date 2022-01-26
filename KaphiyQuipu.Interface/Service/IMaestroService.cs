@@ -12,5 +12,6 @@ namespace KaphiyQuipu.Interface.Service
         List<ConsultaPaisBE> ConsultarPais();
         List<ConsultaProductoPrecioDiaBE> ConsultarProductoPrecioDiaPorSubProductoIdPorEmpresaId(string subProductoId, int empresaId);
         List<ConsultarTransportistaDTO> ConsultarTransportista(ConsultarTransportistaRequestDTO request);
+        List<ConsultarResponsableDTO> ConsultarResponsable(ConsultarResponsableRequestDTO request);
     }
 }
