@@ -8,5 +8,6 @@ namespace KaphiyQuipu.DTO
     {
         public string Nombre { get; set; }
         public string NumeroDocumento { get; set; }
+        public int ContratoId { get; set; }
     }
 }

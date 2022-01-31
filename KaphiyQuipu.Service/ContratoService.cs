@@ -10,7 +10,6 @@ using KaphiyQuipu.Blockchain.Contracts.Interface;
 using KaphiyQuipu.Blockchain.Entities;
 using KaphiyQuipu.Blockchain.Helpers.OperationResults;
 using KaphiyQuipu.DTO;
-using KaphiyQuipu.DTO.Agricultor;
 using KaphiyQuipu.DTO.ContratoCompraVenta;
 using KaphiyQuipu.DTO.Reporte;
 using KaphiyQuipu.Interface.Repository;
@@ -21,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebGYM.Common;
 
 namespace KaphiyQuipu.Service
 {
@@ -337,6 +335,17 @@ namespace KaphiyQuipu.Service
             #endregion
 
             return reporte;
+        }
+
+        public void AsignarTransportistas(AsignarTransportistasRequestDTO request)
+        {
+            if (request.transportistas.Count > 0)
+            {
+                request.Fecha = DateTime.Now;
+                request.transportistas.ForEach(x => x.Fecha = request.Fecha);
+
+                _IContratoRepository.AsignarTransportistas(request.transportistas);
+            }
         }
 
         #endregion

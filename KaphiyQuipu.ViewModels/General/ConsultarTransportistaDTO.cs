@@ -13,5 +13,6 @@ namespace KaphiyQuipu.DTO
         public string PlacaCarreta { get; set; }
         public string Licencia { get; set; }
         public string Soat { get; set; }
+        public string TipoDoc { get; set; }
     }
 }

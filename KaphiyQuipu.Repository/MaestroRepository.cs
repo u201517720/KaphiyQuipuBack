@@ -56,11 +56,12 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public IEnumerable<ConsultarTransportistaDTO> ConsultarTransportista(string nombre, string documento)
+        public IEnumerable<ConsultarTransportistaDTO> ConsultarTransportista(string nombre, string documento, int contrato)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pNombre", nombre);
             parameters.Add("@pNroDoc", documento);
+            parameters.Add("@pContratoId", contrato);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {

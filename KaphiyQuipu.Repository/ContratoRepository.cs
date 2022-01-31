@@ -1,16 +1,15 @@
-﻿using KaphiyQuipu.DTO;
+﻿using Core.Common;
+using Dapper;
+using KaphiyQuipu.DTO;
+using KaphiyQuipu.DTO.ContratoCompraVenta;
 using KaphiyQuipu.Interface.Repository;
 using KaphiyQuipu.Models;
-using Dapper;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Core.Common;
-using KaphiyQuipu.DTO.Agricultor;
-using KaphiyQuipu.DTO.ContratoCompraVenta;
 
 namespace KaphiyQuipu.Repository
 {
@@ -178,6 +177,17 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 return db.Query<CorrelativoTrazabilidadContratoDTO>("uspObtenerCorrelativosTrazabilidadPorNroContrato", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void AsignarTransportistas(List<AsignarTransportistasDTO> transportistas)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pData", transportistas.ToDataTable().AsTableValuedParameter());
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspRegistrarContratoTransporte", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }
