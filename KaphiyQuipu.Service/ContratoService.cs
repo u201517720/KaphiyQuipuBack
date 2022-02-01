@@ -348,6 +348,12 @@ namespace KaphiyQuipu.Service
             }
         }
 
+        public void AsignarResponsableCalidad(AsignarResponsableCalidadRequestDTO request)
+        {
+            request.Fecha = DateTime.Now;
+            _IContratoRepository.AsignarResponsableCalidad(request);
+        }
+
         #endregion
     }
 }

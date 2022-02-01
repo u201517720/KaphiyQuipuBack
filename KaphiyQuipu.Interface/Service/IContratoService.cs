@@ -16,5 +16,6 @@ namespace KaphiyQuipu.Interface.Service
         void ConfirmarRecepcionCafeTerminado(ConfirmarRecepcionCafeTerminadoContratoRequestDTO request);
         Task<List<(string, List<object>)>> ObtenerDatosTrazabilidad(string nroContrato);
         void AsignarTransportistas(AsignarTransportistasRequestDTO request);
+        void AsignarResponsableCalidad(AsignarResponsableCalidadRequestDTO request);
     }
 }

@@ -281,7 +281,7 @@ namespace KaphiyQuipu.API.Controller
                 response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
                 return Ok(response);
             }
-                    }
+        }
 
         [Route("AssignCarriers")]
         [HttpPost]
@@ -299,6 +299,34 @@ namespace KaphiyQuipu.API.Controller
                     _contratoService.AsignarTransportistas(request);
                     response.Result.Success = true;
                 }
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+            return Ok(response);
+        }
+
+        [Route("AssignQualityManager")]
+        [HttpPost]
+        public IActionResult AsignarResponsableCalidad([FromBody] AsignarResponsableCalidadRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            GeneralResponse response = new GeneralResponse();
+
+            try
+            {
+                _contratoService.AsignarResponsableCalidad(request);
+                response.Result.Success = true;
             }
             catch (ResultException ex)
             {

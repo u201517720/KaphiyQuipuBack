@@ -190,5 +190,20 @@ namespace KaphiyQuipu.Repository
                 db.Execute("uspRegistrarContratoTransporte", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void AsignarResponsableCalidad(AsignarResponsableCalidadRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", request.Id);
+            parameters.Add("@pResponsableId", request.ResponsableId);
+            parameters.Add("@pUsuario", request.Usuario);
+            parameters.Add("@pFecha", request.Fecha);
+            parameters.Add("@pEstadoId", request.EstadoId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspAsignarResponsableCalidad", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
