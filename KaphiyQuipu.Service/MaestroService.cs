@@ -74,5 +74,10 @@ namespace KaphiyQuipu.Service
             }
             return response;
         }
+
+        public TipoCambio ObtenerTipoCambio()
+        {
+            return _IMaestroRepository.ObtenerTipoCambio().First();
+        }
     }
 }

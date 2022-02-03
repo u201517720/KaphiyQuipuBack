@@ -81,5 +81,15 @@ namespace KaphiyQuipu.Repository
                 return db.Query<ConsultarResponsableDTO>("uspConsultarResponsables", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<TipoCambio> ObtenerTipoCambio()
+        {
+            var parameters = new DynamicParameters();
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<TipoCambio>("uspObtenerTipoCambio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
