@@ -81,6 +81,7 @@ namespace KaphiyQuipu.Service
             notaIngreso.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.NotaIngresoAcopio);
 
             string affected = _INotaIngresoAcopioRepository.Registrar(notaIngreso);
+            _INotaIngresoAcopioRepository.RegistrarDocumentoPagoAcopio(affected, request.UsuarioRegistro, notaIngreso.FechaRegistro);
 
             return affected;
         }

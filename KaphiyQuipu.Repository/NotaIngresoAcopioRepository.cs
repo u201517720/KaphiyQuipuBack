@@ -188,5 +188,18 @@ namespace KaphiyQuipu.Repository
                 return db.Query<EtiquetaAcopio>("uspObtenerTicketPesadoPorNotaIngresoAcopio", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void RegistrarDocumentoPagoAcopio(string correlativoGR, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pCorrelativoGR", correlativoGR);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspGenerarDocumentoPagoAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

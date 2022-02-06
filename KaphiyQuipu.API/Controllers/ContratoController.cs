@@ -256,7 +256,6 @@ namespace KaphiyQuipu.API.Controller
             return Ok(response);
         }
 
-
         [HttpGet("GenerarQRTrazabilidad/{nroContrato}")]
         public async Task<IActionResult> ObtenerTrazabilidad([FromRoute] string nroContrato)
         {
