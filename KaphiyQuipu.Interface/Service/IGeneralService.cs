@@ -8,5 +8,6 @@ namespace KaphiyQuipu.Interface.Service
     public interface IGeneralService
     {
         List<ConsultarDocumentoPagoDTO> ConsultarDocumentoPago(ConsultarDocumentoPagoRequestDTO request);
+        ConsultarDocumentoPagoPorIdDTO ConsultarDocumentoPagoPorId(ConsultarDocumentoPagoPorIdRequestDTO request);
     }
 }

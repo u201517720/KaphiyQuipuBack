@@ -24,5 +24,16 @@ namespace KaphiyQuipu.Service
             }
             return response;
         }
+
+        public ConsultarDocumentoPagoPorIdDTO ConsultarDocumentoPagoPorId(ConsultarDocumentoPagoPorIdRequestDTO request)
+        {
+            ConsultarDocumentoPagoPorIdDTO response = new ConsultarDocumentoPagoPorIdDTO();
+            var lista = _generalRepository.ConsultarDocumentoPagoPorId(request.Id);
+            if (lista.Any())
+            {
+                response = lista.FirstOrDefault();
+            }
+            return response;
+        }
     }
 }

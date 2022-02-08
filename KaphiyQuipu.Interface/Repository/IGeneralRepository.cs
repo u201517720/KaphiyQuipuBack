@@ -8,5 +8,6 @@ namespace KaphiyQuipu.Interface.Repository
     public interface IGeneralRepository
     {
         IEnumerable<ConsultarDocumentoPagoDTO> ConsultarDocumentoPago(string correlativoDPA, string correlativoCC);
+        IEnumerable<ConsultarDocumentoPagoPorIdDTO> ConsultarDocumentoPagoPorId(int id);
     }
 }

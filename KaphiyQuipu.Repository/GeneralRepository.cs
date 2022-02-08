@@ -28,5 +28,16 @@ namespace KaphiyQuipu.Repository
                 return db.Query<ConsultarDocumentoPagoDTO>("uspConsultarDocumentosPagos", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<ConsultarDocumentoPagoPorIdDTO> ConsultarDocumentoPagoPorId(int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarDocumentoPagoPorIdDTO>("uspConsultarDocumentoPagoPorId", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
