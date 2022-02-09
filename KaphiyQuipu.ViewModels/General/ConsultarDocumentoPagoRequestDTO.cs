@@ -8,5 +8,6 @@ namespace KaphiyQuipu.DTO
     {
         public string CorrelativoDPA { get; set; }
         public string CorrelativoCC { get; set; }
+        public int Id { get; set; }
     }
 }
