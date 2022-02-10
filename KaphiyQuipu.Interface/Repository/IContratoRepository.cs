@@ -21,7 +21,7 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ObtenerControlCalidadDTO> ObtenerControlCalidad(int contratoId);
         void ConfirmarRecepcionCafeTerminado(int id, string usuario, DateTime fecha, string hash);
         IEnumerable<CorrelativoTrazabilidadContratoDTO> ObtenerCorrelativosTrazabilidadPorNroContrato(string nroContrato);
-        void AsignarTransportistas(List<AsignarTransportistasDTO> transportistas);
+        void AsignarTransportistas(List<AsignarTransportistasDTO> transportistas, string codigo);
         void AsignarResponsableCalidad(AsignarResponsableCalidadRequestDTO request);
     }
 }

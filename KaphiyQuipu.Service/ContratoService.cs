@@ -344,7 +344,7 @@ namespace KaphiyQuipu.Service
                 request.Fecha = DateTime.Now;
                 request.transportistas.ForEach(x => x.Fecha = request.Fecha);
 
-                _IContratoRepository.AsignarTransportistas(request.transportistas);
+                _IContratoRepository.AsignarTransportistas(request.transportistas, request.Codigo);
             }
         }
 

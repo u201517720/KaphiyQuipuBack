@@ -13,6 +13,7 @@ namespace KaphiyQuipu.DTO
 
         public List<AsignarTransportistasDTO> transportistas { get; set; }
         public DateTime Fecha { get; set; }
+        public string Codigo { get; set; }
     }
 
     public class AsignarTransportistasDTO

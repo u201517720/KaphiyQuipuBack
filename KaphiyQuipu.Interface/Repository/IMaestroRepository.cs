@@ -10,7 +10,7 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultaUbigeoBE> ConsultaUbibeo();
         IEnumerable<Zona> ConsultarZona(string codigoDistrito);
         IEnumerable<ConsultaPaisBE> ConsultarPais();
-        IEnumerable<ConsultarTransportistaDTO> ConsultarTransportista(string nombre, string documento, int contrato);
+        IEnumerable<ConsultarTransportistaDTO> ConsultarTransportista(int id, string codigo);
         IEnumerable<ConsultarResponsableDTO> ConsultarResponsable(ConsultarResponsableRequestDTO request);
         IEnumerable<TipoCambio> ObtenerTipoCambio();
     }

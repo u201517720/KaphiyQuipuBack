@@ -180,10 +180,11 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public void AsignarTransportistas(List<AsignarTransportistasDTO> transportistas)
+        public void AsignarTransportistas(List<AsignarTransportistasDTO> transportistas, string codigo)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pData", transportistas.ToDataTable().AsTableValuedParameter());
+            parameters.Add("@pCodigo", codigo);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
