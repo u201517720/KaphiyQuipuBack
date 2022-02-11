@@ -13,5 +13,6 @@ namespace KaphiyQuipu.DTO
         public string EmpresaTransformadora { get; set; }
         public string FechaTraslado { get; set; }
         public string FechaEmision { get; set; }
+        public string HashBC { get; set; }
     }
 }

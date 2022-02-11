@@ -17,17 +17,18 @@ namespace KaphiyQuipu.DTO
         public string FechaTraslado { get; set; }
         public string FechaEmision { get; set; }
         public string MotivoSalida { get; set; }
-        public string Conductor { get; set; }
-        public string RucTransporte { get; set; }
-        public string PlacaTractor { get; set; }
-        public string Licencia { get; set; }
-        public string NumeroConstanciaMTC { get; set; }
-        public string MarcaVehiculo { get; set; }
+        //public string Conductor { get; set; }
+        //public string RucTransporte { get; set; }
+        //public string PlacaTractor { get; set; }
+        //public string Licencia { get; set; }
+        //public string NumeroConstanciaMTC { get; set; }
+        //public string MarcaVehiculo { get; set; }
         public string CorrelativoContrato { get; set; }
         public string Producto { get; set; }
         public string UnidadMedida { get; set; }
         public string TipoProduccion { get; set; }
         public decimal TotalSacos { get; set; }
         public decimal PesoKilos { get; set; }
+        public string EstadoId { get; set; }
     }
 }

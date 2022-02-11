@@ -9,7 +9,7 @@ namespace KaphiyQuipu.DTO
         public int NotaIngresoPlantaId { get; set; }
         public string CorrelativoNIP { get; set; }
         public string CorrelativoGRA { get; set; }
-        public string Conductor { get; set; }
+        public string Empresa { get; set; }
         public string HashBC { get; set; }
         public string UsuarioRegistro { get; set; }
         public string FechaRegistro { get; set; }

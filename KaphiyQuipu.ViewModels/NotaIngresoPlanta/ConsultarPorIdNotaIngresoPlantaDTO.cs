@@ -12,8 +12,8 @@ namespace KaphiyQuipu.DTO
         public string Empresa { get; set; }
         public string EmpresaRUC { get; set; }
         public string EmpresaDireccion { get; set; }
-        public string Conductor { get; set; }
-        public string PlacaTractor { get; set; }
+        //public string Conductor { get; set; }
+        //public string PlacaTractor { get; set; }
         public string Certificacion { get; set; }
         public string Producto { get; set; }
         public decimal TotalSacos { get; set; }

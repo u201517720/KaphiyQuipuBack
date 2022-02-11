@@ -189,10 +189,10 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public void RegistrarDocumentoPagoAcopio(string correlativoGR, string usuario, DateTime fecha)
+        public void RegistrarDocumentoPagoAcopio(int id, string usuario, DateTime fecha)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@pCorrelativoGR", correlativoGR);
+            parameters.Add("@pGRId", id);
             parameters.Add("@pUsuario", usuario);
             parameters.Add("@pFecha", fecha);
 

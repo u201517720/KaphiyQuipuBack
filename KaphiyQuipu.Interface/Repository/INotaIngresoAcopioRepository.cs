@@ -20,6 +20,6 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultarDevolucionPorIdNotaIngresoDTO> ConsultarDevolucionPorId(int id);
         void ConfirmarAtencionCompleta(int id, string usuario, DateTime fecha);
         IEnumerable<EtiquetaAcopio> GenerarEtiquetasAcopio(int id);
-        void RegistrarDocumentoPagoAcopio(string correlativoGR, string usuario, DateTime fecha);
+        void RegistrarDocumentoPagoAcopio(int id, string usuario, DateTime fecha);
     }
 }

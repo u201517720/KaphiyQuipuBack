@@ -18,7 +18,7 @@ namespace KaphiyQuipu.DTO
 
     public class AsignarTransportistasDTO
     {
-        public int ContratoId { get; set; }
+        public int IdProceso { get; set; }
         public int TransporteId { get; set; }
         public string Usuario { get; set; }
         public DateTime Fecha { get; set; }
