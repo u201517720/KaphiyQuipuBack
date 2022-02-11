@@ -200,6 +200,7 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@pUsuario", request.Usuario);
             parameters.Add("@pFecha", request.Fecha);
             parameters.Add("@pEstadoId", request.EstadoId);
+            parameters.Add("@pCodigo", request.Codigo);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
