@@ -22,5 +22,6 @@ namespace KaphiyQuipu.DTO
         public decimal HumedadPorcentaje { get; set; }
         public string HashBC { get; set; }
         public string UsuarioActualizacion { get; set; }
+        public string CorrelativoNIP { get; set; }
     }
 }

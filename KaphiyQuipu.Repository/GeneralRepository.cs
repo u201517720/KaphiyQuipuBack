@@ -44,6 +44,17 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public IEnumerable<ConsultarDocumentoPagoPlantaDTO> ConsultarDocumentoPagoPlanta(string documento)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pNroDoc", documento);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarDocumentoPagoPlantaDTO>("uspConsultarDocumentosPagosPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public IEnumerable<ConsultarDocumentoPagoPorIdDTO> ConsultarDocumentoPagoPorId(int id)
         {
             var parameters = new DynamicParameters();
@@ -52,6 +63,20 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 return db.Query<ConsultarDocumentoPagoPorIdDTO>("uspConsultarDocumentoPagoPorId", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void GenerarPagoPendientePlanta(int id, string correlativo, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pNotaIngresoPlantaId", id);
+            parameters.Add("@pCorrelativo", correlativo);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspGenerarDocumentoPagoTransformacion", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 

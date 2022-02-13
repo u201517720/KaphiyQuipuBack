@@ -145,5 +145,61 @@ namespace KaphiyQuipu.API.Controllers
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
             return Ok(response);
         }
+
+        [Route("GeneratePlantPendingPayment")]
+        [HttpPost]
+        public IActionResult GenerarPagoPendientePlanta([FromBody] GenerarPagoPendientePlantaRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            GeneralResponse response = new GeneralResponse();
+
+            try
+            {
+                _generalService.GenerarPagoPendientePlanta(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+            return Ok(response);
+        }
+
+        [Route("ConsultPaymentDocumentPlant")]
+        [HttpPost]
+        public IActionResult ConsultarDocumentoPagoPlanta([FromBody] ConsultarDocumentoPagoPlantaRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            GeneralResponse response = new GeneralResponse();
+
+            try
+            {
+                response.Result.Data = _generalService.ConsultarDocumentoPagoPlanta(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+            return Ok(response);
+        }
     }
 }

@@ -170,20 +170,5 @@ namespace KaphiyQuipu.Repository
                 db.Execute("uspRegistrarResultadosTransformacionNotaIngresoAlmacen", parameters, commandType: CommandType.StoredProcedure);
             }
         }
-
-        public string ObtenerCorrelativoNotaingresoPorId(int id)
-        {
-            string result = string.Empty;
-
-            var parameters = new DynamicParameters();
-            parameters.Add("@pId", id);
-
-            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
-            {
-                result = db.ExecuteScalar<string>("uspObtenerCorrelativoNotaIngresoPlantaPorId", parameters, commandType: CommandType.StoredProcedure);
-            }
-
-            return result;
-        }
     }
 }

@@ -112,8 +112,7 @@ namespace KaphiyQuipu.Service
             NotaIngresoPlanta ingresoPlanta = _Mapper.Map<NotaIngresoPlanta>(request);
             ingresoPlanta.FechaActualizacion = DateTime.Now;
 
-            string correlativo = _INotaIngresoPlantaRepository.ObtenerCorrelativoNotaingresoPorId(request.Id);
-            TransactionResult result = _notaIngresoContract.RegistrarControlCalidad(request, correlativo, ingresoPlanta.FechaActualizacion.Value).Result;
+            TransactionResult result = _notaIngresoContract.RegistrarControlCalidad(request, request.CorrelativoNIP, ingresoPlanta.FechaActualizacion.Value).Result;
             ingresoPlanta.HashBC = result.TransactionHash;
             
             _INotaIngresoPlantaRepository.RegistrarControlCalidad(ingresoPlanta);
@@ -124,8 +123,7 @@ namespace KaphiyQuipu.Service
             NotaIngresoPlantaResultadoTransformacion transformacion = _Mapper.Map<NotaIngresoPlantaResultadoTransformacion>(request);
             transformacion.FechaRegistro = DateTime.Now;
 
-            string correlativo = _INotaIngresoPlantaRepository.ObtenerCorrelativoNotaingresoPorId(request.NotaIngresoPlantaId);
-            TransactionResult result = _notaIngresoContract.RegistrarResultadoTransformacion(request, correlativo, transformacion.FechaRegistro).Result;
+            TransactionResult result = _notaIngresoContract.RegistrarResultadoTransformacion(request, request.CorrelativoNIP, transformacion.FechaRegistro).Result;
             transformacion.HashBC = result.TransactionHash;
             
             _INotaIngresoPlantaRepository.RegistrarResultadosTransformacion(transformacion);

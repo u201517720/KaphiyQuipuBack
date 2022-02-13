@@ -16,6 +16,7 @@
         public static string NotaIngresoDevolucion { get { return "NotaIngresoDevolucion"; } }
         public static string GuiaRemisionDevolucion { get { return "GuiaRemisionDevolucion"; } }
         public static string DocumentoPagoAcopio { get { return "DocumentoPagoAcopio"; } }
+        public static string DocumentoPagoPlanta { get { return "DocumentoPagoPlanta"; } }
     }
 
     public static class Empresas

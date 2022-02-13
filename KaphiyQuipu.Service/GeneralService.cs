@@ -15,12 +15,14 @@ namespace KaphiyQuipu.Service
     public class GeneralService : IGeneralService
     {
         private IGeneralRepository _generalRepository;
+        private ICorrelativoRepository _ICorrelativoRepository;
         public IOptions<FileServerSettings> _fileServerSettings;
 
-        public GeneralService(IGeneralRepository generalRepository, IOptions<FileServerSettings> fileServerSettings)
+        public GeneralService(IGeneralRepository generalRepository, ICorrelativoRepository correlativoRepository, IOptions<FileServerSettings> fileServerSettings)
         {
             _generalRepository = generalRepository;
             _fileServerSettings = fileServerSettings;
+            _ICorrelativoRepository = correlativoRepository;
         }
 
         public List<ConsultarDocumentoPagoDTO> ConsultarDocumentoPago(ConsultarDocumentoPagoRequestDTO request)
@@ -82,6 +84,24 @@ namespace KaphiyQuipu.Service
         {
             request.Fecha = DateTime.Now;
             _generalRepository.ConfirmarVoucherPago(request.Id, request.Usuario, request.Fecha);
+        }
+
+        public void GenerarPagoPendientePlanta(GenerarPagoPendientePlantaRequestDTO request)
+        {
+            request.Fecha = DateTime.Now;
+            request.Correlativo = _ICorrelativoRepository.Obtener(null, Documentos.DocumentoPagoPlanta);
+            _generalRepository.GenerarPagoPendientePlanta(request.Id, request.Correlativo, request.Usuario, request.Fecha);
+        }
+
+        public List<ConsultarDocumentoPagoPlantaDTO> ConsultarDocumentoPagoPlanta(ConsultarDocumentoPagoPlantaRequestDTO request)
+        {
+            List<ConsultarDocumentoPagoPlantaDTO> response = new List<ConsultarDocumentoPagoPlantaDTO>();
+            var lista = _generalRepository.ConsultarDocumentoPagoPlanta(request.Documento);
+            if (lista.Any())
+            {
+                response = lista.ToList();
+            }
+            return response;
         }
     }
 }
