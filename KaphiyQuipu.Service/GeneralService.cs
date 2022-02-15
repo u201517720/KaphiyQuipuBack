@@ -103,5 +103,61 @@ namespace KaphiyQuipu.Service
             }
             return response;
         }
+
+        public ConsultarDocumentoPagoPlantaPorIdDTO ConsultarDocumentoPagoPlantaPorId(ConsultarDocumentoPagoPlantaPorIdRequestDTO request)
+        {
+            ConsultarDocumentoPagoPlantaPorIdDTO response = new ConsultarDocumentoPagoPlantaPorIdDTO();
+            var lista = _generalRepository.ConsultarDocumentoPagoPlantaPorId(request.Id);
+            if (lista.Any())
+            {
+                response = lista.FirstOrDefault();
+            }
+            return response;
+        }
+
+        public void AprobarDepositoPlanta(AprobarDepositoPlantaRequestDTO request)
+        {
+            request.Fecha = DateTime.Now;
+            _generalRepository.AprobarDepositoPlanta(request.Id, request.Usuario, request.Fecha);
+        }
+
+        public void GuardarVoucherPlanta(GuardarVoucherPlantaRequestDTO request, IFormFile file)
+        {
+            request.Fecha = DateTime.Now;
+            var AdjuntoBl = new AdjuntarArchivosBL(_fileServerSettings);
+            byte[] fileBytes = null;
+            if (file != null)
+            {
+                if (file.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        file.CopyTo(ms);
+                        fileBytes = ms.ToArray();
+                        string s = Convert.ToBase64String(fileBytes);
+                    }
+
+                    request.Archivo = file.FileName;
+                    ResponseAdjuntarArchivoDTO response = AdjuntoBl.AgregarArchivo(new RequestAdjuntarArchivosDTO
+                    {
+                        filtros = new AdjuntarArchivosDTO
+                        {
+                            archivoStream = fileBytes,
+                            filename = file.FileName,
+                        },
+                        pathFile = _fileServerSettings.Value.DocumentoPagoPlanta
+                    });
+                    request.Ruta = string.Format(@"{0}\{1}", _fileServerSettings.Value.DocumentoPagoPlanta, response.ficheroReal);
+                }
+            }
+
+            _generalRepository.GuardarVoucherPlanta(request);
+        }
+
+        public void ConfirmarVoucherPagoPlanta(ConfirmarVoucherPagoPlantaRequestDTO request)
+        {
+            request.Fecha = DateTime.Now;
+            _generalRepository.ConfirmarVoucherPagoPlanta(request.Id, request.Usuario, request.Fecha);
+        }
     }
 }

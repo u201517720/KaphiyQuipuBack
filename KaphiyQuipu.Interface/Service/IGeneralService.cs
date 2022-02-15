@@ -14,5 +14,9 @@ namespace KaphiyQuipu.Interface.Service
         void ConfirmarVoucherPago(ConfirmarVoucherPagoRequestDTO request);
         void GenerarPagoPendientePlanta(GenerarPagoPendientePlantaRequestDTO request);
         List<ConsultarDocumentoPagoPlantaDTO> ConsultarDocumentoPagoPlanta(ConsultarDocumentoPagoPlantaRequestDTO request);
+        ConsultarDocumentoPagoPlantaPorIdDTO ConsultarDocumentoPagoPlantaPorId(ConsultarDocumentoPagoPlantaPorIdRequestDTO request);
+        void AprobarDepositoPlanta(AprobarDepositoPlantaRequestDTO request);
+        void GuardarVoucherPlanta(GuardarVoucherPlantaRequestDTO request, IFormFile file);
+        void ConfirmarVoucherPagoPlanta(ConfirmarVoucherPagoPlantaRequestDTO request);
     }
 }

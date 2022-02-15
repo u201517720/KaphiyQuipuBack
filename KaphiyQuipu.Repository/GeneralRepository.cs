@@ -18,6 +18,19 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
+        public void AprobarDepositoPlanta(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspAprobarDepositoPagoAPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public void ConfirmarVoucherPago(int id, string usuario, DateTime fecha)
         {
             var parameters = new DynamicParameters();
@@ -28,6 +41,19 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 db.Execute("uspConfirmarDepositoPagoAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void ConfirmarVoucherPagoPlanta(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspConfirmarDepositoPagoPlanta", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -52,6 +78,17 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 return db.Query<ConsultarDocumentoPagoPlantaDTO>("uspConsultarDocumentosPagosPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<ConsultarDocumentoPagoPlantaPorIdDTO> ConsultarDocumentoPagoPlantaPorId(int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarDocumentoPagoPlantaPorIdDTO>("uspConsultarDocumentosPagosPlantaPorId", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -92,6 +129,21 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 db.Execute("uspGuardarVoucherAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void GuardarVoucherPlanta(GuardarVoucherPlantaRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", request.Id);
+            parameters.Add("@pUsuario", request.Usuario);
+            parameters.Add("@pFecha", request.Fecha);
+            parameters.Add("@pArchivo", request.Archivo);
+            parameters.Add("@pRuta", request.Ruta);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspGuardarVoucherPlanta", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

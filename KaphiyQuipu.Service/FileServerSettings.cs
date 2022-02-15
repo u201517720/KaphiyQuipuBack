@@ -8,5 +8,6 @@ namespace KaphiyQuipu.Service
     {
         public string RutaPrincipal { get; set; }
         public string DocumentoPagoAcopio { get; set; }
+        public string DocumentoPagoPlanta { get; set; }
     }
 }
