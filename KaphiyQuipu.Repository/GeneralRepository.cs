@@ -103,6 +103,20 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public void GenerarPagoDistribuidor(string correlativo, int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pCorrelativo", correlativo);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspGenerarPagoContratoAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public void GenerarPagoPendientePlanta(int id, string correlativo, string usuario, DateTime fecha)
         {
             var parameters = new DynamicParameters();

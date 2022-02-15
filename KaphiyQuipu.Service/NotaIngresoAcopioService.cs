@@ -25,9 +25,10 @@ namespace KaphiyQuipu.Service
         private IContratoCompraContract _contratoCompraContract;
         private IViewRender _viewRender;
         private IEmailService _emailService;
+        private IGeneralRepository _IGeneralRepository;
 
         public NotaIngresoAcopioService(IMapper mapper, ICorrelativoRepository correlativoRepository, INotaIngresoAcopioRepository notaIngresoAcopioRepository, IContratoCompraContract contratoCompraContract,
-            IViewRender viewRender, IEmailService emailService)
+            IViewRender viewRender, IEmailService emailService, IGeneralRepository generalRepository)
         {
             _Mapper = mapper;
             _ICorrelativoRepository = correlativoRepository;
@@ -35,6 +36,7 @@ namespace KaphiyQuipu.Service
             _contratoCompraContract = contratoCompraContract;
             _viewRender = viewRender;
             _emailService = emailService;
+            _IGeneralRepository = generalRepository;
         }
 
         public List<ConsultaNotaIngresoAcopioDTO> Consultar(ConsultaNotaIngresoAcopioRequestDTO request)
@@ -161,7 +163,10 @@ namespace KaphiyQuipu.Service
 
         public void ConfirmarAtencionCompleta(ConfirmarAtencionCompletaNotaIngresoDevoRequestDTO request)
         {
-            _INotaIngresoAcopioRepository.ConfirmarAtencionCompleta(request.Id, request.Usuario, DateTime.Now);
+            DateTime fecha = DateTime.Now;
+            _INotaIngresoAcopioRepository.ConfirmarAtencionCompleta(request.Id, request.Usuario, fecha);
+            string corrPago = _ICorrelativoRepository.Obtener(null, Documentos.DocumentoPagoAcopioContrato);
+            _IGeneralRepository.GenerarPagoDistribuidor(corrPago, request.Id, request.Usuario, fecha);
         }
 
         public GenerarEtiquetasAcopioResponseDTO GenerarEtiquetasAcopio(int id)

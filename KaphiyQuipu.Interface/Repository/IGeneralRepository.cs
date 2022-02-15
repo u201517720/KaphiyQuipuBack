@@ -17,5 +17,6 @@ namespace KaphiyQuipu.Interface.Repository
         void AprobarDepositoPlanta(int id, string usuario, DateTime fecha);
         void GuardarVoucherPlanta(GuardarVoucherPlantaRequestDTO request);
         void ConfirmarVoucherPagoPlanta(int id, string usuario, DateTime fecha);
+        void GenerarPagoDistribuidor(string correlativo, int id, string usuario, DateTime fecha);
     }
 }

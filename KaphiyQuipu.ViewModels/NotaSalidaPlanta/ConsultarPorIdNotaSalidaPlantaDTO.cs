@@ -27,5 +27,6 @@ namespace KaphiyQuipu.DTO
         public string SubProducto { get; set; }
         public string Empaque { get; set; }
         public string TipoEmpaque { get; set; }
+        public int EstadoId { get; set; }
     }
 }
