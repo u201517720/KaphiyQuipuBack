@@ -18,5 +18,7 @@ namespace KaphiyQuipu.Interface.Repository
         void GuardarVoucherPlanta(GuardarVoucherPlantaRequestDTO request);
         void ConfirmarVoucherPagoPlanta(int id, string usuario, DateTime fecha);
         void GenerarPagoDistribuidor(string correlativo, int id, string usuario, DateTime fecha);
+        IEnumerable<ConsultarPagoContratoDTO> ConsultarPagoContrato(string documento);
+        IEnumerable<ConsultarPagoContratoIdDTO> ConsultarPagoContratoId(int id);
     }
 }

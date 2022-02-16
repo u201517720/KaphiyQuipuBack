@@ -103,6 +103,28 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public IEnumerable<ConsultarPagoContratoDTO> ConsultarPagoContrato(string documento)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pNroDoc", documento);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarPagoContratoDTO>("uspConsultarPagoContratoAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<ConsultarPagoContratoIdDTO> ConsultarPagoContratoId(int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ConsultarPagoContratoIdDTO>("uspConsultarPagoContratoAcopioPorId", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public void GenerarPagoDistribuidor(string correlativo, int id, string usuario, DateTime fecha)
         {
             var parameters = new DynamicParameters();

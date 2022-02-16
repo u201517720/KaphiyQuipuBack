@@ -159,5 +159,27 @@ namespace KaphiyQuipu.Service
             request.Fecha = DateTime.Now;
             _generalRepository.ConfirmarVoucherPagoPlanta(request.Id, request.Usuario, request.Fecha);
         }
+
+        public List<ConsultarPagoContratoDTO> ConsultarPagoContrato(ConsultarPagoContratoRequestDTO request)
+        {
+            List<ConsultarPagoContratoDTO> response = new List<ConsultarPagoContratoDTO>();
+            var lista = _generalRepository.ConsultarPagoContrato(request.Documento);
+            if (lista.Any())
+            {
+                response = lista.ToList();
+            }
+            return response;
+        }
+
+        public ConsultarPagoContratoIdDTO ConsultarPagoContratoId(ConsultarPagoContratoIdRequestDTO request)
+        {
+            ConsultarPagoContratoIdDTO response = new ConsultarPagoContratoIdDTO();
+            var lista = _generalRepository.ConsultarPagoContratoId(request.Id);
+            if (lista.Any())
+            {
+                response = lista.FirstOrDefault();
+            }
+            return response;
+        }
     }
 }
