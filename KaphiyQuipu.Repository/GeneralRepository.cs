@@ -44,6 +44,19 @@ namespace KaphiyQuipu.Repository
             }
         }
 
+        public void ConfirmarVoucherPagoContratoCompra(int id, string usuario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", id);
+            parameters.Add("@pUsuario", usuario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspConfirmarDepositoPagoContratoCompra", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public void ConfirmarVoucherPagoPlanta(int id, string usuario, DateTime fecha)
         {
             var parameters = new DynamicParameters();
@@ -165,6 +178,21 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 db.Execute("uspGuardarVoucherAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void GuardarVoucherContratoCompra(GuardarVoucherContratoCompraRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pId", request.Id);
+            parameters.Add("@pUsuario", request.Usuario);
+            parameters.Add("@pFecha", request.Fecha);
+            parameters.Add("@pArchivo", request.Archivo);
+            parameters.Add("@pRuta", request.Ruta);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspGuardarVoucherContratoCompra", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 

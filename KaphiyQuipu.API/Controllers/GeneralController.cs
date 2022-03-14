@@ -373,5 +373,65 @@ namespace KaphiyQuipu.API.Controllers
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
             return Ok(response);
         }
+
+        [Route("SaveVoucherContractPurchase")]
+        [HttpPost]
+        public IActionResult GuardarVoucherContratoCompra(IFormFile file, [FromForm] string request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            GeneralResponse response = new GeneralResponse();
+            try
+            {
+
+                var myJsonObject = JsonConvert.DeserializeObject<GuardarVoucherContratoCompraRequestDTO>(request);
+                _generalService.GuardarVoucherContratoCompra(myJsonObject, file);
+                response.Result.Success = true;
+
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+
+            return Ok(response);
+
+        }
+
+        [Route("ConfirmVoucherPaymentContract")]
+        [HttpPost]
+        public IActionResult ConfirmarVoucherPagoContratoCompra([FromBody] ConfirmarVoucherPagoContratoCompraRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            GeneralResponse response = new GeneralResponse();
+
+            try
+            {
+                _generalService.ConfirmarVoucherPagoContratoCompra(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+            return Ok(response);
+        }
     }
 }

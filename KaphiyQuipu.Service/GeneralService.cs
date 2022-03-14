@@ -181,5 +181,44 @@ namespace KaphiyQuipu.Service
             }
             return response;
         }
+
+        public void GuardarVoucherContratoCompra(GuardarVoucherContratoCompraRequestDTO request, IFormFile file)
+        {
+            request.Fecha = DateTime.Now;
+            var AdjuntoBl = new AdjuntarArchivosBL(_fileServerSettings);
+            byte[] fileBytes = null;
+            if (file != null)
+            {
+                if (file.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        file.CopyTo(ms);
+                        fileBytes = ms.ToArray();
+                        string s = Convert.ToBase64String(fileBytes);
+                    }
+
+                    request.Archivo = file.FileName;
+                    ResponseAdjuntarArchivoDTO response = AdjuntoBl.AgregarArchivo(new RequestAdjuntarArchivosDTO
+                    {
+                        filtros = new AdjuntarArchivosDTO
+                        {
+                            archivoStream = fileBytes,
+                            filename = file.FileName,
+                        },
+                        pathFile = _fileServerSettings.Value.DocumentoPagoContratoCompra
+                    });
+                    request.Ruta = string.Format(@"{0}\{1}", _fileServerSettings.Value.DocumentoPagoContratoCompra, response.ficheroReal);
+                }
+            }
+
+            _generalRepository.GuardarVoucherContratoCompra(request);
+        }
+
+        public void ConfirmarVoucherPagoContratoCompra(ConfirmarVoucherPagoContratoCompraRequestDTO request)
+        {
+            request.Fecha = DateTime.Now;
+            _generalRepository.ConfirmarVoucherPagoContratoCompra(request.Id, request.Usuario, request.Fecha);
+        }
     }
 }
