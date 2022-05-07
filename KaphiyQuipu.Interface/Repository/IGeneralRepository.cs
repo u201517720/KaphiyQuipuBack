@@ -22,5 +22,8 @@ namespace KaphiyQuipu.Interface.Repository
         IEnumerable<ConsultarPagoContratoIdDTO> ConsultarPagoContratoId(int id);
         void GuardarVoucherContratoCompra(GuardarVoucherContratoCompraRequestDTO request);
         void ConfirmarVoucherPagoContratoCompra(int id, string usuario, DateTime fecha);
+        dynamic ProyectarCosecha(int CantMeses, int userId);
+        dynamic ProyectarVenta(int periodo);
+        dynamic ProyectarCosechaTodos(List<ColumnasProyeccionDTO> columnas, List<UserProyeccionCosechaDTO> users);
     }
 }

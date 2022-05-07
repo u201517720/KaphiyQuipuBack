@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Core.Utils;
+using Dapper;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Repository;
 using Microsoft.Extensions.Options;
@@ -208,6 +209,41 @@ namespace KaphiyQuipu.Repository
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
                 db.Execute("uspGuardarVoucherPlanta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public dynamic ProyectarCosecha(int CantMeses, int userId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pMes", CantMeses);
+            parameters.Add("@pUserId", userId);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query("uspProyectarCosechaXAgricultor", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public dynamic ProyectarVenta(int periodo)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pMes", periodo);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query("uspProyectarVenta", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public dynamic ProyectarCosechaTodos(List<ColumnasProyeccionDTO> columnas, List<UserProyeccionCosechaDTO> users)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pColumnas", columnas.ToDataTable().AsTableValuedParameter());
+            parameters.Add("@pData", users.ToDataTable().AsTableValuedParameter());
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query("uspProyectarCosechaTodos", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

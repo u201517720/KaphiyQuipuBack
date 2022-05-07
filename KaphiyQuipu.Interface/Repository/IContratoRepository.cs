@@ -19,7 +19,7 @@ namespace KaphiyQuipu.Interface.Repository
         SolicitudConfirmacionAgrigultorDTO ObtenerDatosSolicitudConfirmacionAgrigultor(int socioFincaId, int contratoId);
         void RegistrarControlCalidad(List<RegistrarControlCalidadDTO> listaControles);
         IEnumerable<ObtenerControlCalidadDTO> ObtenerControlCalidad(int contratoId);
-        void ConfirmarRecepcionCafeTerminado(int id, string usuario, DateTime fecha, string hash);
+        void ConfirmarRecepcionCafeTerminado(int id, string usuario, DateTime fecha, string hash, int puntaje, string comentarios);
         IEnumerable<CorrelativoTrazabilidadContratoDTO> ObtenerCorrelativosTrazabilidadPorNroContrato(string nroContrato);
         void AsignarTransportistas(List<AsignarTransportistasDTO> transportistas, string codigo);
         void AsignarResponsableCalidad(AsignarResponsableCalidadRequestDTO request);

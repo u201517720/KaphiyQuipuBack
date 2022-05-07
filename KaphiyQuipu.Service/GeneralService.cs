@@ -5,10 +5,13 @@ using KaphiyQuipu.Interface.Service;
 using KaphiyQuipu.Service.Adjunto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace KaphiyQuipu.Service
 {
@@ -16,13 +19,15 @@ namespace KaphiyQuipu.Service
     {
         private IGeneralRepository _generalRepository;
         private ICorrelativoRepository _ICorrelativoRepository;
+        private IUsersRepository _IIUsersRepository;
         public IOptions<FileServerSettings> _fileServerSettings;
 
-        public GeneralService(IGeneralRepository generalRepository, ICorrelativoRepository correlativoRepository, IOptions<FileServerSettings> fileServerSettings)
+        public GeneralService(IGeneralRepository generalRepository, ICorrelativoRepository correlativoRepository, IUsersRepository userRepository, IOptions<FileServerSettings> fileServerSettings)
         {
             _generalRepository = generalRepository;
             _fileServerSettings = fileServerSettings;
             _ICorrelativoRepository = correlativoRepository;
+            _IIUsersRepository = userRepository;
         }
 
         public List<ConsultarDocumentoPagoDTO> ConsultarDocumentoPago(ConsultarDocumentoPagoRequestDTO request)
@@ -219,6 +224,48 @@ namespace KaphiyQuipu.Service
         {
             request.Fecha = DateTime.Now;
             _generalRepository.ConfirmarVoucherPagoContratoCompra(request.Id, request.Usuario, request.Fecha);
+        }
+
+        public ProyectarCosechaResponseDTO ProyectarCosecha(ProyectarCosechaRequestDTO request)
+        {
+            ProyectarCosechaResponseDTO response = new ProyectarCosechaResponseDTO();
+            response.Data = _generalRepository.ProyectarCosecha(request.CantMeses, request.UserId);
+            object objData = response.Data;
+            string jsonData = JsonConvert.SerializeObject(objData);
+            response.Columnas = JObject.Parse(jsonData.TrimEnd(']').TrimStart('[')).Children().OfType<JProperty>().Select(x => char.ToUpper(x.Name[0]) + x.Name.Replace(".", string.Empty).Substring(1)).ToList();
+            response.Valores = JObject.Parse(jsonData.TrimEnd(']').TrimStart('[')).Children().OfType<JProperty>().Select(x => Convert.ToDecimal(x.Value)).ToList();
+            return response;
+        }
+
+        public ProyectarVentaResponseDTO ProyectarVenta(ProyectarVentaRequestDTO request)
+        {
+            ProyectarVentaResponseDTO result = new ProyectarVentaResponseDTO();
+            result.Data = _generalRepository.ProyectarVenta(request.NroMeses);
+            object objData = result.Data;
+            string jsonData = JsonConvert.SerializeObject(objData).TrimEnd(']').TrimStart('[');
+            result.Columnas = JObject.Parse(jsonData).Children().OfType<JProperty>().Select(x => char.ToUpper(x.Name[0]) + x.Name.Replace(".", string.Empty).Substring(1)).ToList();
+            result.Valores = JObject.Parse(jsonData).Children().OfType<JProperty>().Select(x => Convert.ToDecimal(x.Value)).ToList();
+            int cntCols = result.Columnas.Where(x => x.Contains("Oct")).Count();
+            cntCols = cntCols + result.Columnas.Where(x => x.Contains("Abr")).Count();
+            var usersIds = _IIUsersRepository.ListarUsersSocios().ToList();
+            List<ColumnasProyeccionDTO> colsProyecs = new List<ColumnasProyeccionDTO>();
+            List<UserProyeccionCosechaDTO> usersProyecs = new List<UserProyeccionCosechaDTO>();
+            objData = _generalRepository.ProyectarCosecha(cntCols, usersIds[0].UserId);
+            jsonData = JsonConvert.SerializeObject(objData).TrimEnd(']').TrimStart('[');
+            foreach (var item in JObject.Parse(jsonData).Children().OfType<JProperty>().Select(x => char.ToUpper(x.Name[0]) + x.Name.Replace(".", string.Empty).Substring(1)))
+            {
+                colsProyecs.Add(new ColumnasProyeccionDTO { NameCol = item });
+            }
+
+            for (int i = 0; i < usersIds.Count; i++)
+            {
+                usersProyecs.Add(new UserProyeccionCosechaDTO { UserId = usersIds[i].UserId, CantMeses = cntCols });
+            }
+            objData = _generalRepository.ProyectarCosechaTodos(colsProyecs, usersProyecs);
+            jsonData = JsonConvert.SerializeObject(objData).TrimEnd(']').TrimStart('[');
+            result.ColumnasCosecha = JObject.Parse(jsonData).Children().OfType<JProperty>().Select(x => x.Name).ToList();
+            result.ValoresCosecha = JObject.Parse(jsonData).Children().OfType<JProperty>().Select(x => Convert.ToDecimal(x.Value)).ToList();
+            return result;
         }
     }
 }

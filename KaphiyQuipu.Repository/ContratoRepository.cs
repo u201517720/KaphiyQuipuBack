@@ -126,7 +126,7 @@ namespace KaphiyQuipu.Repository
             {
                 var list = db.Query<SolicitudConfirmacionAgrigultorDTO>("uspContratoSocioFincaAgricultorConsulta", parameters, commandType: CommandType.StoredProcedure);
 
-                if(list.Any())
+                if (list.Any())
                     itemBE = list.First();
             }
 
@@ -155,13 +155,15 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public void ConfirmarRecepcionCafeTerminado(int id, string usuario, DateTime fecha, string hash)
+        public void ConfirmarRecepcionCafeTerminado(int id, string usuario, DateTime fecha, string hash, int puntaje, string comentarios)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pId", id);
             parameters.Add("@pUsuario", usuario);
             parameters.Add("@pFecha", fecha);
-            parameters.Add("@pHashBC", hash); 
+            parameters.Add("@pHashBC", hash);
+            parameters.Add("@pPuntaje", puntaje);
+            parameters.Add("@pComentario", comentarios);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {

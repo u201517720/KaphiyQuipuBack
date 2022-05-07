@@ -9,5 +9,7 @@ namespace KaphiyQuipu.DTO
         public int Id { get; set; }
         public string Usuario { get; set; }
         public string Contrato { get; set; }
+        public int Puntaje { get; set; }
+        public string Comentarios { get; set; }
     }
 }

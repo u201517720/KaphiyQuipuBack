@@ -31,6 +31,8 @@ namespace KaphiyQuipu.DTO
         public string HashBC { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }
+        public int Puntaje { get; set; }
+        public string Comentarios { get; set; }
     }
 
     public class RegistrarControlCalidadDTO
@@ -48,5 +50,7 @@ namespace KaphiyQuipu.DTO
         public string HashBC { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }
+        public int Puntaje { get; set; }
+        public string Comentarios { get; set; }
     }
 }

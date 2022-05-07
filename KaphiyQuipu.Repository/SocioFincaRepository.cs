@@ -18,8 +18,6 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
-
-
         public int Insertar(SocioFinca socioFinca)
         {
             int result = 0;
@@ -93,7 +91,6 @@ namespace KaphiyQuipu.Repository
             }
             return result;
         }
-
 
         public IEnumerable<ConsultaSocioFincaPorSocioIdBE> ConsultarSocioFincaPorSocioId(int socioId)
         {

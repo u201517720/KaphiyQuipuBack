@@ -23,8 +23,6 @@ namespace KaphiyQuipu.Repository
             _connectionString = connectionString;
         }
 
-
-
         private string dataMenu = @"[
   {
     path: '',
@@ -306,6 +304,7 @@ namespace KaphiyQuipu.Repository
                 return db.Query<Usuario>("uspUsuarioValidarCredenciales", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
         public IEnumerable<ConsultaOpcionesPorUsuario> ConsultarOpcionesPorUsuario(int usuarioId)
         {
             var parameters = new DynamicParameters();
@@ -331,7 +330,6 @@ namespace KaphiyQuipu.Repository
                 return db.Query<ConsultaRolesPorUsuario>("uspUsuarioRolConsultarPorId", parameters, commandType: CommandType.StoredProcedure);
             }
         }
-
 
         public int Insertar(User user)
         {
@@ -383,6 +381,7 @@ namespace KaphiyQuipu.Repository
 
             return id;
         }
+
         public int ValidarUsuario(string correo)
         {
             int result = 0;
@@ -406,5 +405,14 @@ namespace KaphiyQuipu.Repository
             return result;
         }
 
+        public IEnumerable<ListarUsersSociosDTO> ListarUsersSocios()
+        {
+            var parameters = new DynamicParameters();
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ListarUsersSociosDTO>("uspListarUsersSocios", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

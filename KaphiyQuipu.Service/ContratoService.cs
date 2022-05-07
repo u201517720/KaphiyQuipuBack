@@ -186,7 +186,7 @@ namespace KaphiyQuipu.Service
         {
             DateTime fechaActual = DateTime.Now;
             TransactionResult result = _contratoCompraContract.AgregarTrazabilidad(request.Contrato, Constants.TrazabilidadBC.CONFIRMAR_RECEPCION_MATERIA_PROCESADA, request.Contrato, fechaActual).Result;
-            _IContratoRepository.ConfirmarRecepcionCafeTerminado(request.Id, request.Usuario, fechaActual, result.TransactionHash);
+            _IContratoRepository.ConfirmarRecepcionCafeTerminado(request.Id, request.Usuario, fechaActual, result.TransactionHash, request.Puntaje, request.Comentarios);
         }
 
         public async Task<List<(string, List<object>)>> ObtenerDatosTrazabilidad(string nroContrato)

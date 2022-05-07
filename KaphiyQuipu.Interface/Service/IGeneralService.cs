@@ -22,5 +22,7 @@ namespace KaphiyQuipu.Interface.Service
         ConsultarPagoContratoIdDTO ConsultarPagoContratoId(ConsultarPagoContratoIdRequestDTO request);
         void GuardarVoucherContratoCompra(GuardarVoucherContratoCompraRequestDTO request, IFormFile file);
         void ConfirmarVoucherPagoContratoCompra(ConfirmarVoucherPagoContratoCompraRequestDTO request);
+        ProyectarCosechaResponseDTO ProyectarCosecha(ProyectarCosechaRequestDTO request);
+        ProyectarVentaResponseDTO ProyectarVenta(ProyectarVentaRequestDTO request);
     }
 }
