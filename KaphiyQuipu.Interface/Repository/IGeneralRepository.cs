@@ -25,5 +25,6 @@ namespace KaphiyQuipu.Interface.Repository
         dynamic ProyectarCosecha(int CantMeses, int userId);
         dynamic ProyectarVenta(int periodo);
         dynamic ProyectarCosechaTodos(List<ColumnasProyeccionDTO> columnas, List<UserProyeccionCosechaDTO> users);
+        dynamic ProyectarTodasCosechasAcopio(int CantMeses);
     }
 }

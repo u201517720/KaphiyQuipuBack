@@ -489,5 +489,33 @@ namespace KaphiyQuipu.API.Controllers
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
             return Ok(response);
         }
+
+        [Route("ProjectAllCrops")]
+        [HttpPost]
+        public IActionResult ProyectarTodasCosechas([FromBody] ProyectarTodasCosechasRequestDTO request)
+        {
+            Guid guid = Guid.NewGuid();
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
+
+            ProyectarTodasCosechasResponseDTO response = new ProyectarTodasCosechasResponseDTO();
+
+            try
+            {
+                response = _generalService.ProyectarTodasCosechasAcopio(request);
+                response.Result.Success = true;
+            }
+            catch (ResultException ex)
+            {
+                response.Result = new Result() { Success = true, ErrCode = ex.Result.ErrCode, Message = ex.Result.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Result = new Result() { Success = false, Message = "Ocurrio un problema en el servicio, intentelo nuevamente." };
+                _log.RegistrarEvento(ex, guid.ToString());
+            }
+
+            _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(response)}");
+            return Ok(response);
+        }
     }
 }

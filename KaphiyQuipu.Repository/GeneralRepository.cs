@@ -246,5 +246,16 @@ namespace KaphiyQuipu.Repository
                 return db.Query("uspProyectarCosechaTodos", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public dynamic ProyectarTodasCosechasAcopio(int CantMeses)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pMes", CantMeses);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query("uspProyectarCosechaAgricultoresAcopio", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

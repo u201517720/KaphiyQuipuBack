@@ -24,5 +24,6 @@ namespace KaphiyQuipu.Interface.Service
         void ConfirmarVoucherPagoContratoCompra(ConfirmarVoucherPagoContratoCompraRequestDTO request);
         ProyectarCosechaResponseDTO ProyectarCosecha(ProyectarCosechaRequestDTO request);
         ProyectarVentaResponseDTO ProyectarVenta(ProyectarVentaRequestDTO request);
+        ProyectarTodasCosechasResponseDTO ProyectarTodasCosechasAcopio(ProyectarTodasCosechasRequestDTO request);
     }
 }

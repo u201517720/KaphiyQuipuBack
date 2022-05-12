@@ -267,5 +267,37 @@ namespace KaphiyQuipu.Service
             result.ValoresCosecha = JObject.Parse(jsonData).Children().OfType<JProperty>().Select(x => Convert.ToDecimal(x.Value)).ToList();
             return result;
         }
+
+        public ProyectarTodasCosechasResponseDTO ProyectarTodasCosechasAcopio(ProyectarTodasCosechasRequestDTO request)
+        {
+            ProyectarTodasCosechasResponseDTO response = new ProyectarTodasCosechasResponseDTO();
+            List<string> valuesJson = new List<string>();
+            List<string> tempValsJson = new List<string>();
+            List<string> colsJson = new List<string>();
+            object objData = _generalRepository.ProyectarTodasCosechasAcopio(request.NroMeses);
+            string jsonData = JsonConvert.SerializeObject(objData).TrimEnd(']').TrimStart('[');
+            var objectsJson = jsonData.Split('}');
+            colsJson = JObject.Parse(string.Concat(objectsJson[0].Trim(), "}")).Children().OfType<JProperty>().Select(x => char.ToUpper(x.Name[0]) + x.Name.Replace(".", string.Empty).Substring(1)).ToList();
+            response.Columnas.Add(colsJson[0]);
+            for (int i = colsJson.Count - 1; i >= 1; i--)
+            {
+                response.Columnas.Add(colsJson[i]);
+            }
+            for (int i = 0; i < objectsJson.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(objectsJson[i]))
+                {
+                    valuesJson = new List<string>();
+                    tempValsJson = JObject.Parse(string.Concat(objectsJson[i].TrimStart(','), "}")).Children().OfType<JProperty>().Select(x => x.Value.ToString()).ToList();
+                    valuesJson.Add(tempValsJson[0]);
+                    for (int a = tempValsJson.Count - 1; a >= 1; a--)
+                    {
+                        valuesJson.Add(tempValsJson[a]);
+                    }
+                    response.Valores.Add(valuesJson);
+                }
+            }
+            return response;
+        }
     }
 }
