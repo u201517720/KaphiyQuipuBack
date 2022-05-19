@@ -25,5 +25,7 @@ namespace KaphiyQuipu.Interface.Service
         ProyectarCosechaResponseDTO ProyectarCosecha(ProyectarCosechaRequestDTO request);
         ProyectarVentaResponseDTO ProyectarVenta(ProyectarVentaRequestDTO request);
         ProyectarTodasCosechasResponseDTO ProyectarTodasCosechasAcopio(ProyectarTodasCosechasRequestDTO request);
+        List<ValoracionesPorAgricultorDTO> ValoracionesPorAgricultor(ValoracionesPorAgricultorRequestDTO request);
+        List<ListarPuntajeValoracionesAgricultoresDTO> ListarPuntajeValoracionesAgricultores(ListarPuntajeValoracionesAgricultoresRequestDTO request);
     }
 }

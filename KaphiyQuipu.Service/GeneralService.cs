@@ -299,5 +299,27 @@ namespace KaphiyQuipu.Service
             }
             return response;
         }
+
+        public List<ValoracionesPorAgricultorDTO> ValoracionesPorAgricultor(ValoracionesPorAgricultorRequestDTO request)
+        {
+            List<ValoracionesPorAgricultorDTO> response = new List<ValoracionesPorAgricultorDTO>();
+            var lista = _generalRepository.ValoracionesPorAgricultor(request);
+            if (lista.Any())
+            {
+                response = lista.ToList();
+            }
+            return response;
+        }
+
+        public List<ListarPuntajeValoracionesAgricultoresDTO> ListarPuntajeValoracionesAgricultores(ListarPuntajeValoracionesAgricultoresRequestDTO request)
+        {
+            List<ListarPuntajeValoracionesAgricultoresDTO> response = new List<ListarPuntajeValoracionesAgricultoresDTO>();
+            var lista = _generalRepository.ListarPuntajeValoracionesAgricultores(request.FechaInicio, request.FechaFin, request.Tipo);
+            if (lista.Any())
+            {
+                response = lista.ToList();
+            }
+            return response;
+        }
     }
 }

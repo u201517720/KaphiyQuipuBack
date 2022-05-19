@@ -257,5 +257,32 @@ namespace KaphiyQuipu.Repository
                 return db.Query("uspProyectarCosechaAgricultoresAcopio", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<ValoracionesPorAgricultorDTO> ValoracionesPorAgricultor(ValoracionesPorAgricultorRequestDTO request)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pFechaFin", request.FechaFin);
+            parameters.Add("@pFechaInicio", request.FechaInicio);
+            parameters.Add("@pUsuario", request.Usuario);
+            parameters.Add("@pTipo", request.Tipo);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ValoracionesPorAgricultorDTO>("uspListarValoracionesPorAgricultor", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<ListarPuntajeValoracionesAgricultoresDTO> ListarPuntajeValoracionesAgricultores(DateTime fIni, DateTime fFin, int tipo)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pFechaFin", fFin);
+            parameters.Add("@pFechaInicio", fIni);
+            parameters.Add("@pTipo", tipo);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                return db.Query<ListarPuntajeValoracionesAgricultoresDTO>("uspListarValoracionesTodosAgricultores", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
