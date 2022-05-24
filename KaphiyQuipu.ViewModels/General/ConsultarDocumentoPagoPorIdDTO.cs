@@ -18,5 +18,7 @@ namespace KaphiyQuipu.DTO
         public string NombreArchivo { get; set; }
         public string CorrelativoCC { get; set; }
         public string EstadoId { get; set; }
+        public string TipoDocumentoId { get; set; }
+        public string Moneda { get; set; }
     }
 }
