@@ -28,5 +28,6 @@ namespace KaphiyQuipu.Interface.Repository
         dynamic ProyectarTodasCosechasAcopio(int CantMeses);
         IEnumerable<ValoracionesPorAgricultorDTO> ValoracionesPorAgricultor(ValoracionesPorAgricultorRequestDTO request);
         IEnumerable<ListarPuntajeValoracionesAgricultoresDTO> ListarPuntajeValoracionesAgricultores(DateTime fIni, DateTime fFin, int tipo);
+        void GuardarValoracionClienteExterno(string contrato, string documento, string cliente, int puntaje, string comentario, DateTime fecha);
     }
 }

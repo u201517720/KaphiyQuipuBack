@@ -284,5 +284,21 @@ namespace KaphiyQuipu.Repository
                 return db.Query<ListarPuntajeValoracionesAgricultoresDTO>("uspListarValoracionesTodosAgricultores", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void GuardarValoracionClienteExterno(string contrato, string documento, string cliente, int puntaje, string comentario, DateTime fecha)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@pNroContrato", contrato);
+            parameters.Add("@pDocumento", documento);
+            parameters.Add("@pCliente", cliente);
+            parameters.Add("@pPuntaje", puntaje);
+            parameters.Add("@pComentario", comentario);
+            parameters.Add("@pFecha", fecha);
+
+            using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
+            {
+                db.Execute("uspGuardarValoracionClienteExterno", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

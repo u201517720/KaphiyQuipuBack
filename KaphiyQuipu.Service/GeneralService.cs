@@ -321,5 +321,10 @@ namespace KaphiyQuipu.Service
             }
             return response;
         }
+
+        public void GuardarValoracionClienteExterno(GuardarValoracionClienteExternoRequestDTO request)
+        {
+            _generalRepository.GuardarValoracionClienteExterno(request.NroContrato, request.NroDocumento, request.NombreCliente, request.Puntaje, request.Comentario, DateTime.Now);
+        }
     }
 }
