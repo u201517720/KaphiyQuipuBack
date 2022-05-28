@@ -16,5 +16,6 @@ namespace KaphiyQuipu.DTO
         public string FecReg { get; set; }
         public string Agricultor { get; set; }
         public string NombreArchivo { get; set; }
+        public string Moneda { get; set; }
     }
 }
