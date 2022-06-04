@@ -27,6 +27,6 @@ namespace KaphiyQuipu.Interface.Service
         ProyectarTodasCosechasResponseDTO ProyectarTodasCosechasAcopio(ProyectarTodasCosechasRequestDTO request);
         List<ValoracionesPorAgricultorDTO> ValoracionesPorAgricultor(ValoracionesPorAgricultorRequestDTO request);
         List<ListarPuntajeValoracionesAgricultoresDTO> ListarPuntajeValoracionesAgricultores(ListarPuntajeValoracionesAgricultoresRequestDTO request);
-        void GuardarValoracionClienteExterno(GuardarValoracionClienteExternoRequestDTO request);
+        string GuardarValoracionClienteExterno(GuardarValoracionClienteExternoRequestDTO request);
     }
 }

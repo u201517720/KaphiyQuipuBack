@@ -585,7 +585,7 @@ namespace KaphiyQuipu.API.Controllers
 
             try
             {
-                _generalService.GuardarValoracionClienteExterno(request);
+                response.Result.Message = _generalService.GuardarValoracionClienteExterno(request);
                 response.Result.Success = true;
             }
             catch (ResultException ex)

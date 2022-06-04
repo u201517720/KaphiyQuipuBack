@@ -285,7 +285,7 @@ namespace KaphiyQuipu.Repository
             }
         }
 
-        public void GuardarValoracionClienteExterno(string contrato, string documento, string cliente, int puntaje, string comentario, DateTime fecha)
+        public IEnumerable<string> GuardarValoracionClienteExterno(string contrato, string documento, string cliente, int puntaje, string comentario, DateTime fecha, string tipoDocumento)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@pNroContrato", contrato);
@@ -294,10 +294,11 @@ namespace KaphiyQuipu.Repository
             parameters.Add("@pPuntaje", puntaje);
             parameters.Add("@pComentario", comentario);
             parameters.Add("@pFecha", fecha);
+            parameters.Add("@pTipoDoc", tipoDocumento);
 
             using (IDbConnection db = new SqlConnection(_connectionString.Value.CoffeeConnectDB))
             {
-                db.Execute("uspGuardarValoracionClienteExterno", parameters, commandType: CommandType.StoredProcedure);
+                return db.Query<string>("uspGuardarValoracionClienteExterno", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

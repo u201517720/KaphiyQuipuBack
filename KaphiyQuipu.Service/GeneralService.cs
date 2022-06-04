@@ -322,9 +322,15 @@ namespace KaphiyQuipu.Service
             return response;
         }
 
-        public void GuardarValoracionClienteExterno(GuardarValoracionClienteExternoRequestDTO request)
+        public string GuardarValoracionClienteExterno(GuardarValoracionClienteExternoRequestDTO request)
         {
-            _generalRepository.GuardarValoracionClienteExterno(request.NroContrato, request.NroDocumento, request.NombreCliente, request.Puntaje, request.Comentario, DateTime.Now);
+            string mensaje = string.Empty;
+            var mensajes = _generalRepository.GuardarValoracionClienteExterno(request.NroContrato, request.NroDocumento, request.NombreCliente, request.Puntaje, request.Comentario, DateTime.Now, request.TipoDocumento);
+            if(mensajes.ToList().Count > 0)
+            {
+                mensaje = mensajes.First();
+            }
+            return mensaje;
         }
     }
 }
