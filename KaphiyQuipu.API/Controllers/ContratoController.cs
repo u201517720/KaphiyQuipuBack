@@ -1,4 +1,5 @@
 ﻿using Core.Common.Domain.Model;
+using Core.Common.Encryption;
 using KaphiyQuipu.API.Helper;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Service;
@@ -264,7 +265,11 @@ namespace KaphiyQuipu.API.Controller
             try
             {
                 List<(string, List<object>)> datasets = await _contratoService.ObtenerDatosTrazabilidad(nroContrato);
-                byte[] reportData = _reportService.Procesar("SolicitudCompra", null, datasets);
+                string url = $"{Request.Scheme}://{Request.Host}/pages/valoracion-cafe?q={EncryptionLibrary.EncryptText(nroContrato)}";
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                parameters.Add("UrlValoracion", url);
+
+                byte[] reportData = _reportService.Procesar("SolicitudCompra", parameters, datasets);
                 return File(reportData, System.Net.Mime.MediaTypeNames.Application.Pdf, $"{nroContrato}.pdf");
             }
             catch (ResultException ex)
