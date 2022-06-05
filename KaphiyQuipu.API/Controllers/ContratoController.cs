@@ -261,11 +261,12 @@ namespace KaphiyQuipu.API.Controller
         public async Task<IActionResult> ObtenerTrazabilidad([FromRoute] string nroContrato)
         {
             Guid guid = Guid.NewGuid();
+            var clientRequest = HttpContext.Request.Headers["Referer"];
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{nroContrato}");
             try
             {
                 List<(string, List<object>)> datasets = await _contratoService.ObtenerDatosTrazabilidad(nroContrato);
-                string url = $"{Request.Scheme}://{Request.Host}/pages/valoracion-cafe?q={EncryptionLibrary.EncryptText(nroContrato)}";
+                string url = $"{clientRequest}pages/valoracion-cafe?q={EncryptionLibrary.EncryptText(nroContrato)}";
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 parameters.Add("UrlValoracion", url);
 

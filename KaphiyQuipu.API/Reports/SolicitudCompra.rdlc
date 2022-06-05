@@ -3699,6 +3699,8 @@
                     <Value>=Parameters!UrlValoracion.Value</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>Blue</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>

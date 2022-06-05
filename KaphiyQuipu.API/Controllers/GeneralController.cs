@@ -1,4 +1,5 @@
 ﻿using Core.Common.Domain.Model;
+using Core.Common.Encryption;
 using KaphiyQuipu.DTO;
 using KaphiyQuipu.Interface.Service;
 using Microsoft.AspNetCore.Http;
@@ -578,6 +579,7 @@ namespace KaphiyQuipu.API.Controllers
         [HttpPost]
         public IActionResult GuardarValoracionClienteExterno([FromBody] GuardarValoracionClienteExternoRequestDTO request)
         {
+            request.NroContrato = EncryptionLibrary.DecryptText(request.Hash);
             Guid guid = Guid.NewGuid();
             _log.RegistrarEvento($"{guid}{Environment.NewLine}{JsonConvert.SerializeObject(request)}");
 
