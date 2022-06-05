@@ -11,5 +11,6 @@ namespace KaphiyQuipu.DTO
         public string NombreCliente { get; set; }
         public int Puntaje { get; set; }
         public string Comentario { get; set; }
+        public string TipoDocumento { get; set; }
     }
 }

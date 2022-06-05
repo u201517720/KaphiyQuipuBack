@@ -18,5 +18,6 @@ namespace KaphiyQuipu.DTO
         public string RucAcopio { get; set; }
         public string Estado { get; set; }
         public int EstadoId { get; set; }
+        public string Moneda { get; set; }
     }
 }
