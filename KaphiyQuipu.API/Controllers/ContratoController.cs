@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace KaphiyQuipu.API.Controller
 {
@@ -266,7 +267,7 @@ namespace KaphiyQuipu.API.Controller
             try
             {
                 List<(string, List<object>)> datasets = await _contratoService.ObtenerDatosTrazabilidad(nroContrato);
-                string url = $"{clientRequest}pages/valoracion-cafe?q={EncryptionLibrary.EncryptText(nroContrato)}";
+                string url = $"{clientRequest}pages/valoracion-cafe?q={HttpUtility.UrlEncode(EncryptionLibrary.EncryptText(nroContrato))}";
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 parameters.Add("UrlValoracion", url);
 
